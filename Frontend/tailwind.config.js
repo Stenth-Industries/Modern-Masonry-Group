@@ -1,0 +1,76 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "outline-variant": "#dcc0bd",
+        "error": "#ba1a1a",
+        "on-primary": "#ffffff",
+        "on-surface": "#1c1b1b",
+        "on-primary-fixed": "#410002",
+        "on-primary-container": "#ffb3aa",
+        "on-tertiary": "#ffffff",
+        "secondary-fixed-dim": "#e1c299",
+        "surface": "#fcf9f8",
+        "surface-variant": "#e5e2e1",
+        "on-secondary": "#ffffff",
+        "on-secondary-container": "#765f3d",
+        "inverse-primary": "#ffb4ab",
+        "on-tertiary-fixed": "#141d23",
+        "secondary-fixed": "#feddb3",
+        "secondary": "#725a39",
+        "on-background": "#1c1b1b",
+        "on-secondary-fixed-variant": "#584324",
+        "tertiary-container": "#4b545b",
+        "primary-fixed": "#ffdad6",
+        "surface-dim": "#dcd9d9",
+        "outline": "#89726f",
+        "surface-container-lowest": "#ffffff",
+        "error-container": "#ffdad6",
+        "tertiary": "#343d44",
+        "surface-container-highest": "#e5e2e1",
+        "secondary-container": "#fbdbb0",
+        "tertiary-fixed": "#dae4ec",
+        "surface-tint": "#9e4139",
+        "on-error": "#ffffff",
+        "background": "#fcf9f8",
+        "primary-container": "#8e352e",
+        "on-surface-variant": "#564240",
+        "on-tertiary-container": "#bfc8d0",
+        "inverse-on-surface": "#f3f0ef",
+        "surface-bright": "#fcf9f8",
+        "primary": "#6f1e1a",
+        "on-error-container": "#93000a",
+        "surface-container": "#f0eded",
+        "surface-container-high": "#eae7e7",
+        "on-secondary-fixed": "#281801",
+        "tertiary-fixed-dim": "#bec8d0",
+        "primary-fixed-dim": "#ffb4ab",
+        "surface-container-low": "#f6f3f2",
+        "on-primary-fixed-variant": "#7f2a24",
+        "on-tertiary-fixed-variant": "#3f484f",
+        "inverse-surface": "#313030"
+      },
+      borderRadius: {
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        full: "9999px"
+      },
+      fontFamily: {
+        headline: ["Manrope", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        label: ["Inter", "sans-serif"]
+      }
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
+  ],
+}
