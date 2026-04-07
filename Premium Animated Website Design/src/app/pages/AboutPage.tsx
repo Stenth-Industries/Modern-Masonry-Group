@@ -1,5 +1,10 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
 import { Award, Users, Clock, Heart } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const timeline = [
   { year: "1985", event: "Company Founded", description: "Started as a small family-owned masonry business" },
@@ -18,72 +23,157 @@ const stats = [
 ];
 
 export function AboutPage() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header Hero Entrance
+    gsap.fromTo(".header-content", 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+    gsap.fromTo(".hero-img", 
+      { opacity: 0, scale: 0.95 }, 
+      { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: "power3.out" }
+    );
+
+    // Stats Animations
+    const statCards = gsap.utils.toArray(".stat-card");
+    gsap.fromTo(statCards, 
+      { opacity: 0, y: 20 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6, 
+        stagger: 0.1, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".stats-container",
+          start: "top 85%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // Our Story Fade
+    gsap.fromTo(".our-story", 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".our-story",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // Timeline Title Fade
+    gsap.fromTo(".timeline-title", 
+      { opacity: 0, y: 20 },
+      { 
+        opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".timeline-title",
+          start: "top 85%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // Timeline Scrub Animation line
+    gsap.fromTo(".timeline-line", 
+      { scaleY: 0 }, 
+      { 
+        scaleY: 1, 
+        ease: "none",
+        transformOrigin: "top center",
+        scrollTrigger: {
+          trigger: ".timeline-container",
+          start: "top 60%",
+          end: "bottom 80%",
+          scrub: 1,
+        }
+      }
+    );
+
+    // Timeline Items
+    const timelineItems = gsap.utils.toArray(".timeline-item");
+    timelineItems.forEach((item: any, i) => {
+      const direction = i % 2 === 0 ? -50 : 50;
+      gsap.fromTo(item, 
+        { opacity: 0, x: direction, scale: 0.95 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.7,
+          ease: "back.out(1)",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            end: "top 15%",
+            toggleActions: "play reverse play reverse" // plays entering down, reverses leaving up, plays entering up, reverses leaving down
+          }
+        }
+      );
+    });
+
+    // Values Fade
+    gsap.fromTo(".our-values", 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".our-values",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+  }, { scope: container });
+
   return (
-    <div className="pt-32 pb-24 px-6 bg-[var(--off-white)] min-h-screen">
+    <div ref={container} className="pt-32 pb-24 px-6 bg-[var(--off-white)] min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <div className="header-content text-center mb-20 opacity-0 relative z-10">
           <h1 className="text-6xl mb-6">About Modern Masonry</h1>
           <p className="text-[var(--slate)] text-2xl max-w-3xl mx-auto">
             Building beautiful, lasting outdoor spaces since 1985
           </p>
-        </motion.div>
+        </div>
 
         {/* Hero Image */}
-        <motion.div
-          className="relative h-96 rounded-3xl overflow-hidden mb-20"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div className="hero-img relative h-96 rounded-3xl overflow-hidden mb-20 opacity-0 shadow-2xl">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"
             alt="Modern Masonry Team"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </motion.div>
+        </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+        <div className="stats-container grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                className="bg-white rounded-2xl p-8 text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
+                className="stat-card bg-white rounded-2xl p-8 text-center opacity-0 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] transition-all duration-300"
               >
                 <Icon className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
-                <motion.div
-                  className="text-4xl mb-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-[var(--slate)]">{stat.label}</div>
-              </motion.div>
+                <div className="text-4xl mb-2 font-bold">{stat.value}</div>
+                <div className="text-[var(--slate)] font-medium">{stat.label}</div>
+              </div>
             );
           })}
         </div>
 
         {/* Our Story */}
-        <motion.div
-          className="bg-white rounded-3xl p-12 mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl mb-8">Our Story</h2>
+        <div className="our-story bg-white rounded-3xl p-12 mb-20 opacity-0 shadow-sm border border-black/5">
+          <h2 className="text-4xl mb-8 font-bold">Our Story</h2>
           <div className="prose prose-lg max-w-none text-[var(--slate)] space-y-6">
             <p>
               Founded in 1985, Modern Masonry began with a simple mission: to bring exceptional craftsmanship
@@ -101,82 +191,71 @@ export function AboutPage() {
               experience, ensuring every project meets our exacting standards.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Timeline */}
-        <div className="mb-20">
-          <motion.h2
-            className="text-4xl mb-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+        <div className="timeline-container mb-20">
+          <h2 className="timeline-title text-4xl mb-16 text-center font-bold opacity-0">
             Our Journey
-          </motion.h2>
+          </h2>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[var(--accent)]/20 hidden md:block" />
+            {/* Timeline Line Base */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[var(--accent)]/10 hidden md:block" />
+            
+            {/* Timeline Active Scrubber */}
+            <div className="timeline-line absolute left-1/2 top-0 bottom-0 w-1 bg-[var(--accent)] hidden md:block" />
 
             <div className="space-y-12">
               {timeline.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  className="relative"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  className="timeline-item relative opacity-0"
                 >
                   <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                     <div className="md:w-1/2" />
-                    <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-[var(--accent)] rounded-full hidden md:block" />
+                    
+                    {/* Circle on line */}
+                    <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-[var(--accent)] rounded-full hidden md:block shadow-[0_0_0_4px_white]" />
+                    
                     <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                      <motion.div
-                        className="bg-white rounded-2xl p-6 shadow-lg"
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <div className="text-[var(--accent)] text-xl mb-2">{item.year}</div>
-                        <h3 className="text-2xl mb-2">{item.event}</h3>
-                        <p className="text-[var(--slate)]">{item.description}</p>
-                      </motion.div>
+                      <div className="bg-white rounded-2xl p-6 shadow-xl border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                        <div className="text-[var(--accent)] text-xl mb-2 font-black tracking-tight">{item.year}</div>
+                        <h3 className="text-2xl mb-2 font-bold">{item.event}</h3>
+                        <p className="text-[var(--slate)] leading-relaxed">{item.description}</p>
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
         {/* Values */}
-        <motion.div
-          className="bg-[var(--charcoal)] rounded-3xl p-12 text-white text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl mb-12">Our Values</h2>
+        <div className="our-values bg-[var(--charcoal)] rounded-3xl p-12 text-white text-center opacity-0 shadow-2xl">
+          <h2 className="text-4xl mb-12 font-bold">Our Values</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div>
-              <h3 className="text-2xl mb-4">Craftsmanship</h3>
-              <p className="text-white/80">
+              <h3 className="text-2xl mb-4 font-semibold text-[var(--accent)]">Craftsmanship</h3>
+              <p className="text-white/80 leading-relaxed">
                 Every project receives meticulous attention to detail and expert execution
               </p>
             </div>
             <div>
-              <h3 className="text-2xl mb-4">Integrity</h3>
-              <p className="text-white/80">
+              <h3 className="text-2xl mb-4 font-semibold text-[var(--accent)]">Integrity</h3>
+              <p className="text-white/80 leading-relaxed">
                 Honest communication, transparent pricing, and reliable service
               </p>
             </div>
             <div>
-              <h3 className="text-2xl mb-4">Innovation</h3>
-              <p className="text-white/80">
+              <h3 className="text-2xl mb-4 font-semibold text-[var(--accent)]">Innovation</h3>
+              <p className="text-white/80 leading-relaxed">
                 Embracing new techniques and sustainable practices while honoring tradition
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

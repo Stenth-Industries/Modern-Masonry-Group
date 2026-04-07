@@ -10,7 +10,7 @@ export function RootLayout() {
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
-      <main className="min-h-screen pt-24 bg-[#FCFAF9]">
+      <main className="min-h-screen bg-[#FCFAF9]">
         <Outlet />
       </main>
       <Footer />

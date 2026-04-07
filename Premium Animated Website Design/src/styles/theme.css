@@ -3,15 +3,17 @@
 :root {
   --font-size: 16px;
 
-  /* Brand Colors */
-  --white: #FFFFFF;
-  --off-white: #F5F3F0;
-  --charcoal: #1C1C1E;
-  --black: #0A0A0A;
-  --brick: #B04030;
-  --beige: #C8B89A;
-  --slate: #6B7280;
-  --sand: #D4C5A9;
+  /* Brand Colors — Modern Masonry Gold Palette */
+  --white: #FAFAF8;
+  --off-white: #F2EEE8;
+  --charcoal: #1E1A14;
+  --black: #0E0C08;
+  --brick: #C9A84C;
+  --beige: #B8943E;
+  --slate: #8A8070;
+  --sand: #D4C090;
+  --gold: #C9A84C;
+  --gold-dark: #9A7830;
 
   --background: var(--white);
   --foreground: var(--charcoal);

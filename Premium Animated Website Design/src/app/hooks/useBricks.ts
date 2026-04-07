@@ -31,7 +31,6 @@ const parseColors = (colorString: string): string[] => {
     if (!colorString) return [];
     return colorString.split(',').map(s => {
         const key = s.trim().toUpperCase();
-        // Handle composite keys like "TAN / BEIGE"
         if (key.includes('/')) {
             const parts = key.split('/').map(p => p.trim());
             return COLOR_MAP[parts[0]] || COLOR_MAP[parts[1]] || '#EAEAEA';
@@ -39,6 +38,74 @@ const parseColors = (colorString: string): string[] => {
         return COLOR_MAP[key] || '#EAEAEA';
     });
 };
+
+const DUMMY_BRICKS: Brick[] = [
+    {
+        id: "1",
+        variant: "Classic Red Extruded",
+        brick_image: "https://images.unsplash.com/photo-1544288002-c9cc67eeaa05?w=500&q=80",
+        features: {
+            "MATERIAL": "Clay",
+            "COLOUR CLASS": "RED",
+            "STYLE": "Classic",
+        },
+        dimensions: "230 x 110 x 76 mm",
+        house_images: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"],
+        index: 0
+    },
+    {
+        id: "2",
+        variant: "Rustic Ironstone Blend",
+        brick_image: "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=500&q=80",
+        features: {
+            "MATERIAL": "Clay",
+            "COLOUR CLASS": "BROWN, BLACK",
+            "STYLE": "Rustic",
+        },
+        dimensions: "230 x 110 x 76 mm",
+        house_images: ["https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80"],
+        index: 1
+    },
+    {
+        id: "3",
+        variant: "Architectural Slate Block",
+        brick_image: "https://images.unsplash.com/photo-1590483736622-398bc43be4f0?w=500&q=80",
+        features: {
+            "MATERIAL": "Concrete",
+            "COLOUR CLASS": "GREY, BLACK",
+            "STYLE": "Modern",
+        },
+        dimensions: "390 x 190 x 190 mm",
+        house_images: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80"],
+        index: 2
+    },
+    {
+        id: "4",
+        variant: "Limestone Render Veneer",
+        brick_image: "https://images.unsplash.com/photo-1558284561-34bd52809f6e?w=500&q=80",
+        features: {
+            "MATERIAL": "Natural Stone",
+            "COLOUR CLASS": "CREAM, TAN",
+            "STYLE": "Architectural",
+        },
+        dimensions: "Random",
+        house_images: ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"],
+        index: 3
+    },
+    {
+        id: "5",
+        variant: "Heritage Buff Handpressed",
+        brick_image: "https://images.unsplash.com/photo-1518242007639-6b5832a4e98f?w=500&q=80",
+        features: {
+            "MATERIAL": "Clay",
+            "COLOUR CLASS": "BUFF, BEIGE",
+            "STYLE": "Heritage",
+        },
+        dimensions: "230 x 110 x 76 mm",
+        house_images: ["https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80"],
+        index: 4
+    }
+];
 
 export function useBricks() {
     const [bricks, setBricks] = useState<Brick[]>([]);
@@ -48,13 +115,9 @@ export function useBricks() {
     useEffect(() => {
         const fetchBricks = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/bricks');
-                const result = await response.json();
-                if (result.success) {
-                    setBricks(result.data);
-                } else {
-                    setError(result.message);
-                }
+                // Simulate network latency
+                await new Promise(resolve => setTimeout(resolve, 600));
+                setBricks(DUMMY_BRICKS);
             } catch (err) {
                 setError('Failed to fetch bricks');
             } finally {
@@ -86,12 +149,13 @@ export function useBrick(id: string) {
         if (!id) return;
         const fetchBrick = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/bricks/${id}`);
-                const result = await response.json();
-                if (result.success) {
-                    setBrick(result.data);
+                // Simulate network latency
+                await new Promise(resolve => setTimeout(resolve, 400));
+                const found = DUMMY_BRICKS.find(b => b.id === id);
+                if (found) {
+                    setBrick(found);
                 } else {
-                    setError(result.message);
+                    setError('Brick not found');
                 }
             } catch (err) {
                 setError('Failed to fetch brick detail');
