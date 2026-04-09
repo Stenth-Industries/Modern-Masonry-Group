@@ -138,6 +138,22 @@ async function main() {
       uploadedImageUrl = await downloadAndUploadImage(item.image, finalFileName);
     }
 
+    if( item.images){
+      uploadedImagesUrl = [];
+      for(const image of item.images){
+        const parsedUrl = new URL(image);
+        let filename = String(parsedUrl.pathname.split('/').pop() || 'image.png');
+        // Append a timestamp to avoid overwriting existing pictures of the same name from different URLs
+        let parts = filename.split('.');
+        let ext = parts.pop();
+        let nameWithoutExt = parts.join('-');
+        let finalFileName = `${nameWithoutExt}-${Date.now()}.${ext}`;
+
+        uploadedImageUrl = await downloadAndUploadImage(image, finalFileName);
+        uploadedImagesUrl.push(uploadedImageUrl);
+      }
+    }
+
     // Process Variant
     const sizeLabel = item.attributes?.Sizes || 'Standard';
     await prisma.variant.create({
@@ -151,6 +167,7 @@ async function main() {
         heightMm: ran(50, 75),
         depthMm: ran(90, 110),
         imageUrl: uploadedImageUrl,
+        imagesUrl: uploadedImagesUrl,
         isActive: true
       }
     });

@@ -78,6 +78,7 @@ model Variant {
   heightMm    Float?
   depthMm     Float?
   imageUrl    String?
+  imagesUrl   String[]
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
 
