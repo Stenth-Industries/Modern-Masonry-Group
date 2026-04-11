@@ -1,20 +1,38 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 :root {
-  --bg-primary: #0A0A0A;
-  --bg-secondary: #111111;
-  --bg-card: #161616;
-  --bg-card-hover: #1c1c1c;
-  --bg-surface: #1A1A1A;
+  --obsidian:    #1E2535;
+  --charcoal:    #111111;
+  --brass:       #C9A449;
+  --brass-light: #DDB95A;
+  --limestone:   #F0EBE1;
+  --slate-mist:  #F4F4F2;
+  --ash:         #6B6B6B;
+
+  --bg-primary: var(--obsidian);
+  --bg-secondary: var(--charcoal);
+  --bg-card: var(--obsidian);
+  --bg-card-hover: var(--charcoal);
+  --bg-surface: var(--charcoal);
   --border-subtle: rgba(255,255,255,0.06);
   --border-medium: rgba(255,255,255,0.1);
-  --text-primary: #F5F5F5;
-  --text-secondary: #999999;
-  --text-muted: #666666;
-  --accent: #C4956A;
-  --accent-light: #D4AA82;
-  --accent-glow: rgba(196,149,106,0.15);
+  --text-primary: var(--limestone);
+  --text-secondary: var(--ash);
+  --text-muted: var(--ash);
+  --accent: var(--brass);
+  --accent-light: var(--brass-light);
+  --accent-glow: rgba(201,164,73,0.15);
+}
+
+@theme {
+  --color-obsidian: var(--obsidian);
+  --color-charcoal: var(--charcoal);
+  --color-brass: var(--brass);
+  --color-brass-light: var(--brass-light);
+  --color-limestone: var(--limestone);
+  --color-slate-mist: var(--slate-mist);
+  --color-ash: var(--ash);
 }
 
 * { box-sizing: border-box; }
@@ -54,4 +72,30 @@ body {
   background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ── Infinite marquee ── */
+@keyframes scrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll-left  { animation: scrollLeft  35s linear infinite; }
+.animate-scroll-right { animation: scrollRight 40s linear infinite; }
+.animate-scroll-left:hover,
+.animate-scroll-right:hover { animation-play-state: paused; }
+
+/* ── Grain overlay — static, no animation for perf ── */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
 }
