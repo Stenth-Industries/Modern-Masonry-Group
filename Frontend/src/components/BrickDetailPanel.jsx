@@ -41,18 +41,18 @@ function SpecRow({ icon, label, value, delay }) {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay, duration: 0.4 }}
-      className="flex items-center justify-between py-3 border-b border-white/5"
+      className="flex items-center justify-between py-4 border-b border-white/[0.04]"
     >
-      <div className="flex items-center gap-3 text-gray-400">
-        <span className="text-[var(--brass)] opacity-70">{icon}</span>
-        <span className="text-sm">{label}</span>
+      <div className="flex items-center gap-3 text-[#9a9488]">
+        <span className="text-[#ccab7b] opacity-80">{icon}</span>
+        <span className="text-[12px] tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>{label}</span>
       </div>
-      <span className="text-sm text-white font-mono tracking-wide">{value}</span>
+      <span className="text-[12px] text-[#e3decb] font-medium tracking-wider" style={{ fontFamily: "'Inter', sans-serif" }}>{value}</span>
     </motion.div>
   );
 }
 
-export function BrickDetailPanel({ brick, onClose }) {
+export function BrickDetailPanel({ brick, onClose, initialTab = "overview" }) {
   const [activeTab, setActiveTab] = useState("overview");
   const [submitState, setSubmitState] = useState("idle");
   const panelRef = useRef(null);
@@ -74,7 +74,7 @@ export function BrickDetailPanel({ brick, onClose }) {
 
   useEffect(() => {
     if (brick) {
-      setActiveTab("overview");
+      setActiveTab(initialTab);
       setSubmitState("idle");
       setFormData({
         fullName: "",
@@ -148,84 +148,77 @@ export function BrickDetailPanel({ brick, onClose }) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 320, damping: 38 }}
-            className="fixed top-0 right-0 h-full w-full max-w-3xl bg-[var(--charcoal)] z-50 flex flex-col overflow-hidden shadow-[-20px_0_80px_rgba(0,0,0,0.9)]"
+            className="fixed top-0 right-0 h-full w-full max-w-[32rem] border-l border-white/5 z-50 flex flex-col overflow-hidden shadow-[-40px_0_100px_rgba(0,0,0,0.8)] bg-cover bg-center"
+            style={{ backgroundImage: "linear-gradient(to bottom, rgba(10,8,6,0.92), rgba(10,8,6,0.85)), url('/bg.png')" }}
           >
-            {/* Gold accent line */}
-            <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[var(--brass)] to-transparent flex-shrink-0" />
-
             {/* Header */}
-            <div className="flex items-start justify-between px-8 py-5 border-b border-white/5 flex-shrink-0">
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <span className="text-xs font-mono text-[var(--brass)] tracking-[0.15em] uppercase">
+            <div className="flex items-start justify-between px-10 py-8 flex-shrink-0 relative">
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
+              <div className="relative z-10 w-full">
+                <div className="flex justify-end w-full mb-4">
+                  <button
+                    onClick={onClose}
+                    className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-[10px] text-[#ccab7b] font-bold tracking-[0.25em] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
                     {brick.collection}
                   </span>
-                  {brick.isNew && (
-                    <span className="px-2 py-0.5 rounded-full bg-[var(--brass)]/15 text-[var(--brass)] text-xs border border-[var(--brass)]/30">
-                      New
-                    </span>
-                  )}
-                  {!brick.inStock && (
-                    <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-400 text-xs border border-red-500/20">
-                      Out of Stock
-                    </span>
-                  )}
                 </div>
-                <h2 className="text-2xl text-white font-bold tracking-tight">{brick.name}</h2>
-                <p className="text-sm text-gray-500 mt-0.5 font-mono">{brick.code}</p>
+                <h2 className="text-[28px] text-[#e3decb] tracking-[0.04em] mb-1 leading-tight" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}>{brick.name}</h2>
+                <p className="text-[11px] text-[#8c857b] tracking-[0.1em] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>{brick.code}</p>
               </div>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors mt-1"
-              >
-                <X size={20} />
-              </button>
             </div>
 
             {/* Hero Brick Display */}
-            <div className="relative flex-shrink-0 h-52 overflow-hidden bg-black">
+            <div className="relative flex-shrink-0 h-[280px] overflow-hidden border-y border-white/[0.04]">
               {brick.image ? (
-                <img src={brick.image} alt={brick.name} className="w-full h-full object-cover opacity-80" />
+                <img src={brick.image} alt={brick.name} className="w-full h-full object-cover scale-[1.02]" />
               ) : (
                 <BrickWallPattern colorHex={brick.colorHex} rows={6} animated />
               )}
               {/* Gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black pointer-events-none opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
-              {/* Color swatch */}
-              <div className="absolute bottom-4 left-8 flex items-center gap-3 relative z-10">
-                <div
-                  className="w-8 h-8 rounded-full border-2 border-white/20 shadow-lg"
-                  style={{ background: brick.colorHex }}
-                />
-                <div>
-                  <p className="text-xs text-gray-400">{brick.color}</p>
-                  <p className="text-xs font-mono text-gray-500">{brick.colorHex}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+              
+              {/* Color swatch & Metrics */}
+              <div className="absolute bottom-6 left-10 flex w-full pr-20 justify-between items-end relative z-10 w-full" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <div className="flex items-center gap-4">
+                  <div
+                    className="w-10 h-10 rounded-full border border-white/20 shadow-2xl"
+                    style={{ background: brick.colorHex }}
+                  />
+                  <div>
+                    <p className="text-[14px] text-[#e3decb] font-medium tracking-wide mb-0.5">{brick.color}</p>
+                    <p className="text-[10px] tracking-[0.1em] text-white/50 uppercase">{brick.finish}</p>
+                  </div>
                 </div>
-              </div>
-              {/* Finish badge */}
-              <div className="absolute bottom-4 right-8 relative z-10">
-                <span className="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs text-gray-300 backdrop-blur-sm shadow-xl">
-                  {brick.finish} Finish
-                </span>
+
+                <div className="text-right">
+                  <p className="text-[12px] text-[#ccab7b] font-medium tracking-widest uppercase mb-1">{brick.size}</p>
+                  <p className="text-[9px] tracking-widest text-[#8c857b] uppercase">{brick.manufacturer}</p>
+                </div>
               </div>
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-white/5 flex-shrink-0 px-8 bg-black">
+            <div className="flex border-b border-white/[0.04] flex-shrink-0 px-6 mt-4">
               {["overview", "specs", "quote"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-5 py-4 text-sm capitalize transition-colors font-medium ${
-                    activeTab === tab ? "text-[var(--brass)]" : "text-gray-500 hover:text-gray-300"
+                  className={`relative px-6 py-4 text-[11px] uppercase tracking-widest transition-colors ${
+                    activeTab === tab ? "text-[#ccab7b] font-bold" : "text-[#8c857b] font-medium hover:text-[#e3decb]"
                   }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {tab === "quote" ? "Request Quote" : tab === "specs" ? "Specifications" : "Overview"}
                   {activeTab === tab && (
                     <motion.div
                       layoutId="tab-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--brass)]"
+                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#ccab7b]"
                     />
                   )}
                 </button>
@@ -233,7 +226,7 @@ export function BrickDetailPanel({ brick, onClose }) {
             </div>
 
             {/* Scrollable Content */}
-            <div ref={panelRef} className="flex-1 overflow-y-auto bg-[var(--charcoal)]">
+            <div ref={panelRef} className="flex-1 overflow-y-auto scrollbar-none">
               <AnimatePresence mode="wait">
                 {activeTab === "overview" && (
                   <motion.div
@@ -244,59 +237,42 @@ export function BrickDetailPanel({ brick, onClose }) {
                     transition={{ duration: 0.25 }}
                     className="p-8 space-y-8"
                   >
-                    {/* Description */}
-                    <div>
-                      <p className="text-gray-300 leading-relaxed">{brick.description}</p>
+                    <div className="px-4">
+                      <p className="text-[#a8a195] leading-relaxed text-[13px] font-light" style={{ fontFamily: "'Inter', sans-serif" }}>{brick.description}</p>
                     </div>
 
                     {/* Applications */}
-                    <div>
-                      <h4 className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--brass)] mb-4">
+                    <div className="px-4">
+                      <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#ccab7b] mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
                         Suitable Applications
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {brick.applications.map((app) => (
+                        {brick.applications?.map((app) => (
                           <div
                             key={app}
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-300 shadow-sm"
+                            className="flex items-center gap-2 px-4 py-2 rounded-[6px] bg-white/[0.02] border border-white/5 text-[11px] text-[#e3decb] tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}
                           >
-                            <ChevronRight size={12} className="text-[var(--brass)]" />
+                            <ChevronRight size={10} className="text-[#ccab7b]" />
                             {app}
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Quick specs */}
-                    <div className="grid grid-cols-2 gap-4">
-                      {[
-                        { label: "Manufacturer", value: brick.manufacturer },
-                        { label: "Collection", value: brick.collection },
-                        { label: "Finish", value: brick.finish },
-                        { label: "Size", value: brick.size },
-                      ].map((item) => (
-                        <div
-                          key={item.label}
-                          className="p-4 rounded-xl bg-white/5 border border-white/10 shadow-sm"
-                        >
-                          <p className="text-xs text-gray-500 mb-1">{item.label}</p>
-                          <p className="text-sm text-white font-medium">{item.value}</p>
-                        </div>
-                      ))}
-                    </div>
-
                     {/* CTA */}
-                    <button
-                      onClick={() => setActiveTab("quote")}
-                      className="w-full py-4 bg-[var(--brass)] text-black font-bold uppercase tracking-wider text-sm rounded-xl hover:bg-[var(--brass-light)] hover:shadow-[0_0_20px_rgba(212,175,99,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group"
-                    >
-                      <Send size={16} />
-                      <span>Request a Quote for {brick.name}</span>
-                      <ChevronRight
-                        size={16}
-                        className="group-hover:translate-x-1 transition-transform"
-                      />
-                    </button>
+                    <div className="px-4 pb-6">
+                      <button
+                        onClick={() => setActiveTab("quote")}
+                        className="w-full py-[18px] bg-transparent border border-[#ccab7b] text-[#ccab7b] font-bold uppercase tracking-[0.15em] text-[11px] rounded-lg hover:bg-[#ccab7b] hover:text-black transition-all duration-500 flex items-center justify-center gap-2 group" style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        <Send size={14} />
+                        <span>Request a Quote</span>
+                        <ChevronRight
+                          size={14}
+                          className="group-hover:translate-x-1 transition-transform"
+                        />
+                      </button>
+                    </div>
                   </motion.div>
                 )}
 
@@ -307,9 +283,9 @@ export function BrickDetailPanel({ brick, onClose }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.25 }}
-                    className="p-8"
+                    className="p-10"
                   >
-                    <h4 className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--brass)] mb-6">
+                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#ccab7b] mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
                       Technical Specifications
                     </h4>
                     <div className="space-y-0">
@@ -325,9 +301,9 @@ export function BrickDetailPanel({ brick, onClose }) {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="mt-8 p-5 rounded-xl bg-white/5 border border-white/10"
+                      className="mt-8 p-5 rounded-lg bg-white/[0.02] border border-white/5"
                     >
-                      <p className="text-xs text-gray-500 leading-relaxed font-mono">
+                      <p className="text-[11px] text-[#8c857b] tracking-wide leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
                         All specifications are subject to manufacturing tolerances as per AS/NZS 4455.
                         Contact our technical team for project-specific compliance data or MSDS documents.
                       </p>
@@ -335,12 +311,12 @@ export function BrickDetailPanel({ brick, onClose }) {
 
                     <button
                       onClick={() => setActiveTab("quote")}
-                      className="w-full mt-6 py-4 bg-[var(--brass)] text-black font-bold uppercase tracking-wider text-sm rounded-xl hover:bg-[var(--brass-light)] hover:shadow-[0_0_20px_rgba(212,175,99,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group"
+                      className="w-full mt-8 py-[18px] bg-[#ccab7b] text-black font-bold uppercase tracking-[0.15em] text-[11px] rounded-lg hover:shadow-[0_0_30px_rgba(204,171,123,0.3)] transition-all duration-500 flex items-center justify-center gap-2 group" style={{ fontFamily: "'Inter', sans-serif" }}
                     >
-                      <Send size={16} />
+                      <Send size={14} />
                       <span>Request a Quote</span>
                       <ChevronRight
-                        size={16}
+                        size={14}
                         className="group-hover:translate-x-1 transition-transform"
                       />
                     </button>
@@ -393,20 +369,15 @@ export function BrickDetailPanel({ brick, onClose }) {
                           onSubmit={onSubmit}
                           className="space-y-8"
                         >
-                          {/* Product reference */}
-                          <div className="flex items-center gap-4 p-4 rounded-xl bg-black border border-white/5 shadow-sm">
-                            <div className="w-16 h-10 rounded overflow-hidden flex-shrink-0">
-                              {brick.image ? (
-                                <img src={brick.image} className="w-full h-full object-cover" />
-                              ) : (
-                                <BrickWallPattern colorHex={brick.colorHex} rows={3} />
-                              )}
-                            </div>
-                            <div>
-                              <p className="text-white font-bold">{brick.name}</p>
-                              <p className="text-xs font-mono text-gray-500">{brick.code}</p>
-                            </div>
-                          </div>
+                                <div className="flex items-center gap-3 mb-12">
+                                   <div className="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-[#ccab7b]">
+                                     <CheckCircle size={20} />
+                                   </div>
+                                   <div>
+                                     <h3 className="text-[18px] text-[#e3decb] tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>Product Quotation</h3>
+                                     <p className="text-[11px] text-[#8c857b] tracking-wider uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>Please fill your details</p>
+                                   </div>
+                                </div>
 
                           {/* Contact Details */}
                           <div>
@@ -415,206 +386,88 @@ export function BrickDetailPanel({ brick, onClose }) {
                             </h4>
                             <div className="grid grid-cols-2 gap-4">
                               <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Full Name <span className="text-[var(--brass)]">*</span>
+                                <label className="block text-[10px] uppercase tracking-widest text-[#9a9488] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                  Full Name <span className="text-[#ccab7b]">*</span>
                                 </label>
                                 <input
                                   value={formData.fullName}
                                   onChange={e => setFormData({ ...formData, fullName: e.target.value })}
                                   placeholder="John Smith"
-                                  className={`w-full px-4 py-3 rounded-lg bg-black border text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors shadow-sm ${
+                                  className={`w-full px-4 py-3 rounded-md bg-white/[0.03] border text-[#e3decb] text-[12px] placeholder:text-white/20 focus:outline-none focus:border-[#ccab7b]/50 transition-colors font-light ${
                                     formErrors.fullName ? "border-red-500/50" : "border-white/5"
-                                  }`}
+                                  }`} style={{ fontFamily: "'Inter', sans-serif" }}
                                 />
                                 {formErrors.fullName && (
-                                  <p className="text-red-400 text-xs mt-1.5">{formErrors.fullName}</p>
+                                  <p className="text-red-400 text-[10px] mt-1.5">{formErrors.fullName}</p>
                                 )}
                               </div>
                               <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
+                                <label className="block text-[10px] uppercase tracking-widest text-[#9a9488] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
                                   Company Name
                                 </label>
                                 <input
                                   value={formData.company}
                                   onChange={e => setFormData({ ...formData, company: e.target.value })}
                                   placeholder="Acme Constructions"
-                                  className="w-full px-4 py-3 rounded-lg bg-black border border-white/5 shadow-sm text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors"
+                                  className="w-full px-4 py-3 rounded-md bg-white/[0.03] border border-white/5 text-[#e3decb] text-[12px] placeholder:text-white/20 focus:outline-none focus:border-[#ccab7b]/50 transition-colors font-light" style={{ fontFamily: "'Inter', sans-serif" }}
                                 />
                               </div>
                               <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Email Address <span className="text-[var(--brass)]">*</span>
+                                <label className="block text-[10px] uppercase tracking-widest text-[#9a9488] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                  Email Address <span className="text-[#ccab7b]">*</span>
                                 </label>
                                 <input
                                   type="email"
                                   value={formData.email}
                                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                                   placeholder="john@example.com"
-                                  className={`w-full px-4 py-3 rounded-lg bg-black border text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors shadow-sm ${
+                                  className={`w-full px-4 py-3 rounded-md bg-white/[0.03] border text-[#e3decb] text-[12px] placeholder:text-white/20 focus:outline-none focus:border-[#ccab7b]/50 transition-colors font-light ${
                                     formErrors.email ? "border-red-500/50" : "border-white/5"
-                                  }`}
+                                  }`} style={{ fontFamily: "'Inter', sans-serif" }}
                                 />
                                 {formErrors.email && (
-                                  <p className="text-red-400 text-xs mt-1.5">{formErrors.email}</p>
+                                  <p className="text-red-400 text-[10px] mt-1.5">{formErrors.email}</p>
                                 )}
                               </div>
                               <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Phone Number <span className="text-[var(--brass)]">*</span>
+                                <label className="block text-[10px] uppercase tracking-widest text-[#9a9488] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                  Phone Number <span className="text-[#ccab7b]">*</span>
                                 </label>
                                 <input
                                   type="tel"
                                   value={formData.phone}
                                   onChange={e => setFormData({ ...formData, phone: e.target.value })}
                                   placeholder="0400 000 000"
-                                  className={`w-full px-4 py-3 rounded-lg bg-black border text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors shadow-sm ${
+                                  className={`w-full px-4 py-3 rounded-md bg-white/[0.03] border text-[#e3decb] text-[12px] placeholder:text-white/20 focus:outline-none focus:border-[#ccab7b]/50 transition-colors font-light ${
                                     formErrors.phone ? "border-red-500/50" : "border-white/5"
-                                  }`}
+                                  }`} style={{ fontFamily: "'Inter', sans-serif" }}
                                 />
                                 {formErrors.phone && (
-                                  <p className="text-red-400 text-xs mt-1.5">{formErrors.phone}</p>
+                                  <p className="text-red-400 text-[10px] mt-1.5">{formErrors.phone}</p>
                                 )}
                               </div>
                             </div>
-                          </div>
-
-                          {/* Project Details */}
-                          <div>
-                            <h4 className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--brass)] mb-4">
-                              Project Details
-                            </h4>
-                            <div className="space-y-4">
-                              <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Project Type <span className="text-[var(--brass)]">*</span>
-                                </label>
-                                <div className="relative">
-                                  <select
-                                    value={formData.projectType}
-                                    onChange={e => setFormData({ ...formData, projectType: e.target.value })}
-                                    className={`w-full px-4 py-3 rounded-lg bg-black border text-sm text-white focus:outline-none focus:border-[var(--brass)] transition-colors appearance-none shadow-sm ${
-                                      formErrors.projectType ? "border-red-500/50" : "border-white/5"
-                                    }`}
-                                  >
-                                    <option value="" disabled>Select project type...</option>
-                                    {projectTypes.map((t) => (
-                                      <option key={t} value={t} className="bg-black text-white">{t}</option>
-                                    ))}
-                                  </select>
-                                  <ChevronRight size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 rotate-90 pointer-events-none" />
-                                </div>
-                                {formErrors.projectType && (
-                                  <p className="text-red-400 text-xs mt-1.5">{formErrors.projectType}</p>
-                                )}
-                              </div>
-                              <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Project Address / Location
-                                </label>
-                                <input
-                                  value={formData.projectAddress}
-                                  onChange={e => setFormData({ ...formData, projectAddress: e.target.value })}
-                                  placeholder="123 Main Street, Sydney NSW"
-                                  className="w-full px-4 py-3 rounded-lg bg-black border border-white/5 shadow-sm text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors"
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Quantity & Timeline */}
-                          <div>
-                            <h4 className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--brass)] mb-4">
-                              Requirements
-                            </h4>
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Estimated Quantity <span className="text-[var(--brass)]">*</span>
-                                </label>
-                                <div className="flex gap-2">
-                                  <input
-                                    type="number"
-                                    value={formData.quantity}
-                                    onChange={e => setFormData({ ...formData, quantity: e.target.value })}
-                                    placeholder="e.g. 500"
-                                    className={`flex-1 min-w-0 px-4 py-3 rounded-lg bg-black border text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors shadow-sm ${
-                                      formErrors.quantity ? "border-red-500/50" : "border-white/5"
-                                    }`}
-                                  />
-                                  <div className="relative w-28">
-                                    <select
-                                      value={formData.quantityUnit}
-                                      onChange={e => setFormData({ ...formData, quantityUnit: e.target.value })}
-                                      className="w-full h-full px-3 py-3 rounded-lg bg-black border border-white/5 shadow-sm text-white text-sm focus:outline-none focus:border-[var(--brass)] transition-colors appearance-none pr-8"
-                                    >
-                                      {quantityUnits.map((u) => (
-                                        <option key={u} value={u} className="bg-black">{u}</option>
-                                      ))}
-                                    </select>
-                                      <ChevronRight size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 rotate-90 pointer-events-none" />
-                                  </div>
-                                </div>
-                                {formErrors.quantity && (
-                                  <p className="text-red-400 text-xs mt-1.5">{formErrors.quantity}</p>
-                                )}
-                              </div>
-                              <div>
-                                <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                                  Project Timeline
-                                </label>
-                                <div className="relative">
-                                  <select
-                                    value={formData.timeline}
-                                    onChange={e => setFormData({ ...formData, timeline: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-lg bg-black border border-white/5 shadow-sm text-white text-sm focus:outline-none focus:border-[var(--brass)] transition-colors appearance-none"
-                                  >
-                                    <option value="" className="bg-black text-white">Select timeline...</option>
-                                    {timelines.map((t) => (
-                                      <option key={t} value={t} className="bg-black text-white">{t}</option>
-                                    ))}
-                                  </select>
-                                  <ChevronRight size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 rotate-90 pointer-events-none" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Notes */}
-                          <div>
-                            <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                              Additional Notes
-                            </label>
-                            <textarea
-                              rows={4}
-                              value={formData.notes}
-                              onChange={e => setFormData({ ...formData, notes: e.target.value })}
-                              placeholder="Tell us more about your project, special requirements, or any questions..."
-                              className="w-full px-4 py-3 rounded-lg bg-black border border-white/5 shadow-sm text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-[var(--brass)] transition-colors resize-none leading-relaxed"
-                            />
                           </div>
 
                           {/* Submit */}
-                          <div className="pt-2">
+                          <div className="pt-6">
                               <button
                                 type="submit"
                                 disabled={submitState === "loading"}
-                                className="w-full py-4 bg-[var(--brass)] text-black font-bold uppercase tracking-wider text-sm rounded-xl hover:bg-[var(--brass-light)] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(212,175,99,0.2)] hover:shadow-[0_8px_30px_rgba(212,175,99,0.4)]"
+                                className="w-full py-[18px] bg-[#ccab7b] text-black font-bold uppercase tracking-[0.15em] text-[11px] rounded-lg hover:shadow-[0_0_30px_rgba(204,171,123,0.3)] transition-all duration-500 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed" style={{ fontFamily: "'Inter', sans-serif" }}
                               >
                                 {submitState === "loading" ? (
                                   <>
-                                    <Loader2 size={16} className="animate-spin" />
-                                    <span>Sending Request...</span>
+                                    <Loader2 size={14} className="animate-spin" />
+                                    <span>Sending...</span>
                                   </>
                                 ) : (
                                   <>
-                                    <Send size={16} />
+                                    <Send size={14} />
                                     <span>Send Quote Request</span>
                                   </>
                                 )}
                               </button>
-                              <p className="text-xs font-medium text-gray-500 text-center mt-4">
-                                We typically respond within 1–2 business days.
-                              </p>
                           </div>
                         </motion.form>
                       )}

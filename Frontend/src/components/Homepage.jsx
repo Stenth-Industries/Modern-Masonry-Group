@@ -104,7 +104,7 @@ const AnimatedStat = ({ value, prefix = '', suffix = '', label }) => {
   return (
     <div ref={ref} className="pl-8 first:pl-0 flex flex-col justify-center">
       <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight">{prefix}{count}{suffix}</div>
-      <div className="text-sm font-medium text-gray-500 uppercase tracking-widest">{label}</div>
+      <div className="text-sm font-medium text-[var(--ash)] uppercase tracking-widest">{label}</div>
     </div>
   );
 };
@@ -229,7 +229,11 @@ export default function Homepage({ navigate }) {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black">
+    <div className="min-h-screen relative text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black">
+      <div
+        className="fixed inset-0 z-[-1] bg-cover bg-center bg-fixed w-full h-full pointer-events-none opacity-60"
+        style={{ backgroundImage: "url('/bg.png')" }}
+      />
       <FloatingCTA scrollY={scrollY} />
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} navItems={navItems} navigate={navigate} />
 
@@ -292,7 +296,7 @@ export default function Homepage({ navigate }) {
       </div>
 
       {/* HERO */}
-      <section id="home" className="relative h-screen bg-black">
+      <section id="home" className="relative h-screen bg-transparent">
         {/* Layer 0: Video 2 (main loop) — preloaded, fades in as Video 1 fades out */}
         <video
           ref={mainVideoRef}
@@ -399,7 +403,7 @@ export default function Homepage({ navigate }) {
       </motion.div>
 
       {/* STAT BAR */}
-      <section className="bg-white text-black py-16 px-8 md:px-20 border-y border-[var(--slate-mist)]">
+      <section className="bg-[var(--charcoal)]/40 backdrop-blur-sm text-[var(--limestone)] py-16 px-8 md:px-20 border-y border-[var(--slate-mist)]">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-[var(--slate-mist)]">
           <AnimatedStat value={30} suffix="+" label="Years in Business" />
           <AnimatedStat value={10} suffix="k+" label="Premium Products" />
@@ -410,7 +414,7 @@ export default function Homepage({ navigate }) {
 
 
       {/* WHY MMG */}
-      <section className="py-20 px-8 md:px-20 bg-black border-b border-white/5">
+      <section className="py-20 px-8 md:px-20 bg-black/40 backdrop-blur-sm border-b border-white/5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/10">
           {PILLARS.map((p, i) => (
             <div key={i} className="lg:px-8 first:pl-0 last:pr-0 group">
@@ -423,7 +427,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section id="products" className="py-24 px-8 md:px-20 bg-[var(--charcoal)]">
+      <section id="products" className="py-24 px-8 md:px-20 bg-[var(--charcoal)]/60 backdrop-blur-sm">
         <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
             <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-2 uppercase">-- New Arrivals</p>
@@ -510,7 +514,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-24 px-8 md:px-20 bg-black">
+      <section id="services" className="py-24 px-8 md:px-20 bg-black/40 backdrop-blur-sm">
         <div className="mb-14">
           <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-2 uppercase">-- What We Do</p>
           <h2 className="text-4xl font-bold tracking-tight">Our Services</h2>
@@ -534,16 +538,16 @@ export default function Homepage({ navigate }) {
       </section> */}
 
       {/* SHOP BY SPACE */}
-      <section className="py-24 px-8 md:px-20 bg-white text-black">
+      <section className="py-24 px-8 md:px-20 bg-[var(--obsidian)]/20 text-[var(--limestone)]">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-4 uppercase">-- Browse by Application</p>
-          <h2 className="text-5xl font-black tracking-tight mb-6">What Are You Building?</h2>
-          <p className="text-gray-600 text-lg">Find the perfect materials for your specific project. Engineered for performance in every application.</p>
+          <h2 className="text-5xl font-black tracking-tight mb-6 text-white">What Are You Building?</h2>
+          <p className="text-[var(--ash)] text-lg">Find the perfect materials for your specific project. Engineered for performance in every application.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[{ title: 'Exterior Cladding', span: 2 }, { title: 'Driveways', span: 1 }, { title: 'Patios & Walkways', span: 1 }, { title: 'Retaining Walls', span: 1 }, { title: 'Pool Decks', span: 1 }, { title: 'Steps & Caps', span: 1 }].map((s, i) => (
-            <div key={i} className={`group relative overflow-hidden bg-gray-100 cursor-pointer ${s.span === 2 ? 'md:row-span-2' : ''} aspect-square`}>
-              <div className="absolute inset-0 bg-gray-900/30 group-hover:bg-gray-900/10 transition-colors duration-300 z-10" />
+            <div key={i} className={`group relative overflow-hidden bg-[var(--charcoal)] border border-white/5 cursor-pointer ${s.span === 2 ? 'md:row-span-2' : ''} aspect-square`}>
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-300 z-10" />
               <div className="absolute bottom-0 left-0 p-8 z-20">
                 <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">{s.title}</h3>
                 <span className="text-white/80 flex items-center gap-2 text-sm font-bold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
@@ -556,7 +560,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="py-24 px-8 md:px-20 bg-[var(--charcoal)]">
+      <section id="gallery" className="py-24 px-8 md:px-20 bg-[var(--charcoal)]/60 backdrop-blur-sm">
         <div className="mb-12">
           <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-2 uppercase">-- Project Gallery</p>
           <h2 className="text-4xl font-bold tracking-tight">Built to Last. Designed to Impress.</h2>
@@ -585,7 +589,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* TESTIMONIALS */}
-      <section id="testimonials" className="py-24 bg-[var(--charcoal)] overflow-hidden">
+      <section id="testimonials" className="py-24 bg-[var(--charcoal)]/60 backdrop-blur-sm overflow-hidden">
         <div className="px-8 md:px-20 mb-14">
           <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-2 uppercase">-- Client Testimonials</p>
           <h2 className="text-4xl font-bold tracking-tight">What Our Clients Say</h2>
@@ -607,14 +611,14 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-24 px-8 md:px-20 bg-white text-black">
+      <section id="about" className="py-24 px-8 md:px-20 bg-[var(--charcoal)]/40 backdrop-blur-sm text-[var(--limestone)]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
           <div>
             <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-4 uppercase">-- Our Story</p>
-            <h2 className="text-5xl font-black tracking-tight mb-8 leading-none">30 Years of Masonry Excellence</h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-5">Modern Masonry Group was founded in 1994 with a single mission: bring world-class masonry materials to Ontario's architects, builders, and contractors at trade pricing.</p>
-            <p className="text-gray-600 text-lg leading-relaxed mb-10">Today we're Ontario's premier masonry supplier — stocking over 10,000 products from the industry's most trusted brands, with fleet delivery across the province.</p>
-            <a href="#contact" className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-900 transition-colors">
+            <h2 className="text-5xl font-black tracking-tight mb-8 leading-none text-white">30 Years of Masonry Excellence</h2>
+            <p className="text-[var(--ash)] text-lg leading-relaxed mb-5">Modern Masonry Group was founded in 1994 with a single mission: bring world-class masonry materials to Ontario's architects, builders, and contractors at trade pricing.</p>
+            <p className="text-[var(--ash)] text-lg leading-relaxed mb-10">Today we're Ontario's premier masonry supplier — stocking over 10,000 products from the industry's most trusted brands, with fleet delivery across the province.</p>
+            <a href="#contact" className="inline-flex items-center gap-2 bg-[var(--brass)] text-[var(--charcoal)] px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors">
               Work With Us <ArrowRight size={16} />
             </a>
           </div>
@@ -623,11 +627,11 @@ export default function Homepage({ navigate }) {
               <div key={i} className="flex gap-5">
                 <div className="flex flex-col items-center">
                   <div className="w-3 h-3 rounded-full bg-[var(--brass)] mt-1.5 shrink-0" />
-                  {i < MILESTONES.length - 1 && <div className="w-px bg-gray-200 flex-1 my-1" />}
+                  {i < MILESTONES.length - 1 && <div className="w-px bg-[var(--slate-mist)] flex-1 my-1" />}
                 </div>
                 <div className={i < MILESTONES.length - 1 ? 'pb-8' : 'pb-0'}>
                   <p className="text-[10px] font-bold text-[var(--brass)] uppercase tracking-widest mb-1">{m.year}</p>
-                  <p className="text-gray-700 font-medium">{m.event}</p>
+                  <p className="text-[var(--limestone)] font-medium">{m.event}</p>
                 </div>
               </div>
             ))}
@@ -639,20 +643,20 @@ export default function Homepage({ navigate }) {
       <FAQSection />
 
       {/* CTA */}
-      <section id="quote" className="py-32 px-8 text-center bg-[var(--brass)] text-black relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iIzAwMCI+PC9jaXJjbGU+Cjwvc3ZnPg==')] mix-blend-multiply" />
+      <section id="quote" className="py-32 px-8 text-center bg-[var(--obsidian)]/80 backdrop-blur-sm text-[var(--limestone)] relative overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iIzAwMCI+PC9jaXJjbGU+Cjwvc3ZnPg==')] mix-blend-color-dodge" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none">Ready to Start Your Project?</h2>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none text-white">Ready to Start Your Project?</h2>
           <p className="text-xl md:text-2xl font-medium mb-10 max-w-2xl mx-auto opacity-80">Our masonry experts are here to help you select, estimate, and supply the perfect materials.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-black text-white px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-gray-900 transition-colors shadow-2xl">Get a Quote Today</button>
-            <button className="bg-transparent border-2 border-black text-black px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-black/5 transition-colors">Talk to an Expert</button>
+            <button className="bg-[var(--brass)] text-[var(--charcoal)] px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors shadow-2xl">Get a Quote Today</button>
+            <button className="bg-transparent border-2 border-[var(--brass)] text-[var(--brass)] px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass)]/10 transition-colors">Talk to an Expert</button>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[var(--obsidian)] pt-24 pb-12 px-8 md:px-20 border-t border-white/5">
+      <footer className="bg-[var(--obsidian)]/80 backdrop-blur-md pt-24 pb-12 px-8 md:px-20 border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-20 border-b border-white/5 pb-20">
           <div>
             <div className="text-2xl font-bold text-white flex items-center gap-2 mb-6">

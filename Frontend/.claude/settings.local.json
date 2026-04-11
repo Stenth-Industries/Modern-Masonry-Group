@@ -3,7 +3,13 @@
     "allow": [
       "Bash(python3 -c \"import json,sys; data=json.load\\(sys.stdin\\); print\\(f'Total frames: {len\\(data\\)}'\\)\")",
       "Bash(node:*)",
-      "Bash(xargs -I{} du -sh \"D:/modern/frontend/public/videotojpg.com_8263308-uhd_3840_2160_24fps_jpg_20260407_142725/{}\")"
+      "Bash(xargs -I{} du -sh \"D:/modern/frontend/public/videotojpg.com_8263308-uhd_3840_2160_24fps_jpg_20260407_142725/{}\")",
+      "Bash(npm run:*)",
+      "Bash(npx prisma:*)",
+      "Bash(curl:*)",
+      "Bash(git pull:*)",
+      "WebFetch(domain:replit.com)",
+      "WebFetch(domain:8b83412a-84b6-4119-8d3b-271f691e2742-00-2xxyb49a3l5ra.kirk.replit.dev)"
     ]
   }
 }
