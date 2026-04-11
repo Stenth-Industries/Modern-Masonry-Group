@@ -2,10 +2,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, Plus, Minus, ChevronRight } from 'lucide-react';
 import BrickCatalogue from './BrickCatalogue';
+import { InfiniteSlider } from './ui/infinite-slider';
+import { ProgressiveBlur } from './ui/progressive-blur';
+import { Sparkles } from './ui/sparkles';
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
 const BRANDS = ['Brampton Brick', 'Unilock', 'Techo-Bloc', 'Permacon', 'Rinox', 'General Shale', 'Shouldice', 'Cambridge Pavingstones', 'Oldcastle', 'Belgard'];
+
+const BRAND_LOGOS = [
+  { name: 'Brampton Brick',        src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-01png.png',          href: 'https://bramptonbrick.com/en/masonry-products-search' },
+  { name: 'Canada Brick',          src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-03.png',              href: 'https://canadabrick.com/brick/' },
+  { name: 'All Things Stone',      src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-04.png',              href: 'https://www.allthingsstone.com/ca-en/products/' },
+  { name: 'Arriscraft',            src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-05.png',              href: 'https://arriscraft.com/library-1/' },
+  { name: 'Permacon',              src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-06.png',              href: 'https://permacon.ca/en/catalogs/' },
+  { name: 'Ontario Stone Veneers', src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-07.png',              href: 'https://www.ontariostoneveneers.com/products/' },
+  { name: 'Rinox',                 src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-08.png',              href: 'https://www.rinox.com/en/collections/masonry/' },
+  { name: 'Stonerox',              src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-09.png',              href: 'https://www.stonerox.ca/' },
+  { name: 'Rialux',                src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-10.png',              href: 'https://www.rialux.com/en/collections/' },
+  { name: 'Stonearch',             src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Untitled-1.png',           href: 'https://www.stonearch.ca/catalogue' },
+  { name: 'Santerra',              src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Santerra_black-lettering-gold-star-with-white-background.png', href: 'https://santerrastonecraft.com/resources/catalogues-guides' },
+  { name: 'Stonepark',             src: 'https://modernmasonrygroup.ca/wp-content/uploads/2025/05/200x55-1.png',             href: 'https://www.stonepark.ca/products.html' },
+];
 
 const TESTIMONIALS = [
   { name: 'Carla S.', role: 'Lead Architect', company: 'Bousfields Inc.', rating: 5, quote: 'Working with Modern Masonry Group has been seamless from day one. Their brick selection is unmatched in Ontario.' },
@@ -207,8 +225,7 @@ export default function Homepage({ navigate }) {
   const navItems = [
     { label: 'Home', href: '#home' }, { label: 'Products', href: '#products', hasMega: true },
     { label: 'Services', href: '#services' }, { label: 'About Us', href: '#about' },
-    { label: 'Gallery', href: '#gallery' }, { label: 'Testimonials', href: '#testimonials' },
-    { label: 'FAQ', href: '#faq' }, { label: 'Get a Quote', href: '#quote' },
+    { label: 'Gallery', href: '#gallery' },
   ];
 
   return (
@@ -391,22 +408,6 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      {/* BRAND MARQUEE */}
-      <section className="py-12 bg-[var(--charcoal)] border-y border-white/5 overflow-hidden">
-        <p className="text-center text-[10px] text-[var(--ash)] uppercase tracking-[0.35em] mb-7">Proudly Stocking Canada's Leading Masonry Brands</p>
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--charcoal)] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--charcoal)] to-transparent z-10 pointer-events-none" />
-          <div className="flex animate-scroll-left whitespace-nowrap" style={{ willChange: 'transform' }}>
-            {[...BRANDS, ...BRANDS].map((b, i) => (
-              <span key={i} className="inline-flex items-center mx-8 shrink-0">
-                <span className="w-1 h-1 bg-[var(--brass)] rounded-full mr-8" />
-                <span className="text-white/30 hover:text-white/60 transition-colors font-bold text-xs uppercase tracking-[0.25em]">{b}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* WHY MMG */}
       <section className="py-20 px-8 md:px-20 bg-black border-b border-white/5">
@@ -444,6 +445,67 @@ export default function Homepage({ navigate }) {
               <h3 className="text-lg font-bold group-hover:text-[var(--brass)] transition-colors duration-200">{p.name}</h3>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* BRAND MARQUEE */}
+      <section className="relative overflow-hidden bg-[#0d0d0d] border-y border-white/[0.04]">
+        {/* heading */}
+        <div className="relative z-10 pt-14 pb-8 text-center">
+          <p className="text-[10px] uppercase tracking-[0.38em] text-[var(--brass)]/60 mb-2">Proudly Stocking</p>
+          <h2 className="text-[22px] font-semibold tracking-tight text-white/80">
+            Canada's Leading Masonry Brands
+          </h2>
+        </div>
+
+        {/* slider */}
+        <div className="relative z-10 h-[90px] w-full">
+          <InfiniteSlider
+            className="flex h-full w-full items-center"
+            duration={40}
+            gap={64}
+          >
+            {BRAND_LOGOS.map((brand) => (
+              <a
+                key={brand.name}
+                href={brand.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 flex items-center justify-center px-5 py-3 rounded-sm bg-white/90 hover:bg-white transition-all duration-300 group"
+                style={{ height: 60 }}
+              >
+                <img
+                  src={brand.src}
+                  alt={brand.name}
+                  className="h-[34px] w-auto max-w-[120px] object-contain opacity-75 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </a>
+            ))}
+          </InfiniteSlider>
+
+          <ProgressiveBlur
+            className="pointer-events-none absolute top-0 left-0 h-full w-[180px]"
+            direction="left"
+            blurIntensity={0.8}
+          />
+          <ProgressiveBlur
+            className="pointer-events-none absolute top-0 right-0 h-full w-[180px]"
+            direction="right"
+            blurIntensity={0.8}
+          />
+        </div>
+
+        {/* sparkle glow base */}
+        <div className="relative -mt-10 h-64 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
+          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#8b6914,transparent_70%)] before:opacity-30" />
+          <div className="absolute -left-1/2 top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-white/[0.06] bg-[#0d0d0d]" />
+          <Sparkles
+            density={900}
+            size={0.9}
+            color="#C9A449"
+            opacitySpeed={2}
+            className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
+          />
         </div>
       </section>
 
