@@ -589,7 +589,7 @@ export default function BrickCatalogue({ navigate }) {
                 : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'
             }`}>
               {filtered.map((brick, i) => (
-                <BrickCard key={brick.id} brick={brick} onClick={() => openModal(i)} />
+                <BrickCard key={brick.id} brick={brick} onClick={() => navigate('#brick-detail/' + brick.id)} />
               ))}
             </div>
           )}
