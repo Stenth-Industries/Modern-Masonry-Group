@@ -1,104 +1,101 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Card, Input, Button, Select } from './ui';
 
-const COLOR_MAP = {
-  red: '#B4382B',
-  tan: '#D2B48C',
-  grey: '#808080',
-  gray: '#808080',
-  brown: '#5D4037',
-  buff: '#F0DC82',
-  cream: '#FFFDD0',
-  white: '#FFFFFF',
-  black: '#111111',
-  charcoal: '#36454F',
-  charcole: '#36454F',
-  silver: '#C0C0C0',
-  bronze: '#CD7F32',
-  gold: '#FFD700',
-  orange: '#E67E22',
-  pink: '#FADADD',
-};
+export default function Catalogue({ navigate }) {
+  const [search, setSearch]             = useState('');
+  const [material, setMaterial]         = useState('');
+  const [colour, setColour]             = useState('');
+  const [collection, setCollection]     = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [page, setPage]                 = useState(1);
 
-const resolveColor = (name, hex) => {
-  if (!name && !hex) return '#808080';
-  if (!name) return hex;
-  const key = name.toLowerCase().trim();
-  return COLOR_MAP[key] || hex || '#808080';
-};
+  const [products, setProducts]         = useState([]);
+  const [totalItems, setTotalItems]     = useState(0);
+  const [loading, setLoading]           = useState(false);
+  const [hasMore, setHasMore]           = useState(false);
 
-export default function Catalogue() {
-  const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  const [meta, setMeta] = useState(null);
-  const [filters, setFilters] = useState({
-    colours: [],
-    collections: [],
-    styles: [],
-    manufacturers: [],
-    materials: []
+  const [filterOptions, setFilterOptions] = useState({
+    materials: [], colours: [], collections: [], manufacturers: []
   });
 
-  const [queryParams, setQueryParams] = useState({
-    search: '',
-    colour: '',
-    collection: '',
-    style: '',
-    manufacturer: '',
-    material: '',
-    page: 1,
-    limit: 20
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  // Fetch filters
+  // Fetch filter options once
   useEffect(() => {
-    fetch('http://localhost:5000/api/products/filters')
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          setFilters(data.data);
+    fetch('/api/products/filters')
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          const d = res.data;
+          setFilterOptions({
+            materials: d.materials || [],
+            colours: (d.colours || []).map(c => c.value),
+            collections: (d.collections || []).map(c => c.value),
+            manufacturers: (d.manufacturers || []).map(m => m.name),
+          });
         }
       })
-      .catch(err => console.error("Error fetching filters:", err));
+      .catch(err => console.error('Failed to load filter options', err));
   }, []);
 
-// Fetch products
-  const fetchProducts = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      Object.entries(queryParams).forEach(([key, value]) => {
-        if (value) params.append(key, value);
-      });
-
-      const res = await fetch(`http://localhost:5000/api/products?${params.toString()}`);
-      const data = await res.json();
-      
-      if (data.success) {
-        setProducts(prev => queryParams.page === 1 ? data.data : [...prev, ...data.data]);
-        setMeta(data.meta);
-      }
-    } catch (err) {
-      console.error("Error fetching products:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, [queryParams]);
-
+  // Fetch products
   useEffect(() => {
-    if (!hasMore) return;
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (material) params.append('material', material);
+    if (colour) params.append('colour', colour);
+    if (collection) params.append('collection', collection);
+    if (manufacturer) params.append('manufacturer', manufacturer);
+    params.append('page', page);
+    params.append('limit', 20);
+
+    fetch(`/api/products?${params.toString()}`)
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          if (page === 1) {
+            setProducts(res.data);
+          } else {
+            setProducts(prev => [...prev, ...res.data]);
+          }
+          setTotalItems(res.meta.total);
+          setHasMore(page < res.meta.totalPages);
+        }
+      })
+      .catch(err => console.error('Failed to load products', err))
+      .finally(() => setLoading(false));
+  }, [search, material, colour, collection, manufacturer, page]);
+
+  // Reset to page 1 whenever any filter changes (except on first mount where page=1 anyway)
+  // We use a separate effect that runs when filters change to reset the page.
+  // We don't clear explicitly here because we want the existing products visible while loading new ones, or maybe clear them.
+  // Actually, clearing them gives better UX so old items from old query aren't shown.
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setPage(1);
+    setProducts([]);
+  }, [search, material, colour, collection, manufacturer]);
+
+  // Infinite scroll sentinel
+  const sentinelRef = useRef(null);
+  useEffect(() => {
+    if (!hasMore || loading) return;
     const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) setPage(p => p + 1);
+      if (entries[0].isIntersecting) {
+        setPage(p => p + 1);
+      }
     }, { rootMargin: '800px' });
     if (sentinelRef.current) obs.observe(sentinelRef.current);
     return () => obs.disconnect();
-  }, [hasMore, visible.length]);
+  }, [hasMore, loading]);
 
   const clearAll = useCallback(() => {
     setSearch(''); setMaterial(''); setColour(''); setCollection(''); setManufacturer('');
+    setPage(1);
+    setProducts([]);
   }, []);
 
   return (
@@ -136,7 +133,7 @@ export default function Catalogue() {
                   placeholder="All Materials"
                   value={material}
                   onChange={e => setMaterial(e.target.value)}
-                  options={ALL_MATERIALS.map(m => ({ value: m, label: m }))}
+                  options={filterOptions.materials.map(m => ({ value: m, label: m }))}
                 />
               </div>
               <div>
@@ -145,7 +142,7 @@ export default function Catalogue() {
                   placeholder="All Colours"
                   value={colour}
                   onChange={e => setColour(e.target.value)}
-                  options={ALL_COLOURS.map(c => ({ value: c, label: c }))}
+                  options={filterOptions.colours.map(c => ({ value: c, label: c }))}
                 />
               </div>
               <div>
@@ -154,7 +151,7 @@ export default function Catalogue() {
                   placeholder="All Collections"
                   value={collection}
                   onChange={e => setCollection(e.target.value)}
-                  options={ALL_COLLECTIONS.map(c => ({ value: c, label: c }))}
+                  options={filterOptions.collections.map(c => ({ value: c, label: c }))}
                 />
               </div>
               <div>
@@ -163,11 +160,11 @@ export default function Catalogue() {
                   placeholder="All Manufacturers"
                   value={manufacturer}
                   onChange={e => setManufacturer(e.target.value)}
-                  options={ALL_MANUFACTURERS.map(m => ({ value: m, label: m }))}
+                  options={filterOptions.manufacturers.map(m => ({ value: m, label: m }))}
                 />
               </div>
               <div className="pt-4 border-t border-[var(--text-secondary)]/20 flex justify-between items-center">
-                <span className="text-sm text-[var(--text-secondary)]">{filtered.length} Results</span>
+                <span className="text-sm text-[var(--text-secondary)]">{totalItems} Results</span>
                 <Button variant="outline" onClick={clearAll}>Clear All</Button>
               </div>
             </div>
@@ -176,74 +173,56 @@ export default function Catalogue() {
 
         {/* Product Grid */}
         <main className="lg:w-3/4">
-          {visible.length > 0 ? (
+          {products.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {products.map((product, index) => {
-                  const isLastElement = index === products.length - 1;
-                  return (
-                    <div
-                      ref={isLastElement ? lastElementRef : null}
-                      key={`${product.id}-${index}`}
-                      onClick={() => product.slug && navigate(`/product/${product.slug}`)}
-                      style={{ cursor: product.slug ? 'pointer' : 'default' }}
-                    >
-                      <Card className="flex flex-col h-full group">
-                        <div className="relative h-48 bg-[var(--bg-primary)] border-b border-[var(--text-secondary)]/20 overflow-hidden flex items-center justify-center">
-                          {product.variants?.[0]?.imageUrl ? (
-                            <img 
-                              src={product.variants[0].imageUrl} 
-                              alt={product.name} 
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center">
-                              <span className="text-[var(--text-secondary)] opacity-50 font-medium">No Image</span>
-                            </div>
-                          )}
-                          
-                          {product.material && (
-                            <div className="absolute top-3 right-3 bg-[var(--bg-secondary)]/90 backdrop-blur text-xs px-2 py-1 rounded text-[var(--text-primary)] border border-[var(--text-secondary)]/30">
-                              {product.material}
-                            </div>
-                          )}
-                        </div>
-                        
-                        <div className="p-5 flex flex-col flex-grow">
-                          <div className="mb-2">
-                            {product.manufacturers?.map(m => (
-                              <span key={m.id} className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">
-                                {m.name}
-                              </span>
-                            ))}
+                {products.map(product => (
+                  <div
+                    key={product.id}
+                    className="cursor-pointer"
+                    onClick={() => navigate && navigate(`#brick-detail/${product.slug || product.id}`)}
+                  >
+                    <Card className="flex flex-col h-full group">
+                      <div className="relative h-48 bg-[var(--bg-primary)] border-b border-[var(--text-secondary)]/20 overflow-hidden flex items-center justify-center">
+                        {product.variants?.[0]?.imageUrl ? (
+                          <img
+                            src={product.variants[0].imageUrl}
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center">
+                            <span className="text-[var(--text-secondary)] opacity-50 font-medium">No Image</span>
                           </div>
-                          <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">
-                            {product.name}
-                          </h3>
-                          
-                          <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                            {product.categories?.filter(c => c.type === 'colour').map(c => (
-                              <div key={c.id} className="flex items-center gap-1.5 text-xs bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--text-secondary)]/10">
-                                <span className="w-3 h-3 rounded-full border border-black/20" style={{ backgroundColor: resolveColor(c.value, c.hexCode) }}></span>
-                                <span className="text-[var(--text-secondary)]">{c.value}</span>
-                              </div>
-                            ))}
+                        )}
+                        {product.material && (
+                          <div className="absolute top-3 right-3 bg-[var(--bg-secondary)]/90 backdrop-blur text-xs px-2 py-1 rounded text-[var(--text-primary)] border border-[var(--text-secondary)]/30">
+                            {product.material}
                           </div>
-
-                          {/* View Detail CTA */}
-                          {product.slug && (
-                            <div className="mt-3 pt-3 border-t border-[var(--text-secondary)]/10">
-                              <span className="text-xs font-bold tracking-widest uppercase text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                View Details →
-                              </span>
-                            </div>
-                          )}
+                        )}
+                      </div>
+                      <div className="p-5 flex flex-col flex-grow">
+                        <div className="mb-2">
+                          {product.manufacturers?.map(m => (
+                            <span key={m.id} className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">
+                              {m.name}
+                            </span>
+                          ))}
                         </div>
-                      </Card>
-                    </div>
-                  );
-                })}
+                        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">{product.name}</h3>
+                        <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                          {product.categories?.filter(c => c.type === 'colour').map(c => (
+                            <div key={c.id} className="flex items-center gap-1.5 text-xs bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--text-secondary)]/10">
+                              <span className="text-[var(--text-secondary)]">{c.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                ))}
               </div>
 
               {hasMore && (
@@ -253,11 +232,20 @@ export default function Catalogue() {
               )}
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center p-12 text-center h-64 border border-dashed border-[var(--text-secondary)]/30 rounded-xl">
-              <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">No products found</h3>
-              <p className="text-[var(--text-secondary)] max-w-md">Try adjusting your filters or search query.</p>
-              <Button variant="outline" className="mt-6" onClick={clearAll}>Clear all filters</Button>
-            </div>
+            <>
+              {!loading && (
+                <div className="flex flex-col items-center justify-center p-12 text-center h-64 border border-dashed border-[var(--text-secondary)]/30 rounded-xl">
+                  <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">No products found</h3>
+                  <p className="text-[var(--text-secondary)] max-w-md">Try adjusting your filters or search query.</p>
+                  <Button variant="outline" className="mt-6" onClick={clearAll}>Clear all filters</Button>
+                </div>
+              )}
+              {loading && products.length === 0 && (
+                <div className="flex justify-center p-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--accent)]" />
+                </div>
+              )}
+            </>
           )}
         </main>
       </div>
