@@ -1,38 +1,5 @@
-import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
-import rawBricks from '../data/bricks.json';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Card, Input, Button, Select } from './ui';
-
-// ─── Adapt local bricks.json to the shape the UI expects ─────────────────────
-function adaptBrick(b) {
-  const validImages = (b.images || []).filter(
-    src => src && src.startsWith('http') && !src.toLowerCase().includes('logo') && !src.toLowerCase().includes('icon')
-  );
-  if (b.image && b.image.startsWith('http') && !b.image.toLowerCase().includes('logo') && !validImages.includes(b.image)) {
-    validImages.unshift(b.image);
-  }
-  const colours = (b.allColors || []).filter(Boolean);
-  return {
-    id: b.id,
-    name: b.name,
-    material: b.attributes?.Type || '',
-    description: b.description || '',
-    manufacturers: (b.allManufacturers || (b.manufacturer ? [b.manufacturer] : [])).map((name, i) => ({ id: i, name })),
-    variants: validImages.map((imageUrl, i) => ({ id: i, imageUrl })),
-    categories: colours.map((value, i) => ({ id: `colour-${i}`, type: 'colour', value, hexCode: null })),
-    collection: b.collection || '',
-    allCollections: b.allCollections || [],
-  };
-}
-
-const adapted = rawBricks.map(adaptBrick);
-
-// ─── Build filter option lists once ──────────────────────────────────────────
-const ALL_MATERIALS     = [...new Set(adapted.map(b => b.material).filter(Boolean))].sort();
-const ALL_COLOURS       = [...new Set(adapted.flatMap(b => b.categories.map(c => c.value)))].sort();
-const ALL_COLLECTIONS   = [...new Set(adapted.flatMap(b => b.allCollections).filter(Boolean))].sort();
-const ALL_MANUFACTURERS = [...new Set(adapted.flatMap(b => b.manufacturers.map(m => m.name)).filter(Boolean))].sort();
-
-const PAGE_SIZE = 20;
 
 export default function Catalogue({ navigate }) {
   const [search, setSearch]             = useState('');
@@ -42,37 +9,93 @@ export default function Catalogue({ navigate }) {
   const [manufacturer, setManufacturer] = useState('');
   const [page, setPage]                 = useState(1);
 
-  // Reset to page 1 whenever any filter changes
-  useEffect(() => { setPage(1); }, [search, material, colour, collection, manufacturer]);
+  const [products, setProducts]         = useState([]);
+  const [totalItems, setTotalItems]     = useState(0);
+  const [loading, setLoading]           = useState(false);
+  const [hasMore, setHasMore]           = useState(false);
 
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase();
-    return adapted.filter(b => {
-      if (q && !b.name.toLowerCase().includes(q) && !b.material.toLowerCase().includes(q)) return false;
-      if (material && b.material !== material) return false;
-      if (colour && !b.categories.some(c => c.value === colour)) return false;
-      if (collection && !b.allCollections.includes(collection)) return false;
-      if (manufacturer && !b.manufacturers.some(m => m.name === manufacturer)) return false;
-      return true;
-    });
+  const [filterOptions, setFilterOptions] = useState({
+    materials: [], colours: [], collections: [], manufacturers: []
+  });
+
+  // Fetch filter options once
+  useEffect(() => {
+    fetch('/api/products/filters')
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          const d = res.data;
+          setFilterOptions({
+            materials: d.materials || [],
+            colours: (d.colours || []).map(c => c.value),
+            collections: (d.collections || []).map(c => c.value),
+            manufacturers: (d.manufacturers || []).map(m => m.name),
+          });
+        }
+      })
+      .catch(err => console.error('Failed to load filter options', err));
+  }, []);
+
+  // Fetch products
+  useEffect(() => {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (material) params.append('material', material);
+    if (colour) params.append('colour', colour);
+    if (collection) params.append('collection', collection);
+    if (manufacturer) params.append('manufacturer', manufacturer);
+    params.append('page', page);
+    params.append('limit', 20);
+
+    fetch(`/api/products?${params.toString()}`)
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          if (page === 1) {
+            setProducts(res.data);
+          } else {
+            setProducts(prev => [...prev, ...res.data]);
+          }
+          setTotalItems(res.meta.total);
+          setHasMore(page < res.meta.totalPages);
+        }
+      })
+      .catch(err => console.error('Failed to load products', err))
+      .finally(() => setLoading(false));
+  }, [search, material, colour, collection, manufacturer, page]);
+
+  // Reset to page 1 whenever any filter changes (except on first mount where page=1 anyway)
+  // We use a separate effect that runs when filters change to reset the page.
+  // We don't clear explicitly here because we want the existing products visible while loading new ones, or maybe clear them.
+  // Actually, clearing them gives better UX so old items from old query aren't shown.
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setPage(1);
+    setProducts([]);
   }, [search, material, colour, collection, manufacturer]);
-
-  const visible = useMemo(() => filtered.slice(0, page * PAGE_SIZE), [filtered, page]);
-  const hasMore = visible.length < filtered.length;
 
   // Infinite scroll sentinel
   const sentinelRef = useRef(null);
   useEffect(() => {
-    if (!hasMore) return;
+    if (!hasMore || loading) return;
     const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) setPage(p => p + 1);
+      if (entries[0].isIntersecting) {
+        setPage(p => p + 1);
+      }
     }, { rootMargin: '800px' });
     if (sentinelRef.current) obs.observe(sentinelRef.current);
     return () => obs.disconnect();
-  }, [hasMore, visible.length]);
+  }, [hasMore, loading]);
 
   const clearAll = useCallback(() => {
     setSearch(''); setMaterial(''); setColour(''); setCollection(''); setManufacturer('');
+    setPage(1);
+    setProducts([]);
   }, []);
 
   return (
@@ -110,7 +133,7 @@ export default function Catalogue({ navigate }) {
                   placeholder="All Materials"
                   value={material}
                   onChange={e => setMaterial(e.target.value)}
-                  options={ALL_MATERIALS.map(m => ({ value: m, label: m }))}
+                  options={filterOptions.materials.map(m => ({ value: m, label: m }))}
                 />
               </div>
               <div>
@@ -119,7 +142,7 @@ export default function Catalogue({ navigate }) {
                   placeholder="All Colours"
                   value={colour}
                   onChange={e => setColour(e.target.value)}
-                  options={ALL_COLOURS.map(c => ({ value: c, label: c }))}
+                  options={filterOptions.colours.map(c => ({ value: c, label: c }))}
                 />
               </div>
               <div>
@@ -128,7 +151,7 @@ export default function Catalogue({ navigate }) {
                   placeholder="All Collections"
                   value={collection}
                   onChange={e => setCollection(e.target.value)}
-                  options={ALL_COLLECTIONS.map(c => ({ value: c, label: c }))}
+                  options={filterOptions.collections.map(c => ({ value: c, label: c }))}
                 />
               </div>
               <div>
@@ -137,11 +160,11 @@ export default function Catalogue({ navigate }) {
                   placeholder="All Manufacturers"
                   value={manufacturer}
                   onChange={e => setManufacturer(e.target.value)}
-                  options={ALL_MANUFACTURERS.map(m => ({ value: m, label: m }))}
+                  options={filterOptions.manufacturers.map(m => ({ value: m, label: m }))}
                 />
               </div>
               <div className="pt-4 border-t border-[var(--text-secondary)]/20 flex justify-between items-center">
-                <span className="text-sm text-[var(--text-secondary)]">{filtered.length} Results</span>
+                <span className="text-sm text-[var(--text-secondary)]">{totalItems} Results</span>
                 <Button variant="outline" onClick={clearAll}>Clear All</Button>
               </div>
             </div>
@@ -150,18 +173,18 @@ export default function Catalogue({ navigate }) {
 
         {/* Product Grid */}
         <main className="lg:w-3/4">
-          {visible.length > 0 ? (
+          {products.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {visible.map(product => (
+                {products.map(product => (
                   <div
                     key={product.id}
                     className="cursor-pointer"
-                    onClick={() => navigate && navigate(`#brick-detail/${product.id}`)}
+                    onClick={() => navigate && navigate(`#brick-detail/${product.slug || product.id}`)}
                   >
                     <Card className="flex flex-col h-full group">
                       <div className="relative h-48 bg-[var(--bg-primary)] border-b border-[var(--text-secondary)]/20 overflow-hidden flex items-center justify-center">
-                        {product.variants[0]?.imageUrl ? (
+                        {product.variants?.[0]?.imageUrl ? (
                           <img
                             src={product.variants[0].imageUrl}
                             alt={product.name}
@@ -182,7 +205,7 @@ export default function Catalogue({ navigate }) {
                       </div>
                       <div className="p-5 flex flex-col flex-grow">
                         <div className="mb-2">
-                          {product.manufacturers.map(m => (
+                          {product.manufacturers?.map(m => (
                             <span key={m.id} className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">
                               {m.name}
                             </span>
@@ -190,7 +213,7 @@ export default function Catalogue({ navigate }) {
                         </div>
                         <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">{product.name}</h3>
                         <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                          {product.categories.filter(c => c.type === 'colour').map(c => (
+                          {product.categories?.filter(c => c.type === 'colour').map(c => (
                             <div key={c.id} className="flex items-center gap-1.5 text-xs bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--text-secondary)]/10">
                               <span className="text-[var(--text-secondary)]">{c.value}</span>
                             </div>
@@ -209,11 +232,20 @@ export default function Catalogue({ navigate }) {
               )}
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center p-12 text-center h-64 border border-dashed border-[var(--text-secondary)]/30 rounded-xl">
-              <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">No products found</h3>
-              <p className="text-[var(--text-secondary)] max-w-md">Try adjusting your filters or search query.</p>
-              <Button variant="outline" className="mt-6" onClick={clearAll}>Clear all filters</Button>
-            </div>
+            <>
+              {!loading && (
+                <div className="flex flex-col items-center justify-center p-12 text-center h-64 border border-dashed border-[var(--text-secondary)]/30 rounded-xl">
+                  <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">No products found</h3>
+                  <p className="text-[var(--text-secondary)] max-w-md">Try adjusting your filters or search query.</p>
+                  <Button variant="outline" className="mt-6" onClick={clearAll}>Clear all filters</Button>
+                </div>
+              )}
+              {loading && products.length === 0 && (
+                <div className="flex justify-center p-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--accent)]" />
+                </div>
+              )}
+            </>
           )}
         </main>
       </div>

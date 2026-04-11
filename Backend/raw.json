@@ -1,0 +1,111 @@
+{
+  "manufacturer": [
+    {
+      "id": "a1b2c3d4-0001-0000-0000-000000000000",
+      "name": "Vandersanden",
+      "website": "https://www.vandersanden.com",
+      "country": "Belgium",
+      "description": "Premium European brick manufacturer",
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    }
+  ],
+
+  "category": [
+    {
+      "id": "cat-0001-0000-0000-000000000000",
+      "type": "colour",
+      "value": "Black",
+      "hexCode": "#1a1a1a"
+    },
+    {
+      "id": "cat-0002-0000-0000-000000000000",
+      "type": "style",
+      "value": "Handmades",
+      "hexCode": null
+    },
+    {
+      "id": "cat-0003-0000-0000-000000000000",
+      "type": "collection",
+      "value": "Full-bed Face Brick",
+      "hexCode": null
+    }
+  ],
+
+  "product": [
+    {
+      "id": "prod-0001-0000-0000-000000000000",
+      "name": "Vandersanden Handmade Black Brick",
+      "slug": "vandersanden-handmade-black-brick",
+      "description": "A premium handmade full-bed face brick in deep black.",
+      "material": "brick",
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    }
+  ],
+
+  "productManufacturer": [
+    {
+      "productId": "prod-0001-0000-0000-000000000000",
+      "manufacturerId": "a1b2c3d4-0001-0000-0000-000000000000"
+    }
+  ],
+
+  "productCategory": [
+    {
+      "productId": "prod-0001-0000-0000-000000000000",
+      "categoryId": "cat-0001-0000-0000-000000000000"
+    },
+    {
+      "productId": "prod-0001-0000-0000-000000000000",
+      "categoryId": "cat-0002-0000-0000-000000000000"
+    },
+    {
+      "productId": "prod-0001-0000-0000-000000000000",
+      "categoryId": "cat-0003-0000-0000-000000000000"
+    }
+  ],
+
+  "variant": [
+    {
+      "id": "var-0001-0000-0000-000000000000",
+      "productId": "prod-0001-0000-0000-000000000000",
+      "sku": "VDS-BLK-WF50",
+      "colourName": "Black",
+      "hexCode": "#1a1a1a",
+      "sizeLabel": "WF50mm",
+      "widthMm": 210,
+      "heightMm": 100,
+      "depthMm": 50,
+      "imageUrl": "https://yourcdn.com/vds-black-wf50.jpg",
+      "isActive": true,
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    },
+    {
+      "id": "var-0002-0000-0000-000000000000",
+      "productId": "prod-0001-0000-0000-000000000000",
+      "sku": "VDS-BLK-DF",
+      "colourName": "Black",
+      "hexCode": "#1a1a1a",
+      "sizeLabel": "DF",
+      "widthMm": 215,
+      "heightMm": 100,
+      "depthMm": 65,
+      "imageUrl": "https://yourcdn.com/vds-black-df.jpg",
+      "isActive": true,
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    },
+    {
+      "id": "var-0003-0000-0000-000000000000",
+      "productId": "prod-0001-0000-0000-000000000000",
+      "sku": "VDS-BLK-LF40S",
+      "colourName": "Black",
+      "hexCode": "#1a1a1a",
+      "sizeLabel": "LF40-S",
+      "widthMm": 240,
+      "heightMm": 75,
+      "depthMm": 40,
+      "imageUrl": "https://yourcdn.com/vds-black-lf40s.jpg",
+      "isActive": true,
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    }
+  ]
+}

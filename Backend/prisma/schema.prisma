@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+
+model Manufacturer {
+  id          String   @id @default(uuid())
+  name        String
+  website     String?
+  country     String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  products ProductManufacturer[]
+}
+
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?
+  material    String?  
+  createdAt   DateTime @default(now())
+
+  manufacturers ProductManufacturer[]
+  categories    ProductCategory[]
+  variants      Variant[]
+}
+
+
+model ProductManufacturer {
+  productId      String
+  manufacturerId String
+
+  product      Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  manufacturer Manufacturer @relation(fields: [manufacturerId], references: [id], onDelete: Cascade)
+
+  @@id([productId, manufacturerId])
+}
+
+
+model Category {
+  id      String  @id @default(uuid())
+  type    String  // 'colour' | 'collection' | 'style'
+  value   String  // 'Black' | 'Handmades' | 'Extruded'
+  hexCode String? // optional, for colour swatches
+
+  products ProductCategory[]
+
+  @@unique([type, value])
+}
+
+
+model ProductCategory {
+  productId  String
+  categoryId String
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
+}
+
+
+model Variant {
+  id          String   @id @default(uuid())
+  productId   String
+  sku         String?  @unique
+  colourName  String?
+  hexCode     String?
+  sizeLabel   String?  
+  widthMm     Float?
+  heightMm    Float?
+  depthMm     Float?
+  imageUrl    String?
+  imagesUrl   String[]
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}

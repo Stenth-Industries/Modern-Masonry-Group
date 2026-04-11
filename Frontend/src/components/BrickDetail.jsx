@@ -1,36 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import rawBricks from '../data/bricks.json';
-
-// ─── Adapt local bricks.json shape to what this component expects ─────────────
-function adaptBrick(b) {
-  const validImages = (b.images || []).filter(
-    src => src && src.startsWith('http') && !src.toLowerCase().includes('logo') && !src.toLowerCase().includes('icon')
-  );
-  if (b.image && b.image.startsWith('http') && !b.image.toLowerCase().includes('logo') && !validImages.includes(b.image)) {
-    validImages.unshift(b.image);
-  }
-  const variants = validImages.map((imageUrl, i) => ({ id: i, imageUrl, colourName: null, hexCode: null, sku: null }));
-  const categories = [];
-  if (b.attributes?.Colour) {
-    b.attributes.Colour.split(',').forEach((c, i) => categories.push({ id: `colour-${i}`, type: 'colour', value: c.trim(), hexCode: null }));
-  }
-  if (b.attributes?.Style) {
-    b.attributes.Style.split(',').forEach((s, i) => categories.push({ id: `style-${i}`, type: 'style', value: s.trim(), hexCode: null }));
-  }
-  if (b.attributes?.Sizes) {
-    categories.push({ id: 'size-0', type: 'size', value: b.attributes.Sizes, hexCode: null });
-  }
-  if (b.collection) {
-    categories.push({ id: 'collection-0', type: 'collection', value: b.collection, hexCode: null });
-  }
-  return {
-    ...b,
-    material: b.attributes?.Type || 'Brick',
-    manufacturers: b.manufacturer ? [{ id: 1, name: b.manufacturer }] : [],
-    variants,
-    categories,
-  };
-}
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const THUMB_VISIBLE = 4; // show 4 thumbs, last slot = "+N more"
@@ -309,14 +277,31 @@ function ThumbStrip({ images, currentImage, onSelect, onOpenLightbox }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function BrickDetail({ brickId, navigate }) {
-  const raw = rawBricks.find(b => String(b.id) === String(brickId));
-  const product = raw ? adaptBrick(raw) : null;
-  const loading = false;
-  const error = !product ? 'Product not found' : null;
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/products/${brickId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          setProduct(data.data);
+        } else {
+          setError(data.message || 'Product not found');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setError('Failed to load product');
+      })
+      .finally(() => setLoading(false));
+  }, [brickId]);
 
   const images = useMemo(() => {
     if (!product) return [];
