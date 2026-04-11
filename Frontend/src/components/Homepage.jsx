@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, Plus, Minus, ChevronRight } from 'lucide-react';
 import BrickCatalogue from './BrickCatalogue';
-import heroFrames from '../data/hero-frames.json';
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
@@ -183,12 +182,9 @@ const FAQSection = () => {
 
 /* ══ MAIN ══════════════════════════════════════════════════ */
 export default function Homepage({ navigate }) {
-  const canvasRef = useRef(null);
   const introVideoRef = useRef(null);
-  const [canvasReady, setCanvasReady] = useState(false);
-  const canvasReadyRef = useRef(false);
-  const [introVisible, setIntroVisible] = useState(true);
-  const [introFading, setIntroFading] = useState(false);
+  const mainVideoRef = useRef(null);
+  const [isVideo1Ended, setIsVideo1Ended] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollYProgress, scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -202,53 +198,6 @@ export default function Homepage({ navigate }) {
     return () => u();
   }, [scrollY]);
 
-  /* Canvas hero — optimized: load subset of frames, lower FPS, medium quality */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha:false });
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'medium';
-
-    // Use every 2nd frame for smoother motion, play at slow 3 FPS for ambient feel
-    const selectedFrames = heroFrames.filter((_, i) => i % 2 === 0);
-    const FPS = 6, INTERVAL = 1000/FPS;
-    const imgPath = f => `/videotojpg.com_8263308-uhd_3840_2160_24fps_jpg_20260407_142725/${f}`;
-
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const bitmaps = new Array(selectedFrames.length);
-    let cur = 0, rafId, lastTs = 0;
-
-    // Single-chain sequential load — less memory pressure
-    const loadOne = async (i) => {
-      if (i >= selectedFrames.length) return;
-      const img = new Image();
-      img.decoding = 'async';
-      img.src = imgPath(selectedFrames[i]);
-      await new Promise(res => { img.onload = res; img.onerror = res; });
-      try {
-        const sc = Math.max(canvas.width/img.width, canvas.height/img.height);
-        bitmaps[i] = await createImageBitmap(img, { resizeWidth:Math.round(img.width*sc), resizeHeight:Math.round(img.height*sc), resizeQuality:'medium' });
-      } catch { bitmaps[i] = img; }
-      if (!canvasReadyRef.current) { canvasReadyRef.current = true; setCanvasReady(true); }
-      loadOne(i + 1);
-    };
-    loadOne(0);
-
-    const tick = (ts) => {
-      rafId = requestAnimationFrame(tick);
-      if (ts - lastTs < INTERVAL) return;
-      lastTs = ts;
-      const bm = bitmaps[cur];
-      if (bm) ctx.drawImage(bm, (canvas.width-bm.width)/2, (canvas.height-bm.height)/2);
-      cur = (cur+1) % selectedFrames.length;
-    };
-    rafId = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(rafId); window.removeEventListener('resize', resize); };
-  }, []);
 
   const navItems = [
     { label:'Home', href:'#home' }, { label:'Products', href:'#products', hasMega:true },
@@ -320,8 +269,17 @@ export default function Homepage({ navigate }) {
 
       {/* HERO */}
       <section id="home" className="relative h-screen bg-black">
-        {/* Layer 0: Canvas hero (always mounted, always playing) */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0 opacity-60"/>
+        {/* Layer 0: Video 2 (Main continuous loop), preloaded but hidden/paused until Video 1 ends */}
+        <video
+          ref={mainVideoRef}
+          src="/video2-optim.mp4"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          style={{ opacity: 0.6 }}
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
 
         {/* Layer 1: Decorative grid lines */}
         <div className="absolute inset-0 z-[1] opacity-20 pointer-events-none">
@@ -363,39 +321,25 @@ export default function Homepage({ navigate }) {
           </motion.div>
         </div>
 
-        {/* Layer 3: Intro video — plays once on top, blends out into the hero */}
-        {introVisible && (
-          <div
-            className="absolute inset-0 z-20 pointer-events-none"
-            style={{
-              opacity: introFading ? 0 : 1,
-              transition: 'opacity 2.5s ease-in-out',
-            }}
-            onTransitionEnd={() => {
-              if (introFading) setIntroVisible(false);
-            }}
-          >
+        {/* Layer 3: Intro video (Video 1) — instantly hides when it finishes to reveal Video 2 */}
+        {!isVideo1Ended && (
+          <div className="absolute inset-0 z-20 pointer-events-none">
             <video
               ref={introVideoRef}
-              src="/Untitled (3).mp4"
+              src="/video1-optim.mp4"
               className="absolute inset-0 w-full h-full object-cover"
               autoPlay
               muted
               playsInline
               preload="auto"
-              onTimeUpdate={(e) => {
-                // Start fading 2.5s before the video ends for a gradual blend
-                const vid = e.currentTarget;
-                if (vid.duration && vid.currentTime >= vid.duration - 2.5 && !introFading) {
-                  setIntroFading(true);
+              onEnded={() => {
+                setIsVideo1Ended(true);
+                if (mainVideoRef.current) {
+                  mainVideoRef.current.play().catch(console.error);
                 }
               }}
-              onEnded={() => {
-                // Safety net — if timeupdate didn't fire, trigger fade now
-                if (!introFading) setIntroFading(true);
-              }}
             />
-            {/* Soft dark vignette to ease the blend between video and canvas */}
+            {/* Soft dark vignette to frame the hero */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
           </div>
         )}
