@@ -232,8 +232,8 @@ export default function Homepage({ navigate }) {
       <div className="fixed top-8 left-0 w-full z-50 flex justify-center pointer-events-none px-6">
         <motion.nav style={{ scale: navScale, y: navY }}
           className={`pointer-events-auto relative flex items-center gap-4 md:gap-8 px-5 md:px-8 py-4 rounded-full border transition-all duration-500 ${isScrolled
-            ? 'border-white/10 backdrop-blur-xl bg-[var(--obsidian)]/60 shadow-[0_8px_40px_rgba(0,0,0,0.6)]'
-            : 'border-white/10 bg-[var(--charcoal)]/80 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]'}`}>
+            ? 'border-white/10 backdrop-blur-md bg-[var(--obsidian)]/60 shadow-[0_8px_40px_rgba(0,0,0,0.6)]'
+            : 'border-white/10 bg-[var(--charcoal)]/80 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.4)]'}`}>
           <motion.div style={{ opacity: navBgOp }} className="absolute inset-0 z-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-full" />
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
             className="relative z-10 flex items-center pr-3 md:pr-5 border-r border-white/10 shrink-0 cursor-pointer"
@@ -246,7 +246,9 @@ export default function Homepage({ navigate }) {
                 <MagneticLink href={item.href}>{item.label} <ChevronDown size={12} className="inline opacity-50" /></MagneticLink>
                 <div className="absolute top-[calc(100%+12px)] -left-4 w-52 bg-[var(--charcoal)] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col py-3 border border-white/10 rounded-2xl overflow-hidden">
                   {['Brick', 'Stone', 'Landscaping', 'Accessories', 'Rialux Siding'].map(p => (
-                    <a key={p} href={`#${p.toLowerCase()}`} className="px-6 py-3 hover:bg-white/5 transition-colors text-sm font-medium border-b last:border-0 border-white/5 flex justify-between items-center">
+                    <a key={p} href={`#${p.toLowerCase()}`}
+                      onClick={e => { e.preventDefault(); navigate(`#${p.toLowerCase()}`); }}
+                      className="px-6 py-3 hover:bg-white/5 transition-colors text-sm font-medium border-b last:border-0 border-white/5 flex justify-between items-center">
                       {p} <ChevronDown size={12} className="opacity-30 -rotate-90" />
                     </a>
                   ))}
@@ -282,6 +284,8 @@ export default function Homepage({ navigate }) {
           style={{
             opacity: introFading ? 0.6 : 0,
             transition: 'opacity 1.8s ease-in-out',
+            willChange: 'opacity',
+            transform: 'translateZ(0)',
           }}
           muted
           loop
@@ -336,6 +340,8 @@ export default function Homepage({ navigate }) {
             style={{
               opacity: introFading ? 0 : 1,
               transition: 'opacity 1.8s ease-in-out',
+              willChange: 'opacity',
+              transform: 'translateZ(0)',
             }}
             onTransitionEnd={() => { if (introFading) setIsVideo1Ended(true); }}
           >
