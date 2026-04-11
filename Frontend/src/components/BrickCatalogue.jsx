@@ -1,604 +1,658 @@
-import { useState, useMemo, useEffect, useCallback } from 'react';
-import rawBricks from '../data/bricks.json';
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search,
+  X,
+  ChevronDown,
+  SlidersHorizontal,
+  LayoutGrid,
+  List,
+  ArrowUpDown,
+  Filter,
+  Sparkles,
+} from "lucide-react";
+import { BrickWallPattern } from "./BrickWallPattern";
+import { BrickDetailPanel } from "./BrickDetailPanel";
 
-// ─── Normalise helpers ────────────────────────────────────────────────────────
-function normaliseSize(raw = '') {
-  if (!raw) return 'Unknown';
-  const s = raw.toLowerCase();
-  const out = [];
-  if (s.includes('elongated'))                          out.push('Elongated');
-  if (s.includes('modular'))                            out.push('Modular');
-  if (s.includes('norman'))                             out.push('Norman');
-  if (s.includes('jumbo'))                              out.push('Jumbo');
-  if (s.includes('prp') || s.includes('premier plus'))  out.push('Premier Plus / PRP');
-  return out.length ? out.join(', ') : raw;
-}
-function normaliseType(raw = '') {
-  if (raw.toLowerCase().includes('co2') || raw.toLowerCase().includes('negative')) return 'CO₂ Negative';
-  if (raw.toLowerCase().includes('full')) return 'Full-bed Face Brick';
-  return raw || 'Unknown';
-}
-
-// ─── Process bricks ───────────────────────────────────────────────────────────
-const bricks = rawBricks.map((b) => {
-  const validImgs = (b.images || []).filter(
-    (src) => src && !src.toLowerCase().includes('logo') && !src.toLowerCase().includes('icon')
-  );
-  return {
-    ...b,
-    image: b.image && !b.image.toLowerCase().includes('logo') ? b.image : validImgs[0] || '',
-    allImages: validImgs.length ? validImgs : b.image ? [b.image] : [],
-    colours: b.attributes?.Colour ? b.attributes.Colour.split(',').map((c) => c.trim()).filter(Boolean) : [],
-    type: normaliseType(b.attributes?.Type || ''),
-    styles: b.attributes?.Style ? b.attributes.Style.split(',').map((s) => s.trim()).filter(Boolean) : [],
-    sizeNorm: normaliseSize(b.attributes?.Sizes || ''),
-    sizeRaw: b.attributes?.Sizes || '',
-    manufacturers: b.manufacturer ? [b.manufacturer] : [],
-    collections: b.collection ? [b.collection] : [],
-  };
-});
-
-// ─── Filter option lists ──────────────────────────────────────────────────────
-const ALL_COLOURS       = [...new Set(bricks.flatMap((b) => b.colours))].sort();
-const ALL_TYPES         = [...new Set(bricks.map((b) => b.type))].filter(Boolean).sort();
-const ALL_STYLES        = [...new Set(bricks.flatMap((b) => b.styles))].filter(Boolean).sort();
-const ALL_SIZES         = [...new Set(bricks.flatMap((b) => b.sizeNorm.split(',').map((s) => s.trim())))].filter(Boolean).sort();
-const ALL_MANUFACTURERS = [...new Set(bricks.flatMap((b) => b.manufacturers))].filter(Boolean).sort();
-const ALL_COLLECTIONS   = [
-  'Concrete Brick','Elongated Brick','Extruded','Extruded-Matt & Velour',
-  'Extruded-Smooth & Velour','Glass Brick','Handmades','Molded Brick','Thin Brick','Tumbled',
-];
-
-const COLOUR_SWATCHES = {
-  Grey:'#9ca3af', Black:'#1f2937', Brown:'#92400e', 'Brown/Tan':'#a16207',
-  Buff:'#d97706', Burgundy:'#9f1239', Cream:'#fef3c7', Beige:'#d4b896',
-  Orange:'#ea580c', Red:'#dc2626', Tan:'#b45309', White:'#e5e7eb', Yellow:'#fbbf24',
+const colorDots = {
+  Tan: "#C4A57B",
+  Red: "#A0563B",
+  Gray: "#9E9284",
+  Blue: "#5B7C8D",
+  Cream: "#E8DCC8",
+  Charcoal: "#545454",
+  Brown: "#7A5C40",
+  White: "#E8E4DC",
 };
 
-function toggle(arr, val) {
-  return arr.includes(val) ? arr.filter((x) => x !== val) : [...arr, val];
-}
+// Mapper from Backend product format to UI format
+const mapProduct = (p) => {
+  const collection = p.categories?.find(c => c.type === 'collection')?.value || p.material || 'General';
+  const colorCat = p.categories?.find(c => c.type === 'colour');
+  const manufacturer = p.manufacturers?.[0]?.name || 'Generic';
+  const variant = p.variants?.[0];
+  
+  return {
+    id: p.id,
+    name: p.name,
+    collection,
+    color: colorCat?.value || 'Gray',
+    colorHex: colorCat?.hexCode || colorDots[colorCat?.value] || '#888',
+    manufacturer,
+    finish: p.categories?.find(c => c.type === 'style')?.value || 'Standard',
+    code: variant?.sku || (p.id.substring(0,8).toUpperCase()),
+    inStock: true, // Defaulting to true for demo
+    isNew: false, 
+    image: variant?.imageUrl || null,
+    // Add missing details for the panel:
+    description: p.description || 'Premium architectural masonry unit engineered for high performance applications.',
+    applications: ["Residential API", "Commercial API", "Feature Walls"],
+    size: 'Standard 230×76×110mm',
+    weight: '3.0 kg',
+    compressiveStrength: '25 MPa',
+    waterAbsorption: '8%',
+    frostResistance: 'F2'
+  };
+};
 
-// ─── Sidebar filter group ─────────────────────────────────────────────────────
-function Group({ title, options, selected, onToggle, swatches, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
-  const n = selected.length;
-
+function FilterSection({
+  title,
+  isOpen,
+  onToggle,
+  children,
+}) {
   return (
-    <div>
+    <div className="border-b border-white/5">
       <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between py-3.5 group"
+        onClick={onToggle}
+        className="flex items-center justify-between w-full py-4 text-left group"
       >
-        <span className={`text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${open || n > 0 ? 'text-white' : 'text-white/30 group-hover:text-white/55'}`}>
+        <span className="text-sm text-gray-300 group-hover:text-[var(--brass)] transition-colors font-medium">
           {title}
         </span>
-        <div className="flex items-center gap-2">
-          {n > 0 && (
-            <span className="text-[8px] font-black bg-[var(--brass)] text-black w-4 h-4 flex items-center justify-center leading-none">
-              {n}
-            </span>
+        <ChevronDown
+          size={14}
+          className={`text-gray-500 group-hover:text-[var(--brass)] transition-all ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function ActiveFilterBadge({ label, onRemove }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      className="inline-flex items-center gap-1.5 px-3 mb-2 py-1 rounded-full bg-[var(--brass)]/15 border border-[var(--brass)]/30 text-[var(--brass)] text-xs font-semibold"
+    >
+      {label}
+      <button
+        onClick={onRemove}
+        className="ml-0.5 hover:text-white transition-colors focus:outline-none"
+      >
+        <X size={10} />
+      </button>
+    </motion.span>
+  );
+}
+
+function BrickCard({
+  product,
+  index,
+  viewMode,
+  onClick,
+}) {
+  if (viewMode === "list") {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96 }}
+        transition={{ duration: 0.3 }}
+        onClick={onClick}
+        className="group flex items-center gap-6 p-4 rounded-xl bg-[var(--charcoal)] border border-white/5 hover:border-[var(--brass)]/50 hover:shadow-[0_0_20px_rgba(212,175,99,0.1)] cursor-pointer transition-all duration-300"
+      >
+        {/* Brick swatch */}
+        <div className="w-24 h-16 rounded-lg overflow-hidden flex-shrink-0 relative bg-black">
+          {product.image ? (
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+          ) : (
+            <BrickWallPattern colorHex={product.colorHex} rows={3} />
           )}
-          <span className={`text-white/20 text-xs transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
-            ▾
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="text-white font-bold group-hover:text-[var(--brass)] transition-colors truncate">
+              {product.name}
+            </h3>
+            {product.isNew && (
+              <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-[var(--brass)]/15 text-[var(--brass)] text-[10px] uppercase font-bold tracking-widest border border-[var(--brass)]/25">
+                New
+              </span>
+            )}
+          </div>
+          <p className="text-xs text-gray-500 font-medium">
+            {product.collection} · {product.manufacturer} · {product.finish}
+          </p>
+        </div>
+
+        {/* Color + code */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <div
+            className="w-4 h-4 rounded-full border border-white/10 shadow-sm"
+            style={{ background: product.colorHex }}
+          />
+          <span className="text-xs font-mono text-gray-500">{product.code}</span>
+        </div>
+
+        {/* Status */}
+        <div className="flex-shrink-0">
+          <span
+            className={`text-xs px-2.5 py-1 rounded-md font-bold uppercase tracking-wider ${
+              product.inStock
+                ? "text-emerald-400 bg-emerald-400/10 border border-emerald-400/20"
+                : "text-red-400 bg-red-400/10 border border-red-400/20"
+            }`}
+          >
+            {product.inStock ? "In Stock" : "Enquire"}
           </span>
         </div>
-      </button>
+      </motion.div>
+    );
+  }
 
-      {open && (
-        <div className="pb-5">
-          {swatches ? (
-            // Colour: swatch grid
-            <div className="grid grid-cols-6 gap-2 pt-1">
-              {options.map((opt) => {
-                const active = selected.includes(opt);
-                return (
-                  <button
-                    key={opt}
-                    title={opt}
-                    onClick={() => onToggle(opt)}
-                    className={`w-8 h-8 rounded-full relative flex items-center justify-center transition-all duration-150
-                      ${active ? 'ring-[1.5px] ring-[var(--brass)] ring-offset-[3px] ring-offset-[#0c0c0c]' : 'opacity-50 hover:opacity-100 hover:scale-110'}`}
-                    style={{ background: swatches[opt] || '#d4b896' }}
-                  >
-                    {active && (
-                      <svg className="w-3 h-3 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.94, y: 16 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.35 }}
+      whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
+      onClick={onClick}
+      className="group cursor-pointer aspect-auto"
+    >
+      <div className="relative bg-[var(--charcoal)] rounded-2xl overflow-hidden border border-white/5 transition-all duration-400 group-hover:border-[var(--brass)]/50 group-hover:shadow-[0_12px_40px_rgba(212,175,99,0.15)] flex flex-col h-full">
+        {/* Brick Pattern or Image */}
+        <div className="relative aspect-[4/3] overflow-hidden bg-black flex-shrink-0">
+          {product.image ? (
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
           ) : (
-            // Text list — left-border active indicator
-            <div className="pt-1">
-              {options.map((opt) => {
-                const active = selected.includes(opt);
-                return (
-                  <button
-                    key={opt}
-                    onClick={() => onToggle(opt)}
-                    className={`w-full flex items-center py-2 pl-3 border-l-2 transition-all duration-150 group/r
-                      ${active ? 'border-[var(--brass)]' : 'border-transparent hover:border-white/15'}`}
-                  >
-                    <span className={`text-[11px] font-medium text-left transition-colors leading-snug
-                      ${active ? 'text-white' : 'text-white/35 group-hover/r:text-white/65'}`}>
-                      {opt}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <BrickWallPattern colorHex={product.colorHex} rows={5} />
           )}
+
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-end pb-5 gap-2">
+            <motion.span className="px-5 py-2.5 bg-[var(--brass)] text-black font-bold uppercase text-[10px] tracking-widest rounded-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75 shadow-lg">
+              View Details
+            </motion.span>
+          </div>
+
+          {/* Badges */}
+          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+            {product.isNew && (
+              <span className="px-2.5 py-1 rounded-md bg-black/80 border border-[var(--brass)]/40 text-[var(--brass)] text-[9px] uppercase font-bold tracking-widest backdrop-blur-sm shadow-sm">
+                New
+              </span>
+            )}
+            {!product.inStock && (
+              <span className="px-2.5 py-1 rounded-md bg-black/80 border border-red-500/30 text-red-400 text-[9px] uppercase font-bold tracking-widest backdrop-blur-sm shadow-sm">
+                Enquire
+              </span>
+            )}
+          </div>
+
+          {/* Color dot */}
+          <div
+            className="absolute bottom-3 right-3 w-5 h-5 rounded-full border-2 border-white/20 shadow-lg"
+            style={{ background: product.colorHex }}
+            title={product.color}
+          />
+        </div>
+
+        {/* Info */}
+        <div className="p-5 flex-1 flex flex-col">
+          <div className="flex items-start justify-between gap-2 mb-1.5">
+            <h3 className="text-white font-bold text-lg group-hover:text-[var(--brass)] transition-colors leading-tight line-clamp-1">
+              {product.name}
+            </h3>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-4">
+            <span className="px-2 py-0.5 rounded bg-white/5 text-gray-400">
+              {product.collection}
+            </span>
+            <span className="text-gray-700">·</span>
+            <span className="truncate">{product.manufacturer}</span>
+          </div>
+          <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5">
+            <span className="text-xs font-mono text-gray-500">{product.code}</span>
+            <span className="text-xs text-gray-400 font-medium truncate ml-2">{product.finish}</span>
+          </div>
+        </div>
+
+        {/* Gold bottom line on hover */}
+        <div className="h-[2px] w-0 bg-gradient-to-r from-transparent via-[var(--brass)] to-transparent group-hover:w-full transition-all duration-500" />
+      </div>
+    </motion.div>
+  );
+}
+
+export default function BrickCatalogue({ navigate }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCollections, setSelectedCollections] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedManufacturers, setSelectedManufacturers] = useState([]);
+  
+  const [viewMode, setViewMode] = useState("grid");
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [openSections, setOpenSections] = useState({
+    collections: true,
+    colors: true,
+    manufacturers: true,
+  });
+  const [selectedBrick, setSelectedBrick] = useState(null);
+
+  // Backend Data State
+  const [products, setProducts] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+
+  const [filterOptions, setFilterOptions] = useState({
+    collections: [], colors: [], manufacturers: []
+  });
+
+  // Fetch filter options once
+  useEffect(() => {
+    fetch('/api/products/filters')
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          const d = res.data;
+          setFilterOptions({
+            colors: (d.colours || []).map(c => c.value),
+            collections: (d.collections || []).map(c => c.value),
+            manufacturers: (d.manufacturers || []).map(m => m.name),
+          });
+        }
+      })
+      .catch(err => console.error('Failed to load filter options', err));
+  }, []);
+
+  // Fetch products
+  useEffect(() => {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (searchQuery) params.append('search', searchQuery);
+    if (selectedCollections.length) params.append('collection', selectedCollections.join(','));
+    if (selectedColors.length) params.append('colour', selectedColors.join(','));
+    if (selectedManufacturers.length) params.append('manufacturer', selectedManufacturers.join(','));
+    params.append('page', page);
+    params.append('limit', 20);
+
+    fetch(`/api/products?${params.toString()}`)
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.data) {
+          const mapped = res.data.map(mapProduct);
+          if (page === 1) {
+            setProducts(mapped);
+          } else {
+            setProducts(prev => [...prev, ...mapped]);
+          }
+          setTotalItems(res.meta.total);
+          setHasMore(page < res.meta.totalPages);
+        }
+      })
+      .catch(err => console.error('Failed to load products', err))
+      .finally(() => setLoading(false));
+  }, [searchQuery, selectedCollections, selectedColors, selectedManufacturers, page]);
+
+  // Reset pagination on filter change
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setPage(1);
+    setProducts([]);
+  }, [searchQuery, selectedCollections, selectedColors, selectedManufacturers]);
+
+  // Infinite scroll
+  const sentinelRef = useRef(null);
+  useEffect(() => {
+    if (!hasMore || loading) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        setPage(p => p + 1);
+      }
+    }, { rootMargin: '800px' });
+    if (sentinelRef.current) obs.observe(sentinelRef.current);
+    return () => obs.disconnect();
+  }, [hasMore, loading]);
+
+  const toggleSection = (key) => setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  const toggleFilter = useCallback(
+    (value, current, setter) => {
+      setter(current.includes(value) ? current.filter((v) => v !== value) : [...current, value]);
+    },
+    []
+  );
+
+  const clearAllFilters = () => {
+    setSelectedCollections([]);
+    setSelectedColors([]);
+    setSelectedManufacturers([]);
+    setSearchQuery("");
+  };
+
+  const totalActiveFilters = selectedCollections.length + selectedColors.length + selectedManufacturers.length;
+
+  // Render individual filter sections separately to allow injection outside
+  const FilterContent = () => (
+    <div className="space-y-0">
+      {/* Collections */}
+      <FilterSection title="Collections" isOpen={openSections.collections} onToggle={() => toggleSection("collections")}>
+        <div className="space-y-1 pr-2">
+          {filterOptions.collections.map((col) => {
+            const active = selectedCollections.includes(col);
+            return (
+              <button
+                key={col}
+                onClick={() => toggleFilter(col, selectedCollections, setSelectedCollections)}
+                className={`w-full text-left flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all font-medium ${
+                  active ? "bg-[var(--brass)]/15 text-[var(--brass)] border border-[var(--brass)]/25" : "text-gray-400 hover:bg-white/5 hover:text-white border border-transparent"
+                }`}
+              >
+                <span className="truncate mr-2">{col}</span>
+              </button>
+            );
+          })}
+        </div>
+      </FilterSection>
+
+      {/* Colours */}
+      <FilterSection title="Colours" isOpen={openSections.colors} onToggle={() => toggleSection("colors")}>
+        <div className="space-y-1.5 mt-1 pr-2">
+          {filterOptions.colors.map((color) => {
+            const active = selectedColors.includes(color);
+            return (
+              <button
+                key={color}
+                onClick={() => toggleFilter(color, selectedColors, setSelectedColors)}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all font-medium ${
+                  active ? "bg-[var(--brass)]/15 text-[var(--brass)] border border-[var(--brass)]/25" : "text-gray-400 hover:bg-white/5 hover:text-white border border-transparent"
+                }`}
+              >
+                <div
+                  className={`w-4 h-4 rounded-full flex-shrink-0 shadow-sm border ${active ? "border-[var(--brass)]/70" : "border-white/10"}`}
+                  style={{ background: colorDots[color] ?? "#888" }}
+                />
+                <span className="truncate">{color}</span>
+              </button>
+            );
+          })}
+        </div>
+      </FilterSection>
+
+      {/* Manufacturers */}
+      <FilterSection title="Manufacturers" isOpen={openSections.manufacturers} onToggle={() => toggleSection("manufacturers")}>
+        <div className="space-y-1 pr-2">
+          {filterOptions.manufacturers.map((mfr) => {
+            const active = selectedManufacturers.includes(mfr);
+            return (
+              <button
+                key={mfr}
+                onClick={() => toggleFilter(mfr, selectedManufacturers, setSelectedManufacturers)}
+                className={`w-full text-left flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all font-medium ${
+                  active ? "bg-[var(--brass)]/15 text-[var(--brass)] border border-[var(--brass)]/25" : "text-gray-400 hover:bg-white/5 hover:text-white border border-transparent"
+                }`}
+              >
+                <span className="truncate">{mfr}</span>
+              </button>
+            );
+          })}
+        </div>
+      </FilterSection>
+
+      {/* Clear all */}
+      {totalActiveFilters > 0 && (
+        <div className="pt-5 pr-4 lg:pr-0 pb-12">
+          <button
+            onClick={clearAllFilters}
+            className="w-full py-2.5 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-white/30 text-xs font-bold uppercase tracking-wider transition-colors"
+          >
+            Clear all filters
+          </button>
         </div>
       )}
     </div>
   );
-}
-
-// ─── Product card ─────────────────────────────────────────────────────────────
-function BrickCard({ brick, onClick }) {
-  const [imgError, setImgError] = useState(false);
-
-  // Helper to determine badge text
-  const getBadge = () => {
-    if (brick.type === 'CO₂ Negative') return 'ECO SERIES';
-    if (brick.styles.includes('Tumbled')) return 'HERITAGE';
-    if (brick.styles.includes('Smooth')) return 'MODERN';
-    if (brick.collections.includes('Thin Brick')) return 'PREMIUM';
-    return 'ESTATE';
-  };
-
-  // Unique price for each for demo
-  const price = (4.25 + (brick.name.length % 5) * 1.5).toFixed(2);
 
   return (
-    <div
-      onClick={onClick}
-      className="group cursor-pointer flex flex-col transition-all duration-500"
-    >
-      {/* Image Container */}
-      <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-[var(--charcoal)] mb-5 border border-white/5 group-hover:border-[var(--brass)]/30 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-all duration-500">
-        {brick.image && !imgError ? (
-          <img
-            src={brick.image}
-            alt={brick.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center opacity-10">
-             <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-          </div>
-        )}
+    <div className="h-screen bg-black text-white flex flex-col font-sans overflow-hidden">
+      <div className="flex flex-1 w-full bg-black">
+        {/* Mobile Filter Overlay */}
+        <AnimatePresence>
+          {showMobileFilters && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] lg:hidden"
+                onClick={() => setShowMobileFilters(false)}
+              />
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", stiffness: 320, damping: 35 }}
+                className="fixed top-0 left-0 h-full w-80 bg-black border-r border-white/5 z-[100] flex flex-col lg:hidden shadow-[10px_0_40px_rgba(0,0,0,0.5)]"
+              >
+                {/* Mobile Static Header */}
+                <div className="p-6 pb-4 border-b border-white/10 shrink-0">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2 text-[var(--brass)] uppercase font-bold tracking-widest text-xs">
+                      <Filter size={16} />
+                      <span>Filters</span>
+                    </div>
+                    <button
+                      onClick={() => setShowMobileFilters(false)}
+                      className="text-gray-500 hover:text-white bg-white/5 p-2 rounded-full transition-colors"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                  {/* Search Bar Mobile */}
+                  <div className="relative">
+                    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search products..."
+                      className="w-full pl-11 pr-11 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-base placeholder:text-gray-500 focus:outline-none focus:border-[var(--brass)]/50 focus:bg-white/10 transition-colors"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+                      >
+                        <X size={16} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Mobile Filter Lists */}
+                <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+                  <FilterContent />
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
-        {/* Badge Overlay */}
-        <div className="absolute top-5 left-5">
-          <span className="bg-white text-black text-[9px] font-black tracking-widest px-3 py-1.5 rounded-md shadow-2xl">
-            {getBadge()}
-          </span>
-        </div>
-
-        {/* Photography Count */}
-        {brick.allImages.length > 1 && (
-          <div className="absolute bottom-5 right-5 bg-black/40 backdrop-blur-md text-white/50 text-[9px] font-bold px-2 py-1 rounded-lg">
-            +{brick.allImages.length - 1} GALLERY
-          </div>
-        )}
-      </div>
-
-      {/* Info Block */}
-      <div className="px-1 flex flex-col">
-        <div className="flex justify-between items-baseline mb-1.5">
-          <h3 className="text-white text-lg font-black tracking-tighter leading-none group-hover:text-[var(--brass)] transition-colors duration-300">
-            {brick.name}
-          </h3>
-          <span className="text-[var(--brass)] text-sm font-black tracking-tighter">
-            ${price} <span className="text-[10px] opacity-40 font-bold uppercase tracking-widest ml-0.5">/ sqft</span>
-          </span>
-        </div>
-        <p className="text-[11px] text-white/30 font-bold uppercase tracking-widest leading-loose">
-          {brick.style || brick.styles[0] || 'Standard'} • {brick.manufacturer.replace(' Industries', '')}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ─── Detail modal ─────────────────────────────────────────────────────────────
-function BrickModal({ brick, onClose, onPrev, onNext }) {
-  const [activeImg, setActiveImg] = useState(0);
-  const [imgErrors, setImgErrors] = useState({});
-
-  useEffect(() => { setActiveImg(0); setImgErrors({}); }, [brick?.id]);
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-  useEffect(() => {
-    const h = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight') onNext();
-      if (e.key === 'ArrowLeft') onPrev();
-    };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
-  }, [onClose, onNext, onPrev]);
-
-  if (!brick) return null;
-  const currentSrc = brick.allImages[activeImg];
-  const attrRows = Object.entries(brick.attributes || {}).filter(([k]) => k !== 'The Art of the Facade');
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-stretch" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />
-
-      <div
-        className="relative m-auto w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#0f0f0f] border border-white/10 overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Modal header */}
-        <div className="flex items-center justify-between px-7 py-4 border-b border-white/[0.07] flex-shrink-0">
-          <div>
-            {brick.manufacturer && (
-              <p className="text-[9px] text-[var(--brass)] uppercase tracking-[0.3em] font-bold mb-1">{brick.manufacturer}</p>
-            )}
-            <h2 className="text-base font-black text-white tracking-tight leading-none">{brick.name}</h2>
-          </div>
-          <div className="flex items-center gap-1">
-            <button onClick={onPrev} className="w-8 h-8 flex items-center justify-center text-white/30 hover:text-white border border-white/[0.08] hover:border-white/25 transition-all">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button onClick={onNext} className="w-8 h-8 flex items-center justify-center text-white/30 hover:text-white border border-white/[0.08] hover:border-white/25 transition-all">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </button>
-            <button onClick={onClose} className="w-8 h-8 flex items-center justify-center text-white/30 hover:text-white border border-white/[0.08] hover:border-white/25 transition-all ml-2">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-1 min-h-0 overflow-hidden">
-          {/* Image pane — 55% */}
-          <div className="w-[55%] flex-shrink-0 bg-black flex flex-col">
-            <div className="flex-1 min-h-0 flex items-center justify-center p-6">
-              {currentSrc && !imgErrors[activeImg] ? (
-                <img
-                  src={currentSrc}
-                  alt={brick.name}
-                  className="max-w-full max-h-full object-contain"
-                  onError={() => setImgErrors((p) => ({ ...p, [activeImg]: true }))}
-                />
-              ) : (
-                <svg className="w-16 h-16 text-white/5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <rect x="2" y="7" width="20" height="14" rx="1" strokeWidth="1" />
-                  <rect x="2" y="3" width="9" height="4" rx="1" strokeWidth="1" />
-                  <rect x="13" y="3" width="9" height="4" rx="1" strokeWidth="1" />
-                </svg>
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex flex-col w-80 flex-shrink-0 border-r border-white/5 bg-black h-screen pt-24">
+          
+          {/* Locked Sidebar Header */}
+          <div className="px-6 pb-6 shrink-0 z-10 bg-black">
+            <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+              <SlidersHorizontal size={18} className="text-[var(--brass)]" />
+              <span className="text-sm font-bold tracking-[0.2em] uppercase text-[var(--brass)]">
+                Refine Search
+              </span>
+              {totalActiveFilters > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="ml-auto w-6 h-6 rounded-full bg-[var(--brass)] text-black text-xs font-bold flex items-center justify-center shadow-lg shadow-[var(--brass)]/20"
+                >
+                  {totalActiveFilters}
+                </motion.span>
               )}
             </div>
-            {brick.allImages.length > 1 && (
-              <div className="flex gap-1.5 p-3 border-t border-white/[0.06] overflow-x-auto flex-shrink-0">
-                {brick.allImages.map((src, i) =>
-                  !imgErrors[i] && (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImg(i)}
-                      className={`flex-shrink-0 w-11 h-11 overflow-hidden border transition-all ${activeImg === i ? 'border-[var(--brass)]' : 'border-white/10 opacity-40 hover:opacity-80'}`}
-                    >
-                      <img src={src} alt="" className="w-full h-full object-cover" onError={() => setImgErrors((p) => ({ ...p, [i]: true }))} />
-                    </button>
-                  )
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Detail pane */}
-          <div className="flex-1 border-l border-white/[0.06] flex flex-col min-h-0">
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto">
-              <div className="p-7 space-y-7">
-
-                {/* Colours */}
-                {brick.colours.length > 0 && (
-                  <div>
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-[var(--brass)] font-bold mb-4">Colour Palette</p>
-                    <div className="flex flex-wrap gap-3">
-                      {brick.colours.map((c) => (
-                        <div key={c} className="flex items-center gap-2">
-                          <span className="w-4 h-4 rounded-full border border-white/10" style={{ background: COLOUR_SWATCHES[c] || '#d4b896' }} />
-                          <span className="text-xs text-white/45">{c}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Specs */}
-                {attrRows.length > 0 && (
-                  <div>
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-[var(--brass)] font-bold mb-4">Specifications</p>
-                    <div className="border border-white/[0.07]">
-                      {attrRows.map(([key, val], i) => (
-                        <div key={key} className={`flex ${i % 2 === 0 ? 'bg-white/[0.025]' : ''}`}>
-                          <span className="w-32 flex-shrink-0 px-4 py-3 text-[10px] uppercase tracking-wider text-white/20 font-bold border-r border-white/[0.06]">{key}</span>
-                          <span className="px-4 py-3 text-xs text-white/60">{val}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Styles */}
-                {brick.styles.length > 0 && (
-                  <div>
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-[var(--brass)] font-bold mb-3">Style</p>
-                    <div className="flex flex-wrap gap-2">
-                      {brick.styles.map((s) => (
-                        <span key={s} className="border border-white/10 text-white/40 text-[10px] uppercase tracking-wider px-3 py-1">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Size */}
-                {brick.sizeNorm && brick.sizeNorm !== 'Unknown' && (
-                  <div>
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-[var(--brass)] font-bold mb-2">Sizes</p>
-                    <p className="text-xs text-white/40">{brick.sizeRaw}</p>
-                  </div>
-                )}
-
-                {/* Eco */}
-                {brick.type === 'CO₂ Negative' && (
-                  <div className="border-l-2 border-emerald-500 pl-4 py-1">
-                    <p className="text-[9px] uppercase tracking-widest text-emerald-400 font-bold mb-1">CO₂ Negative Series</p>
-                    <p className="text-[11px] text-white/30 leading-relaxed">Sequesters more carbon than it produces in manufacturing.</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Sticky CTA — always visible at bottom */}
-            <div className="flex-shrink-0 p-5 border-t border-white/[0.06] bg-[#0f0f0f]">
-              <button className="w-full bg-[var(--brass)] text-black text-[10px] font-black uppercase tracking-[0.25em] py-4 hover:bg-[var(--brass-light)] transition-colors">
-                Request a Sample
-              </button>
+            
+            {/* Locked Search Bar */}
+            <div className="relative">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products..."
+                className="w-full pl-11 pr-11 py-4 bg-white/5 border border-white/10 rounded-xl text-white text-base placeholder:text-gray-500 focus:outline-none focus:border-[var(--brass)]/50 focus:bg-white/10 transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              )}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Main catalogue ───────────────────────────────────────────────────────────
-export default function BrickCatalogue({ navigate }) {
-  const [search, setSearch]           = useState('');
-  const [sort, setSort]               = useState('az');
-  const [selColours, setSelColours]   = useState([]);
-  const [selTypes, setSelTypes]       = useState([]);
-  const [selStyles, setSelStyles]     = useState([]);
-  const [selSizes, setSelSizes]       = useState([]);
-  const [selManufacturers, setSelManufacturers] = useState([]);
-  const [selCollections, setSelCollections]     = useState([]);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [modalIdx, setModalIdx]       = useState(null);
-
-  const filtered = useMemo(() => {
-    let list = bricks;
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter((b) =>
-        b.name.toLowerCase().includes(q) ||
-        b.colours.some((c) => c.toLowerCase().includes(q)) ||
-        b.styles.some((s) => s.toLowerCase().includes(q)) ||
-        b.manufacturers.some((m) => m.toLowerCase().includes(q)) ||
-        b.collections.some((c) => c.toLowerCase().includes(q))
-      );
-    }
-    if (selColours.length)       list = list.filter((b) => selColours.some((c) => b.colours.includes(c)));
-    if (selTypes.length)         list = list.filter((b) => selTypes.includes(b.type));
-    if (selStyles.length)        list = list.filter((b) => selStyles.some((s) => b.styles.includes(s)));
-    if (selSizes.length)         list = list.filter((b) => selSizes.some((s) => b.sizeNorm.includes(s)));
-    if (selManufacturers.length) list = list.filter((b) => selManufacturers.some((s) => b.manufacturers.includes(s)));
-    if (selCollections.length)   list = list.filter((b) => selCollections.some((s) => b.collections.includes(s)));
-
-    return [...list].sort((a, b) =>
-      sort === 'az' ? a.name.localeCompare(b.name) :
-      sort === 'za' ? b.name.localeCompare(a.name) :
-      b.allImages.length - a.allImages.length
-    );
-  }, [search, sort, selColours, selTypes, selStyles, selSizes, selManufacturers, selCollections]);
-
-  const openModal  = (i) => setModalIdx(i);
-  const closeModal = useCallback(() => setModalIdx(null), []);
-  const prevModal  = useCallback(() => setModalIdx((i) => (i - 1 + filtered.length) % filtered.length), [filtered.length]);
-  const nextModal  = useCallback(() => setModalIdx((i) => (i + 1) % filtered.length), [filtered.length]);
-
-  const totalActive =
-    selColours.length + selTypes.length + selStyles.length +
-    selSizes.length + selManufacturers.length + selCollections.length;
-
-  const clearAll = () => {
-    setSelColours([]); setSelTypes([]); setSelStyles([]);
-    setSelSizes([]); setSelManufacturers([]); setSelCollections([]); setSearch('');
-  };
-
-  return (
-    <div className="min-h-screen bg-[#0c0c0c] text-white flex flex-col">
-
-      {/* ── Editorial Header ── */}
-      <div className="flex-shrink-0 bg-[#0c0c0c] pt-20 pb-12">
-        <div className="max-w-screen-2xl mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b border-white/10 pb-12">
-              <div className="max-w-2xl">
-                <h2 className="text-6xl md:text-8xl font-serif leading-none mb-6">
-                  Architectural <br/> <span className="text-[var(--brass)] italic">Brick.</span>
-                </h2>
-                <p className="text-[var(--ash)] text-lg leading-relaxed font-medium italic opacity-70">
-                  Curated masonry solutions for the modern facade. From kiln-fired textures to precision-engineered modular units. Engineered for performance in every application.
-                </p>
-              </div>
-              
-              <div className="flex flex-col items-end gap-4">
-                 <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-white/20">
-                    <span>SORT BY:</span>
-                    <select
-                      value={sort}
-                      onChange={(e) => setSort(e.target.value)}
-                      className="bg-transparent border-none text-white focus:outline-none cursor-pointer hover:text-[var(--brass)] transition-colors"
-                    >
-                      <option value="az">Featured Designs</option>
-                      <option value="za">Z → A</option>
-                      <option value="photos">Most Photos</option>
-                    </select>
-                 </div>
-                 <div className="text-right">
-                    <span className="text-xl font-black text-[var(--brass)] leading-none">{filtered.length}</span>
-                    <span className="text-[10px] text-white/15 uppercase tracking-[0.2em] ml-2 font-black">CURATED SOLUTIONS</span>
-                 </div>
-              </div>
-           </div>
-        </div>
-      </div>
-
-      {/* ── Navigation Strip (Search & Filter Toggle) ── */}
-      <header className="border-b border-white/[0.07] flex-shrink-0 sticky top-0 z-20 bg-[#0c0c0c]/80 backdrop-blur-xl">
-        <div className="flex items-center h-16 px-6 gap-6 max-w-screen-2xl mx-auto">
-
-          {/* Sidebar toggle */}
-          <button
-            onClick={() => setSidebarOpen((o) => !o)}
-            title={sidebarOpen ? 'Hide filters' : 'Show filters'}
-            className="flex-shrink-0 flex items-center gap-3 text-white/40 hover:text-[var(--brass)] transition-colors group"
-          >
-            <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[var(--brass)]/50 transition-colors ${totalActive > 0 ? 'bg-[var(--brass)] border-[var(--brass)] text-black' : ''}`}>
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h10M4 18h6" />
-              </svg>
-            </div>
-            <span className="text-[10px] font-black tracking-widest uppercase">{sidebarOpen ? 'Hide Explore' : 'Explore'}</span>
-          </button>
-
-          <div className="h-6 w-px bg-white/[0.08]" />
-
-          {/* Search */}
-          <div className="flex-1 relative max-w-md">
-            <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 111 11a6 6 0 0116 0z" />
-            </svg>
-            <input
-              type="text"
-              placeholder="SEARCH CATALOGUE..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-transparent pl-8 pr-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-white placeholder:text-white/10 focus:outline-none focus:text-[var(--brass)] transition-colors"
-            />
+          
+          {/* Scrollable Filters */}
+          <div className="flex-1 overflow-y-auto px-6 pb-24 custom-scrollbar">
+             <FilterContent />
           </div>
-        </div>
 
-        {/* Active filter strip */}
-        {totalActive > 0 && (
-          <div className="border-t border-white/[0.04] px-6 py-1.5 flex items-center gap-2 flex-wrap max-w-screen-2xl mx-auto">
-            {[
-              ...selColours.map((v) => ({ v, clear: () => setSelColours((p) => p.filter((x) => x !== v)) })),
-              ...selCollections.map((v) => ({ v, clear: () => setSelCollections((p) => p.filter((x) => x !== v)) })),
-              ...selManufacturers.map((v) => ({ v, clear: () => setSelManufacturers((p) => p.filter((x) => x !== v)) })),
-              ...selTypes.map((v) => ({ v, clear: () => setSelTypes((p) => p.filter((x) => x !== v)) })),
-              ...selStyles.map((v) => ({ v, clear: () => setSelStyles((p) => p.filter((x) => x !== v)) })),
-              ...selSizes.map((v) => ({ v, clear: () => setSelSizes((p) => p.filter((x) => x !== v)) })),
-            ].map(({ v, clear }) => (
+        </aside>
+
+        {/* Main Content Pane */}
+        <main className="flex-1 min-w-0 flex flex-col h-screen pt-24 bg-black">
+          
+          {/* Locked Main Pane Header */}
+          <div className="px-6 lg:px-8 pb-4 shrink-0 bg-black z-10">
+            <div className="flex items-center gap-4 mb-6 flex-wrap">
               <button
-                key={v}
-                onClick={clear}
-                className="flex items-center gap-1.5 bg-[var(--brass)] text-black text-[9px] font-black uppercase tracking-wider px-2.5 py-1 hover:bg-[var(--brass-light)] transition-colors"
+                onClick={() => setShowMobileFilters(true)}
+                className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--charcoal)] border border-white/10 text-xs font-bold uppercase tracking-wider text-gray-300 hover:border-[var(--brass)]/40 transition-colors"
               >
-                {v}
-                <svg className="w-2.5 h-2.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <Filter size={14} />
+                <span>Filter</span>
+                {totalActiveFilters > 0 && (
+                  <span className="w-5 h-5 rounded-full bg-[var(--brass)] text-black flex items-center justify-center -ml-1">
+                    {totalActiveFilters}
+                  </span>
+                )}
               </button>
-            ))}
-            <button onClick={clearAll} className="text-[9px] text-white/15 hover:text-[var(--brass)] uppercase tracking-widest font-bold transition-colors">
-              Clear all
-            </button>
+
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mr-auto">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                  <span className="text-[var(--brass)] font-black text-base">{totalItems}</span>{" "}
+                  {totalItems === 1 ? "Product" : "Products"} Found
+                </p>
+              </motion.div>
+
+              <div className="flex rounded-xl overflow-hidden border border-white/10 bg-[var(--charcoal)] shadow-lg shadow-black">
+                <button onClick={() => setViewMode("grid")} className={`p-3 transition-colors ${viewMode === "grid" ? "bg-[var(--brass)] text-black" : "text-gray-500 hover:text-gray-300 hover:bg-white/5"}`}>
+                  <LayoutGrid size={18} />
+                </button>
+                <button onClick={() => setViewMode("list")} className={`p-3 transition-colors ${viewMode === "list" ? "bg-[var(--brass)] text-black" : "text-gray-500 hover:text-gray-300 hover:bg-white/5"}`}>
+                  <List size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Active Filter Badges */}
+            <AnimatePresence>
+              {(totalActiveFilters > 0 || searchQuery) && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap gap-2 pb-2">
+                  <AnimatePresence>
+                    {searchQuery && <ActiveFilterBadge label={`"${searchQuery}"`} onRemove={() => setSearchQuery("")} />}
+                    {selectedCollections.map(c => <ActiveFilterBadge key={c} label={c} onRemove={() => setSelectedCollections(p => p.filter(x => x !== c))} />)}
+                    {selectedColors.map(c => <ActiveFilterBadge key={c} label={c} onRemove={() => setSelectedColors(p => p.filter(x => x !== c))} />)}
+                    {selectedManufacturers.map(m => <ActiveFilterBadge key={m} label={m} onRemove={() => setSelectedManufacturers(p => p.filter(x => x !== m))} />)}
+                  </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        )}
-      </header>
 
-      <div className="flex flex-1 min-h-0 max-w-screen-2xl mx-auto w-full">
-
-        {/* ── Sidebar ── */}
-        {sidebarOpen && (
-          <aside className="w-52 flex-shrink-0 border-r border-white/[0.05]">
-            <div className="sticky top-12 h-[calc(100vh-3rem)] overflow-y-auto py-2 px-5">
-
-              {totalActive > 0 && (
-                <div className="py-3 border-b border-white/[0.05] mb-1">
-                  <button onClick={clearAll} className="text-[9px] uppercase tracking-[0.2em] text-[var(--brass)]/70 hover:text-[var(--brass)] font-bold transition-colors">
-                    Clear all filters ({totalActive})
-                  </button>
+          {/* Scrollable Product Grid */}
+          <div className="flex-1 overflow-y-auto px-6 lg:px-8 pb-24 custom-scrollbar relative border-t border-white/5 lg:border-transparent pt-4">
+            <AnimatePresence>
+              {products.length > 0 ? (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} key="results" className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6" : "space-y-4"}>
+                  {products.map((product, index) => (
+                    <BrickCard key={`${product.id}-${index}`} product={product} index={index % 20} viewMode={viewMode} onClick={() => setSelectedBrick(product)} />
+                  ))}
+                </motion.div>
+              ) : (
+                !loading && (
+                  <motion.div key="no-results" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-32 text-center">
+                    <div className="w-24 h-16 rounded-xl overflow-hidden mb-6 opacity-30">
+                      <BrickWallPattern colorHex="#333" rows={3} />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">No products found</h3>
+                    <p className="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed">
+                      Try adjusting your filters or search query to explore more of our api catalogue.
+                    </p>
+                    <button onClick={clearAllFilters} className="px-8 py-3.5 rounded-xl bg-[var(--brass)] text-black font-bold uppercase tracking-wider text-xs hover:bg-[var(--brass-light)] transition-all">
+                      Clear All Filters
+                    </button>
+                  </motion.div>
+                )
+              )}
+              
+              {hasMore && (
+                <div ref={sentinelRef} className="flex justify-center py-10 mt-8">
+                  <div className="w-8 h-8 rounded-full border-2 border-[var(--brass)] border-t-transparent animate-spin" />
                 </div>
               )}
+            </AnimatePresence>
+          </div>
 
-              <div className="divide-y divide-white/[0.05]">
-                <Group title="Colour" options={ALL_COLOURS} selected={selColours}
-                  onToggle={(v) => setSelColours((p) => toggle(p, v))} swatches={COLOUR_SWATCHES} defaultOpen={true} />
-                <Group title="Collection" options={ALL_COLLECTIONS} selected={selCollections}
-                  onToggle={(v) => setSelCollections((p) => toggle(p, v))} defaultOpen={true} />
-                {ALL_MANUFACTURERS.length > 0 && (
-                  <Group title="Manufacturer" options={ALL_MANUFACTURERS} selected={selManufacturers}
-                    onToggle={(v) => setSelManufacturers((p) => toggle(p, v))} />
-                )}
-                {ALL_TYPES.filter(Boolean).length > 0 && (
-                  <Group title="Type" options={ALL_TYPES.filter(Boolean)} selected={selTypes}
-                    onToggle={(v) => setSelTypes((p) => toggle(p, v))} />
-                )}
-                {ALL_STYLES.length > 0 && (
-                  <Group title="Style" options={ALL_STYLES} selected={selStyles}
-                    onToggle={(v) => setSelStyles((p) => toggle(p, v))} />
-                )}
-                {ALL_SIZES.length > 0 && (
-                  <Group title="Size" options={ALL_SIZES} selected={selSizes}
-                    onToggle={(v) => setSelSizes((p) => toggle(p, v))} />
-                )}
-              </div>
-            </div>
-          </aside>
-        )}
-
-        {/* ── Product grid ── */}
-        <main className="flex-1 min-w-0 p-8">
-          {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-40 gap-6 text-white/5">
-              <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-4.35-4.35M17 11A6 6 0 111 11a6 6 0 0116 0z" />
-              </svg>
-              <p className="text-sm font-black uppercase tracking-[0.4em]">No Solutions Found</p>
-              <button onClick={clearAll} className="text-[10px] font-black uppercase tracking-widest text-[var(--brass)] hover:text-white transition-colors underline underline-offset-8">
-                Reset All Filters
-              </button>
-            </div>
-          ) : (
-            <div className={`grid gap-x-8 gap-y-16 ${
-              sidebarOpen
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'
-            }`}>
-              {filtered.map((brick, i) => (
-                <BrickCard key={brick.id} brick={brick} onClick={() => navigate('#brick-detail/' + brick.id)} />
-              ))}
-            </div>
-          )}
         </main>
       </div>
 
-      {modalIdx !== null && (
-        <BrickModal brick={filtered[modalIdx]} onClose={closeModal} onPrev={prevModal} onNext={nextModal} />
-      )}
+      <BrickDetailPanel brick={selectedBrick} onClose={() => setSelectedBrick(null)} />
     </div>
   );
 }

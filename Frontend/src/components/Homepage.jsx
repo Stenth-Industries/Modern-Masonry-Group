@@ -465,11 +465,11 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      {/* CATALOGUE */}
+      {/* CATALOGUE
       <section id="brick-catalogue" className="py-12 px-8 md:px-20 bg-[var(--obsidian)]">
         <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-8 uppercase text-center">-- Product Catalogue</p>
         <BrickCatalogue />
-      </section>
+      </section> */}
 
       {/* SHOP BY SPACE */}
       <section className="py-24 px-8 md:px-20 bg-white text-black">

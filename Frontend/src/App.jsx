@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Homepage from './components/Homepage';
 import BrickCatalogue from './components/BrickCatalogue';
-import Catalogue from './components/Catalogue';
 import BrickDetail from './components/BrickDetail';
 
 export default function App() {
@@ -38,7 +37,7 @@ export default function App() {
   }
 
   if (view === 'brick') {
-    return <Catalogue navigate={navigate} />;
+    return <BrickCatalogue navigate={navigate} />;
   }
 
   return <Homepage navigate={navigate} />;
