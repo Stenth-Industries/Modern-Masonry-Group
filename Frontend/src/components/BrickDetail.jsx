@@ -320,11 +320,22 @@ export default function BrickDetail({ brickId, navigate }) {
 
   const images = useMemo(() => {
     if (!product) return [];
-    const imgs = [];
+    const imgs = new Set();
     (product.variants || []).forEach(v => {
-      if (v.imageUrl && v.imageUrl.startsWith('http') && !imgs.includes(v.imageUrl)) imgs.push(v.imageUrl);
+      // Main variant image
+      if (v.imageUrl && v.imageUrl.startsWith('http')) {
+        imgs.add(v.imageUrl);
+      }
+      // Additional variant images
+      if (Array.isArray(v.imagesUrl)) {
+        v.imagesUrl.forEach(url => {
+          if (url && url.startsWith('http')) {
+            imgs.add(url);
+          }
+        });
+      }
     });
-    return imgs;
+    return Array.from(imgs);
   }, [product]);
 
   const currentImage = selectedImage || images[0] || null;

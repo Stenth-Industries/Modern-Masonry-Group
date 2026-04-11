@@ -1,67 +1,93 @@
-import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
-import rawBricks from '../data/bricks.json';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, Input, Button, Select } from './ui';
 
-// ─── Adapt local bricks.json to the shape the UI expects ─────────────────────
-function adaptBrick(b) {
-  const validImages = (b.images || []).filter(
-    src => src && src.startsWith('http') && !src.toLowerCase().includes('logo') && !src.toLowerCase().includes('icon')
-  );
-  if (b.image && b.image.startsWith('http') && !b.image.toLowerCase().includes('logo') && !validImages.includes(b.image)) {
-    validImages.unshift(b.image);
-  }
-  const colours = (b.allColors || []).filter(Boolean);
-  return {
-    id: b.id,
-    name: b.name,
-    material: b.attributes?.Type || '',
-    description: b.description || '',
-    manufacturers: (b.allManufacturers || (b.manufacturer ? [b.manufacturer] : [])).map((name, i) => ({ id: i, name })),
-    variants: validImages.map((imageUrl, i) => ({ id: i, imageUrl })),
-    categories: colours.map((value, i) => ({ id: `colour-${i}`, type: 'colour', value, hexCode: null })),
-    collection: b.collection || '',
-    allCollections: b.allCollections || [],
-  };
-}
+const COLOR_MAP = {
+  red: '#B4382B',
+  tan: '#D2B48C',
+  grey: '#808080',
+  gray: '#808080',
+  brown: '#5D4037',
+  buff: '#F0DC82',
+  cream: '#FFFDD0',
+  white: '#FFFFFF',
+  black: '#111111',
+  charcoal: '#36454F',
+  charcole: '#36454F',
+  silver: '#C0C0C0',
+  bronze: '#CD7F32',
+  gold: '#FFD700',
+  orange: '#E67E22',
+  pink: '#FADADD',
+};
 
-const adapted = rawBricks.map(adaptBrick);
+const resolveColor = (name, hex) => {
+  if (!name && !hex) return '#808080';
+  if (!name) return hex;
+  const key = name.toLowerCase().trim();
+  return COLOR_MAP[key] || hex || '#808080';
+};
 
-// ─── Build filter option lists once ──────────────────────────────────────────
-const ALL_MATERIALS     = [...new Set(adapted.map(b => b.material).filter(Boolean))].sort();
-const ALL_COLOURS       = [...new Set(adapted.flatMap(b => b.categories.map(c => c.value)))].sort();
-const ALL_COLLECTIONS   = [...new Set(adapted.flatMap(b => b.allCollections).filter(Boolean))].sort();
-const ALL_MANUFACTURERS = [...new Set(adapted.flatMap(b => b.manufacturers.map(m => m.name)).filter(Boolean))].sort();
+export default function Catalogue() {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [meta, setMeta] = useState(null);
+  const [filters, setFilters] = useState({
+    colours: [],
+    collections: [],
+    styles: [],
+    manufacturers: [],
+    materials: []
+  });
 
-const PAGE_SIZE = 20;
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    colour: '',
+    collection: '',
+    style: '',
+    manufacturer: '',
+    material: '',
+    page: 1,
+    limit: 20
+  });
 
-export default function Catalogue({ navigate }) {
-  const [search, setSearch]             = useState('');
-  const [material, setMaterial]         = useState('');
-  const [colour, setColour]             = useState('');
-  const [collection, setCollection]     = useState('');
-  const [manufacturer, setManufacturer] = useState('');
-  const [page, setPage]                 = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  // Reset to page 1 whenever any filter changes
-  useEffect(() => { setPage(1); }, [search, material, colour, collection, manufacturer]);
+  // Fetch filters
+  useEffect(() => {
+    fetch('http://localhost:5000/api/products/filters')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setFilters(data.data);
+        }
+      })
+      .catch(err => console.error("Error fetching filters:", err));
+  }, []);
 
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase();
-    return adapted.filter(b => {
-      if (q && !b.name.toLowerCase().includes(q) && !b.material.toLowerCase().includes(q)) return false;
-      if (material && b.material !== material) return false;
-      if (colour && !b.categories.some(c => c.value === colour)) return false;
-      if (collection && !b.allCollections.includes(collection)) return false;
-      if (manufacturer && !b.manufacturers.some(m => m.name === manufacturer)) return false;
-      return true;
-    });
-  }, [search, material, colour, collection, manufacturer]);
+// Fetch products
+  const fetchProducts = useCallback(async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      });
 
-  const visible = useMemo(() => filtered.slice(0, page * PAGE_SIZE), [filtered, page]);
-  const hasMore = visible.length < filtered.length;
+      const res = await fetch(`http://localhost:5000/api/products?${params.toString()}`);
+      const data = await res.json();
+      
+      if (data.success) {
+        setProducts(prev => queryParams.page === 1 ? data.data : [...prev, ...data.data]);
+        setMeta(data.meta);
+      }
+    } catch (err) {
+      console.error("Error fetching products:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [queryParams]);
 
-  // Infinite scroll sentinel
-  const sentinelRef = useRef(null);
   useEffect(() => {
     if (!hasMore) return;
     const obs = new IntersectionObserver(entries => {
@@ -153,53 +179,71 @@ export default function Catalogue({ navigate }) {
           {visible.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {visible.map(product => (
-                  <div
-                    key={product.id}
-                    className="cursor-pointer"
-                    onClick={() => navigate && navigate(`#brick-detail/${product.id}`)}
-                  >
-                    <Card className="flex flex-col h-full group">
-                      <div className="relative h-48 bg-[var(--bg-primary)] border-b border-[var(--text-secondary)]/20 overflow-hidden flex items-center justify-center">
-                        {product.variants[0]?.imageUrl ? (
-                          <img
-                            src={product.variants[0].imageUrl}
-                            alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                            referrerPolicy="no-referrer"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center">
-                            <span className="text-[var(--text-secondary)] opacity-50 font-medium">No Image</span>
-                          </div>
-                        )}
-                        {product.material && (
-                          <div className="absolute top-3 right-3 bg-[var(--bg-secondary)]/90 backdrop-blur text-xs px-2 py-1 rounded text-[var(--text-primary)] border border-[var(--text-secondary)]/30">
-                            {product.material}
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-5 flex flex-col flex-grow">
-                        <div className="mb-2">
-                          {product.manufacturers.map(m => (
-                            <span key={m.id} className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">
-                              {m.name}
-                            </span>
-                          ))}
-                        </div>
-                        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">{product.name}</h3>
-                        <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                          {product.categories.filter(c => c.type === 'colour').map(c => (
-                            <div key={c.id} className="flex items-center gap-1.5 text-xs bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--text-secondary)]/10">
-                              <span className="text-[var(--text-secondary)]">{c.value}</span>
+                {products.map((product, index) => {
+                  const isLastElement = index === products.length - 1;
+                  return (
+                    <div
+                      ref={isLastElement ? lastElementRef : null}
+                      key={`${product.id}-${index}`}
+                      onClick={() => product.slug && navigate(`/product/${product.slug}`)}
+                      style={{ cursor: product.slug ? 'pointer' : 'default' }}
+                    >
+                      <Card className="flex flex-col h-full group">
+                        <div className="relative h-48 bg-[var(--bg-primary)] border-b border-[var(--text-secondary)]/20 overflow-hidden flex items-center justify-center">
+                          {product.variants?.[0]?.imageUrl ? (
+                            <img 
+                              src={product.variants[0].imageUrl} 
+                              alt={product.name} 
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center">
+                              <span className="text-[var(--text-secondary)] opacity-50 font-medium">No Image</span>
                             </div>
-                          ))}
+                          )}
+                          
+                          {product.material && (
+                            <div className="absolute top-3 right-3 bg-[var(--bg-secondary)]/90 backdrop-blur text-xs px-2 py-1 rounded text-[var(--text-primary)] border border-[var(--text-secondary)]/30">
+                              {product.material}
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    </Card>
-                  </div>
-                ))}
+                        
+                        <div className="p-5 flex flex-col flex-grow">
+                          <div className="mb-2">
+                            {product.manufacturers?.map(m => (
+                              <span key={m.id} className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">
+                                {m.name}
+                              </span>
+                            ))}
+                          </div>
+                          <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">
+                            {product.name}
+                          </h3>
+                          
+                          <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                            {product.categories?.filter(c => c.type === 'colour').map(c => (
+                              <div key={c.id} className="flex items-center gap-1.5 text-xs bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--text-secondary)]/10">
+                                <span className="w-3 h-3 rounded-full border border-black/20" style={{ backgroundColor: resolveColor(c.value, c.hexCode) }}></span>
+                                <span className="text-[var(--text-secondary)]">{c.value}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* View Detail CTA */}
+                          {product.slug && (
+                            <div className="mt-3 pt-3 border-t border-[var(--text-secondary)]/10">
+                              <span className="text-xs font-bold tracking-widest uppercase text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                View Details →
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </Card>
+                    </div>
+                  );
+                })}
               </div>
 
               {hasMore && (
