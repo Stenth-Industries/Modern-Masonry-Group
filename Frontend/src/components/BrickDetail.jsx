@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useParams, Link } from 'react-router-dom';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const THUMB_VISIBLE = 4; // show 4 thumbs, last slot = "+N more"
@@ -276,51 +277,33 @@ function ThumbStrip({ images, currentImage, onSelect, onOpenLightbox }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function BrickDetail({ brickId, navigate }) {
+export default function BrickDetail() {
+  const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null); // null = closed
   const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/products/${brickId}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
-          setProduct(data.data);
-        } else {
-          setError(data.message || 'Product not found');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        setError('Failed to load product');
-      })
+    setError(null);
+    fetch(`http://localhost:5000/api/products/${slug}`)
+      .then(res => { if (!res.ok) throw new Error('Product not found'); return res.json(); })
+      .then(data => { if (data.success) setProduct(data.data); else throw new Error(data.message || 'Failed to load'); })
+      .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [brickId]);
+  }, [slug]);
 
   const images = useMemo(() => {
     if (!product) return [];
-    const imgs = new Set();
+    const imgs = [];
     (product.variants || []).forEach(v => {
-      // Main variant image
-      if (v.imageUrl && v.imageUrl.startsWith('http')) {
-        imgs.add(v.imageUrl);
-      }
-      // Additional variant images
-      if (Array.isArray(v.imagesUrl)) {
-        v.imagesUrl.forEach(url => {
-          if (url && url.startsWith('http')) {
-            imgs.add(url);
-          }
-        });
-      }
+      if (v.imageUrl && v.imageUrl.startsWith('http') && !imgs.includes(v.imageUrl)) imgs.push(v.imageUrl);
     });
-    return Array.from(imgs);
+    return imgs;
   }, [product]);
 
   const currentImage = selectedImage || images[0] || null;
@@ -356,7 +339,7 @@ export default function BrickDetail({ brickId, navigate }) {
   if (error || !product) return (
     <div style={styles.centerScreen}>
       <p style={{ color: '#ef4444', fontWeight: 700, marginBottom: '12px' }}>{error || 'Product not found'}</p>
-      <a href="#brick" style={styles.backLink}><ArrowLeft /> Back to Catalogue</a>
+      <Link to="/" style={styles.backLink}><ArrowLeft /> Back to Catalogue</Link>
     </div>
   );
 
@@ -530,7 +513,7 @@ export default function BrickDetail({ brickId, navigate }) {
               {/* Breadcrumb + Title */}
               <div style={{ marginBottom: '28px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                  <a href="#brick" className="bd-breadcrumb-link">Catalogue</a>
+                  <Link to="/" className="bd-breadcrumb-link">Home</Link>
                   <span style={{ color: 'var(--text-secondary)', fontSize: 10 }}>›</span>
                   <span style={{ color: 'var(--accent)', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                     {product.name}
@@ -616,9 +599,9 @@ export default function BrickDetail({ brickId, navigate }) {
 
         {/* Back Button */}
         <div style={{ marginTop: '48px' }}>
-          <a href="#brick" className="bd-back-link">
+          <Link to="/" className="bd-back-link">
             <ArrowLeft /> Back to Collection
-          </a>
+          </Link>
         </div>
       </div>
     </div>
