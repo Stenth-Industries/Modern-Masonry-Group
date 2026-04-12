@@ -283,8 +283,8 @@ export default function BrickDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [lightboxIndex, setLightboxIndex] = useState(null); // null = closed
-  const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [formData, setFormData] = useState({ fullName: '', email: '', company: '', quantity: '', details: '' });
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -320,10 +320,27 @@ export default function BrickDetail() {
   const openLightbox = useCallback((index) => setLightboxIndex(index), []);
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    try {
+      const payload = { ...formData, productId: product?.id };
+      const res = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ fullName: '', email: '', company: '', quantity: '', details: '' });
+        setTimeout(() => setSubmitted(false), 4000);
+      } else {
+        alert(data.message || 'Failed to submit quote request');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error submitting quote request');
+    }
   };
 
   // ── Loading ──
@@ -543,20 +560,27 @@ export default function BrickDetail() {
                     <div style={styles.formRow}>
                       <div>
                         <label style={styles.formLabel}>Full Name</label>
-                        <input type="text" placeholder="John Doe" className="bd-input"
+                        <input type="text" placeholder="John Doe" className="bd-input" required
                           value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })} />
                       </div>
+                      <div>
+                        <label style={styles.formLabel}>Email Address</label>
+                        <input type="email" placeholder="john@example.com" className="bd-input" required
+                          value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                      </div>
+                    </div>
+
+                    <div style={styles.formRow}>
                       <div>
                         <label style={styles.formLabel}>Company</label>
                         <input type="text" placeholder="Architectural Firm" className="bd-input"
                           value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} />
                       </div>
-                    </div>
-
-                    <div>
-                      <label style={styles.formLabel}>Estimated Quantity (Sq Ft)</label>
-                      <input type="text" placeholder="1,000" className="bd-input"
-                        value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} />
+                      <div>
+                        <label style={styles.formLabel}>Estimated Quantity (Sq Ft)</label>
+                        <input type="text" placeholder="1,000" className="bd-input"
+                          value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} />
+                      </div>
                     </div>
 
                     <div>

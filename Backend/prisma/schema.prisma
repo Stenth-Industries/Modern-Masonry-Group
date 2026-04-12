@@ -84,3 +84,15 @@ model Variant {
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
+
+model Quote {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String
+  company   String?
+  quantity  String?
+  details   String?
+  productId String?
+  isGeneral Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
