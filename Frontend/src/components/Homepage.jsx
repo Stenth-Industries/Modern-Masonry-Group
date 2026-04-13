@@ -4,6 +4,8 @@ import { ArrowRight, ArrowUpRight, Plus, Minus, Mail } from "lucide-react";
 import BrickCatalogue from "./BrickCatalogue";
 import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 import { InfiniteSlider } from "./ui/infinite-slider";
+import { Sparkles } from "./ui/sparkles";
+import { ProgressiveBlur } from "./ui/progressive-blur";
 import Footer from "./Footer";
 
 const BRANDS = [
@@ -665,37 +667,68 @@ export default function Homepage({ navigate }) {
       <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* BRAND MARQUEE */}
-      <section className="py-12 bg-white/80 border-y border-white/5 overflow-hidden">
-        <p className="text-center font-bold text-[24px] text-[var(--brass)] uppercase tracking-[0.35em] mb-7">
-          Trusted By Canada's Leading Masonry Brands
-        </p>
-        <div className="relative">
-          <InfiniteSlider
-            duration={30}
-            durationOnHover={70}
-            direction="horizontal"
-            gap={90}
-          >
-            {[
-              "/logos/Logo-01png.png",
-              "/logos/200x55-1.png",
-              "/logos/Logo-03.png",
-              "/logos/Logo-04.png",
-              "/logos/Logo-05.png",
-              "/logos/Logo-06.png",
-              "/logos/Logo-07.png",
-              "/logos/Logo-08.png",
-              "/logos/Logo-09.png",
-              "/logos/Logo-10.png",
-            ].map((logoFile, i) => (
-              <img
-                key={i}
-                src={logoFile}
-                alt={`Trusted Partner ${i + 3}`}
-                className="h-12 md:h-16 w-auto object-contain shrink-0 transition-all duration-300"
-              />
-            ))}
-          </InfiniteSlider>
+      <section className="py-24 relative overflow-hidden w-full bg-transparent flex flex-col items-center">
+        <div className="mx-auto w-full max-w-7xl z-20">
+          <div className="text-center text-3xl font-light text-[#e3decb] mb-12" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+            <span className="text-white text-4xl">
+              Trusted by Canada's
+            </span>
+            <br />
+            <span className="tracking-[0.3em] uppercase text-sm font-bold mt-4 inline-block font-sans text-[#C9A449]">
+              Leading Masonry Brands
+            </span>
+          </div>
+
+          <div className="relative h-[100px] w-full">
+            <InfiniteSlider 
+              className='flex h-full w-full items-center opacity-80 mix-blend-screen' 
+              duration={40}
+              gap={90}
+            >
+              {[
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-01png.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/200x55-1.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-03.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-04.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-05.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-06.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-07.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-08.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-09.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Santerra_black-lettering-gold-star-with-white-background.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Untitled-1.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-10.png",
+              ].map((logoFile, i) => (
+                <img
+                  key={i}
+                  src={logoFile}
+                  alt={`Trusted Partner ${i}`}
+                  className="h-12 md:h-16 w-auto object-contain shrink-0 transition-all duration-300 grayscale hover:grayscale-0"
+                />
+              ))}
+            </InfiniteSlider>
+            <ProgressiveBlur
+              className='pointer-events-none absolute top-0 left-0 h-full w-[150px] md:w-[300px]'
+              direction='left'
+              blurIntensity={1}
+            />
+            <ProgressiveBlur
+              className='pointer-events-none absolute top-0 right-0 h-full w-[150px] md:w-[300px]'
+              direction='right'
+              blurIntensity={1}
+            />
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 w-full h-[400px] overflow-hidden pointer-events-none [mask-image:radial-gradient(50%_50%,white,transparent)] -z-10 mt-16 scale-y-125">
+          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#C9A449,transparent_75%)] before:opacity-15" />
+          <div className="absolute -left-[50%] top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-[#C9A449]/30 bg-transparent" />
+          <Sparkles
+            density={800}
+            size={1.5}
+            className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
+            color="#C9A449"
+          />
         </div>
       </section>
 

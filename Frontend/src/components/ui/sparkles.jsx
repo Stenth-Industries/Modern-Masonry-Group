@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useId, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -78,13 +76,5 @@ export function Sparkles({
     detectRetina: true,
   };
 
-  return (
-    isReady && (
-      <Particles
-        id={id}
-        options={{ ...defaultOptions, ...options }}
-        className={className}
-      />
-    )
-  );
+  return isReady && <Particles id={id} options={{ ...defaultOptions, ...options }} className={className} />;
 }
