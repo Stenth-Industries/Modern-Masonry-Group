@@ -5,7 +5,7 @@ import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 export default function Footer() {
   return (
     <footer
-      className="bg-[var(--charcoal)] relative overflow-hidden text-[#6B6B6B]"
+      className="relative overflow-hidden text-[#6B6B6B]"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {/* Top gold rule */}

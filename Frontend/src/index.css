@@ -55,6 +55,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-primary);
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000;
   color: var(--text-primary);
 }
