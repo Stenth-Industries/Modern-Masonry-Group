@@ -298,11 +298,8 @@ function ComparePanel({ items, onRemove, onClose, open }) {
           transition={{ duration: 0.4, ease: 'easeOut' }}
           className="fixed inset-0 z-[90] overflow-y-auto"
         >
-          {/* ── Background — matches catalogue ── */}
-          <div className="fixed inset-0 -z-10 pointer-events-none">
-            <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/bg.png')" }} />
-            <div className="absolute inset-0 bg-black/60" />
-          </div>
+          {/* ── Background Overlay ── */}
+          <div className="fixed inset-0 -z-10 pointer-events-none bg-black/60 backdrop-blur-sm" />
 
           <motion.div
             initial={{ y: 24, opacity: 0 }}
@@ -649,11 +646,7 @@ export default function BrickCatalogue() {
 
   return (
     <div className="min-h-screen relative font-sans text-white">
-      {/* Background */}
-      <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-fixed w-full h-full"
-        style={{ backgroundImage: "url('/bg.png')" }}
-      />
+
       {/* Wrapper to hold UI on top of background — fills entire viewport */}
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* Top Header structured & refined */}
