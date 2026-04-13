@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, ChevronRight } from 'lucide-react';
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
@@ -12,18 +12,14 @@ const NAV_ITEMS = [
   { label: 'Gallery', href: '#gallery' },
 ];
 
-/* ── Magnetic link ── */
+/* ── Nav link ── */
 const MagneticLink = ({ children, href, className = '', onClick }) => {
-  const ref = useRef(null);
-  const x = useMotionValue(0), y = useMotionValue(0);
-  const sx = useSpring(x, { damping: 15, stiffness: 150 });
-  const sy = useSpring(y, { damping: 15, stiffness: 150 });
   return (
-    <motion.a ref={ref} href={href} onClick={onClick}
-      onMouseMove={e => { const r = ref.current.getBoundingClientRect(); x.set((e.clientX - (r.left + r.width / 2)) * .4); y.set((e.clientY - (r.top + r.height / 2)) * .4); }}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      style={{ x: sx, y: sy }}
-      className={`relative px-4 py-2 text-xs uppercase tracking-[0.2em] font-medium text-white/60 hover:text-white transition-colors duration-300 block ${className}`}>
+    <motion.a href={href} onClick={onClick}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+      className={`relative px-4 py-2 text-xs uppercase tracking-[0.2em] font-medium text-white/60 hover:text-white transition-colors duration-200 block ${className}`}>
       {children}
     </motion.a>
   );
