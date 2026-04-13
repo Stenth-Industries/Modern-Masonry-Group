@@ -984,12 +984,11 @@ export default function Homepage({ navigate }) {
       <div className="relative z-10">
         <div className="px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-around gap-10">
           <div className="lg:max-w-sm">
-            <p className="text-[#C9A449] text-[10px] font-semibold tracking-[0.35em] uppercase mb-3">
-              Exclusive Intelligence
+            <p className="text-[#C9A449] text-[18px] font-bold tracking-[0.35em] uppercase mb-3">
+              Stay Ahead of the Build
             </p>
             <h3
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-              className="text-white text-3xl font-light tracking-wide leading-snug"
+              className="text-white text-3xl font-bold tracking-wide leading-snug"
             >
               Ontario's Premier
               <br />
