@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   ChevronDown,
@@ -8,12 +9,18 @@ import {
   Heart,
   Grid3x3,
   Grid,
-  Download,
-  Share2,
-  X
+  X,
+  Ruler,
+  Package,
+  Droplets,
+  Thermometer,
+  Zap,
+  Building2,
 } from "lucide-react";
 import { brickProducts } from "./catalogue-data";
 import { BrickWallPattern } from "./BrickWallPattern";
+
+const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 import { BrickDetailPanel } from "./BrickDetailPanel";
 import Footer from "./Footer";
 
@@ -237,11 +244,261 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
   );
 }
 
+// ── Compare Panel ────────────────────────────────────────────────────────────
+
+const SPEC_GROUPS = [
+  {
+    label: 'Identity',
+    specs: [
+      { label: 'Manufacturer', key: 'manufacturer' },
+      { label: 'Collection',   key: 'collection' },
+      { label: 'Colour',       key: 'color', isColor: true },
+      { label: 'Finish',       key: 'finish' },
+    ],
+  },
+  {
+    label: 'Dimensions',
+    specs: [
+      { label: 'Size',   key: 'size' },
+      { label: 'Weight', key: 'weight' },
+    ],
+  },
+  {
+    label: 'Technical',
+    specs: [
+      { label: 'Compressive Strength', key: 'compressiveStrength' },
+      { label: 'Water Absorption',     key: 'waterAbsorption' },
+      { label: 'Frost Resistance',     key: 'frostResistance' },
+    ],
+  },
+  {
+    label: 'Availability',
+    specs: [
+      { label: 'SKU',      key: 'code' },
+      { label: 'In Stock', key: 'inStock', isBool: true },
+    ],
+  },
+];
+
+function isDifferent(items, key) {
+  const vals = items.map(p => String(p[key] ?? ''));
+  return new Set(vals).size > 1;
+}
+
+function ComparePanel({ items, onRemove, onClose, open }) {
+  const slots = [...items, ...Array.from({ length: 3 - items.length }, () => null)];
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="fixed inset-0 z-[90] overflow-y-auto"
+        >
+          {/* ── Background — matches catalogue ── */}
+          <div className="fixed inset-0 -z-10 pointer-events-none">
+            <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/bg.png')" }} />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+
+          <motion.div
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 16, opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="min-h-full max-w-[1380px] mx-auto px-8 md:px-14 py-12 flex flex-col"
+          >
+
+            {/* ── Masthead ── */}
+            <div className="flex items-start justify-between mb-14">
+              <div>
+                {/* Ornamental rule */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="h-[1px] w-8" style={{ background: 'linear-gradient(90deg, transparent, #ccab7b)' }} />
+                  <span className="text-[9px] uppercase tracking-[0.4em] text-[#ccab7b] font-bold">Material Comparison</span>
+                  <div className="h-[1px] w-8" style={{ background: 'linear-gradient(90deg, #ccab7b, transparent)' }} />
+                </div>
+                <h2 className="text-[40px] md:text-[56px] text-[#e8e2d4] leading-[1] tracking-tight"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 300 }}>
+                  Side by Side
+                </h2>
+                <p className="mt-2 text-[13px] text-white/25 tracking-[0.08em]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  {items.length} of 3 products selected
+                </p>
+              </div>
+              <button onClick={onClose}
+                className="group mt-2 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.25em] text-white/30 hover:text-[#ccab7b] transition-colors duration-300">
+                <span>Close</span>
+                <span className="w-7 h-7 border border-white/10 group-hover:border-[#ccab7b]/40 rounded-full flex items-center justify-center transition-colors">
+                  <X size={11} />
+                </span>
+              </button>
+            </div>
+
+            {/* ── Product Cards Row ── */}
+            <div className="grid gap-px mb-0" style={{ gridTemplateColumns: '200px repeat(3, 1fr)' }}>
+              {/* Corner label */}
+              <div className="flex items-end pb-8 pr-8">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-white/15" style={{ fontFamily: "'Inter', sans-serif" }}>Product</span>
+              </div>
+
+              {slots.map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="px-4 pb-8"
+                >
+                  {p ? (
+                    <div className="flex flex-col">
+                      {/* Index number */}
+                      <span className="text-[10px] font-mono text-[#ccab7b]/40 mb-3 tracking-widest">0{i + 1}</span>
+
+                      {/* Image */}
+                      <div className="relative w-full aspect-[3/2] overflow-hidden rounded-sm mb-5 group">
+                        {p.image
+                          ? <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                          : <BrickWallPattern colorHex={p.colorHex || '#7A5C40'} rows={5} />
+                        }
+                        {/* Gradient overlay on image */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        {/* Stock badge */}
+                        <span className={`absolute bottom-3 left-3 text-[8px] uppercase tracking-[0.2em] font-bold px-2 py-1 rounded-sm ${
+                          p.inStock ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-800/50' : 'bg-red-950/80 text-red-400 border border-red-800/50'
+                        }`}>
+                          {p.inStock ? 'In Stock' : 'Out of Stock'}
+                        </span>
+                        {/* Remove */}
+                        <button onClick={() => onRemove(p)}
+                          className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity w-6 h-6 bg-black/80 rounded-full flex items-center justify-center text-white/60 hover:text-white">
+                          <X size={10} />
+                        </button>
+                      </div>
+
+                      {/* Name */}
+                      <h3 className="text-[#e2ded4] text-[17px] leading-snug mb-1 line-clamp-2"
+                        style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}>
+                        {p.name}
+                      </h3>
+                      <p className="text-[9px] uppercase tracking-[0.22em] text-[#ccab7b]/60 font-semibold mb-5">{p.manufacturer}</p>
+
+                      {/* CTA */}
+                      <button className="w-full py-3 text-[9px] uppercase tracking-[0.2em] font-bold text-[#ccab7b] border border-[#ccab7b]/25 hover:border-[#ccab7b] hover:bg-[#ccab7b]/10 transition-all duration-300 rounded-sm">
+                        Request Sample
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono text-white/10 mb-3 tracking-widest">0{i + 1}</span>
+                      <div className="aspect-[3/2] border border-dashed border-white/[0.08] rounded-sm flex flex-col items-center justify-center gap-3 text-white/15">
+                        <div className="w-8 h-8 rounded-full border border-dashed border-white/10 flex items-center justify-center text-base">+</div>
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-center leading-relaxed">Go back &amp;<br />add a product</span>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* ── Full-width gold divider ── */}
+            <div className="w-full h-[1px] mb-0" style={{ background: 'linear-gradient(90deg, transparent, #ccab7b30, #ccab7b60, #ccab7b30, transparent)' }} />
+
+            {/* ── Spec Table ── */}
+            {SPEC_GROUPS.map((group, gi) => (
+              <div key={group.label}>
+                {/* Group header row */}
+                <div className="grid" style={{ gridTemplateColumns: '200px repeat(3, 1fr)' }}>
+                  <div className="py-6 pr-8 flex items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="h-[1px] flex-1 w-4" style={{ background: 'linear-gradient(90deg, transparent, #ccab7b40)' }} />
+                      <span className="text-[8.5px] uppercase tracking-[0.35em] text-[#ccab7b] font-bold whitespace-nowrap">{group.label}</span>
+                    </div>
+                  </div>
+                  {slots.map((_, i) => (
+                    <div key={i} className="py-6 px-4 border-l border-white/[0.04]" />
+                  ))}
+                </div>
+
+                {/* Spec rows */}
+                {group.specs.map(({ label, key, isColor, isBool }, si) => {
+                  const diff = items.length > 1 && isDifferent(items, key);
+                  const isLast = si === group.specs.length - 1;
+                  return (
+                    <div key={key}
+                      className={`grid transition-colors duration-300 ${diff ? 'bg-[#ccab7b]/[0.03]' : ''} ${isLast ? 'mb-2' : ''}`}
+                      style={{ gridTemplateColumns: '200px repeat(3, 1fr)' }}>
+
+                      {/* Label */}
+                      <div className={`flex items-center py-4 pr-8 border-t ${diff ? 'border-[#ccab7b]/15' : 'border-white/[0.04]'}`}>
+                        <div className="flex items-center gap-2 w-full">
+                          {diff && <div className="w-[2px] h-3 bg-[#ccab7b] rounded-full shrink-0" />}
+                          <span className={`text-[10px] uppercase tracking-[0.18em] font-medium transition-colors ${diff ? 'text-[#ccab7b]/80' : 'text-white/25'}`}
+                            style={{ fontFamily: "'Inter', sans-serif" }}>
+                            {label}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Values */}
+                      {slots.map((p, i) => (
+                        <div key={i} className={`flex items-center py-4 px-4 border-t border-l ${diff ? 'border-[#ccab7b]/15' : 'border-white/[0.04]'}`}>
+                          {p ? (
+                            isBool ? (
+                              <span className={`text-[11px] font-semibold flex items-center gap-1.5 ${p[key] ? 'text-emerald-400' : 'text-red-400/70'}`}>
+                                {p[key] ? <Check size={11} strokeWidth={2.5} /> : <X size={11} />}
+                                {p[key] ? 'In Stock' : 'Out of Stock'}
+                              </span>
+                            ) : isColor ? (
+                              <span className="flex items-center gap-2.5">
+                                {p.colorHex && (
+                                  <span className="w-3.5 h-3.5 rounded-full border border-white/15 shrink-0" style={{ background: p.colorHex }} />
+                                )}
+                                <span className={`text-[12px] tracking-wide transition-colors ${diff ? 'text-[#e3decb] font-medium' : 'text-white/35'}`}>
+                                  {p[key] ?? '—'}
+                                </span>
+                              </span>
+                            ) : (
+                              <span className={`text-[12px] tracking-wide leading-snug transition-colors ${diff ? 'text-[#e3decb] font-medium' : 'text-white/35'}`}>
+                                {p[key] ?? '—'}
+                              </span>
+                            )
+                          ) : (
+                            <span className="text-white/10 text-[12px]">—</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+
+                {/* Section divider */}
+                {gi < SPEC_GROUPS.length - 1 && (
+                  <div className="w-full h-[1px] my-2" style={{ background: 'linear-gradient(90deg, transparent, #ffffff08, transparent)' }} />
+                )}
+              </div>
+            ))}
+
+            {/* ── Bottom gold rule ── */}
+            <div className="mt-12 w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, #ccab7b30, transparent)' }} />
+            <p className="mt-6 text-center text-[9px] uppercase tracking-[0.3em] text-white/15">Modern Masonry Group — Premium Material Selection</p>
+
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // ── Main UI ──────────────────────────────────────────────────────────────────
 
 export default function BrickCatalogue() {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [compact, setCompact] = useState(true);
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
@@ -256,9 +513,10 @@ export default function BrickCatalogue() {
   const [filtersDB, setFiltersDB] = useState(DEFAULT_FILTERS);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const gridRef = React.useRef(null);
 
   // Load database filters once on mount
   useEffect(() => {
@@ -338,9 +596,10 @@ export default function BrickCatalogue() {
               isNew: false,
             };
           });
-          setProducts((prev) => (page === 1 ? mapped : [...prev, ...mapped]));
+          setProducts(mapped);
           setTotal(res.meta.total);
-          setHasMore(page < res.meta.totalPages);
+          setTotalPages(res.meta.totalPages);
+          gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           setErrorMsg(res.message || "Unknown error from API");
         }
@@ -357,10 +616,9 @@ export default function BrickCatalogue() {
     return () => controller.abort();
   }, [debouncedQuery, types, colors, finishes, manufacturers, page]);
 
-  // Reset pagination on filter change
+  // Reset to page 1 on filter change
   useEffect(() => {
     setPage(1);
-    setProducts([]);
   }, [debouncedQuery, types, colors, finishes, manufacturers]);
 
   const tog = useCallback((val, getter, setter) => {
@@ -377,12 +635,14 @@ export default function BrickCatalogue() {
     );
   }, []);
 
+  const [showCompare, setShowCompare] = useState(false);
+
   const handleToggleCompare = useCallback((prod) => {
-    setCompareQueue(prev =>
-      prev.find(p => p.id === prod.id)
-        ? prev.filter(p => p.id !== prod.id)
-        : [...prev, prod]
-    );
+    setCompareQueue(prev => {
+      if (prev.find(p => p.id === prod.id)) return prev.filter(p => p.id !== prod.id);
+      if (prev.length >= 3) return prev; // max 3
+      return [...prev, prod];
+    });
   }, []);
 
   const displayedProducts = showFavourites ? favourites : products;
@@ -463,14 +723,15 @@ export default function BrickCatalogue() {
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               />
             </div>
-            <div className="flex items-center gap-4">
-              <Grid size={16} className="text-[#9a9488] hover:text-white cursor-pointer" />
-              <Grid3x3 size={16} className="text-[#9a9488] hover:text-white cursor-pointer" />
-            </div>
-            <div className="flex items-center gap-5 ml-4 text-[#9a9488]">
-              <Download size={15} className="hover:text-white cursor-pointer" />
-              <Share2 size={15} className="hover:text-white cursor-pointer" />
-              <SlidersHorizontal size={15} className="hover:text-white cursor-pointer" />
+            <div className="flex items-center gap-1 border border-white/10 rounded-md p-1">
+              <button onClick={() => setCompact(false)} title="Comfortable view"
+                className={`p-1.5 rounded transition-colors ${!compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                <Grid size={14} />
+              </button>
+              <button onClick={() => setCompact(true)} title="Compact view"
+                className={`p-1.5 rounded transition-colors ${compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                <Grid3x3 size={14} />
+              </button>
             </div>
           </div>
         </div>
@@ -540,7 +801,7 @@ export default function BrickCatalogue() {
           </aside>
 
           {/* Main Content Area */}
-          <main className="flex-1 px-8 lg:px-12 pt-8 pb-32">
+          <main ref={gridRef} className="flex-1 px-8 lg:px-12 pt-8 pb-32">
 
 
             {/* Grid perfectly matches 5 cols exactly as drawn in the image/request */}
@@ -549,7 +810,7 @@ export default function BrickCatalogue() {
                 API Error: {errorMsg}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-8">
+              <div className={`grid gap-8 ${compact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'}`}>
                 {displayedProducts.map((p) => (
                   <PremiumCard
                     key={p.id}
@@ -569,20 +830,54 @@ export default function BrickCatalogue() {
                 <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
                   {favourites.length > 0 ? "All Favourites Displayed" : "No favourites yet"}
                 </span>
-              ) : hasMore ? (
-                <button
-                  onClick={() => setPage((p) => p + 1)}
-                  disabled={loading}
-                  className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#ccab7b] hover:text-[#dfba88] transition-colors border-b border-transparent hover:border-current pb-0.5"
-                >
-                  {loading ? "Loading..." : "LOAD MORE PRODUCTS"}
-                </button>
-              ) : (
-                products.length > 0 && (
-                  <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
-                    All Collections Displayed
-                  </span>
-                )
+              ) : totalPages > 1 && (
+                <div className="flex items-center gap-1.5">
+                  {/* Prev */}
+                  <button
+                    onClick={() => setPage(p => Math.max(1, p - 1))}
+                    disabled={page === 1 || loading}
+                    className="px-3 py-2 text-[11px] uppercase tracking-[0.15em] font-bold text-white/40 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                  >
+                    ←
+                  </button>
+
+                  {/* Page numbers */}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1)
+                    .filter(n => n === 1 || n === totalPages || Math.abs(n - page) <= 1)
+                    .reduce((acc, n, idx, arr) => {
+                      if (idx > 0 && n - arr[idx - 1] > 1) acc.push('…');
+                      acc.push(n);
+                      return acc;
+                    }, [])
+                    .map((n, i) =>
+                      n === '…' ? (
+                        <span key={`ellipsis-${i}`} className="px-2 text-white/20 text-[11px]">…</span>
+                      ) : (
+                        <button
+                          key={n}
+                          onClick={() => setPage(n)}
+                          disabled={loading}
+                          className={`w-9 h-9 text-[11px] font-bold tracking-[0.1em] rounded-sm transition-all duration-200 ${
+                            page === n
+                              ? 'bg-[#ccab7b] text-black'
+                              : 'text-white/40 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          {n}
+                        </button>
+                      )
+                    )
+                  }
+
+                  {/* Next */}
+                  <button
+                    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                    disabled={page === totalPages || loading}
+                    className="px-3 py-2 text-[11px] uppercase tracking-[0.15em] font-bold text-white/40 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                  >
+                    →
+                  </button>
+                </div>
               )}
             </div>
           </main>
@@ -602,20 +897,54 @@ export default function BrickCatalogue() {
       <Footer />
 
       {/* Floating Compare Bar */}
-      {compareQueue.length > 0 && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#ccab7b]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4 animate-fade-in-up">
-          <span className="text-[11px] uppercase tracking-widest text-white/80 font-medium">
-            <span className="text-[#ccab7b] font-bold">{compareQueue.length}</span> items to compare
-          </span>
-          <div className="w-px h-4 bg-white/10"></div>
-          <button onClick={() => alert("Full Compare View Coming Soon in next update!")} className="text-[10px] uppercase tracking-widest text-[#ccab7b] font-bold hover:text-white transition-colors">
-            Compare Now
-          </button>
-          <button onClick={() => setCompareQueue([])} className="text-white/40 hover:text-white ml-2">
-            <X size={14} />
-          </button>
-        </div>
-      )}
+      <AnimatePresence>
+        {compareQueue.length > 0 && !showCompare && (
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 40, opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#ccab7b]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4"
+          >
+            {/* Thumbnails */}
+            <div className="flex items-center gap-2">
+              {compareQueue.map(p => (
+                <div key={p.id} className="w-8 h-8 rounded-full border border-[#ccab7b]/40 overflow-hidden bg-[#111] shrink-0">
+                  {p.image
+                    ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                    : <div className="w-full h-full bg-[#3a2e1e]" />
+                  }
+                </div>
+              ))}
+              {compareQueue.length < 3 && (
+                <div className="w-8 h-8 rounded-full border border-dashed border-white/15 flex items-center justify-center text-white/20 text-sm">+</div>
+              )}
+            </div>
+            <div className="w-px h-4 bg-white/10" />
+            <span className="text-[11px] uppercase tracking-widest text-white/60 font-medium">
+              <span className="text-[#ccab7b] font-bold">{compareQueue.length}</span>/3 selected
+            </span>
+            <div className="w-px h-4 bg-white/10" />
+            <button
+              onClick={() => setShowCompare(true)}
+              className="text-[10px] uppercase tracking-widest text-[#ccab7b] font-bold hover:text-white transition-colors"
+            >
+              Compare Now
+            </button>
+            <button onClick={() => setCompareQueue([])} className="text-white/40 hover:text-white ml-1">
+              <X size={14} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Compare Panel */}
+      <ComparePanel
+        open={showCompare}
+        items={compareQueue}
+        onRemove={handleToggleCompare}
+        onClose={() => setShowCompare(false)}
+      />
     </div>
   );
 }

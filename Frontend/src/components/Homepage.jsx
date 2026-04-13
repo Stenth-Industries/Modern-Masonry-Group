@@ -609,7 +609,7 @@ export default function Homepage({ navigate }) {
             {
               name: "Algonquin Granite",
               cat: "Natural Stone",
-              img: "/AlgonquinGranite_sample_1_LG.jpg",
+              img: "/Landscaping_Stone.jpg",
               rotate: true,
             },
             {
@@ -632,9 +632,9 @@ export default function Homepage({ navigate }) {
                   style={
                     p.rotate
                       ? {
-                          transform: "rotate(90deg) scale(1.4)",
-                          transformOrigin: "center",
-                        }
+                        transform: "rotate(90deg) scale(1.4)",
+                        transformOrigin: "center",
+                      }
                       : {}
                   }
                 />

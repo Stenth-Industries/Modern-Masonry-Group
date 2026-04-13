@@ -13,7 +13,7 @@ export default function Footer() {
 
       {/* NEWSLETTER BAND */}
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div className="px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="lg:max-w-sm">
             <p className="text-[#C9A449] text-[10px] font-semibold tracking-[0.35em] uppercase mb-3">
               Exclusive Intelligence
@@ -45,12 +45,12 @@ export default function Footer() {
       </div>
 
       {/* Thin gold divider */}
-      <div className="max-w-7xl mx-auto px-8 lg:px-16">
+      <div className="px-8 lg:px-16">
         <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
       </div>
 
       {/* MAIN GRID */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 pt-16 pb-12">
+      <div className="relative z-10 px-8 lg:px-16 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 items-start">
           {/* Brand */}
           <div className="lg:col-span-4 flex flex-col">
@@ -257,7 +257,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 pb-6">
+      <div className="relative z-10 px-8 lg:px-16 pb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent mb-8" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/20">
           <p className="tracking-wide">

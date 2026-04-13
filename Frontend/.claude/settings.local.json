@@ -9,7 +9,26 @@
       "Bash(curl:*)",
       "Bash(git pull:*)",
       "WebFetch(domain:replit.com)",
-      "WebFetch(domain:8b83412a-84b6-4119-8d3b-271f691e2742-00-2xxyb49a3l5ra.kirk.replit.dev)"
+      "WebFetch(domain:8b83412a-84b6-4119-8d3b-271f691e2742-00-2xxyb49a3l5ra.kirk.replit.dev)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(git reset:*)",
+      "Bash(npm install:*)",
+      "Bash(git show:*)",
+      "Read(//tmp/**)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(npx vite:*)",
+      "Bash(grep -v \"^$\")",
+      "mcp__ide__getDiagnostics",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(grep:*)",
+      "Bash(ls D:/modern/Frontend/tailwind.config*)",
+      "Bash(ls D:/modern/Frontend/*.config*)",
+      "Bash(ls D:/modern/Frontend/src/components/ui/infinite-slider*)"
     ]
   }
 }
