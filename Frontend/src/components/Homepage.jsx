@@ -347,7 +347,13 @@ export default function Homepage({ navigate }) {
   }, []);
 
   return (
-    <div className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black" style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000" }}>
+    <div
+      className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black"
+      style={{
+        background:
+          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000",
+      }}
+    >
       <FloatingCTA scrollY={scrollY} />
 
       {/* HERO */}
@@ -579,13 +585,10 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
 
       {/* FEATURED PRODUCTS */}
-      <section
-        id="products"
-        className="py-24 px-8 md:px-20"
-      >
+      <section id="products" className="py-24 px-8 md:px-20">
         <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
             <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
@@ -636,9 +639,9 @@ export default function Homepage({ navigate }) {
                   style={
                     p.rotate
                       ? {
-                        transform: "rotate(90deg) scale(1.4)",
-                        transformOrigin: "center",
-                      }
+                          transform: "rotate(90deg) scale(1.4)",
+                          transformOrigin: "center",
+                        }
                       : {}
                   }
                 />
@@ -727,13 +730,18 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
+      {/* Thin gold divider */}
+      <div className="px-8 lg:px-16">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+      </div>
+
       {/* CATALOGUE
       <section id="brick-catalogue" className="py-12 px-8 md:px-20 bg-[var(--obsidian)]">
         <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-8 uppercase text-center">-- Product Catalogue</p>
         <BrickCatalogue />
       </section> */}
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]/20" />
 
       {/* SHOP BY SPACE */}
       <section className="py-24 px-8 md:px-20 text-white">
@@ -799,7 +807,7 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
 
       {/* GALLERY */}
       <section id="gallery" className="py-24 px-8 md:px-20">
@@ -866,13 +874,10 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* Note: Fix make this animation carousel  */}
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]" />
 
       {/* TESTIMONIALS */}
-      <section
-        id="testimonials"
-        className="py-24 overflow-hidden"
-      >
+      <section id="testimonials" className="py-24 overflow-hidden">
         <div className="px-8 md:px-20 mb-14">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
             Client Testimonials
@@ -914,8 +919,6 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-
-
       {/* FAQ */}
       <FAQSection />
 
@@ -943,6 +946,39 @@ export default function Homepage({ navigate }) {
           </div>
         </div>
       </section>
+
+      {/* NEWSLETTER BAND */}
+      <div className="relative z-10">
+        <div className="px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-around gap-10">
+          <div className="lg:max-w-sm">
+            <p className="text-[#C9A449] text-[10px] font-semibold tracking-[0.35em] uppercase mb-3">
+              Exclusive Intelligence
+            </p>
+            <h3
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+              className="text-white text-3xl font-light tracking-wide leading-snug"
+            >
+              Ontario's Premier
+              <br />
+              Masonry Supplier
+            </h3>
+            <p className="text-sm mt-3 leading-relaxed text-white/40">
+              Trade offers, new arrivals, and project inspiration delivered with
+              discretion.
+            </p>
+          </div>
+          <div className="flex w-full lg:w-auto lg:min-w-[380px]">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="bg-white/[0.03] border border-white/10 border-r-0 text-white/80 px-5 py-4 text-sm w-full outline-none placeholder:text-white/20 focus:border-[#C9A449]/50 transition-colors duration-300"
+            />
+            <button className="bg-[#C9A449] hover:bg-[#DDB95A] transition-colors duration-200 text-black px-8 font-semibold uppercase text-[10px] tracking-[0.25em] shrink-0 whitespace-nowrap">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <Footer />

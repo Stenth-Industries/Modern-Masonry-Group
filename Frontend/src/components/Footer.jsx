@@ -5,44 +5,13 @@ import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 export default function Footer() {
   return (
     <footer
-      className="bg-[#07070a] relative overflow-hidden text-[#6B6B6B]"
+      className="bg-[var(--charcoal)] relative overflow-hidden text-[#6B6B6B]"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {/* Top gold rule */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#C9A449] to-transparent opacity-40" />
 
-      {/* NEWSLETTER BAND */}
-      <div className="relative z-10">
-        <div className="px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-between gap-10">
-          <div className="lg:max-w-sm">
-            <p className="text-[#C9A449] text-[10px] font-semibold tracking-[0.35em] uppercase mb-3">
-              Exclusive Intelligence
-            </p>
-            <h3
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-              className="text-white text-3xl font-light tracking-wide leading-snug"
-            >
-              Ontario's Premier
-              <br />
-              Masonry Supplier
-            </h3>
-            <p className="text-sm mt-3 leading-relaxed text-white/40">
-              Trade offers, new arrivals, and project inspiration — delivered
-              with discretion.
-            </p>
-          </div>
-          <div className="flex w-full lg:w-auto lg:min-w-[380px]">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="bg-white/[0.03] border border-white/10 border-r-0 text-white/80 px-5 py-4 text-sm w-full outline-none placeholder:text-white/20 focus:border-[#C9A449]/50 transition-colors duration-300"
-            />
-            <button className="bg-[#C9A449] hover:bg-[#DDB95A] transition-colors duration-200 text-black px-8 font-semibold uppercase text-[10px] tracking-[0.25em] shrink-0 whitespace-nowrap">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Thin gold divider */}
       <div className="px-8 lg:px-16">
