@@ -1,6 +1,11 @@
 {
-  "buildCommand": "cd Backend && npm install && npx prisma generate && cd ../Frontend && npm install && npm run build",
+  "installCommand": "npm install && cd Backend && npm install",
+  "buildCommand": "cd Backend && npx prisma generate && cd ../Frontend && npm install && npm run build",
   "outputDirectory": "Frontend/dist",
-  "installCommand": "echo skip",
-  "framework": null
+  "framework": null,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
