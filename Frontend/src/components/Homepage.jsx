@@ -525,6 +525,8 @@ export default function Homepage({ navigate }) {
         </div>
       </section> */}
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* ABOUT */}
       <section id="about" className="py-32 px-8 md:px-20 text-white">
         <div className="max-w-7xl mx-auto mb-16 text-center">
@@ -576,6 +578,8 @@ export default function Homepage({ navigate }) {
           </div>
         </div>
       </section>
+
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* FEATURED PRODUCTS */}
       <section
@@ -655,6 +659,8 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* BRAND MARQUEE */}
       <section className="py-12 bg-white/80 border-y border-white/5 overflow-hidden">
         <p className="text-center font-bold text-[24px] text-[var(--brass)] uppercase tracking-[0.35em] mb-7">
@@ -690,6 +696,8 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* SERVICES */}
       <section id="services" className="py-24 px-8 md:px-20">
         <div className="mb-14">
@@ -700,11 +708,11 @@ export default function Homepage({ navigate }) {
             Our Core Services
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES.map((s, i) => (
             <div
               key={i}
-              className="bg-black p-8 group hover:bg-[var(--charcoal)] transition-colors duration-300 cursor-default"
+              className="p-8 group cursor-default border border-white/10 rounded-xl hover:border-[var(--brass)]/40 transition-all duration-300"
             >
               <div className="text-[var(--brass)] text-3xl mb-5">{s.icon}</div>
               <p className="text-[10px] text-[var(--brass)] uppercase tracking-[0.25em] mb-3 font-bold">
@@ -724,6 +732,8 @@ export default function Homepage({ navigate }) {
         <p className="text-[var(--brass)] text-xs font-bold tracking-widest mb-8 uppercase text-center">-- Product Catalogue</p>
         <BrickCatalogue />
       </section> */}
+
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* SHOP BY SPACE */}
       <section className="py-24 px-8 md:px-20 text-white">
@@ -788,6 +798,8 @@ export default function Homepage({ navigate }) {
           ))}
         </div>
       </section>
+
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* GALLERY */}
       <section id="gallery" className="py-24 px-8 md:px-20">
@@ -854,6 +866,8 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* Note: Fix make this animation carousel  */}
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* TESTIMONIALS */}
       <section
         id="testimonials"
@@ -899,6 +913,8 @@ export default function Homepage({ navigate }) {
           ))}
         </div>
       </section>
+
+
 
       {/* FAQ */}
       <FAQSection />
