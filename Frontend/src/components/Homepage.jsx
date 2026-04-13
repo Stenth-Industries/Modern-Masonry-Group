@@ -705,7 +705,7 @@ export default function Homepage({ navigate }) {
                   <img
                     src={logoFile}
                     alt={`Trusted Partner ${i}`}
-                    className="max-h-full max-w-full object-contain shrink-0 transition-all duration-300 grayscale hover:grayscale-0"
+                    className="max-h-full max-w-full object-contain shrink-0 transition-all duration-300"
                   />
                 </div>
               ))}
