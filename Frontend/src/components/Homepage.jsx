@@ -641,9 +641,9 @@ export default function Homepage({ navigate }) {
                   style={
                     p.rotate
                       ? {
-                          transform: "rotate(90deg) scale(1.4)",
-                          transformOrigin: "center",
-                        }
+                        transform: "rotate(90deg) scale(1.4)",
+                        transformOrigin: "center",
+                      }
                       : {}
                   }
                 />
@@ -668,20 +668,19 @@ export default function Homepage({ navigate }) {
 
       {/* BRAND MARQUEE */}
       <section className="py-24 relative overflow-hidden w-full bg-transparent flex flex-col items-center">
-        <div className="mx-auto w-full max-w-7xl z-20">
+        <div className="w-full z-20">
           <div className="text-center text-3xl font-light text-[#e3decb] mb-12" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
             <span className="text-white text-4xl">
               Trusted by Canada's
             </span>
-            <br />
             <span className="tracking-[0.3em] uppercase text-sm font-bold mt-4 inline-block font-sans text-[#C9A449]">
               Leading Masonry Brands
             </span>
           </div>
 
           <div className="relative h-[120px] w-full">
-            <InfiniteSlider 
-              className='flex h-full w-full items-center' 
+            <InfiniteSlider
+              className='flex h-full w-full items-center'
               duration={40}
               gap={40}
             >
@@ -699,8 +698,8 @@ export default function Homepage({ navigate }) {
                 "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Untitled-1.png",
                 "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-10.png",
               ].map((logoFile, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="bg-white/95 backdrop-blur-sm rounded-xl px-6 py-4 flex items-center justify-center shrink-0 w-48 h-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/20 transition-transform duration-300 hover:-translate-y-2"
                 >
                   <img
