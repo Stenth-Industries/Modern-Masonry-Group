@@ -670,11 +670,8 @@ export default function Homepage({ navigate }) {
       <section className="py-24 relative overflow-hidden w-full bg-transparent flex flex-col items-center">
         <div className="w-full z-20">
           <div className="flex flex-col md:flex-row items-center md:items-baseline justify-center gap-3 text-center mb-12">
-            <span className="text-white text-3xl md:text-4xl font-light" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-              Trusted by Canada's
-            </span>
-            <span className="tracking-[0.3em] uppercase text-xs md:text-sm font-bold font-sans text-[#C9A449]">
-              Leading Masonry Brands
+            <span className="tracking-[0.3em] uppercase text-lg md:text-s font-bold font-sans text-[#C9A449]">
+              Trusted by Canada's Leading Masonry Brands
             </span>
           </div>
 
