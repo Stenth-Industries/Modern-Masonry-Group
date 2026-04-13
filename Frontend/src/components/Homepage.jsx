@@ -679,11 +679,11 @@ export default function Homepage({ navigate }) {
             </span>
           </div>
 
-          <div className="relative h-[100px] w-full">
+          <div className="relative h-[120px] w-full">
             <InfiniteSlider 
-              className='flex h-full w-full items-center opacity-80 mix-blend-screen' 
+              className='flex h-full w-full items-center' 
               duration={40}
-              gap={90}
+              gap={40}
             >
               {[
                 "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-01png.png",
@@ -699,12 +699,16 @@ export default function Homepage({ navigate }) {
                 "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Untitled-1.png",
                 "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-10.png",
               ].map((logoFile, i) => (
-                <img
-                  key={i}
-                  src={logoFile}
-                  alt={`Trusted Partner ${i}`}
-                  className="h-12 md:h-16 w-auto object-contain shrink-0 transition-all duration-300 grayscale hover:grayscale-0"
-                />
+                <div 
+                  key={i} 
+                  className="bg-white/95 backdrop-blur-sm rounded-xl px-6 py-4 flex items-center justify-center shrink-0 w-48 h-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/20 transition-transform duration-300 hover:-translate-y-2"
+                >
+                  <img
+                    src={logoFile}
+                    alt={`Trusted Partner ${i}`}
+                    className="max-h-full max-w-full object-contain shrink-0 transition-all duration-300 grayscale hover:grayscale-0"
+                  />
+                </div>
               ))}
             </InfiniteSlider>
             <ProgressiveBlur
