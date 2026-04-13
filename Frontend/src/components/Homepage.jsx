@@ -311,7 +311,7 @@ const FAQSection = () => {
   const mid = Math.ceil(FAQS.length / 2);
 
   return (
-    <section id="faq" className="py-24 px-8 md:px-20 bg-black">
+    <section id="faq" className="py-24 px-8 md:px-20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-14 text-center">
           <p className="text-[var(--brass)] text-lg font-bold tracking-widest mb-4 uppercase">
@@ -347,7 +347,7 @@ export default function Homepage({ navigate }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black">
+    <div className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black" style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000" }}>
       <FloatingCTA scrollY={scrollY} />
 
       {/* HERO */}
@@ -526,7 +526,7 @@ export default function Homepage({ navigate }) {
       </section> */}
 
       {/* ABOUT */}
-      <section id="about" className="py-32 px-8 md:px-20 bg-black text-white">
+      <section id="about" className="py-32 px-8 md:px-20 text-white">
         <div className="max-w-7xl mx-auto mb-16 text-center">
           <p className="text-[var(--brass)] text-5xl font-bold tracking-widest uppercase inline-block">
             A Story of Craft
@@ -580,7 +580,7 @@ export default function Homepage({ navigate }) {
       {/* FEATURED PRODUCTS */}
       <section
         id="products"
-        className="py-24 px-8 md:px-20 bg-[var(--charcoal)]"
+        className="py-24 px-8 md:px-20"
       >
         <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
@@ -607,7 +607,7 @@ export default function Homepage({ navigate }) {
               img: "/Glacier-Grey-1775591959608.jpg",
             },
             {
-              name: "Algonquin Granite",
+              name: "Raven Black Granite",
               cat: "Natural Stone",
               img: "/Landscaping_Stone.jpg",
               rotate: true,
@@ -691,7 +691,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-24 px-8 md:px-20 bg-black">
+      <section id="services" className="py-24 px-8 md:px-20">
         <div className="mb-14">
           <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
             What Defines Us
@@ -726,7 +726,7 @@ export default function Homepage({ navigate }) {
       </section> */}
 
       {/* SHOP BY SPACE */}
-      <section className="py-24 px-8 md:px-20 bg-[var(--charcoal)] text-white">
+      <section className="py-24 px-8 md:px-20 text-white">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <p className="text-[var(--brass)] text-xl font-bold tracking-widest mb-4 uppercase">
             Browse by Project Type
@@ -790,7 +790,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="py-24 px-8 md:px-20 bg-black">
+      <section id="gallery" className="py-24 px-8 md:px-20">
         <div className="mb-12">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
             Project Gallery
@@ -857,7 +857,7 @@ export default function Homepage({ navigate }) {
       {/* TESTIMONIALS */}
       <section
         id="testimonials"
-        className="py-24 bg-[var(--charcoal)] overflow-hidden"
+        className="py-24 overflow-hidden"
       >
         <div className="px-8 md:px-20 mb-14">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
