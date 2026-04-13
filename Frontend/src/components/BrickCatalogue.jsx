@@ -15,10 +15,54 @@ import {
 import { brickProducts } from "./catalogue-data";
 import { BrickWallPattern } from "./BrickWallPattern";
 import { BrickDetailPanel } from "./BrickDetailPanel";
+import Footer from "./Footer";
 
 // ── Configuration ─────────────────────────────────────────────────────────────
 
 const ACCENT = "#ccab7b";
+
+const COLOR_MAP = {
+  red: '#B4382B',
+  'dark red': '#8B1A1A',
+  tan: '#C4A57B',
+  grey: '#808080',
+  gray: '#808080',
+  'light grey': '#B0B0B0',
+  'dark grey': '#555555',
+  brown: '#7A5C40',
+  'dark brown': '#4A3728',
+  buff: '#D4B483',
+  cream: '#EDE0C4',
+  white: '#E8E4DC',
+  'off white': '#E0D8CC',
+  black: '#1A1A1A',
+  charcoal: '#4A4A4A',
+  silver: '#A8A8A8',
+  bronze: '#A0724A',
+  gold: '#C9A84C',
+  orange: '#C0622A',
+  pink: '#D4948A',
+  blue: '#4A6FA5',
+  green: '#5A7A5A',
+  yellow: '#D4C060',
+  beige: '#CDB89A',
+  ivory: '#E8DFC8',
+  slate: '#607080',
+  terracotta: '#C06040',
+  'light brown': '#A08060',
+  'medium brown': '#8B6347',
+  'warm grey': '#9A9088',
+  'cool grey': '#8090A0',
+  purple: '#705080',
+  multicolor: 'linear-gradient(135deg, #B4382B 0%, #C4A57B 33%, #808080 66%, #4A3728 100%)',
+};
+
+const resolveColorHex = (name, apiHex) => {
+  // Ignore #808080 — it's the database default placeholder, not a real color
+  if (apiHex && apiHex !== '#808080') return apiHex;
+  if (!name) return null;
+  return COLOR_MAP[name.toLowerCase().trim()] || null;
+};
 
 // Dynamic database filters will overwrite this structure on mount
 const DEFAULT_FILTERS = {
@@ -30,7 +74,7 @@ const DEFAULT_FILTERS = {
 
 // ── Simple Elegant Checkbox ──────────────────────────────────────────────────
 
-function GlassCheckbox({ checked, label, count, onClick }) {
+function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
   return (
     <button
       onClick={onClick}
@@ -38,19 +82,25 @@ function GlassCheckbox({ checked, label, count, onClick }) {
     >
       <div className="flex items-center gap-3">
         <div
-          className={`w-[14px] h-[14px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
-              ? "bg-[#ccab7b] border-[#ccab7b]"
-              : "bg-black/20 border-white/15 group-hover:border-white/40"
+          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
+            ? "bg-[#ccab7b] border-[#ccab7b]"
+            : "bg-black/20 border-white/15 group-hover:border-white/40"
             }`}
         >
           {checked && (
-            <Check size={9} className="text-black" strokeWidth={3.5} />
+            <Check size={11} className="text-black" strokeWidth={3.5} />
           )}
         </div>
+        {colorDot && (
+          <div
+            className="w-[14px] h-[14px] rounded-full border border-white/20 shrink-0"
+            style={{ background: colorDot }}
+          />
+        )}
         <span
-          className={`text-[11px] tracking-[0.04em] transition-colors duration-300 ${checked
-              ? "text-[#e3decb] font-medium"
-              : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
+          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${checked
+            ? "text-[#e3decb] font-medium"
+            : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
             }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
@@ -58,7 +108,7 @@ function GlassCheckbox({ checked, label, count, onClick }) {
         </span>
       </div>
       {count !== undefined && (
-        <span className="text-[9px] text-white/20 font-mono tabular-nums">
+        <span className="text-[11px] text-white/20 font-mono tabular-nums">
           {count}
         </span>
       )}
@@ -74,13 +124,13 @@ function Section({ title, children, defaultOpen = true }) {
     <div className="mb-6">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full pb-3 border-b border-[rgba(255,255,255,0.05)] mb-3 group outline-none"
+        className="flex items-center justify-between w-full pb-4 border-b border-[rgba(255,255,255,0.05)] mb-4 group outline-none"
       >
-        <span className="text-[9.5px] uppercase tracking-[0.25em] text-[#e3decb] group-hover:text-white transition-colors font-bold">
+        <span className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] group-hover:text-white transition-colors font-bold">
           {title}
         </span>
         <ChevronDown
-          size={11}
+          size={13}
           className={`text-white/40 transition-transform duration-500 delay-75 ${open ? "rotate-180" : ""}`}
         />
       </button>
@@ -101,11 +151,11 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
 
   return (
     <div
-      className="group flex flex-col w-full bg-transparent border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.15)] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer"
+      className="group flex flex-col w-full h-full bg-transparent border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.15)] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer"
       onClick={() => onSample(product)}
     >
       {/* Upper Picture Area */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-[rgba(255,255,255,0.02)]">
+      <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
         {product.image ? (
           <img
             src={product.image}
@@ -118,7 +168,7 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
         )}
 
         {/* Top-Right Heart Checkbox */}
-        <button 
+        <button
           onClick={(e) => { e.stopPropagation(); onToggleFavourite(product); }}
           className={`absolute top-3 right-3 p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isFavourite ? 'border-[#ccab7b]' : 'border-transparent group-hover:border-white/20'}`}
         >
@@ -126,19 +176,19 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
         </button>
       </div>
 
-      {/* Info Area - Slightly darkened while keeping transparency */}
-      <div className="flex flex-col p-4 md:p-5 flex-1 bg-black/30">
-        <div className="mb-3">
+      {/* Info Area  */}
+      <div className="flex flex-col p-5 md:p-6 flex-1 bg-black/30 justify-between">
+        <div className="mb-2 shrink-0">
           <h3
-            className="text-[#e2ded9] text-[20px] mb-2 tracking-[0.03em] truncate leading-tight"
+            className="text-[#e2ded9] text-[18px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
             {product.name}
           </h3>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 mt-2">
             <span
-              className="text-[11px] uppercase tracking-[0.15em] text-white/50"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
+              className="text-[11px] uppercase tracking-[0.15em] text-[#ccab7b]/80"
+              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
             >
               {manufacturer}
             </span>
@@ -146,19 +196,19 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
         </div>
 
         <div
-          className="flex flex-wrap items-center gap-2 mb-6"
+          className="flex flex-wrap items-center gap-2 mb-3 shrink-0"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           {typeLabel && (
             <span
-              className="text-[10px] tracking-[0.1em] text-white/60 bg-white/[0.04] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase shadow-sm"
+              className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase"
               style={{ fontWeight: 500 }}
             >
               {typeLabel}
             </span>
           )}
           <span
-            className="text-[10px] tracking-[0.1em] text-[#ccab7b] bg-[#ccab7b]/10 border border-[#ccab7b]/20 px-2 py-1 rounded-[4px] uppercase shadow-sm"
+            className="text-[9.5px] tracking-[0.08em] text-[#ccab7b] bg-[#ccab7b]/10 border border-[#ccab7b]/20 px-2 py-1 rounded-[4px] uppercase"
             style={{ fontWeight: 600 }}
           >
             {product.finish}
@@ -166,24 +216,20 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
         </div>
 
         <div
-          className="flex items-center justify-between mt-auto"
+          className="flex items-center justify-between mt-auto gap-3"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <button
-            className="px-5 py-2 border border-[#4a3d2c] bg-transparent hover:bg-[#ccab7b] transition-all text-[#ccab7b] hover:text-black text-[10px] sm:text-[11px] uppercase tracking-[0.15em] rounded-md"
+            className="px-5 py-2.5 border border-[#4a3d2c] bg-transparent hover:bg-[#ccab7b] transition-all text-[#ccab7b] hover:text-black text-[10px] sm:text-[11px] uppercase tracking-[0.15em] rounded-md"
             style={{ fontWeight: 600 }}
           >
             Request Sample
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-            className={`flex items-center gap-2 transition-colors text-[10px] sm:text-[11px] tracking-[0.1em] uppercase bg-transparent ${isCompared ? 'text-white' : 'text-[#9a9488] hover:text-white'}`}
-            style={{ fontWeight: 500 }}
+            className={`flex items-center justify-center min-w-[36px] h-[36px] rounded-[4px] transition-colors bg-transparent border ${isCompared ? 'border-[#ccab7b] bg-[#ccab7b]/10' : 'border-white/10 hover:border-white/30'}`}
           >
-            <div className={`w-4 h-4 border rounded-[2px] flex items-center justify-center bg-transparent transition-colors ${isCompared ? 'border-white bg-[#ccab7b]/20' : 'border-white/20'}`}>
-               {isCompared && <Check size={10} className="text-white" strokeWidth={3} />}
-            </div>
-            {isCompared ? 'Added' : 'Compare'}
+            {isCompared ? <Check size={16} className="text-[#ccab7b]" strokeWidth={2.5} /> : <div className="text-white/40 font-bold font-mono text-[16px] hover:text-white">+</div>}
           </button>
         </div>
       </div>
@@ -222,7 +268,7 @@ export default function BrickCatalogue() {
         if (r.success && r.data) {
           setFiltersDB({
             collections: r.data.collections.map((c) => c.value),
-            colors: r.data.colours.map((c) => c.value),
+            colors: r.data.colours.map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) })),
             styles: r.data.styles.map((s) => s.value),
             manufacturers: r.data.manufacturers.map((m) => m.name),
           });
@@ -307,7 +353,7 @@ export default function BrickCatalogue() {
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
-      
+
     return () => controller.abort();
   }, [debouncedQuery, types, colors, finishes, manufacturers, page]);
 
@@ -324,15 +370,15 @@ export default function BrickCatalogue() {
   }, []);
 
   const handleToggleFavourite = useCallback((prod) => {
-    setFavourites(prev => 
-      prev.find(p => p.id === prod.id) 
+    setFavourites(prev =>
+      prev.find(p => p.id === prod.id)
         ? prev.filter(p => p.id !== prod.id)
         : [...prev, prod]
     );
   }, []);
 
   const handleToggleCompare = useCallback((prod) => {
-    setCompareQueue(prev => 
+    setCompareQueue(prev =>
       prev.find(p => p.id === prod.id)
         ? prev.filter(p => p.id !== prod.id)
         : [...prev, prod]
@@ -342,37 +388,45 @@ export default function BrickCatalogue() {
   const displayedProducts = showFavourites ? favourites : products;
 
   return (
-    <div className="min-h-screen relative font-sans text-white bg-[#0e0c0a]">
-      {/* EXACT Background bg.png - Restored to pure 100% unaltered state */}
+    <div className="min-h-screen relative font-sans text-white">
+      {/* Background */}
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-fixed w-full h-full"
         style={{ backgroundImage: "url('/bg.png')" }}
       />
-
       {/* Wrapper to hold UI on top of background — fills entire viewport */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Top Header perfectly centered */}
-        <div className="w-full flex flex-col items-center justify-center pt-24 pb-12 px-10 relative">
-          <div className="w-10 border-t border-[#ccab7b] mb-10"></div>
-          <h1 className="text-[110px] md:text-[140px] font-serif tracking-normal leading-none font-normal text-[#e3decb] mb-6" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
-            Brick Range
-          </h1>
-          <p className="text-[22px] md:text-[26px] tracking-[0.05em] text-[#ccab7b] italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
-            Explore colour, finish, and material specifications
-          </p>
-          <div className="w-10 border-t border-[#ccab7b] mt-10 mb-14"></div>
+        {/* Top Header structured & refined */}
+        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-28 pb-16 px-10 xl:px-14 relative">
+          <div className="flex flex-col md:flex-row md:items-end justify-between w-full gap-8">
+            <div>
+              <div className="flex items-center mb-5">
+                <span className="text-[#ccab7b] text-m font-bold tracking-widest uppercase">
+                  Our Premium Brick Collection
+                </span>
+              </div>
+              <h1 className="text-[20px] md:text-[70px] font-serif tracking-tight leading-[0.9] font-normal text-[#e3decb]">
+                Modern Masonry <br />   Brick   Catalogue
+              </h1>
+            </div>
+            <div className="md:max-w-md pb-10">
+              <p className="text-[18px] md:text-[20px] tracking-[0.02em] leading-relaxed text-white/50 italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
+                "Precision curated masonry materials, offering specialist guidance and province-wide delivery—built for those who build with intention."
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
-        <div className="w-full bg-[#0e0c0a] border-y border-[rgba(255,255,255,0.04)] px-8 xl:px-12 py-3 flex items-center justify-between z-40 sticky top-0 shadow-2xl">
+        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
           {/* Left side */}
           <div className="flex items-center gap-8">
             <span className="text-[11px] font-bold tracking-[0.05em] text-[#ccab7b] uppercase">{showFavourites ? favourites.length : total} products</span>
-            <button 
+            <button
               onClick={() => setShowFavourites(!showFavourites)}
               className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? 'text-[#ccab7b]' : 'text-[#9a9488] hover:text-white'}`}
             >
-               <Heart size={14} className={showFavourites ? "text-[#ccab7b] fill-[#ccab7b]" : "text-[#9a9488]"} /> {showFavourites ? 'View All' : 'List Favourites'}
+              <Heart size={14} className={showFavourites ? "text-[#ccab7b] fill-[#ccab7b]" : "text-[#9a9488]"} /> {showFavourites ? 'View All' : 'List Favourites'}
             </button>
           </div>
 
@@ -421,10 +475,10 @@ export default function BrickCatalogue() {
           </div>
         </div>
 
-        <div className="flex flex-1 w-full">
-          {/* Sidebar matches exact layout: below title */}
-          <aside className="w-[280px] xl:w-[300px] sticky top-0 h-[calc(100vh-160px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/30 z-20 flex-shrink-0">
-            <div className="px-6 pt-6 pb-24">
+        <div className="flex flex-1 w-full max-w-[1800px] mx-auto">
+          {/* Sidebar */}
+          <aside className="w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0">
+            <div className="px-8 xl:px-10 pt-10 pb-32">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={14} className="text-[#ccab7b]" />
                 <h2
@@ -450,12 +504,13 @@ export default function BrickCatalogue() {
               </Section>
 
               <Section title="COLOUR">
-                {filtersDB.colors.map((c) => (
+                {filtersDB.colors.map(({ value, hex }) => (
                   <GlassCheckbox
-                    key={c}
-                    label={c}
-                    checked={colors.includes(c)}
-                    onClick={() => tog(c, colors, setColors)}
+                    key={value}
+                    label={value}
+                    colorDot={hex}
+                    checked={colors.includes(value)}
+                    onClick={() => tog(value, colors, setColors)}
                   />
                 ))}
               </Section>
@@ -494,7 +549,7 @@ export default function BrickCatalogue() {
                 API Error: {errorMsg}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-8">
                 {displayedProducts.map((p) => (
                   <PremiumCard
                     key={p.id}
@@ -542,6 +597,9 @@ export default function BrickCatalogue() {
           onClose={() => setSelected(null)}
         />
       )}
+
+      {/* Footer */}
+      <Footer />
 
       {/* Floating Compare Bar */}
       {compareQueue.length > 0 && (

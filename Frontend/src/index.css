@@ -20,6 +20,14 @@
   --text-primary: var(--color-limestone);
   --text-secondary: var(--color-ash);
   --text-muted: var(--color-ash);
+
+  /* Shorthand aliases used by components */
+  --brass: #C9A449;
+  --brass-light: #DDB95A;
+  --charcoal: #111111;
+  --obsidian: #1E2535;
+  --limestone: #F0EBE1;
+  --ash: #6B6B6B;
 }
 
 body {

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const THUMB_VISIBLE = 4; // show 4 thumbs, last slot = "+N more"
@@ -277,33 +276,51 @@ function ThumbStrip({ images, currentImage, onSelect, onOpenLightbox }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function BrickDetail() {
-  const { slug } = useParams();
+export default function BrickDetail({ brickId, navigate }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [formData, setFormData] = useState({ fullName: '', email: '', company: '', quantity: '', details: '' });
+  const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    setError(null);
-    fetch(`http://localhost:5000/api/products/${slug}`)
-      .then(res => { if (!res.ok) throw new Error('Product not found'); return res.json(); })
-      .then(data => { if (data.success) setProduct(data.data); else throw new Error(data.message || 'Failed to load'); })
-      .catch(err => setError(err.message))
+    fetch(`/api/products/${brickId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          setProduct(data.data);
+        } else {
+          setError(data.message || 'Product not found');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setError('Failed to load product');
+      })
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [brickId]);
 
   const images = useMemo(() => {
     if (!product) return [];
-    const imgs = [];
+    const imgs = new Set();
     (product.variants || []).forEach(v => {
-      if (v.imageUrl && v.imageUrl.startsWith('http') && !imgs.includes(v.imageUrl)) imgs.push(v.imageUrl);
+      // Main variant image
+      if (v.imageUrl && v.imageUrl.startsWith('http')) {
+        imgs.add(v.imageUrl);
+      }
+      // Additional variant images
+      if (Array.isArray(v.imagesUrl)) {
+        v.imagesUrl.forEach(url => {
+          if (url && url.startsWith('http')) {
+            imgs.add(url);
+          }
+        });
+      }
     });
-    return imgs;
+    return Array.from(imgs);
   }, [product]);
 
   const currentImage = selectedImage || images[0] || null;
@@ -320,27 +337,10 @@ export default function BrickDetail() {
   const openLightbox = useCallback((index) => setLightboxIndex(index), []);
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    try {
-      const payload = { ...formData, productId: product?.id };
-      const res = await fetch('/api/quotes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSubmitted(true);
-        setFormData({ fullName: '', email: '', company: '', quantity: '', details: '' });
-        setTimeout(() => setSubmitted(false), 4000);
-      } else {
-        alert(data.message || 'Failed to submit quote request');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error submitting quote request');
-    }
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   // ── Loading ──
@@ -356,7 +356,7 @@ export default function BrickDetail() {
   if (error || !product) return (
     <div style={styles.centerScreen}>
       <p style={{ color: '#ef4444', fontWeight: 700, marginBottom: '12px' }}>{error || 'Product not found'}</p>
-      <Link to="/" style={styles.backLink}><ArrowLeft /> Back to Catalogue</Link>
+      <a href="#brick" style={styles.backLink}><ArrowLeft /> Back to Catalogue</a>
     </div>
   );
 
@@ -530,7 +530,7 @@ export default function BrickDetail() {
               {/* Breadcrumb + Title */}
               <div style={{ marginBottom: '28px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                  <Link to="/" className="bd-breadcrumb-link">Home</Link>
+                  <a href="#brick" className="bd-breadcrumb-link">Catalogue</a>
                   <span style={{ color: 'var(--text-secondary)', fontSize: 10 }}>›</span>
                   <span style={{ color: 'var(--accent)', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                     {product.name}
@@ -560,27 +560,20 @@ export default function BrickDetail() {
                     <div style={styles.formRow}>
                       <div>
                         <label style={styles.formLabel}>Full Name</label>
-                        <input type="text" placeholder="John Doe" className="bd-input" required
+                        <input type="text" placeholder="John Doe" className="bd-input"
                           value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })} />
                       </div>
-                      <div>
-                        <label style={styles.formLabel}>Email Address</label>
-                        <input type="email" placeholder="john@example.com" className="bd-input" required
-                          value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
-                      </div>
-                    </div>
-
-                    <div style={styles.formRow}>
                       <div>
                         <label style={styles.formLabel}>Company</label>
                         <input type="text" placeholder="Architectural Firm" className="bd-input"
                           value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} />
                       </div>
-                      <div>
-                        <label style={styles.formLabel}>Estimated Quantity (Sq Ft)</label>
-                        <input type="text" placeholder="1,000" className="bd-input"
-                          value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} />
-                      </div>
+                    </div>
+
+                    <div>
+                      <label style={styles.formLabel}>Estimated Quantity (Sq Ft)</label>
+                      <input type="text" placeholder="1,000" className="bd-input"
+                        value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} />
                     </div>
 
                     <div>
@@ -623,9 +616,9 @@ export default function BrickDetail() {
 
         {/* Back Button */}
         <div style={{ marginTop: '48px' }}>
-          <Link to="/" className="bd-back-link">
+          <a href="#brick" className="bd-back-link">
             <ArrowLeft /> Back to Collection
-          </Link>
+          </a>
         </div>
       </div>
     </div>
@@ -634,7 +627,7 @@ export default function BrickDetail() {
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = {
-  page: { minHeight: '100vh', background: 'var(--bg-primary)', paddingTop: '80px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px' },
+  page: { minHeight: '100vh', background: 'rgba(14,12,10,0.6)', backdropFilter: 'blur(4px)', paddingTop: '120px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px' },
   container: { maxWidth: '1280px', margin: '0 auto' },
   twoCol: { display: 'flex', flexDirection: 'row', gap: '64px', flexWrap: 'wrap' },
   leftCol: { flex: '7', minWidth: '300px' },
