@@ -775,7 +775,7 @@ export default function Homepage({ navigate }) {
                 alt={s.title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gray-900/40 group-hover:bg-gray-900/20 transition-colors duration-300 z-10" />
+              <div className="absolute inset-0 group-hover:transition-colors duration-300 z-10" />
               <div className="absolute bottom-0 left-0 p-8 z-20">
                 <h3 className="text-2xl font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-2 drop-shadow-md">
                   {s.title}
@@ -840,7 +840,7 @@ export default function Homepage({ navigate }) {
                   alt={t.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-200" />
+                <div className="absolute inset-0 group-hover:transition-colors duration-200" />
                 <h4 className="relative z-10 font-bold">{t.title}</h4>
               </div>
             ))}
