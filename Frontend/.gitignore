@@ -56,3 +56,5 @@ dist-ssr
 Skill/
 skills/
 skills-lock.json
+.vercel
+.env*.local

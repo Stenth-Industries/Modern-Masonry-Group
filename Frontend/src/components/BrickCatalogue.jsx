@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { brickProducts } from "./catalogue-data";
 import { BrickWallPattern } from "./BrickWallPattern";
+import API_BASE from "../lib/api";
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 import { BrickDetailPanel } from "./BrickDetailPanel";
@@ -525,7 +526,7 @@ export default function BrickCatalogue() {
 
   // Load database filters once on mount
   useEffect(() => {
-    fetch("/api/products/filters")
+    fetch(`${API_BASE}/products/filters`)
       .then((res) => res.json())
       .then((r) => {
         if (r.success && r.data) {
@@ -563,7 +564,7 @@ export default function BrickCatalogue() {
     params.append("page", page);
     params.append("limit", 20);
 
-    fetch(`/api/products?${params.toString()}`, { signal: controller.signal })
+    fetch(`${API_BASE}/products?${params.toString()}`, { signal: controller.signal })
       .then((r) => r.json())
       .then((res) => {
         if (res.success && res.data) {

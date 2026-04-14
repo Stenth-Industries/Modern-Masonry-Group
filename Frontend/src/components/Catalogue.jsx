@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Input, Button, Select } from './ui';
+import API_BASE from '../lib/api';
 
 export default function Catalogue() {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ export default function Catalogue() {
 
   // Fetch filters
   useEffect(() => {
-    fetch('/api/products/filters')
+    fetch(`${API_BASE}/products/filters`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -46,7 +47,7 @@ export default function Catalogue() {
         if (value) params.append(key, value);
       });
 
-      const res = await fetch(`/api/products?${params.toString()}`);
+      const res = await fetch(`${API_BASE}/products?${params.toString()}`);
       const data = await res.json();
       
       if (data.success) {

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import API_BASE from '../lib/api';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const THUMB_VISIBLE = 4; // show 4 thumbs, last slot = "+N more"
@@ -287,7 +288,7 @@ export default function BrickDetail({ brickId, navigate }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/products/${brickId}`)
+    fetch(`${API_BASE}/products/${brickId}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.data) {

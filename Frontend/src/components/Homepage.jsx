@@ -481,13 +481,16 @@ export default function Homepage({ navigate }) {
             />
           </motion.div>
         </motion.div>
-        {/* Layer 0: Video 2 (main loop) — preloaded, fades in as Video 1 fades out */}
+        {/* Layer 0: Solid black base — always covers content beneath, prevents any bleed-through */}
+        <div className="absolute inset-0 z-0 bg-black" />
+
+        {/* Layer 1: Video 2 (main loop) — preloaded, fades in as Video 1 fades out */}
         <video
           ref={mainVideoRef}
           src="/video2-optim.mp4"
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          className="absolute inset-0 w-full h-full object-cover z-[1]"
           style={{
-            opacity: introFading ? 0.6 : 0,
+            opacity: introFading ? 1 : 0,
             transition: "opacity 1.8s ease-in-out",
             willChange: "opacity",
             transform: "translateZ(0)",
@@ -498,14 +501,18 @@ export default function Homepage({ navigate }) {
           preload="auto"
         />
 
-        {/* Layer 1: Decorative grid lines */}
-        <div className="absolute inset-0 z-[1] opacity-20 pointer-events-none">
+        {/* Layer 2: Decorative grid lines */}
+        <div className="absolute inset-0 z-[2] opacity-20 pointer-events-none">
           <div className="absolute top-0 right-[20%] w-px h-full bg-white/30" />
           <div className="absolute top-[30%] left-0 w-full h-px bg-white/30" />
         </div>
 
-        {/* Layer 2: Hero text content */}
-        <motion.div style={{ y: heroTextY, opacity: heroOpacity }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
+        {/* Layer 3: Hero text content — only shown after intro video fades */}
+        <motion.div
+          style={{ y: heroTextY, opacity: isVideo1Ended ? heroOpacity : 0 }}
+          className="px-8 md:px-20 z-[3] relative w-full max-w-7xl pt-[18vh]"
+          aria-hidden={!isVideo1Ended}
+        >
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
             <div className="flex gap-[0.25em] flex-wrap">
               {["Where", "Architecture"].map((w, i) => (
@@ -564,52 +571,50 @@ export default function Homepage({ navigate }) {
           </motion.div>
         </motion.div>
 
-        {/* Layer 3: Intro video (Video 1) — crossfades into Video 2 */}
-        {!isVideo1Ended && (
-          <div
-            className="absolute inset-0 z-20 pointer-events-none"
-            style={{
-              opacity: introFading ? 0 : 1,
-              transition: "opacity 1.8s ease-in-out",
-              willChange: "opacity",
-              transform: "translateZ(0)",
+        {/* Layer 4: Intro video (Video 1) — crossfades into Video 2, kept in DOM to avoid removal flash */}
+        <div
+          className="absolute inset-0 z-[4] pointer-events-none bg-black"
+          style={{
+            opacity: isVideo1Ended ? 0 : introFading ? 0 : 1,
+            transition: "opacity 1.8s ease-in-out",
+            willChange: "opacity",
+            transform: "translateZ(0)",
+          }}
+          onTransitionEnd={() => {
+            if (introFading) setIsVideo1Ended(true);
+          }}
+        >
+          <video
+            ref={introVideoRef}
+            src="/video1-optim.mp4"
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onTimeUpdate={(e) => {
+              const v = e.currentTarget;
+              if (
+                v.duration &&
+                v.currentTime >= v.duration - 1.8 &&
+                !introFading
+              ) {
+                setIntroFading(true);
+                if (mainVideoRef.current)
+                  mainVideoRef.current.play().catch(console.error);
+              }
             }}
-            onTransitionEnd={() => {
-              if (introFading) setIsVideo1Ended(true);
+            onEnded={() => {
+              if (!introFading) {
+                setIntroFading(true);
+                if (mainVideoRef.current)
+                  mainVideoRef.current.play().catch(console.error);
+              }
             }}
-          >
-            <video
-              ref={introVideoRef}
-              src="/video1-optim.mp4"
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              onTimeUpdate={(e) => {
-                const v = e.currentTarget;
-                if (
-                  v.duration &&
-                  v.currentTime >= v.duration - 1.8 &&
-                  !introFading
-                ) {
-                  setIntroFading(true);
-                  if (mainVideoRef.current)
-                    mainVideoRef.current.play().catch(console.error);
-                }
-              }}
-              onEnded={() => {
-                if (!introFading) {
-                  setIntroFading(true);
-                  if (mainVideoRef.current)
-                    mainVideoRef.current.play().catch(console.error);
-                }
-              }}
-            />
-            {/* Soft dark vignette to frame the hero */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
-          </div>
-        )}
+          />
+          {/* Soft dark vignette to frame the hero */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+        </div>
       </section>
 
       {/* STAT BAR */}
