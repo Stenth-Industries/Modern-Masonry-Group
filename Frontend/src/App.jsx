@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Homepage from './components/Homepage';
 import BrickCatalogue from './components/BrickCatalogue';
 import BrickDetail from './components/BrickDetail';
+import ServicesPage from './components/ServicesPage';
 import Navbar from './components/Navbar';
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
         setView('brick-detail');
       } else if (hash === '#brick') {
         setView('brick');
+      } else if (hash === '#services') {
+        setView('services');
       } else {
         setView('home');
       }
@@ -38,6 +41,7 @@ export default function App() {
       <Navbar navigate={navigate} />
       {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
       {view === 'brick' && <BrickCatalogue navigate={navigate} />}
+      {view === 'services' && <ServicesPage navigate={navigate} />}
       {view === 'home' && <Homepage navigate={navigate} />}
     </>
   );
