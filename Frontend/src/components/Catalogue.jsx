@@ -27,7 +27,7 @@ export default function Catalogue() {
 
   // Fetch filters
   useEffect(() => {
-    fetch('http://localhost:5000/api/products/filters')
+    fetch('/api/products/filters')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -46,7 +46,7 @@ export default function Catalogue() {
         if (value) params.append(key, value);
       });
 
-      const res = await fetch(`http://localhost:5000/api/products?${params.toString()}`);
+      const res = await fetch(`/api/products?${params.toString()}`);
       const data = await res.json();
       
       if (data.success) {

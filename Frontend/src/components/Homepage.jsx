@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, AnimatePresence, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Plus, Minus, Mail } from "lucide-react";
 import BrickCatalogue from "./BrickCatalogue";
+import OntarioMap from "./OntarioMap";
 import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 import { InfiniteSlider } from "./ui/infinite-slider";
+import { Sparkles } from "./ui/sparkles";
+import { ProgressiveBlur } from "./ui/progressive-blur";
 import Footer from "./Footer";
 
 const BRANDS = [
@@ -272,6 +275,106 @@ const FloatingCTA = ({ scrollY }) => {
   );
 };
 
+/* ── Fade-up on scroll (reusable) ── */
+const FadeUp = ({ children, delay = 0, className = "", whileHover, whileTap }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={whileHover}
+      whileTap={whileTap}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/* ── Word-by-word heading reveal ── */
+const SplitHeading = ({ text, className = "", delay = 0, Tag = "h2" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <Tag ref={ref} className={className}>
+      {text.split(" ").map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden mr-[0.3em] last:mr-0">
+          <motion.span
+            initial={{ y: "110%", opacity: 0 }}
+            animate={inView ? { y: 0, opacity: 1 } : {}}
+            transition={{ duration: 0.75, delay: delay + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block"
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </Tag>
+  );
+};
+
+/* ── Gold wipe reveal for images ── */
+const SlideReveal = ({ children, delay = 0, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <div ref={ref} className={className} style={{ position: "relative" }}>
+      {children}
+      <motion.div
+        initial={{ scaleX: 1 }}
+        animate={inView ? { scaleX: 0 } : {}}
+        transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: "right", position: "absolute", inset: 0, zIndex: 30, pointerEvents: "none" }}
+        className="bg-[var(--brass)]"
+      />
+    </div>
+  );
+};
+
+/* ── Animated timeline connector ── */
+const GrowLine = ({ delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ scaleY: 0 }}
+      animate={inView ? { scaleY: 1 } : {}}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      style={{ transformOrigin: "top" }}
+      className="w-px bg-[var(--brass)]/30 flex-1 my-2"
+    />
+  );
+};
+
+/* ── Magnetic CTA button ── */
+const MagneticButton = ({ children, className = "", onClick }) => {
+  const ref = useRef(null);
+  const [xy, setXY] = useState({ x: 0, y: 0 });
+  const handleMove = (e) => {
+    const r = ref.current.getBoundingClientRect();
+    setXY({ x: (e.clientX - r.left - r.width / 2) * 0.28, y: (e.clientY - r.top - r.height / 2) * 0.28 });
+  };
+  const handleLeave = () => setXY({ x: 0, y: 0 });
+  return (
+    <motion.button
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      animate={{ x: xy.x, y: xy.y }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 180, damping: 14 }}
+      className={className}
+      onClick={onClick}
+    >
+      {children}
+    </motion.button>
+  );
+};
+
 /* ── FAQ ── */
 const FAQSection = () => {
   const [open, setOpen] = useState(null);
@@ -341,13 +444,21 @@ export default function Homepage({ navigate }) {
   const [isVideo1Ended, setIsVideo1Ended] = useState(false);
   const [introFading, setIntroFading] = useState(false);
   const { scrollY } = useScroll();
+  const heroTextY = useTransform(scrollY, [0, 600], [0, -90]);
+  const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
 
   useEffect(() => {
     if (introVideoRef.current) introVideoRef.current.playbackRate = 1.5;
   }, []);
 
   return (
-    <div className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black" style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000" }}>
+    <div
+      className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black"
+      style={{
+        background:
+          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000",
+      }}
+    >
       <FloatingCTA scrollY={scrollY} />
 
       {/* HERO */}
@@ -395,7 +506,7 @@ export default function Homepage({ navigate }) {
         </div>
 
         {/* Layer 2: Hero text content */}
-        <div className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
+        <motion.div style={{ y: heroTextY, opacity: heroOpacity }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
             <div className="flex gap-[0.25em] flex-wrap">
               {["Where", "Architecture"].map((w, i) => (
@@ -445,14 +556,14 @@ export default function Homepage({ navigate }) {
             transition={{ duration: 0.7, delay: 1 }}
             className="flex flex-wrap gap-4"
           >
-            <button className="bg-[var(--brass)] text-black px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors flex items-center gap-2">
+            <MagneticButton className="bg-[var(--brass)] text-black px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors flex items-center gap-2">
               Explore Products <ArrowRight size={16} />
-            </button>
-            <button className="bg-black/40 backdrop-blur-sm border border-white/30 text-white px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
+            </MagneticButton>
+            <MagneticButton className="bg-black/40 backdrop-blur-sm border border-white/30 text-white px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
               Request a Quote
-            </button>
+            </MagneticButton>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Layer 3: Intro video (Video 1) — crossfades into Video 2 */}
         {!isVideo1Ended && (
@@ -525,19 +636,22 @@ export default function Homepage({ navigate }) {
         </div>
       </section> */}
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* ABOUT */}
       <section id="about" className="py-32 px-8 md:px-20 text-white">
         <div className="max-w-7xl mx-auto mb-16 text-center">
-          <p className="text-[var(--brass)] text-5xl font-bold tracking-widest uppercase inline-block">
-            A Story of Craft
-          </p>
+          <SplitHeading
+            text="A Story of Craft"
+            Tag="p"
+            className="text-[var(--brass)] text-5xl font-bold tracking-widest uppercase"
+          />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
-          <div className="flex flex-col justify-center lg:-mt-12">
+          <FadeUp delay={0.1} className="flex flex-col justify-center lg:-mt-12">
             <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-16">
               30 Years of Masonry Excellence
             </h2>
-
             <p className="text-gray-400 text-xl leading-relaxed mb-6 font-light">
               Modern Masonry Group was founded in 1994 with a single mission:
               bring world-class masonry materials to Ontario's Homeowners,
@@ -548,41 +662,45 @@ export default function Homepage({ navigate }) {
               10,000 + products from the industry's most trusted brands, with
               fleet delivery across the province.
             </p>
-            <a
+            <motion.a
               href="#contact"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               className="inline-flex items-center self-start gap-2 border border-[var(--brass)] text-[var(--brass)] px-8 py-4 text-sm rounded-full font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] hover:text-black transition-colors"
             >
               About Us
               <ArrowRight size={16} />
-            </a>
-          </div>
+            </motion.a>
+          </FadeUp>
           <div className="flex flex-col justify-center pl-0 lg:pl-12">
             {MILESTONES.map((m, i) => (
-              <div key={i} className="flex gap-6">
-                <div className="flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-[var(--brass)] mt-1.5 shrink-0 shadow-[0_0_10px_rgba(212,175,99,0.5)]" />
-                  {i < MILESTONES.length - 1 && (
-                    <div className="w-px bg-white/10 flex-1 my-2" />
-                  )}
+              <FadeUp key={i} delay={i * 0.1}>
+                <div className="flex gap-6">
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-4 rounded-full bg-[var(--brass)] mt-1.5 shrink-0 shadow-[0_0_10px_rgba(212,175,99,0.5)]" />
+                    {i < MILESTONES.length - 1 && (
+                      <GrowLine delay={i * 0.1 + 0.3} />
+                    )}
+                  </div>
+                  <div className={i < MILESTONES.length - 1 ? "pb-10" : "pb-0"}>
+                    <p className="text-xl font-bold text-[var(--brass)] uppercase tracking-widest mb-2">
+                      {m.year}
+                    </p>
+                    <p className="text-gray-300 font-medium text-xl">{m.event}</p>
+                  </div>
                 </div>
-                <div className={i < MILESTONES.length - 1 ? "pb-10" : "pb-0"}>
-                  <p className="text-xl font-bold text-[var(--brass)] uppercase tracking-widest mb-2">
-                    {m.year}
-                  </p>
-                  <p className="text-gray-300 font-medium text-xl">{m.event}</p>
-                </div>
-              </div>
+              </FadeUp>
             ))}
           </div>
         </div>
       </section>
 
+      {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
+
       {/* FEATURED PRODUCTS */}
-      <section
-        id="products"
-        className="py-24 px-8 md:px-20"
-      >
-        <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
+      <section id="products" className="py-24 px-8 md:px-20">
+        <FadeUp className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
             <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
               New Arrivals
@@ -597,7 +715,7 @@ export default function Homepage({ navigate }) {
           >
             View All <ArrowRight size={16} />
           </a>
-        </div>
+        </FadeUp>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
@@ -623,7 +741,7 @@ export default function Homepage({ navigate }) {
               img: "/Masonry-block.png",
             },
           ].map((p, i) => (
-            <div key={i} className="group cursor-pointer">
+            <FadeUp key={i} delay={i * 0.08} whileHover={{ y: -5, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }} className="group cursor-pointer">
               <div className="aspect-[4/5] bg-[var(--charcoal)] mb-4 relative overflow-hidden border border-white/5 hover:border-[var(--brass)]/30 transition-colors duration-300">
                 <img
                   src={p.img}
@@ -650,61 +768,98 @@ export default function Homepage({ navigate }) {
               <h3 className="text-lg font-bold group-hover:text-[var(--brass)] transition-colors duration-200">
                 {p.name}
               </h3>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </section>
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* BRAND MARQUEE */}
-      <section className="py-12 bg-white/80 border-y border-white/5 overflow-hidden">
-        <p className="text-center font-bold text-[24px] text-[var(--brass)] uppercase tracking-[0.35em] mb-7">
-          Trusted By Canada's Leading Masonry Brands
-        </p>
-        <div className="relative">
-          <InfiniteSlider
-            duration={30}
-            durationOnHover={70}
-            direction="horizontal"
-            gap={90}
-          >
-            {[
-              "/logos/Logo-01png.png",
-              "/logos/200x55-1.png",
-              "/logos/Logo-03.png",
-              "/logos/Logo-04.png",
-              "/logos/Logo-05.png",
-              "/logos/Logo-06.png",
-              "/logos/Logo-07.png",
-              "/logos/Logo-08.png",
-              "/logos/Logo-09.png",
-              "/logos/Logo-10.png",
-            ].map((logoFile, i) => (
-              <img
-                key={i}
-                src={logoFile}
-                alt={`Trusted Partner ${i + 3}`}
-                className="h-12 md:h-16 w-auto object-contain shrink-0 transition-all duration-300"
-              />
-            ))}
-          </InfiniteSlider>
+      <section className="py-24 relative overflow-hidden w-full bg-transparent flex flex-col items-center">
+        <div className="w-full z-20">
+          <div className="flex flex-col md:flex-row items-center md:items-baseline justify-center gap-3 text-center mb-12">
+            <span className="tracking-[0.3em] uppercase text-lg md:text-s font-bold font-sans text-[#C9A449]">
+              Trusted by Canada's Leading Masonry Brands
+            </span>
+          </div>
+
+          <div className="relative h-[120px] w-full">
+            <InfiniteSlider
+              className='flex h-full w-full items-center'
+              duration={40}
+              gap={40}
+            >
+              {[
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-01png.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/200x55-1.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-03.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-04.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-05.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-06.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-07.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-08.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-09.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Santerra_black-lettering-gold-star-with-white-background.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Untitled-1.png",
+                "https://modernmasonrygroup.ca/wp-content/uploads/2025/05/Logo-10.png",
+              ].map((logoFile, i) => (
+                <div
+                  key={i}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl px-6 py-4 flex items-center justify-center shrink-0 w-48 h-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/20 transition-transform duration-300 hover:-translate-y-2"
+                >
+                  <img
+                    src={logoFile}
+                    alt={`Trusted Partner ${i}`}
+                    className="max-h-full max-w-full object-contain shrink-0 transition-all duration-300"
+                  />
+                </div>
+              ))}
+            </InfiniteSlider>
+            <ProgressiveBlur
+              className='pointer-events-none absolute top-0 left-0 h-full w-[150px] md:w-[300px]'
+              direction='left'
+              blurIntensity={1}
+            />
+            <ProgressiveBlur
+              className='pointer-events-none absolute top-0 right-0 h-full w-[150px] md:w-[300px]'
+              direction='right'
+              blurIntensity={1}
+            />
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 w-full h-[400px] overflow-hidden pointer-events-none [mask-image:radial-gradient(50%_50%,white,transparent)] -z-10 mt-16 scale-y-125">
+          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#C9A449,transparent_75%)] before:opacity-15" />
+          <div className="absolute -left-[50%] top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-[#C9A449]/30 bg-transparent" />
+          <Sparkles
+            density={800}
+            size={1.5}
+            className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
+            color="#C9A449"
+          />
         </div>
       </section>
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+
       {/* SERVICES */}
       <section id="services" className="py-24 px-8 md:px-20">
-        <div className="mb-14">
+        <FadeUp className="mb-14">
           <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
             What Defines Us
           </p>
           <h2 className="text-4xl font-bold tracking-tight">
             Our Core Services
           </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+        </FadeUp>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES.map((s, i) => (
-            <div
+            <FadeUp
               key={i}
-              className="bg-black p-8 group hover:bg-[var(--charcoal)] transition-colors duration-300 cursor-default"
+              delay={i * 0.1}
+              whileHover={{ y: -5, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}
+              className="p-8 group cursor-default border border-white/10 rounded-xl hover:border-[var(--brass)]/40 transition-all duration-300"
             >
               <div className="text-[var(--brass)] text-3xl mb-5">{s.icon}</div>
               <p className="text-[10px] text-[var(--brass)] uppercase tracking-[0.25em] mb-3 font-bold">
@@ -714,10 +869,15 @@ export default function Homepage({ navigate }) {
               <p className="text-[var(--ash)] text-sm leading-relaxed">
                 {s.desc}
               </p>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </section>
+
+      {/* Thin gold divider */}
+      <div className="px-8 lg:px-16">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+      </div>
 
       {/* CATALOGUE
       <section id="brick-catalogue" className="py-12 px-8 md:px-20 bg-[var(--obsidian)]">
@@ -725,20 +885,24 @@ export default function Homepage({ navigate }) {
         <BrickCatalogue />
       </section> */}
 
+      <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]/20" />
+
       {/* SHOP BY SPACE */}
       <section className="py-24 px-8 md:px-20 text-white">
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <FadeUp className="text-center mb-16 max-w-2xl mx-auto">
           <p className="text-[var(--brass)] text-xl font-bold tracking-widest mb-4 uppercase">
             Browse by Project Type
           </p>
-          <h2 className="text-5xl font-black tracking-tight mb-6">
-            What Are You Building Today?
-          </h2>
+          <SplitHeading
+            text="What Are You Building Today?"
+            className="text-5xl font-black tracking-tight mb-6"
+            delay={0.1}
+          />
           <p className="text-gray-400 text-lg">
             Discover materials that transform ideas into refined, lasting
             spaces.
           </p>
-        </div>
+        </FadeUp>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
@@ -766,8 +930,9 @@ export default function Homepage({ navigate }) {
               img: "/Steps.png",
             },
           ].map((s, i) => (
-            <div
+            <FadeUp
               key={i}
+              delay={i * 0.07}
               className="group relative overflow-hidden cursor-pointer aspect-square border border-white/5 hover:border-[var(--brass)]/30 transition-colors duration-300"
             >
               <img
@@ -784,23 +949,27 @@ export default function Homepage({ navigate }) {
                   Explore <ArrowRight size={14} />
                 </span>
               </div>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </section>
 
+      {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
+
       {/* GALLERY */}
       <section id="gallery" className="py-24 px-8 md:px-20">
-        <div className="mb-12">
+        <FadeUp className="mb-12">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
             Project Gallery
           </p>
-          <h2 className="text-4xl font-bold tracking-tight">
-            Built to Last. Designed to Impress.
-          </h2>
-        </div>
+          <SplitHeading
+            text="Built to Last. Designed to Impress."
+            className="text-4xl font-bold tracking-tight"
+            delay={0.05}
+          />
+        </FadeUp>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:h-[640px]">
-          <div className="lg:col-span-3 aspect-square lg:aspect-auto relative group overflow-hidden border border-white/5 lg:h-full">
+          <SlideReveal delay={0.2} className="lg:col-span-3 aspect-square lg:aspect-auto group overflow-hidden border border-white/5 lg:h-full">
             <img
               src="/House.png"
               alt="The Muskoka Residence"
@@ -819,21 +988,16 @@ export default function Homepage({ navigate }) {
                 lakeside home.
               </p>
             </div>
-          </div>
+          </SlideReveal>
           <div className="lg:col-span-2 grid grid-rows-2 gap-4 lg:h-full">
             {[
-              {
-                title: "Urban Commercial Plaza",
-                img: "/Urban.png",
-              },
-              {
-                title: "Heritage Restoration",
-                img: "/Heritage.jpeg",
-              },
+              { title: "Urban Commercial Plaza", img: "/Urban.png" },
+              { title: "Heritage Restoration", img: "/Heritage.jpeg" },
             ].map((t, i) => (
-              <div
+              <SlideReveal
                 key={i}
-                className="border border-white/5 relative group cursor-pointer overflow-hidden text-white flex items-end p-6 min-h-48 lg:min-h-0"
+                delay={0.35 + i * 0.12}
+                className="border border-white/5 group cursor-pointer overflow-hidden text-white flex items-end p-6 min-h-48 lg:min-h-0"
               >
                 <img
                   src={t.img}
@@ -842,31 +1006,37 @@ export default function Homepage({ navigate }) {
                 />
                 <div className="absolute inset-0 group-hover:transition-colors duration-200" />
                 <h4 className="relative z-10 font-bold">{t.title}</h4>
-              </div>
+              </SlideReveal>
             ))}
           </div>
         </div>
-        <div className="mt-12 text-center">
-          <button className="border border-[var(--brass)] text-[var(--brass)] rounded-full px-8 py-3 text-sm font-bold uppercase tracking-widerhover:bg-[var(--brass-light)] hover:bg-[var(--brass-light)] hover:text-black transition-colors">
+        <FadeUp delay={0.2} className="mt-12 text-center">
+          <motion.button
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="border border-[var(--brass)] text-[var(--brass)] rounded-full px-8 py-3 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] hover:text-black transition-colors"
+          >
             View All Projects
-          </button>
-        </div>
+          </motion.button>
+        </FadeUp>
       </section>
 
-      {/* Note: Fix make this animation carousel  */}
+      {/* ONTARIO DELIVERY MAP */}
+      <OntarioMap />
+
+      <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]" />
+
       {/* TESTIMONIALS */}
-      <section
-        id="testimonials"
-        className="py-24 overflow-hidden"
-      >
-        <div className="px-8 md:px-20 mb-14">
+      <section id="testimonials" className="py-24 overflow-hidden">
+        <FadeUp className="px-8 md:px-20 mb-14">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
             Client Testimonials
           </p>
           <h2 className="text-4xl font-bold tracking-tight">
             Stories Behind the Work
           </h2>
-        </div>
+        </FadeUp>
         <div className="space-y-5">
           {[0, 1].map((row) => (
             <div
@@ -909,24 +1079,62 @@ export default function Homepage({ navigate }) {
         className="py-32 px-8 text-center bg-[var(--brass)] text-black relative overflow-hidden"
       >
         <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iIzAwMCI+PC9jaXJjbGU+Cjwvc3ZnPg==')] mix-blend-multiply" />
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none">
-            Ready to Start Your Project?
-          </h2>
+        <FadeUp className="max-w-4xl mx-auto relative z-10">
+          <SplitHeading
+            text="Ready to Start Your Project?"
+            className="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none"
+          />
           <p className="text-xl md:text-2xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
             Our masonry experts are here to help you select, estimate, and
             supply the perfect materials.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-black rounded-full text-white px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-gray-900 transition-colors shadow-2xl">
+            <MagneticButton className="bg-black rounded-full text-white px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-gray-900 transition-colors shadow-2xl">
               Request a Quote Today
-            </button>
-            <button className="bg-transparent rounded-full border-2 border-black text-black px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-black/5 transition-colors">
+            </MagneticButton>
+            <MagneticButton className="bg-transparent rounded-full border-2 border-black text-black px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-black/5 transition-colors">
               Consult with an Expert
-            </button>
+            </MagneticButton>
+          </div>
+        </FadeUp>
+      </section>
+
+      {/* NEWSLETTER BAND */}
+      <FadeUp className="relative z-10">
+        <div className="px-8 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-around gap-10">
+          <div className="lg:max-w-sm">
+            <p className="text-[#C9A449] text-[18px] font-bold tracking-[0.35em] uppercase mb-3">
+              Stay Ahead of the Build
+            </p>
+            <h3
+              className="text-white text-3xl font-bold tracking-wide leading-snug"
+            >
+              Ontario's Premier
+              <br />
+              Masonry Supplier
+            </h3>
+            <p className="text-sm mt-3 leading-relaxed text-white/40">
+              Trade offers, new arrivals, and project inspiration delivered with
+              discretion.
+            </p>
+          </div>
+          <div className="flex w-full lg:w-auto lg:min-w-[380px]">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="bg-white/[0.03] border border-white/10 border-r-0 text-white/80 px-5 py-4 text-sm w-full outline-none placeholder:text-white/20 focus:border-[#C9A449]/50 transition-colors duration-300"
+            />
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              className="bg-[#C9A449] hover:bg-[#DDB95A] transition-colors duration-200 text-black px-8 font-semibold uppercase text-[10px] tracking-[0.25em] shrink-0 whitespace-nowrap"
+            >
+              Subscribe
+            </motion.button>
           </div>
         </div>
-      </section>
+      </FadeUp>
 
       {/* FOOTER */}
       <Footer />
