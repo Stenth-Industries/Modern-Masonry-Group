@@ -63,6 +63,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000;
+  background: #000;
   color: var(--text-primary);
+}
+
+/* Fixed background via pseudo-element — avoids paint on every scroll tick */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat;
+  will-change: transform;
 }

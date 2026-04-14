@@ -281,11 +281,12 @@ const FadeUp = ({ children, delay = 0, className = "", whileHover, whileTap }) =
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={whileHover}
       whileTap={whileTap}
+      style={{ willChange: inView ? "auto" : "transform, opacity" }}
       className={className}
     >
       {children}
@@ -302,9 +303,10 @@ const SplitHeading = ({ text, className = "", delay = 0, Tag = "h2" }) => {
       {text.split(" ").map((word, i) => (
         <span key={i} className="inline-block overflow-hidden mr-[0.3em] last:mr-0">
           <motion.span
-            initial={{ y: "110%", opacity: 0 }}
+            initial={{ y: "100%", opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.75, delay: delay + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.55, delay: delay + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: inView ? "auto" : "transform, opacity" }}
             className="inline-block"
           >
             {word}
@@ -365,7 +367,8 @@ const MagneticButton = ({ children, className = "", onClick }) => {
       onMouseLeave={handleLeave}
       animate={{ x: xy.x, y: xy.y }}
       whileTap={{ scale: 0.96 }}
-      transition={{ type: "spring", stiffness: 180, damping: 14 }}
+      style={{ willChange: "transform" }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={className}
       onClick={onClick}
     >
@@ -453,15 +456,11 @@ export default function Homepage({ navigate }) {
   return (
     <div
       className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black"
-      style={{
-        background:
-          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bg.png') center/cover no-repeat fixed, #000",
-      }}
     >
       <FloatingCTA scrollY={scrollY} />
 
       {/* HERO */}
-      <section id="home" className="relative h-screen bg-black overflow-hidden">
+      <section id="home" className="relative h-screen bg-black overflow-hidden" style={{ contain: "layout style" }}>
         {/* LOGO IN VIDEO */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -473,6 +472,7 @@ export default function Homepage({ navigate }) {
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
           >
             <img
               src="/Logo-MM (1).png"
@@ -505,7 +505,7 @@ export default function Homepage({ navigate }) {
         </div>
 
         {/* Layer 2: Hero text content */}
-        <motion.div style={{ y: heroTextY, opacity: heroOpacity }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
+        <motion.div style={{ y: heroTextY, opacity: heroOpacity, willChange: "transform, opacity" }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
             <div className="flex gap-[0.25em] flex-wrap">
               {["Where", "Architecture"].map((w, i) => (
@@ -832,8 +832,8 @@ export default function Homepage({ navigate }) {
           <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#C9A449,transparent_75%)] before:opacity-15" />
           <div className="absolute -left-[50%] top-1/2 aspect-[1/0.7] z-10 w-[200%] rounded-[100%] border-t border-[#C9A449]/30 bg-transparent" />
           <Sparkles
-            density={800}
-            size={1.5}
+            density={400}
+            size={1.2}
             className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
             color="#C9A449"
           />

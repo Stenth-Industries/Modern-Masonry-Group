@@ -38,7 +38,7 @@ export function Sparkles({
       enable: false,
       zIndex: 1,
     },
-    fpsLimit: 120,
+    fpsLimit: 60,
     particles: {
       color: {
         value: color,
@@ -73,7 +73,7 @@ export function Sparkles({
         },
       },
     },
-    detectRetina: true,
+    detectRetina: false,
   };
 
   return isReady && <Particles id={id} options={{ ...defaultOptions, ...options }} className={className} />;

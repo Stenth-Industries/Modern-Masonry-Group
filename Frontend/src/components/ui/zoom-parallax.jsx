@@ -20,12 +20,13 @@ export function ZoomParallax({ images }) {
     });
 
     // All hooks called at top level — no loops
-    const s0 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-    const s1 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-    const s2 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-    const s3 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-    const s4 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-    const s5 = useTransform(scrollYProgress, [0, 1], [1, 8]);
+    // Tighter scale ranges = less pixel interpolation work per frame
+    const s0 = useTransform(scrollYProgress, [0, 1], [1, 2.5]);
+    const s1 = useTransform(scrollYProgress, [0, 1], [1, 3]);
+    const s2 = useTransform(scrollYProgress, [0, 1], [1, 3.5]);
+    const s3 = useTransform(scrollYProgress, [0, 1], [1, 3]);
+    const s4 = useTransform(scrollYProgress, [0, 1], [1, 3.5]);
+    const s5 = useTransform(scrollYProgress, [0, 1], [1, 4.5]);
     const scales = [s0, s1, s2, s3, s4, s5];
 
     const six = images.slice(0, 6);
@@ -40,7 +41,7 @@ export function ZoomParallax({ images }) {
                     return (
                         <motion.div
                             key={index}
-                            style={{ scale: scales[index] }}
+                            style={{ scale: scales[index], willChange: "transform" }}
                             className="absolute top-0 flex h-full w-full items-center justify-center"
                         >
                             <div
