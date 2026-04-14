@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Plus, Minus, Mail } from "lucide-react";
 import BrickCatalogue from "./BrickCatalogue";
+import OntarioMap from "./OntarioMap";
 import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 import { InfiniteSlider } from "./ui/infinite-slider";
 import { Sparkles } from "./ui/sparkles";
@@ -1021,7 +1022,9 @@ export default function Homepage({ navigate }) {
         </FadeUp>
       </section>
 
-      {/* Note: Fix make this animation carousel  */}
+      {/* ONTARIO DELIVERY MAP */}
+      <OntarioMap />
+
       <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]" />
 
       {/* TESTIMONIALS */}

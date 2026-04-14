@@ -28,7 +28,12 @@
       "Bash(grep:*)",
       "Bash(ls D:/modern/Frontend/tailwind.config*)",
       "Bash(ls D:/modern/Frontend/*.config*)",
-      "Bash(ls D:/modern/Frontend/src/components/ui/infinite-slider*)"
+      "Bash(ls D:/modern/Frontend/src/components/ui/infinite-slider*)",
+      "Bash(openskills install:*)",
+      "Bash(npm list:*)",
+      "Bash(npx openskills:*)",
+      "Bash(npx skillfish:*)",
+      "Bash(npx skills:*)"
     ]
   }
 }
