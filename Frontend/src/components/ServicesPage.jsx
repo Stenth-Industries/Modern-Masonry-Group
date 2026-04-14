@@ -113,7 +113,8 @@ const SPLIT_SECTIONS = [
       'Structural design assistance & Conceptual engineering',
       'Lifecycle analysis, Energy and sustainability guidance'
     ],
-    img: '/masonry_animated_model.png',
+    img: '/logos/1746106515466.gif',
+    isGif: true,
     imgLeft: false,
   },
 ];
@@ -182,14 +183,22 @@ function SplitSection({ section, navigate }) {
       initial={{ opacity: 0, scale: 0.97 }}
       animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden min-h-[360px] lg:min-h-[520px] group"
+      className="relative overflow-hidden min-h-[360px] lg:min-h-[520px] group flex items-center justify-center bg-black"
     >
-      <img
-        src={section.img}
-        alt={section.title}
-        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-      />
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-colors duration-500" />
+      {section.isGif ? (
+        <img
+          src={section.img}
+          alt={section.title}
+          className="w-full h-full object-contain max-h-[520px]"
+        />
+      ) : (
+        <img
+          src={section.img}
+          alt={section.title}
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+        />
+      )}
+      {!section.isGif && <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-colors duration-500" />}
       {/* Brass corner accent */}
       <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[var(--brass)] opacity-60" />
       <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[var(--brass)] opacity-60" />
