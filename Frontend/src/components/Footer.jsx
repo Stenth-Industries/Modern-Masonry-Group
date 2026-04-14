@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { TextHoverEffect, FooterBackgroundGradient } from "./ui/hover-footer";
 
@@ -104,14 +105,17 @@ export default function Footer() {
                   ),
                 },
               ].map(({ label, svg }) => (
-                <a
+                <motion.a
                   key={label}
                   href="#"
                   aria-label={label}
+                  whileHover={{ scale: 1.15, y: -2 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                   className="w-8 h-8 border border-white/[0.08] flex items-center justify-center text-white/30 hover:border-[#C9A449]/50 hover:text-[#C9A449] transition-all duration-300"
                 >
                   {svg}
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>

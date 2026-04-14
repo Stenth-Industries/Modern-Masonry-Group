@@ -596,7 +596,6 @@ export default function BrickCatalogue() {
           setProducts(mapped);
           setTotal(res.meta.total);
           setTotalPages(res.meta.totalPages);
-          gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           setErrorMsg(res.message || "Unknown error from API");
         }
