@@ -13,6 +13,9 @@ import {
   X
 } from "lucide-react";
 import { BrickWallPattern } from "./BrickWallPattern";
+import API_BASE from "../lib/api";
+
+const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 import { BrickDetailPanel } from "./BrickDetailPanel";
 import CompareModal from "./CompareModal";
 import Footer from "./Footer";
@@ -304,13 +307,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
   // Load database filters once on mount
   useEffect(() => {
-    fetch("/api/products/filters")
-      .then(async (res) => {
-        const text = await res.text();
-        if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
-        if (!text) return { success: true, data: { collections: [], colours: [], styles: [], manufacturers: [] } };
-        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid filter JSON: " + text.substring(0, 100)); }
-      })
+    fetch(`${API_BASE}/products/filters`)
+      .then((res) => res.json())
       .then((r) => {
         if (r.success && r.data) {
           setFiltersDB({
@@ -355,13 +353,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
     params.append("page", page);
     params.append("limit", 20);
 
-    fetch(`/api/products?${params.toString()}`, { signal: controller.signal })
-      .then(async (r) => {
-        const text = await r.text();
-        if (!r.ok) throw new Error(`Status ${r.status}: ${text}`);
-        if (!text) return { success: true, data: [], meta: { total: 0, totalPages: 1 } };
-        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid product JSON: " + text.substring(0, 100)); }
-      })
+    fetch(`${API_BASE}/products?${params.toString()}`, { signal: controller.signal })
+      .then((r) => r.json())
       .then((res) => {
         if (res.success && res.data) {
           const mapped = res.data.map((p) => {
