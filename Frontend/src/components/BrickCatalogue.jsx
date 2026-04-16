@@ -196,13 +196,20 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
           >
             <Heart size={14} fill={isFavourite ? "#ccab7b" : "transparent"} color={isFavourite ? "#ccab7b" : "rgba(255,255,255,0.7)"} />
           </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-            title="Add to Compare"
-            className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isCompared ? 'border-[#ccab7b] bg-[#ccab7b]/10' : 'border-transparent group-hover:border-white/20'}`}
-          >
-            {isCompared ? <Check size={14} className="text-[#ccab7b]" strokeWidth={2.5} /> : <Plus size={14} className="text-white/70" />}
-          </button>
+          <div className="relative group/compare">
+            <button
+              onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
+              className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isCompared ? 'border-[#ccab7b] bg-[#ccab7b]/10' : 'border-transparent group-hover:border-white/20'}`}
+            >
+              {isCompared ? <Check size={14} className="text-[#ccab7b]" strokeWidth={2.5} /> : <Plus size={14} className="text-white/70" />}
+            </button>
+            {/* Tooltip label */}
+            <div className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover/compare:opacity-100 transition-opacity duration-200">
+              <span className="whitespace-nowrap text-[9px] uppercase tracking-[0.15em] font-bold text-white bg-black/80 backdrop-blur-sm border border-white/10 px-2 py-1 rounded-[4px]">
+                {isCompared ? "Remove" : "Compare"}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
