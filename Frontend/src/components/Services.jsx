@@ -111,7 +111,7 @@ const SERVICES = [
       "Techo-Bloc, Rialux Siding & landscaping systems",
       "Accessories: mortar, lintels, ties & profiles",
     ],
-    img: "/Exterior-Cladding.png",
+    img: "/bg.png",
     cta: "Browse Catalogue",
     ctaHash: "#brick",
   },
@@ -129,7 +129,7 @@ const SERVICES = [
       "Code-compliant product recommendations",
       "On-site or virtual consultation available",
     ],
-    img: "/patio.png",
+    img: "/bg.png",
     cta: "Book a Consultation",
     ctaHash: "#contact",
   },
@@ -147,7 +147,7 @@ const SERVICES = [
       "Real-time order tracking",
       "Express delivery for urgent projects",
     ],
-    img: "/Retaining-walls.png",
+    img: "/bg.png",
     cta: "Get a Delivery Quote",
     ctaHash: "#contact",
   },
@@ -165,7 +165,7 @@ const SERVICES = [
       "Dedicated trade account representative",
       "Tender & volume pricing on request",
     ],
-    img: "/Pool.png",
+    img: "/bg.png",
     cta: "Apply for Trade Account",
     ctaHash: "#contact",
   },
@@ -183,7 +183,7 @@ const SERVICES = [
       "Product specialists available Mon–Sat",
       "Sample library for architects & designers",
     ],
-    img: "/Driveways.png",
+    img: "/bg.png",
     cta: "Get Directions",
     ctaHash: "#contact",
   },
@@ -391,7 +391,7 @@ export default function Services({ navigate }) {
         {/* Background image with parallax */}
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <img
-            src="/Exterior-Cladding.png"
+            src="/bg.png"
             alt="Services"
             className="w-full h-full object-cover opacity-30"
           />
