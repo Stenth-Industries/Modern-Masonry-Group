@@ -90,12 +90,6 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
             <Check size={11} className="text-black" strokeWidth={3.5} />
           )}
         </div>
-        {colorDot && (
-          <div
-            className="w-[14px] h-[14px] rounded-full border border-white/20 shrink-0"
-            style={{ background: colorDot }}
-          />
-        )}
         <span
           className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${checked
             ? "text-[#e3decb] font-medium"
@@ -105,6 +99,12 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
         >
           {label}
         </span>
+        {colorDot && (
+          <div
+            className="w-[14px] h-[14px] rounded-full border border-white/20 shrink-0"
+            style={{ background: colorDot }}
+          />
+        )}
       </div>
       {count !== undefined && (
         <span className="text-[11px] text-white/20 font-mono tabular-nums">
