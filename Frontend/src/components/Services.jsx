@@ -111,7 +111,7 @@ const SERVICES = [
       "Techo-Bloc, Rialux Siding & landscaping systems",
       "Accessories: mortar, lintels, ties & profiles",
     ],
-    img: "/bg.png",
+    img: "/services/supply.png",
     cta: "Browse Catalogue",
     ctaHash: "#brick",
   },
@@ -129,7 +129,7 @@ const SERVICES = [
       "Code-compliant product recommendations",
       "On-site or virtual consultation available",
     ],
-    img: "/bg.png",
+    img: "/services/consultation.png",
     cta: "Book a Consultation",
     ctaHash: "#contact",
   },
@@ -147,7 +147,7 @@ const SERVICES = [
       "Real-time order tracking",
       "Express delivery for urgent projects",
     ],
-    img: "/bg.png",
+    img: "/services/delivery.png",
     cta: "Get a Delivery Quote",
     ctaHash: "#contact",
   },
@@ -165,7 +165,7 @@ const SERVICES = [
       "Dedicated trade account representative",
       "Tender & volume pricing on request",
     ],
-    img: "/bg.png",
+    img: "/services/trade.png",
     cta: "Apply for Trade Account",
     ctaHash: "#contact",
   },
@@ -183,7 +183,7 @@ const SERVICES = [
       "Product specialists available Mon–Sat",
       "Sample library for architects & designers",
     ],
-    img: "/bg.png",
+    img: "/services/showroom.png",
     cta: "Get Directions",
     ctaHash: "#contact",
   },
@@ -201,7 +201,7 @@ const SERVICES = [
       "Up to 5 samples per order",
       "Bulk sample packs for trade professionals",
     ],
-    img: "/bg.png",
+    img: "/services/sample.png",
     cta: "Request Samples",
     ctaHash: "#brick",
   },
@@ -283,27 +283,16 @@ function ServiceCard({ service, index, navigate }) {
       <div
         className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0 border border-white/[0.07] rounded-2xl overflow-hidden group hover:border-[var(--brass)]/30 transition-all duration-500`}
       >
-        {/* Image panel — bg.png shows through from fixed background */}
-        <div className="relative lg:w-[42%] aspect-[4/3] lg:aspect-auto shrink-0 overflow-hidden bg-black/50 group-hover:bg-black/40 transition-colors duration-500">
-          {/* Number watermark */}
-          <div className="absolute bottom-4 left-6 font-black text-[100px] leading-none text-white/[0.04] select-none pointer-events-none"
-            style={{ fontFamily: "'Playfair Display', serif" }}>
-            {service.number}
-          </div>
-          {/* Brass corner accent */}
-          <div className="absolute top-5 right-5 w-10 h-10 border-t border-r border-[var(--brass)]/20 pointer-events-none" />
-          <div className="absolute bottom-5 left-5 w-10 h-10 border-b border-l border-[var(--brass)]/20 pointer-events-none" />
+        {/* Image panel */}
+        <div className="relative lg:w-[42%] aspect-[4/3] lg:aspect-auto shrink-0 overflow-hidden bg-black/50 transition-colors duration-500">
+          <img src={service.img} alt={service.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 mix-blend-screen" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+          
           {/* Tag chip */}
           <div className="absolute top-5 left-5">
             <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-[var(--brass)] bg-black/60 backdrop-blur-sm border border-[var(--brass)]/30 px-3 py-1.5 rounded-full">
               {service.tag}
             </span>
-          </div>
-          {/* Icon centred */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-[var(--brass)]/20 group-hover:text-[var(--brass)]/35 transition-colors duration-500" style={{ transform: 'scale(3.5)' }}>
-              {service.icon}
-            </div>
           </div>
         </div>
 
