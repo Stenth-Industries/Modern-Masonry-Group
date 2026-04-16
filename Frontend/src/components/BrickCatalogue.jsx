@@ -302,7 +302,15 @@ export default function BrickCatalogue() {
         if (r.success && r.data) {
           setFiltersDB({
             collections: r.data.collections.map((c) => c.value),
-            colors: r.data.colours.map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) })),
+            colors: r.data.colours
+              .map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
+              .sort((a, b) => {
+                const isOtherA = a.value.toLowerCase() === 'other';
+                const isOtherB = b.value.toLowerCase() === 'other';
+                if (isOtherA) return 1;
+                if (isOtherB) return -1;
+                return 0;
+              }),
             styles: r.data.styles.map((s) => s.value),
             manufacturers: r.data.manufacturers.map((m) => m.name),
           });
