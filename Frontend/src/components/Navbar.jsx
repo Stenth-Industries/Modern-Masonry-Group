@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, AnimatePresence, useMotionValue } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, ChevronRight } from 'lucide-react';
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
@@ -12,15 +12,27 @@ const NAV_ITEMS = [
   { label: 'Gallery', href: '#gallery' },
 ];
 
-/* ── Nav link ── */
+/* ── Nav link with brass underline draw ── */
 const MagneticLink = ({ children, href, className = '', onClick }) => {
+  const [hovered, setHovered] = useState(false);
   return (
-    <motion.a href={href} onClick={onClick}
-      whileHover={{ scale: 1.08 }}
+    <motion.a
+      href={href}
+      onClick={onClick}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       className={`relative px-4 py-2 text-xs uppercase tracking-[0.2em] font-medium text-white/60 hover:text-white transition-colors duration-200 block ${className}`}>
       {children}
+      {/* Brass underline that draws left-to-right on hover */}
+      <motion.span
+        className="absolute bottom-0.5 left-4 right-4 h-px bg-[var(--brass)] origin-left"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      />
     </motion.a>
   );
 };
@@ -105,7 +117,7 @@ export default function Navbar({ navigate }) {
       </div>
 
       {/* NAVBAR */}
-      <div className="fixed top-8 left-0 w-full z-50 flex justify-center pointer-events-none px-6"
+      <div className="fixed top-14 left-0 w-full z-50 flex justify-center pointer-events-none px-6"
         style={{ transform: navVisible ? 'translateY(0)' : 'translateY(-120px)', transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)' }}>
         <motion.nav style={{ scale: navScale, y: navY }}
           className={`pointer-events-auto relative flex items-center gap-4 md:gap-8 px-5 md:px-8 py-4 rounded-full border transition-all duration-500 ${isScrolled

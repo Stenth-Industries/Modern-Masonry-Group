@@ -498,8 +498,11 @@ export default function Homepage({ navigate }) {
           preload="auto"
         />
 
+        {/* Persistent dark overlay — keeps text legible over video */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-black/70 via-black/45 to-black/25 pointer-events-none" />
+
         {/* Layer 1: Decorative grid lines */}
-        <div className="absolute inset-0 z-[1] opacity-20 pointer-events-none">
+        <div className="absolute inset-0 z-[2] opacity-20 pointer-events-none">
           <div className="absolute top-0 right-[20%] w-px h-full bg-white/30" />
           <div className="absolute top-[30%] left-0 w-full h-px bg-white/30" />
         </div>
@@ -606,8 +609,8 @@ export default function Homepage({ navigate }) {
                 }
               }}
             />
-            {/* Soft dark vignette to frame the hero */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+            {/* Dark vignette over intro video for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/45 to-black/25 pointer-events-none" />
           </div>
         )}
       </section>
