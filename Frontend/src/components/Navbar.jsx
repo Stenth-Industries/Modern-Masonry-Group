@@ -38,7 +38,7 @@ const MagneticLink = ({ children, href, className = '', onClick }) => {
 };
 
 /* ── Mobile menu ── */
-const MobileMenu = ({ open, onClose, navigate }) => (
+const MobileMenu = ({ open, onClose, navigate, onOpenSearch }) => (
   <AnimatePresence>
     {open && (
       <>
@@ -49,7 +49,10 @@ const MobileMenu = ({ open, onClose, navigate }) => (
           className="fixed right-0 top-0 bottom-0 w-72 bg-[var(--obsidian)] z-[80] flex flex-col p-8 border-l border-white/10">
           <div className="flex justify-between items-center mb-10">
             <img src="/Logo-MM.png" alt="MMG" className="h-10 w-auto" />
-            <button onClick={onClose} className="text-white/50 hover:text-white"><X size={20} /></button>
+            <div className="flex items-center gap-4">
+               <button onClick={() => { onClose(); onOpenSearch(); }} className="text-[var(--brass)] hover:text-white transition-colors"><Search size={20} /></button>
+               <button onClick={onClose} className="text-white/50 hover:text-white"><X size={22} /></button>
+            </div>
           </div>
           <nav className="flex flex-col">
             {NAV_ITEMS.map((item, i) => (
@@ -63,7 +66,7 @@ const MobileMenu = ({ open, onClose, navigate }) => (
             ))}
           </nav>
           <div className="mt-auto pt-8">
-            <a href="#contact" className="flex items-center justify-center gap-2 bg-[var(--brass)] text-black px-6 py-4 font-bold text-sm uppercase tracking-wider w-full rounded-full">
+            <a href="#contact" onClick={(e) => { e.preventDefault(); navigate('#contact'); onClose(); }} className="flex items-center justify-center gap-2 bg-[var(--brass)] text-black px-6 py-4 font-bold text-sm uppercase tracking-wider w-full rounded-full">
               Get a Quote <ArrowUpRight size={14} />
             </a>
           </div>
@@ -73,9 +76,113 @@ const MobileMenu = ({ open, onClose, navigate }) => (
   </AnimatePresence>
 );
 
+/* ── Search Modal Full Screen ── */
+const SearchModal = ({ open, onClose, navigate }) => {
+  const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 100);
+      const handleEscape = (e) => { if (e.key === 'Escape') onClose(); };
+      window.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+      return () => {
+        window.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = '';
+      };
+    }
+  }, [open, onClose]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const q = query.trim().toLowerCase();
+    if(q) {
+       // OMNIBAR: Whole website search routing
+       if (q.includes("service") || q.includes("build")) navigate("#services-page");
+       else if (q.includes("home")) navigate("#home");
+       else if (q.includes("about") || q.includes("who")) navigate("#about");
+       else if (q.includes("contact") || q.includes("quote") || q.includes("email")) navigate("#contact");
+       else if (q.includes("gallery") || q.includes("photo") || q.includes("image")) navigate("#gallery");
+       else {
+         // Default to product database
+         navigate('#brick?search=' + encodeURIComponent(query.trim()));
+       }
+       setQuery(''); // clean for next open
+       onClose();
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Deep Glass Overlay */}
+          <motion.div 
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }} 
+            animate={{ opacity: 1, backdropFilter: "blur(24px)" }} 
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 bg-[var(--obsidian)]/80 z-[100] flex flex-col justify-center items-center p-6"
+            onClick={onClose}
+          />
+          
+          {/* Modal Content container */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }} 
+            animate={{ opacity: 1, scale: 1, y: 0 }} 
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-0 left-0 w-full h-full z-[101] flex flex-col pt-[20vh] items-center pointer-events-none px-6"
+          >
+            <div className="w-full max-w-4xl pointer-events-auto">
+               <div className="flex justify-between items-center mb-12 px-2">
+                 <span className="text-[var(--brass)] uppercase tracking-[0.4em] text-xs font-bold drop-shadow-[0_0_10px_#d4af37]">Catalogue Search</span>
+                 <button onClick={onClose} className="text-white/50 hover:text-white transition-colors flex items-center gap-2 text-[10px] uppercase tracking-widest"><X size={16}/> Esc to close</button>
+               </div>
+               
+               <form onSubmit={handleSearch} className="relative w-full group">
+                  <Search size={36} className="absolute left-0 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-[var(--brass)] transition-colors" />
+                  <input 
+                    ref={inputRef}
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search premium materials..."
+                    className="w-full bg-transparent border-b-2 border-white/10 text-4xl md:text-6xl font-light text-white pl-16 pb-6 focus:outline-none focus:border-[var(--brass)] transition-colors placeholder:text-white/10 placeholder:font-serif placeholder:italic tracking-tight"
+                  />
+               </form>
+
+               {/* Quick Suggestions */}
+               <motion.div 
+                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                 className="mt-16"
+               >
+                  <p className="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium mb-6 px-2">Popular Categories</p>
+                  <div className="flex flex-wrap gap-4 px-2">
+                    {['Architectural Brick', 'Aged Natural Stone', 'Commercial Supply', 'Heritage Restoration'].map(tag => (
+                      <button 
+                        type="button"
+                        key={tag}
+                        onClick={() => { setQuery(tag); setTimeout(() => handleSearch({preventDefault: () => {}}), 100); }}
+                        className="px-6 py-3 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[var(--brass)] hover:bg-[var(--brass)]/10 text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300"
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+               </motion.div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 /* ══ NAVBAR ══════════════════════════════════════════════════ */
 export default function Navbar({ navigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -103,7 +210,8 @@ export default function Navbar({ navigate }) {
 
   return (
     <>
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} navigate={navigate} />
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} navigate={navigate} />
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} navigate={navigate} onOpenSearch={() => setSearchOpen(true)} />
 
       {/* UTILITY BAR */}
       <div className="bg-[#111111] border-b border-white/10 text-xs py-2 px-6 flex justify-between items-center text-[var(--ash)] z-[60] relative">
@@ -150,9 +258,9 @@ export default function Navbar({ navigate }) {
             ) : <MagneticLink key={item.label} href={item.href}>{item.label}</MagneticLink>)}
           </div>
           <div className="hidden md:flex relative z-10 items-center pl-2 border-l border-white/10">
-            <button className="p-2 text-white/50 hover:text-white transition-colors"><Search size={15} /></button>
+            <button onClick={() => setSearchOpen(true)} className="p-2 text-white/50 hover:text-[var(--brass)] transition-colors"><Search size={15} /></button>
           </div>
-          <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+          <motion.a href="#contact" onClick={(e) => { e.preventDefault(); navigate('#contact'); }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             className="relative z-10 group hidden md:flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] font-bold bg-[var(--brass)] text-black px-5 py-2 rounded-full overflow-hidden hover:shadow-[0_0_20px_rgba(212,175,99,0.4)] transition-shadow shrink-0">
             <span className="relative z-10">Get a Quote</span>
             <ArrowUpRight size={13} className="relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -443,14 +443,17 @@ const FAQSection = () => {
 export default function Homepage({ navigate }) {
   const introVideoRef = useRef(null);
   const mainVideoRef = useRef(null);
-  const [isVideo1Ended, setIsVideo1Ended] = useState(false);
-  const [introFading, setIntroFading] = useState(false);
+  const [isVideo1Ended, setIsVideo1Ended] = useState(() => sessionStorage.getItem('mmg_introPlayed') === 'true');
+  const [introFading, setIntroFading] = useState(() => sessionStorage.getItem('mmg_introPlayed') === 'true');
   const { scrollY } = useScroll();
   const heroTextY = useTransform(scrollY, [0, 600], [0, -90]);
   const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
 
   useEffect(() => {
     if (introVideoRef.current) introVideoRef.current.playbackRate = 1.5;
+    if (sessionStorage.getItem('mmg_introPlayed') === 'true' && mainVideoRef.current) {
+        mainVideoRef.current.play().catch(console.error);
+    }
   }, []);
 
   return (
@@ -597,6 +600,7 @@ export default function Homepage({ navigate }) {
                   !introFading
                 ) {
                   setIntroFading(true);
+                  sessionStorage.setItem('mmg_introPlayed', 'true');
                   if (mainVideoRef.current)
                     mainVideoRef.current.play().catch(console.error);
                 }
@@ -604,6 +608,7 @@ export default function Homepage({ navigate }) {
               onEnded={() => {
                 if (!introFading) {
                   setIntroFading(true);
+                  sessionStorage.setItem('mmg_introPlayed', 'true');
                   if (mainVideoRef.current)
                     mainVideoRef.current.play().catch(console.error);
                 }
