@@ -14,7 +14,6 @@ import {
   Share2,
   X
 } from "lucide-react";
-import { brickProducts } from "./catalogue-data";
 import { BrickWallPattern } from "./BrickWallPattern";
 import { BrickDetailPanel } from "./BrickDetailPanel";
 import Footer from "./Footer";
