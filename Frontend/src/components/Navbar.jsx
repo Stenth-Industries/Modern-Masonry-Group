@@ -7,7 +7,7 @@ const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='h
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
   { label: 'Products', href: '#products', hasMega: true },
-  { label: 'Services', href: '#services' },
+  { label: 'Services', href: '#services-page' },
   { label: 'About Us', href: '#about' },
   { label: 'Gallery', href: '#gallery' },
 ];
