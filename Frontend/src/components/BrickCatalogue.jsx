@@ -10,8 +10,6 @@ import {
   Heart,
   Grid3x3,
   Grid,
-  Download,
-  Share2,
   X
 } from "lucide-react";
 import { BrickWallPattern } from "./BrickWallPattern";
@@ -270,6 +268,7 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
 export default function BrickCatalogue() {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [compact, setCompact] = useState(true);
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
@@ -437,7 +436,7 @@ export default function BrickCatalogue() {
                 Modern Masonry <br />   Brick   Catalogue
               </h1>
             </div>
-            <div className="md:max-w-md pb-">
+            <div className="md:max-w-md pb-10">
               <p className="text-[18px] md:text-[20px] tracking-[0.02em] leading-relaxed text-white/50 italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
                 "Precision curated masonry materials, offering specialist guidance and province-wide delivery—built for those who build with intention."
               </p>
@@ -491,14 +490,15 @@ export default function BrickCatalogue() {
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               />
             </div>
-            <div className="flex items-center gap-4">
-              <Grid size={16} className="text-[#9a9488] hover:text-white cursor-pointer" />
-              <Grid3x3 size={16} className="text-[#9a9488] hover:text-white cursor-pointer" />
-            </div>
-            <div className="flex items-center gap-5 ml-4 text-[#9a9488]">
-              <Download size={15} className="hover:text-white cursor-pointer" />
-              <Share2 size={15} className="hover:text-white cursor-pointer" />
-              <SlidersHorizontal size={15} className="hover:text-white cursor-pointer" />
+            <div className="flex items-center gap-1 border border-white/10 rounded-md p-1">
+              <button onClick={() => setCompact(false)} title="Comfortable view"
+                className={`p-1.5 rounded transition-colors ${!compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                <Grid size={14} />
+              </button>
+              <button onClick={() => setCompact(true)} title="Compact view"
+                className={`p-1.5 rounded transition-colors ${compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                <Grid3x3 size={14} />
+              </button>
             </div>
           </div>
         </div>
@@ -589,7 +589,7 @@ export default function BrickCatalogue() {
                   hidden: {},
                   visible: { transition: { staggerChildren: 0.06 } }
                 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-8"
+                className={`grid gap-8 ${compact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'}`}
               >
                 {displayedProducts.map((p) => (
                   <motion.div
