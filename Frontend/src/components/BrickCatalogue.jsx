@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   Search,
   ChevronDown,
@@ -13,7 +13,8 @@ import {
   X
 } from "lucide-react";
 import { BrickWallPattern } from "./BrickWallPattern";
-import { BrickDetailPanel } from "./BrickDetailPanel";
+import BrickDetailPanel from "./BrickDetail";
+import CompareModal from "./CompareModal";
 import Footer from "./Footer";
 
 // ── Configuration ─────────────────────────────────────────────────────────────
@@ -142,9 +143,9 @@ function Section({ title, children, defaultOpen = true }) {
   );
 }
 
-// ── Recreated Screenshot Dribbble Card ───────────────────────────────────────
+// ── Recreated Screenshot Dribbble Card (Highly Optimized) ───────────────────
 
-function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isCompared, onToggleCompare }) {
+const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isCompared, onToggleCompare }) {
   const typeLabel = product.collection || product.type || "MOULDED";
   const manufacturer = product.manufacturer || "GLEN GERY";
   const [imgError, setImgError] = useState(false);
@@ -181,6 +182,7 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
             loading="lazy"
+            decoding="async"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -268,13 +270,21 @@ function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isComp
       </div>
     </motion.div>
   );
-}
+});
 
 // ── Main UI ──────────────────────────────────────────────────────────────────
 
-export default function BrickCatalogue() {
-  const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
+export default function BrickCatalogue({ navigate, initialQuery = "" }) {
+  const [query, setQuery] = useState(initialQuery);
+  const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
+
+  // Sync with router changes seamlessly
+  useEffect(() => {
+    if (initialQuery !== query) {
+      setQuery(initialQuery);
+      setDebouncedQuery(initialQuery);
+    }
+  }, [initialQuery]);
   const [compact, setCompact] = useState(true);
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
@@ -284,6 +294,7 @@ export default function BrickCatalogue() {
 
   const [favourites, setFavourites] = useState([]);
   const [compareQueue, setCompareQueue] = useState([]);
+  const [showCompare, setShowCompare] = useState(false);
   const [showFavourites, setShowFavourites] = useState(false);
 
   const [products, setProducts] = useState([]);
@@ -297,7 +308,12 @@ export default function BrickCatalogue() {
   // Load database filters once on mount
   useEffect(() => {
     fetch("/api/products/filters")
-      .then((res) => res.json())
+      .then(async (res) => {
+        const text = await res.text();
+        if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
+        if (!text) return { success: true, data: { collections: [], colours: [], styles: [], manufacturers: [] } };
+        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid filter JSON: " + text.substring(0, 100)); }
+      })
       .then((r) => {
         if (r.success && r.data) {
           setFiltersDB({
@@ -343,7 +359,12 @@ export default function BrickCatalogue() {
     params.append("limit", 20);
 
     fetch(`/api/products?${params.toString()}`, { signal: controller.signal })
-      .then((r) => r.json())
+      .then(async (r) => {
+        const text = await r.text();
+        if (!r.ok) throw new Error(`Status ${r.status}: ${text}`);
+        if (!text) return { success: true, data: [], meta: { total: 0, totalPages: 1 } };
+        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid product JSON: " + text.substring(0, 100)); }
+      })
       .then((res) => {
         if (res.success && res.data) {
           const mapped = res.data.map((p) => {
@@ -425,6 +446,10 @@ export default function BrickCatalogue() {
         ? prev.filter(p => p.id !== prod.id)
         : [...prev, prod]
     );
+  }, []);
+
+  const handleSample = useCallback((product) => {
+    setSelected(product);
   }, []);
 
   const displayedProducts = showFavourites ? favourites : products;
@@ -616,7 +641,7 @@ export default function BrickCatalogue() {
                   >
                     <PremiumCard
                       product={p}
-                      onSample={(p) => setSelected(p)}
+                      onSample={handleSample}
                       isFavourite={favourites.some(fav => fav.id === p.id)}
                       onToggleFavourite={handleToggleFavourite}
                       isCompared={compareQueue.some(comp => comp.id === p.id)}
@@ -665,20 +690,54 @@ export default function BrickCatalogue() {
       <Footer />
 
       {/* Floating Compare Bar */}
-      {compareQueue.length > 0 && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#ccab7b]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4 animate-fade-in-up">
-          <span className="text-[11px] uppercase tracking-widest text-white/80 font-medium">
-            <span className="text-[#ccab7b] font-bold">{compareQueue.length}</span> items to compare
-          </span>
-          <div className="w-px h-4 bg-white/10"></div>
-          <button onClick={() => alert("Full Compare View Coming Soon in next update!")} className="text-[10px] uppercase tracking-widest text-[#ccab7b] font-bold hover:text-white transition-colors">
-            Compare Now
-          </button>
-          <button onClick={() => setCompareQueue([])} className="text-white/40 hover:text-white ml-2">
-            <X size={14} />
-          </button>
-        </div>
-      )}
+      <AnimatePresence>
+        {compareQueue.length > 0 && !showCompare && (
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 40, opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#ccab7b]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4"
+          >
+            {/* Thumbnails */}
+            <div className="flex items-center gap-2">
+              {compareQueue.map(p => (
+                <div key={p.id} className="w-8 h-8 rounded-full border border-[#ccab7b]/40 overflow-hidden bg-[#111] shrink-0">
+                  {p.image
+                    ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                    : <div className="w-full h-full bg-[#3a2e1e]" />
+                  }
+                </div>
+              ))}
+              {compareQueue.length < 3 && (
+                <div className="w-8 h-8 rounded-full border border-dashed border-white/15 flex items-center justify-center text-white/20 text-sm">+</div>
+              )}
+            </div>
+            <div className="w-px h-4 bg-white/10" />
+            <span className="text-[11px] uppercase tracking-widest text-white/60 font-medium">
+              <span className="text-[#ccab7b] font-bold">{compareQueue.length}</span>/3 selected
+            </span>
+            <div className="w-px h-4 bg-white/10" />
+            <button
+              onClick={() => setShowCompare(true)}
+              className="text-[10px] uppercase tracking-widest text-[#ccab7b] font-bold hover:text-white transition-colors"
+            >
+              Compare Now
+            </button>
+            <button onClick={() => setCompareQueue([])} className="text-white/40 hover:text-white ml-1">
+              <X size={14} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Full Compare Specification Modal */}
+      <CompareModal 
+         open={showCompare} 
+         products={compareQueue} 
+         onClose={() => setShowCompare(false)} 
+         onRemove={handleToggleCompare} 
+      />
     </div>
   );
 }
