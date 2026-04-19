@@ -439,19 +439,20 @@ const FAQSection = () => {
   );
 };
 
-/* ══ MAIN ══════════════════════════════════════════════════ */
+let introPlayedSession = false;
+
 export default function Homepage({ navigate }) {
   const introVideoRef = useRef(null);
   const mainVideoRef = useRef(null);
-  const [isVideo1Ended, setIsVideo1Ended] = useState(() => sessionStorage.getItem('mmg_introPlayed') === 'true');
-  const [introFading, setIntroFading] = useState(() => sessionStorage.getItem('mmg_introPlayed') === 'true');
+  const [isVideo1Ended, setIsVideo1Ended] = useState(introPlayedSession);
+  const [introFading, setIntroFading] = useState(introPlayedSession);
   const { scrollY } = useScroll();
   const heroTextY = useTransform(scrollY, [0, 600], [0, -90]);
   const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
 
   useEffect(() => {
     if (introVideoRef.current) introVideoRef.current.playbackRate = 1.5;
-    if (sessionStorage.getItem('mmg_introPlayed') === 'true' && mainVideoRef.current) {
+    if (introPlayedSession && mainVideoRef.current) {
         mainVideoRef.current.play().catch(console.error);
     }
   }, []);
@@ -614,10 +615,41 @@ export default function Homepage({ navigate }) {
                   mainVideoRef.current.play().catch(console.error);
               }
             }}
-          />
-          {/* Soft dark vignette to frame the hero */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
-        </div>
+          >
+            <video
+              ref={introVideoRef}
+              src="/video1-optim.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              onTimeUpdate={(e) => {
+                const v = e.currentTarget;
+                if (
+                  v.duration &&
+                  v.currentTime >= v.duration - 1.8 &&
+                  !introFading
+                ) {
+                  setIntroFading(true);
+                  introPlayedSession = true;
+                  if (mainVideoRef.current)
+                    mainVideoRef.current.play().catch(console.error);
+                }
+              }}
+              onEnded={() => {
+                if (!introFading) {
+                  setIntroFading(true);
+                  introPlayedSession = true;
+                  if (mainVideoRef.current)
+                    mainVideoRef.current.play().catch(console.error);
+                }
+              }}
+            />
+            {/* Dark vignette over intro video for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20 pointer-events-none" />
+          </div>
+        )}
       </section>
 
       {/* STAT BAR */}
