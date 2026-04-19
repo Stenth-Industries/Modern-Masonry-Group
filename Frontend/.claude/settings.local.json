@@ -33,7 +33,15 @@
       "Bash(npm list:*)",
       "Bash(npx openskills:*)",
       "Bash(npx skillfish:*)",
-      "Bash(npx skills:*)"
+      "Bash(npx skills:*)",
+      "Bash(git commit *)",
+      "Skill(firecrawl-search)",
+      "Bash(python -c ' *)",
+      "Skill(ai-image-generator)",
+      "Bash(py -3 -c \"import sys,json; [print\\(m['name']\\) for m in json.load\\(sys.stdin\\).get\\('models',[]\\) if 'image' in m['name'].lower\\(\\)]\")",
+      "Bash(py *)",
+      "Bash(file public/services/*)",
+      "Bash(du -sh public/services/*)"
     ]
   }
 }
