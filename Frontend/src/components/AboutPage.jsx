@@ -133,7 +133,7 @@ export default function AboutPage({ navigate }) {
         <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row gap-16 md:gap-24 items-center">
            <div className="w-full md:w-1/2">
              <FadeUp delay={0.2} className="relative overflow-hidden rounded-sm group">
-               <img src="../public/carmine-enhanced.png" alt="Meet Our CEO" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
+               <img src="/carmine-enhanced.png" alt="Meet Our CEO" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
              </FadeUp>
            </div>
            <div className="w-full md:w-1/2">
@@ -238,7 +238,7 @@ Working directly with us or through our extensive network of distributors across
            </div>
            <div className="w-full md:w-1/2">
              <FadeUp delay={0.3} className="relative overflow-hidden rounded-sm group">
-               <img src="../public/2024-06-07.webp" alt="Give Us A Shout" className="w-[80%] h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
+               <img src="/2024-06-07.webp" alt="Give Us A Shout" className="w-[80%] h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
              </FadeUp>
            </div>
         </div>
