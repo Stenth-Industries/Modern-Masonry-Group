@@ -494,7 +494,7 @@ export default function Homepage({ navigate }) {
           src="/video2-optim.mp4"
           className="absolute inset-0 w-full h-full object-cover z-[1]"
           style={{
-            opacity: introFading ? 1 : 0,
+            opacity: introFading ? 0.8 : 0,
             transition: "opacity 1.8s ease-in-out",
             willChange: "opacity",
             transform: "translateZ(0)",
@@ -579,7 +579,7 @@ export default function Homepage({ navigate }) {
         <div
           className="absolute inset-0 z-[4] pointer-events-none bg-black"
           style={{
-            opacity: isVideo1Ended ? 0 : introFading ? 0 : 1,
+            opacity: isVideo1Ended ? 0 : introFading ? 0 : 0.8,
             transition: "opacity 1.8s ease-in-out",
             willChange: "opacity",
             transform: "translateZ(0)",
