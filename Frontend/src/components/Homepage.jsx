@@ -604,6 +604,7 @@ export default function Homepage({ navigate }) {
                 !introFading
               ) {
                 setIntroFading(true);
+                introPlayedSession = true;
                 if (mainVideoRef.current)
                   mainVideoRef.current.play().catch(console.error);
               }
@@ -611,45 +612,15 @@ export default function Homepage({ navigate }) {
             onEnded={() => {
               if (!introFading) {
                 setIntroFading(true);
+                introPlayedSession = true;
                 if (mainVideoRef.current)
                   mainVideoRef.current.play().catch(console.error);
               }
             }}
-          >
-            <video
-              ref={introVideoRef}
-              src="/video1-optim.mp4"
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              onTimeUpdate={(e) => {
-                const v = e.currentTarget;
-                if (
-                  v.duration &&
-                  v.currentTime >= v.duration - 1.8 &&
-                  !introFading
-                ) {
-                  setIntroFading(true);
-                  introPlayedSession = true;
-                  if (mainVideoRef.current)
-                    mainVideoRef.current.play().catch(console.error);
-                }
-              }}
-              onEnded={() => {
-                if (!introFading) {
-                  setIntroFading(true);
-                  introPlayedSession = true;
-                  if (mainVideoRef.current)
-                    mainVideoRef.current.play().catch(console.error);
-                }
-              }}
-            />
-            {/* Dark vignette over intro video for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20 pointer-events-none" />
-          </div>
-        )}
+          />
+          {/* Dark vignette over intro video for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20 pointer-events-none" />
+        </div>
       </section>
 
       {/* STAT BAR */}
