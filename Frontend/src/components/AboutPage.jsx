@@ -56,33 +56,41 @@ export default function AboutPage({ navigate }) {
 
       {/* HERO SECTION */}
       <section className="relative h-screen bg-black overflow-hidden flex items-center justify-center text-center px-4">
-        <video 
+        {/* <video 
           autoPlay 
           muted 
           loop 
           playsInline
           className="absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-75" 
           src="https://usbrick.com/wp-content/uploads/2024/09/4279-476c-ba9c-4ff2bf93a2f9.mov" 
+        /> */}
+        <img 
+          src="https://usbrick.com/wp-content/uploads/2024/09/05853e6ea60ef9c81013003cc0a8221b-scaled.jpeg" 
+          alt="Hero background" 
+          className="absolute inset-0 w-full h-full object-cover grayscale-[0.1] brightness-[0.5]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent" />
         
-        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col justify-center h-full text-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col justify-end h-full text-right px-8 md:px-20 items-end pb-24 md:pb-32">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl lg:text-[120px] font-black text-white uppercase tracking-tighter leading-none shadow-sm"
+            className="text-4xl md:text-6xl lg:text-[80px] font-black text-white uppercase tracking-tighter leading-none pr-20"
           >
-            BORN HERE.<br/>BUILT HERE.
+            BORN HERE. BUILT HERE.
           </motion.h1>
-          <motion.span 
+          <motion.div 
             initial={{ y: 20, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xl md:text-3xl text-[var(--brass)] mt-6 font-light uppercase tracking-widest drop-shadow-md"
+            className="flex items-center gap-4 mt-8"
           >
-            Since 1939
-          </motion.span>
+            <div className="h-px w-12 bg-[var(--brass)]" />
+            <span className="text-xl md:text-2xl text-[var(--brass)] font-bold uppercase tracking-[0.3em]">
+              Since 1994
+            </span>
+          </motion.div>
         </div>
       </section>
 
@@ -93,22 +101,22 @@ export default function AboutPage({ navigate }) {
             <FadeUp>
               <h2 className="text-[var(--brass)] text-4xl md:text-5xl font-bold mb-6 tracking-tight">Our Roots</h2>
             </FadeUp>
-            <FadeUp delay={0.2} className="text-[var(--ash)] text-lg mb-10 leading-relaxed font-light">
+            <FadeUp delay={0.2} className="text-[var(--ash)] text-lg mb-10 leading-relaxed ">
               <p className="mb-6">
-                US Brick was born from the acquisition of Carolina Ceramics, a family-owned firebrick manufacturer founded in 1939 in Columbia, South Carolina. This rich legacy of craftsmanship and dedication to quality laid the foundation for who we are today.
+                Modern Masonry Group was built on a foundation of craftsmanship, experience, and a vision to redefine masonry in Ontario. With decades of combined expertise in both material supply and installation, we bring together the precision of skilled artisans with a deep understanding of architectural design.
               </p>
               <p>
-                Since our inception in 2020, we have increased our production capabilities from 60 million to 350 million bricks annually and expanded our operations to include manufacturing facilities in Tennessee, Alabama, and Indiana. As we continue to grow, we remain focused on crafting relationships as strong as the products we produce. Our success is driven by our core values: flexibility, customer advocacy, teamwork and personal responsibility.
+             From premium brick and natural stone to custom precast and limestone, our work is driven by quality, durability, and refined execution. We partner with homeowners, builders, and architects across Ontario to deliver tailored solutions and lasting results — built on precision, performance, and trust.
               </p>
             </FadeUp>
             
             <FadeUp delay={0.3} className="flex flex-col gap-2">
                <Accordion title="Our Craft">
-                 <p className="mb-4">Building on the classic collections inherited from various Legacy Brands, we’re continuously expanding our product offerings to meet diverse architectural and modern-day needs. We believe in the power of local inspiration, drawing from the unique charm and history of our surroundings to create products that unite tradition with modern aesthetics.</p>
-                 <p>Beyond brick, we also supply a wide range of materials from hardscapes and stone to premium shutters and outdoor living kits.</p>
+                 <p className="mb-4">Building on years of industry experience, we continuously refine our approach to sourcing and supplying materials that meet the demands of modern architecture. Our collections are carefully curated to balance performance, durability, and timeless design ensuring every project is built with intention. Inspired by evolving architectural trends and real-world application, we work closely with builders, designers, and homeowners to deliver solutions that seamlessly bring structure and aesthetic together.</p>
+                 <p>Beyond brick and stone, we offer a complete range of masonry and hardscape materials from natural stone and precast elements to outdoor living solutions. Supporting every stage of your project, we deliver with precision, reliability, and a commitment to lasting quality.</p>
                </Accordion>
                <Accordion title="Our Approach">
-                 <p>We view every interaction as an opportunity to build a lasting relationship. We’re here to guide you every step of the way, providing quick support and, if needed, connecting you with the right sources to ensure your project’s success.</p>
+                 <p>We work as partners in every project offering expert guidance, responsive support, and tailored solutions from start to finish. Our focus is simple: make the process seamless and deliver results you can rely on.</p>
                </Accordion>
             </FadeUp>
           </div>
@@ -125,22 +133,25 @@ export default function AboutPage({ navigate }) {
         <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row gap-16 md:gap-24 items-center">
            <div className="w-full md:w-1/2">
              <FadeUp delay={0.2} className="relative overflow-hidden rounded-sm group">
-               <img src="https://usbrick.com/wp-content/uploads/2024/09/d010b39f73e25a438e3a94731371b76d-scaled.jpeg" alt="Meet Our CEO" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
+               <img src="../public/carmine-enhanced.png" alt="Meet Our CEO" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
              </FadeUp>
            </div>
            <div className="w-full md:w-1/2">
               <FadeUp>
-                 <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 tracking-tight">Meet Our CEO, Mikee</h2>
+                 <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 tracking-tight">Meet Our CEO, Carmine</h2>
               </FadeUp>
-              <FadeUp delay={0.2} className="text-[var(--ash)] text-lg leading-relaxed mb-8 font-light">
-                 <p className="mb-6">Mikee Johnson, the driving force behind US Brick, exemplifies leadership characterized by a hands-on, accountable approach. Growing up in Orangeburg, South Carolina, Mikee’s journey began in his family’s business, Cox Industries. From a summer laborer in 1985 to CEO in 2008, he’s always believed in the importance of community involvement and leadership beyond the boardroom. In 2020, he transitioned from ‘sticks to bricks’ by acquiring Carolina Ceramics, leading to the founding of US Brick.</p>
-                 <p>Today, Mikee remains actively involved in the company’s daily operations. He drives his team to celebrate successes, tackle challenges head-on, and take initiative. His proactive and empowering leadership style encourages team members to lead by example and stay responsive to each other’s needs. As he often says, “Success comes from making more good decisions than bad.”</p>
+              <FadeUp delay={0.2} className="text-[var(--ash)] text-lg leading-relaxed mb-8">
+                 <p className="mb-4">"I didn't start this company to build walls — I started it to build something that lasts."</p>
+                 <p className="mb-4">Carmine Bruno founded Modern Masonry Group with a simple but powerful conviction: that skilled craftsmanship and modern standards belong together. Growing up with a deep respect for the trades, Carmine saw firsthand how much pride goes into building something with your hands and how little recognition that work often receives.</p>
+                 <p>That passion led him to Seneca Polytechnic, where he combined a practical, hands-on education with a growing vision for what a masonry company could be not just a contractor, but a trusted partner in the communities it serves. Armed with technical knowledge and an entrepreneurial drive, Carmine set out to build a company that would raise the bar for quality, reliability, and professionalism in the industry.
+
+Today, Modern Masonry Group is a reflection of everything Carmine believes in: meticulous attention to detail, long-lasting relationships with clients, and a team that takes as much pride in their work as he does. For Carmine, every project is personal because every structure his team builds is meant to stand the test of time, just like the values it was built on.</p>
               </FadeUp>
               <FadeUp delay={0.3}>
-                 <Accordion title="Continue Reading">
+                 {/* <Accordion title="Continue Reading">
                     <p className="mb-4">Outside of US Brick, Mikee is an avid outdoorsman and family man, devoted to his wife Cyndi and their three children, Brady, Lilly Rae, and Causey, and grandson William. Academically, he holds a degree in English and Political Science from Furman University and two MBAs—one from Kennesaw State University, focusing on Family Business, and another from the Darla Moore School of Business at the University of South Carolina.</p>
                     <p>He has received numerous accolades, including South Carolina Business Leader of the Year and the Order of the Palmetto. Through his transformative leadership, Mikee has turned US Brick into a close-knit family dedicated to excellence, integrity, and making a significant impact both inside and outside the workplace.</p>
-                 </Accordion>
+                 </Accordion> */}
               </FadeUp>
            </div>
         </div>
@@ -181,7 +192,7 @@ export default function AboutPage({ navigate }) {
       </section>
 
       {/* PRESS & AFFILIATIONS */}
-      <section className="relative py-32 bg-[#0a0a0a] overflow-hidden z-10 border-t border-white/5">
+      {/* <section className="relative py-32 bg-[#0a0a0a] overflow-hidden z-10 border-t border-white/5">
         <div className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none mix-blend-screen" style={{ backgroundImage: "url('https://usbrick.com/wp-content/uploads/2024/07/Rectangle-113.png')" }} />
         <div className="relative z-10 w-full">
           <FadeUp className="mb-16">
@@ -205,7 +216,7 @@ export default function AboutPage({ navigate }) {
             </InfiniteSlider>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* GIVE US A SHOUT */}
       <section className="relative py-24 px-8 md:px-20 bg-black border-t border-white/5 z-10">
@@ -214,8 +225,10 @@ export default function AboutPage({ navigate }) {
               <FadeUp>
                  <h2 className="text-[var(--brass)] text-4xl md:text-5xl font-bold mb-6 tracking-tight">Give Us a Shout</h2>
               </FadeUp>
-              <FadeUp delay={0.2} className="text-[var(--ash)] text-lg leading-relaxed mb-10 font-light">
-                 <p>We’re here to help! Whether you are working directly with us or through our extensive network of distributors, you can count on us to be there with the support you need.</p>
+              <FadeUp delay={0.2} className="text-[var(--ash)] text-lg leading-relaxed mb-10 ">
+                 <p>We're here to help. Whether you're a homeowner planning your next project, a builder looking for a reliable masonry partner, or an architect sourcing premium materials the Modern Masonry Group team is ready to step in and make things happen.
+
+Working directly with us or through our extensive network of distributors across Ontario, you can count on responsive support, expert guidance, and a team that genuinely cares about getting it right. No project is too big, no question too small we're in your corner from the first call to the final stone.</p>
               </FadeUp>
               <FadeUp delay={0.4}>
                  <button onClick={() => navigate('#contact')} className="bg-transparent border border-[var(--brass)] text-[var(--brass)] px-10 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass)] hover:text-black transition-colors rounded-full flex items-center gap-3">
@@ -225,7 +238,7 @@ export default function AboutPage({ navigate }) {
            </div>
            <div className="w-full md:w-1/2">
              <FadeUp delay={0.3} className="relative overflow-hidden rounded-sm group">
-               <img src="https://usbrick.com/wp-content/uploads/2024/09/05853e6ea60ef9c81013003cc0a8221b-scaled.jpeg" alt="Give Us A Shout" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
+               <img src="../public/2024-06-07.webp" alt="Give Us A Shout" className="w-[80%] h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
              </FadeUp>
            </div>
         </div>

@@ -113,9 +113,9 @@ const SERVICES = [
         }}
       />
     ),
-    tag: "Design & Technical Guidance",
+    tag: "Installation, Maintenance & Repairs",
     title: "Expert Consultation",
-    desc: "Work alongside masonry specialists who collaborate with architects, builders, and designers to specify the right materials, finishes, and systems for your vision.",
+    desc: "Work alongside masonry specialists who collaborate with architects and builders delivering precise material selection, expert installation, and ongoing maintenance and repairs to protect your investment and ensure lasting performance.",
   },
   {
     icon: (
@@ -490,7 +490,7 @@ export default function Homepage({ navigate }) {
           src="/video2-optim.mp4"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{
-            opacity: introFading ? 0.6 : 0,
+            opacity: introFading ? 0.9 : 0, 
             transition: "opacity 1.8s ease-in-out",
             willChange: "opacity",
             transform: "translateZ(0)",
@@ -502,7 +502,7 @@ export default function Homepage({ navigate }) {
         />
 
         {/* Persistent dark overlay — keeps text legible over video */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-black/70 via-black/45 to-black/25 pointer-events-none" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-black/60 via-black/40 to-black/20 pointer-events-none" />
 
         {/* Layer 1: Decorative grid lines */}
         <div className="absolute inset-0 z-[2] opacity-20 pointer-events-none">
@@ -615,7 +615,7 @@ export default function Homepage({ navigate }) {
               }}
             />
             {/* Dark vignette over intro video for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/45 to-black/25 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20 pointer-events-none" />
           </div>
         )}
       </section>

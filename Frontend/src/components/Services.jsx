@@ -7,7 +7,6 @@ import {
   useSpring,
   useMotionValue,
   AnimatePresence,
-  useMotionTemplate,
 } from "framer-motion";
 import {
   ArrowRight,
@@ -399,12 +398,107 @@ const bulletItem = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
 };
 
+const SERVICE_VISUALS = [
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.32)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.18), rgba(0,0,0,0) 58%)",
+    base: "linear-gradient(160deg, #16120d 0%, #221911 48%, #0d0b09 100%)",
+    slab: "linear-gradient(140deg, #4f3b2a 0%, #8d6b4e 42%, #c6a27b 100%)",
+    detail: "Inventory Wall",
+  },
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.26)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.16), rgba(0,0,0,0) 62%)",
+    base: "linear-gradient(145deg, #101113 0%, #15181d 50%, #0b0c0e 100%)",
+    slab: "linear-gradient(140deg, #b5b1a5 0%, #e5dccf 45%, #8f8a80 100%)",
+    detail: "Design Studio",
+  },
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.3)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.18), rgba(0,0,0,0) 55%)",
+    base: "linear-gradient(145deg, #0d1014 0%, #17212a 48%, #0a0b0d 100%)",
+    slab: "linear-gradient(140deg, #465564 0%, #90a0af 45%, #cfd9df 100%)",
+    detail: "Logistics Grid",
+  },
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.3)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.16), rgba(0,0,0,0) 60%)",
+    base: "linear-gradient(145deg, #12100d 0%, #1b1712 48%, #090807 100%)",
+    slab: "linear-gradient(140deg, #6c5846 0%, #b08e69 45%, #efe2ca 100%)",
+    detail: "Trade Desk",
+  },
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.28)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.18), rgba(0,0,0,0) 58%)",
+    base: "linear-gradient(145deg, #17130f 0%, #241c14 48%, #0d0b08 100%)",
+    slab: "linear-gradient(140deg, #8c735a 0%, #d4ba97 45%, #f3e8d1 100%)",
+    detail: "Showroom Boards",
+  },
+  {
+    accent: "#C9A449",
+    glow: "rgba(201,164,73,0.28)",
+    panel: "linear-gradient(135deg, rgba(201,164,73,0.16), rgba(0,0,0,0) 60%)",
+    base: "linear-gradient(145deg, #101011 0%, #18191c 48%, #080809 100%)",
+    slab: "linear-gradient(140deg, #7d6957 0%, #bda089 45%, #f0e3d2 100%)",
+    detail: "Sample Boards",
+  },
+];
+
+function ServiceVisual({ service, index }) {
+  const visual = SERVICE_VISUALS[index % SERVICE_VISUALS.length];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={{ background: `${visual.panel}, ${visual.base}` }}>
+      <div
+        className="absolute inset-x-[8%] top-[10%] h-[72%] rounded-[28px] border"
+        style={{
+          background: visual.slab,
+          borderColor: "rgba(255,255,255,0.12)",
+          boxShadow: `0 0 0 1px rgba(255,255,255,0.04), 0 24px 80px ${visual.glow}`,
+        }}
+      />
+      <div className="absolute inset-x-[15%] top-[18%] h-[10px] rounded-full bg-black/25" />
+      <div className="absolute left-[15%] right-[15%] top-[28%] bottom-[26%] grid grid-cols-3 gap-4 opacity-80">
+        {[0, 1, 2].map((col) => (
+          <div key={col} className="relative overflow-hidden rounded-[18px] border border-white/10 bg-black/25">
+            <div className="absolute inset-x-0 top-[18%] h-[1px] bg-white/30" />
+            <div className="absolute inset-x-0 top-[48%] h-[1px] bg-white/25" />
+            <div className="absolute inset-x-0 top-[76%] h-[1px] bg-white/20" />
+            <div className="absolute top-0 bottom-0 left-[35%] w-[1px] bg-white/15" />
+            <div className="absolute top-0 bottom-0 left-[70%] w-[1px] bg-white/10" />
+          </div>
+        ))}
+      </div>
+      <div className="absolute left-[12%] right-[12%] bottom-[14%] flex items-end justify-between">
+        <div>
+          <div className="text-[11px] uppercase tracking-[0.28em] font-bold" style={{ color: visual.accent }}>
+            {service.tag}
+          </div>
+          <div className="mt-2 text-[26px] text-[#f0e8da]" style={{ fontFamily: "'Playfair Display', serif" }}>
+            {visual.detail}
+          </div>
+        </div>
+        <div
+          className="h-10 w-10 rounded-full border"
+          style={{ borderColor: `${visual.accent}66`, background: "rgba(0,0,0,0.24)", boxShadow: `0 0 30px ${visual.glow}` }}
+        />
+      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_28%),linear-gradient(to_top,rgba(0,0,0,0.6),transparent_45%)]" />
+    </div>
+  );
+}
+
 function ServiceCard({ service, index, navigate }) {
   const isEven = index % 2 === 0;
   const ref = useRef(null);
   const { scrollYProgress: cardScroll } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(cardScroll, [0, 1], ["-10%", "10%"]);
-  const imgScale = useTransform(cardScroll, [0, 0.5, 1], [1.1, 1, 1.1]);
+  const imgY = useTransform(cardScroll, [0, 1], ["-4%", "4%"]);
+  const imgScale = useTransform(cardScroll, [0, 0.5, 1], [1.04, 1, 1.04]);
   const inView = useInView(ref, { once: true, margin: "-200px 0px" });
 
   return (
@@ -413,49 +507,16 @@ function ServiceCard({ service, index, navigate }) {
       initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
       animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
       transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} border border-white/[0.07] rounded-2xl overflow-hidden group hover:border-[var(--brass)]/40 transition-all duration-500 hover:shadow-[0_0_60px_rgba(204,171,123,0.06)]`}
+      className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-10 lg:gap-16 xl:gap-20 group transition-all duration-500`}
     >
-      {/* Image panel with local parallax */}
-      <div className="relative lg:w-[42%] aspect-[4/3] lg:aspect-auto shrink-0 overflow-hidden bg-black/50 group-hover:bg-black/40 transition-colors duration-700">
-        <motion.img
-          src={service.img}
-          alt={service.title}
-          style={{ y: imgY, scale: imgScale, transformOrigin: 'center' }}
-          className="absolute inset-0 w-full h-[120%] -top-[10%] object-cover opacity-40 group-hover:opacity-65 transition-opacity duration-700 ease-out mix-blend-screen"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-
-        {/* Animated brass border trace on hover */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          initial={false}
-        >
-          <motion.div
-            className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-[var(--brass)] to-transparent"
-            initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
-            style={{ transformOrigin: "left" }}
-            transition={{ duration: 0.5 }}
-          />
-        </motion.div>
-
-        {/* Tag chip */}
-        <motion.div
-          className="absolute top-5 left-5"
-          initial={{ opacity: 0, y: -8 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-[var(--brass)] bg-black/60 backdrop-blur-sm border border-[var(--brass)]/30 px-3 py-1.5 rounded-full">
-            {service.tag}
-          </span>
+      <div className="relative lg:w-[48%] w-full min-h-[340px] lg:min-h-[520px] shrink-0 overflow-hidden rounded-[20px] bg-black/35">
+        <motion.div style={{ y: imgY, scale: imgScale, transformOrigin: "center" }} className="absolute inset-0">
+          <ServiceVisual service={service} index={index} />
         </motion.div>
       </div>
 
-      {/* Content panel */}
-      <div className="flex flex-col justify-between p-8 lg:p-12 flex-1 bg-gradient-to-br from-white/[0.025] to-transparent">
+      <div className="flex flex-col justify-between flex-1 w-full py-3 lg:py-6">
         <div>
-          {/* Icon + line */}
           <motion.div
             className="flex items-center gap-3 mb-5"
             initial={{ opacity: 0 }}
@@ -478,8 +539,17 @@ function ServiceCard({ service, index, navigate }) {
             />
           </motion.div>
 
+          <motion.p
+            className="text-[11px] uppercase tracking-[0.22em] text-[var(--brass)] font-bold mb-4"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.28 }}
+          >
+            {service.number} / {service.title}
+          </motion.p>
+
           <motion.h3
-            className="text-3xl lg:text-4xl font-normal text-[#e3decb] mb-2 leading-tight"
+            className="text-3xl lg:text-[2.85rem] font-normal text-[#e3decb] mb-4 leading-tight max-w-[12ch]"
             style={{ fontFamily: "'Playfair Display', serif" }}
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -489,16 +559,7 @@ function ServiceCard({ service, index, navigate }) {
           </motion.h3>
 
           <motion.p
-            className="text-[11px] uppercase tracking-[0.2em] text-[var(--brass)] font-bold mb-5"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.35 }}
-          >
-            {service.title}
-          </motion.p>
-
-          <motion.p
-            className="text-white/50 text-[15px] leading-relaxed mb-7 max-w-xl"
+            className="text-white/50 text-[15px] leading-[1.9] mb-10 max-w-xl"
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -506,9 +567,8 @@ function ServiceCard({ service, index, navigate }) {
             {service.description}
           </motion.p>
 
-          {/* Staggered bullets */}
           <motion.ul
-            className="space-y-2.5 mb-8"
+            className="grid grid-cols-1 xl:grid-cols-2 gap-x-10 gap-y-4 mb-12"
             variants={bulletVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -539,7 +599,7 @@ function ServiceCard({ service, index, navigate }) {
         >
           <button
             onClick={() => navigate(service.ctaHash)}
-            className="group/cta inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-bold text-[var(--brass)] hover:text-white transition-colors duration-300 relative"
+            className="group/cta inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] font-bold text-[var(--brass)] hover:text-white transition-colors duration-300 relative"
           >
             <motion.span
               className="absolute -bottom-0.5 left-0 h-px bg-[var(--brass)]"
@@ -719,61 +779,11 @@ function FAQItem({ faq, index }) {
 
 export default function Services({ navigate }) {
   const containerRef = useRef(null);
-  const heroRef = useRef(null);
-  
-  // Interactive flashlight
-  const mouseX = useMotionValue(typeof window !== "undefined" ? window.innerWidth / 2 : 0);
-  const mouseY = useMotionValue(typeof window !== "undefined" ? window.innerHeight / 2 : 0);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    
-    let isUserActive = false;
-    
-    // Auto-tease Cinematic Sweep
-    const sweep1 = setTimeout(() => { if (!isUserActive) { mouseX.set(w * 0.8); mouseY.set(h * 0.3); } }, 600);
-    const sweep2 = setTimeout(() => { if (!isUserActive) { mouseX.set(w * 0.2); mouseY.set(h * 0.7); } }, 1800);
-    const sweep3 = setTimeout(() => { if (!isUserActive) { mouseX.set(w * 0.5); mouseY.set(h * 0.5); } }, 3200);
-
-    const handleMouseMove = (e) => {
-      isUserActive = true;
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(sweep1);
-      clearTimeout(sweep2);
-      clearTimeout(sweep3);
-    };
-  }, [mouseX, mouseY]);
-
-  const flashlightBg = useTransform(
-    [mouseX, mouseY],
-    ([x, y]) => `radial-gradient(circle 800px at ${x}px ${y}px, rgba(204,171,123,0.06), transparent 80%)`
-  );
 
   // SCROLL HOOKS
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   const globalBgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  
-  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(heroScroll, [0, 1], ["0%", "25%"]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.5], [1, 0]);
   const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  // X-RAY MASK LOGIC
-  const smoothX = useSpring(mouseX, { damping: 40, stiffness: 100, mass: 0.8 });
-  const smoothY = useSpring(mouseY, { damping: 40, stiffness: 100, mass: 0.8 });
-  
-  // Base radius expands massively and rapidly when scrolled down (accelerated reveal)
-  const scrollRadius = useTransform(heroScroll, [0, 0.03], [22, 160]);
-  const maskRadius = useSpring(scrollRadius, { damping: 30, stiffness: 120 });
-  const xrayMask = useMotionTemplate`radial-gradient(circle ${maskRadius}vh at ${smoothX}px ${smoothY}px, black 0%, rgba(0,0,0,0.8) 20%, transparent 60%)`;
 
   return (
     <div ref={containerRef} className="min-h-screen text-white font-sans relative">
@@ -790,99 +800,51 @@ export default function Services({ navigate }) {
           className="absolute inset-0 bg-cover bg-center h-[115%] w-full pointer-events-none mix-blend-luminosity opacity-40" 
           style={{ backgroundImage: "url('/bg.png')", y: globalBgY }} 
         />
-        {/* Dynamic Interactive Flashlight */}
-        <motion.div 
-          className="absolute inset-0 pointer-events-none z-10" 
-          style={{ background: flashlightBg }} 
-        />
       </div>
       <div className="fixed inset-0 z-0 bg-black/40 pointer-events-none" />
 
       <div className="relative z-10">
 
         {/* ── HERO: X-Ray Refraction Reality Shift ──────────────────────────── */}
-        <section ref={heroRef} className="relative h-screen min-h-[850px] w-full flex items-center justify-center overflow-hidden bg-black cursor-crosshair">
-          
-           {/* BOTTOM LAYER (The Raw Material) */}
-           <div className="absolute inset-0 z-0 bg-black">
-              <motion.div 
-                style={{ y: useTransform(heroScroll, [0, 1], ["0%", "15%"]) }}
-                className="absolute inset-0 w-full h-[120%] bg-cover bg-center grayscale opacity-20 transition-transform duration-1000"
-                style={{ backgroundImage: "url('/bg.png')" }} 
-              />
-              <div className="absolute inset-0 bg-black/80 mix-blend-multiply" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center pb-20 pointer-events-none">
-                 <span className="text-white/20 tracking-[1em] text-[10px] md:text-xs uppercase mb-8 font-medium">The Foundation</span>
-                 <h1 className="text-[10vw] font-black tracking-tighter text-transparent uppercase leading-[0.9] drop-shadow-2xl text-center pb-4" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
-                   THE RAW ELEMENT
-                 </h1>
-              </div>
-              
-              {/* Raw floating particles */}
-              {[...Array(15)].map((_, i) => (
-                 <motion.div
-                   key={i}
-                   className="absolute w-1 h-1 rounded-sm bg-white/5 pointer-events-none backdrop-blur-sm"
-                   style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
-                   animate={{ y: [0, -60, 0], opacity: [0, 1, 0] }}
-                   transition={{ duration: 7 + i, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                 />
-              ))}
-           </div>
- 
-           {/* TOP LAYER (The Finished Reality - Masked dynamically by Cursor) */}
-           <motion.div 
-              className="absolute inset-0 z-10 pointer-events-none"
-              style={{ maskImage: xrayMask, WebkitMaskImage: xrayMask }}
-           >
-              {/* The completed architecture masterpiece image */}
-              <motion.div 
-                style={{ y: useTransform(heroScroll, [0, 1], ["0%", "20%"]), scale: 1.05 }}
-                className="absolute inset-0 w-full h-[120%] bg-cover bg-center brightness-110 saturate-[1.1]"
-                style={{ backgroundImage: "url('/nano_banana.png')" }} 
-              />
-              
-              {/* Very elegant vignette to ensure text always pops */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/50" />
-              
-              {/* The "Perfect" Reality Text */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center pb-20">
-                 <span className="text-[var(--brass-light)] tracking-[1em] text-[10px] md:text-xs uppercase mb-8 font-bold drop-shadow-[0_0_15px_rgba(0,0,0,1)]">The Masterpiece</span>
-                 <h1 className="text-[12vw] font-normal tracking-tight text-white leading-[0.9] drop-shadow-[0_10px_40px_rgba(0,0,0,0.9)] text-center pb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-                   The Final Vision.
-                 </h1>
-              </div>
-           </motion.div>
+        <section className="relative min-h-[760px] w-full overflow-hidden bg-black">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(201,164,73,0.16),transparent_24%),radial-gradient(circle_at_80%_24%,rgba(201,164,73,0.1),transparent_24%),linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.75))]" />
+          <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: "url('/nano_banana.png')" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-[rgba(7,7,7,0.94)] via-[rgba(7,7,7,0.58)] to-[rgba(7,7,7,0.84)]" />
 
-          {/* STATIC FLOATING CONTROLS (Always Visible on Top of everything) */}
-          <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-8 md:p-12">
-             <div className="w-full flex justify-between items-start text-white/60 text-[10px] uppercase tracking-[0.3em] font-bold">
-                <span className="flex items-center gap-3 bg-black/20 px-4 py-2 rounded-full backdrop-blur-md border border-white/10"><div className="w-2 h-2 rounded-full bg-[var(--brass)] animate-pulse shadow-[0_0_10px_#d4af37]" /> Scroll to Expand Reality</span>
-                <span>Services / 01</span>
-             </div>
-             
-             <div className="w-full flex justify-between items-end">
-                <div className="max-w-[300px]">
-                   <p className="text-white/40 text-[13px] leading-[2] font-light mb-8">
-                     We bridge the gap between raw natural supply and unparalleled structural design across Ontario.
-                   </p>
-                   <MagBtn
-                     onClick={() => navigate("#contact")}
-                     className="flex w-fit items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brass)] hover:text-white transition-all duration-500 pointer-events-auto"
-                   >
-                     Partner With Us <ArrowRight size={14} />
-                   </MagBtn>
+          <div className="relative z-10 max-w-7xl mx-auto min-h-[760px] px-8 md:px-14 lg:px-20 py-28 lg:py-32 flex items-end">
+            <div className="max-w-3xl">
+              <FadeUp>
+                <p className="text-[var(--brass)] text-[11px] font-bold tracking-[0.34em] uppercase mb-6">
+                  What We Do
+                </p>
+                <h1
+                  className="text-5xl md:text-7xl lg:text-[6.25rem] font-normal leading-[0.92] text-[#f3ede1] mb-8"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  Masonry Services
+                  <br />
+                  Designed Around Real Jobs
+                </h1>
+                <p className="text-white/55 text-[16px] md:text-[18px] leading-[1.9] max-w-2xl mb-10">
+                  From product supply and specification support to delivery and trade coordination, we help Ontario projects move forward with clarity, consistency, and materials selected for the way they will actually be built.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <MagBtn
+                    onClick={() => navigate("#contact")}
+                    className="bg-[var(--brass)] text-black px-7 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-[var(--brass-light)] transition-colors"
+                  >
+                    Partner With Us
+                  </MagBtn>
+                  <MagBtn
+                    onClick={() => navigate("#brick")}
+                    className="border border-white/15 text-white/75 px-7 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] hover:border-[var(--brass)] hover:text-white transition-colors"
+                  >
+                    Browse Catalogue
+                  </MagBtn>
                 </div>
-                
-                <div className="hidden md:flex flex-col items-end gap-3 text-[10px] uppercase tracking-[0.3em] text-white/30 text-right font-bold">
-                   <span className="hover:text-white transition-colors">Scale</span>
-                   <span className="hover:text-white transition-colors">Precision</span>
-                   <span className="hover:text-white transition-colors">Endurance</span>
-                </div>
-             </div>
+              </FadeUp>
+            </div>
           </div>
-
-          <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-gradient-to-t from-[var(--obsidian)] to-transparent z-30 pointer-events-none" />
         </section>
 
         {/* ── STATS BAR ────────────────────────────────────────────────────────── */}

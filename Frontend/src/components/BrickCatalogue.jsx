@@ -13,18 +13,19 @@ import {
   X
 } from "lucide-react";
 import { BrickWallPattern } from "./BrickWallPattern";
-import BrickDetailPanel from "./BrickDetail";
+import { BrickDetailPanel } from "./BrickDetailPanel";
 import CompareModal from "./CompareModal";
 import Footer from "./Footer";
 
 // ── Configuration ─────────────────────────────────────────────────────────────
 
-const ACCENT = "#ccab7b";
+const ACCENT = "#c9a449";
 
 const COLOR_MAP = {
   red: '#B4382B',
   'dark red': '#8B1A1A',
   tan: '#C4A57B',
+  burgundy: '#5D1E24',
   grey: '#808080',
   gray: '#808080',
   'light grey': '#B0B0B0',
@@ -83,7 +84,7 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
       <div className="flex items-center gap-3">
         <div
           className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
-            ? "bg-[#ccab7b] border-[#ccab7b]"
+            ? "bg-[#c9a449] border-[#c9a449]"
             : "bg-black/20 border-white/15 group-hover:border-white/40"
             }`}
         >
@@ -171,7 +172,7 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 800 }}
-      className="group flex flex-col w-full h-full bg-transparent border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.15)] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer"
+      className={`group flex flex-col w-full h-full bg-transparent border ${isCompared ? 'border-[#c9a449]' : 'border-[rgba(255,255,255,0.06)]'} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer`}
       onClick={() => onSample(product)}
     >
       {/* Upper Picture Area */}
@@ -186,32 +187,18 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
             onError={() => setImgError(true)}
           />
         ) : (
-          <BrickWallPattern colorHex={product.colorHex || "#ccab7b"} rows={5} />
+          <BrickWallPattern colorHex={product.colorHex || "#c9a449"} rows={5} />
         )}
 
-        {/* Top-Right: Favourites + Compare buttons */}
+        {/* Top-Right: Favourites button */}
         <div className="absolute top-3 right-3 flex flex-col gap-1.5">
           <button
             onClick={(e) => { e.stopPropagation(); onToggleFavourite(product); }}
-            title="Add to Favourites"
-            className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isFavourite ? 'border-[#ccab7b]' : 'border-transparent group-hover:border-white/20'}`}
+            title={isFavourite ? "Remove from Favourites" : "Add to Favourites"}
+            className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isFavourite ? 'border-[#c9a449]' : 'border-transparent group-hover:border-white/20'}`}
           >
-            <Heart size={14} fill={isFavourite ? "#ccab7b" : "transparent"} color={isFavourite ? "#ccab7b" : "rgba(255,255,255,0.7)"} />
+            <Heart size={14} fill={isFavourite ? "#c9a449" : "transparent"} color={isFavourite ? "#c9a449" : "rgba(255,255,255,0.7)"} />
           </button>
-          <div className="relative group/compare">
-            <button
-              onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-              className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isCompared ? 'border-[#ccab7b] bg-[#ccab7b]/10' : 'border-transparent group-hover:border-white/20'}`}
-            >
-              {isCompared ? <Check size={14} className="text-[#ccab7b]" strokeWidth={2.5} /> : <Plus size={14} className="text-white/70" />}
-            </button>
-            {/* Tooltip label */}
-            <div className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover/compare:opacity-100 transition-opacity duration-200">
-              <span className="whitespace-nowrap text-[9px] uppercase tracking-[0.15em] font-bold text-white bg-black/80 backdrop-blur-sm border border-white/10 px-2 py-1 rounded-[4px]">
-                {isCompared ? "Remove" : "Compare"}
-              </span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -226,7 +213,7 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
           </h3>
           <div className="flex items-center gap-1.5 mt-2">
             <span
-              className="text-[11px] uppercase tracking-[0.15em] text-[#ccab7b]/80"
+              className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
             >
               {manufacturer}
@@ -247,7 +234,7 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
             </span>
           )}
           <span
-            className="text-[9.5px] tracking-[0.08em] text-[#ccab7b] bg-[#ccab7b]/10 border border-[#ccab7b]/20 px-2 py-1 rounded-[4px] uppercase"
+            className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
             style={{ fontWeight: 600 }}
           >
             {product.finish}
@@ -255,16 +242,25 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
         </div>
 
         <div
-          className="flex items-center justify-between mt-auto gap-3"
+          className="flex items-stretch mt-auto gap-2.5"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <button
-            className="relative overflow-hidden px-5 py-2.5 border border-[#4a3d2c] bg-transparent group/btn hover:bg-[#ccab7b] transition-all text-[#ccab7b] hover:text-black text-[10px] sm:text-[11px] uppercase tracking-[0.15em] rounded-md"
+            className="flex flex-[1.2] items-center justify-center relative overflow-hidden px-2 py-2.5 border border-[#4a3d2c] bg-transparent group/btn hover:bg-[#c9a449] transition-all text-[#c9a449] hover:text-black text-[10px] sm:text-[11px] uppercase tracking-[0.12em] rounded-md"
             style={{ fontWeight: 600 }}
           >
-            <span className="relative z-10">Request Sample</span>
+            <span className="relative z-10 whitespace-nowrap">Request Sample</span>
             {/* Shimmer sweep */}
             <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-500 ease-out skew-x-[-15deg]" />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
+            className={`flex flex-1 items-center justify-center gap-1.5 px-2 py-2.5 rounded-md border transition-all text-[10px] sm:text-[11px] uppercase tracking-[0.12em] whitespace-nowrap ${isCompared ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]' : 'border-[#4a3d2c] hover:border-[#c9a449] bg-transparent text-[#c9a449] hover:bg-white/5'}`}
+            style={{ fontWeight: 600 }}
+          >
+            {isCompared ? <Check size={12} strokeWidth={2.5} /> : <Plus size={12} />}
+            <span>{isCompared ? "Added" : "Compare"}</span>
           </button>
         </div>
       </div>
@@ -300,6 +296,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const [products, setProducts] = useState([]);
   const [filtersDB, setFiltersDB] = useState(DEFAULT_FILTERS);
   const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -383,7 +380,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               slug: p.slug,
               collection: collCat?.value || "Extruded",
               color: colorCat?.value || "Brown",
-              colorHex: colorCat?.hexCode || "#7A5C40",
+              colorHex: resolveColorHex(colorCat?.value, colorCat?.hexCode) || "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
               finish: styleCat?.value || sizeLabel || "Matt",
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
@@ -401,8 +398,9 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               isNew: false,
             };
           });
-          setProducts((prev) => (page === 1 ? mapped : [...prev, ...mapped]));
+          setProducts(mapped);
           setTotal(res.meta.total);
+          setTotalPages(res.meta.totalPages);
           setHasMore(page < res.meta.totalPages);
         } else {
           setErrorMsg(res.message || "Unknown error from API");
@@ -444,7 +442,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
     setCompareQueue(prev =>
       prev.find(p => p.id === prod.id)
         ? prev.filter(p => p.id !== prod.id)
-        : [...prev, prod]
+        : [...prev, prod].slice(-3)
     );
   }, []);
 
@@ -454,31 +452,38 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
   const displayedProducts = showFavourites ? favourites : products;
 
+  const getPagination = () => {
+    if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i + 1);
+    if (page <= 3) return [1, 2, 3, 4, '...', totalPages];
+    if (page >= totalPages - 2) return [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    return [1, '...', page - 1, page, page + 1, '...', totalPages];
+  };
+
   return (
-    <div className="min-h-screen relative font-sans text-white">
+    <div className="min-h-screen relative font-sans text-white flex flex-col">
       {/* Background */}
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-fixed w-full h-full"
         style={{ backgroundImage: "url('/bg.png')" }}
       />
-      {/* Wrapper to hold UI on top of background — fills entire viewport */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+
+      <div className="relative z-10 flex flex-col flex-grow">
         {/* Top Header structured & refined */}
-        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-28 pb-16 px-10 xl:px-14 relative">
-          <div className="flex flex-col md:flex-row md:items-end justify-between w-full gap-8">
+        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-28 pb-16 px-10 xl:px-14 relative shrink-0">
+          <div className="flex flex-col md:flex-row justify-between w-full gap-8">
             <div>
               <div className="flex items-center mb-5">
-                <span className="text-[#ccab7b] text-m font-bold tracking-widest uppercase">
+                <span className="text-[#c9a449] text-m font-bold tracking-widest uppercase">
                   Our Premium Brick Collection
                 </span>
               </div>
               <h1 className="text-[20px] md:text-[70px] font-serif tracking-tight leading-[0.9] font-normal text-[#e3decb]">
-                Modern Masonry <br />   Brick   Catalogue
+                Modern Masonry <br /> Brick Catalogue
               </h1>
             </div>
-            <div className="md:max-w-md pb-10">
-              <p className="text-[18px] md:text-[20px] tracking-[0.02em] leading-relaxed text-white/50 italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
-                "Precision curated masonry materials, offering specialist guidance and province-wide delivery—built for those who build with intention."
+            <div className="md:max-w-md pt-12 md:pt-14">
+              <p className="text-[24px] md:text-[24px] tracking-[0.02em] leading-relaxed text-white/50 italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
+                "Discover premium bricks curated for strength, style, and projects that deserve attention to detail - built for those who build with intention."
               </p>
             </div>
           </div>
@@ -486,18 +491,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
         <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
-          {/* Left side */}
           <div className="flex items-center gap-8">
-            <span className="text-[11px] font-bold tracking-[0.05em] text-[#ccab7b] uppercase">{showFavourites ? favourites.length : total} products</span>
+            <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">{showFavourites ? favourites.length : total} products</span>
             <button
               onClick={() => setShowFavourites(!showFavourites)}
-              className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? 'text-[#ccab7b]' : 'text-[#9a9488] hover:text-white'}`}
+              className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? 'text-[#c9a449]' : 'text-[#9a9488] hover:text-white'}`}
             >
-              <Heart size={14} className={showFavourites ? "text-[#ccab7b] fill-[#ccab7b]" : "text-[#9a9488]"} /> {showFavourites ? 'View All' : 'List Favourites'}
+              <Heart size={14} className={showFavourites ? "text-[#c9a449] fill-[#c9a449]" : "text-[#9a9488]"} /> {showFavourites ? 'View All' : 'List Favourites'}
             </button>
           </div>
 
-          {/* Middle Active Filters */}
           <div className="flex items-center gap-3 flex-1 justify-center">
             {[...types, ...colors, ...finishes, ...manufacturers].map(v => (
               <div key={v} className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm">
@@ -517,10 +520,9 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             )}
           </div>
 
-          {/* Right Side Tools */}
           <div className="flex items-center gap-6 border-l border-white/5 pl-8">
             <div className="relative group flex items-center">
-              <Search size={14} className="absolute left-0 text-[#9a9488] group-focus-within:text-[#ccab7b] transition-colors" />
+              <Search size={14} className="absolute left-0 text-[#9a9488] group-focus-within:text-[#c9a449] transition-colors" />
               <input
                 type="text"
                 value={query}
@@ -532,19 +534,18 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             </div>
             <div className="flex items-center gap-1 border border-white/10 rounded-md p-1">
               <button onClick={() => setCompact(false)} title="Comfortable view"
-                className={`p-1.5 rounded transition-colors ${!compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                className={`p-1.5 rounded transition-colors ${!compact ? 'bg-[#c9a449] text-black' : 'text-[#9a9488] hover:text-white'}`}>
                 <Grid size={14} />
               </button>
               <button onClick={() => setCompact(true)} title="Compact view"
-                className={`p-1.5 rounded transition-colors ${compact ? 'bg-[#ccab7b] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+                className={`p-1.5 rounded transition-colors ${compact ? 'bg-[#c9a449] text-black' : 'text-[#9a9488] hover:text-white'}`}>
                 <Grid3x3 size={14} />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-1 w-full max-w-[1800px] mx-auto">
-          {/* Sidebar with slide-in entrance */}
+        <div className="flex flex-grow w-full max-w-[1800px] mx-auto min-h-0">
           <motion.aside
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
@@ -552,83 +553,42 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             className="w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0">
             <div className="px-8 xl:px-10 pt-10 pb-32">
               <div className="flex items-center gap-3 mb-8">
-                <SlidersHorizontal size={14} className="text-[#ccab7b]" />
-                <h2
-                  className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb]"
-                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}
-                >
-                  REFINE
-                </h2>
+                <SlidersHorizontal size={14} className="text-[#c9a449]" />
+                <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">REFINE</h2>
               </div>
 
-
-
-              {/* Dynamically populated filter sections */}
               <Section title="COLLECTION">
                 {filtersDB.collections.map((t) => (
-                  <GlassCheckbox
-                    key={t}
-                    label={t}
-                    checked={types.includes(t)}
-                    onClick={() => tog(t, types, setTypes)}
-                  />
+                  <GlassCheckbox key={t} label={t} checked={types.includes(t)} onClick={() => tog(t, types, setTypes)} />
                 ))}
               </Section>
-
               <Section title="COLOUR">
                 {filtersDB.colors.map(({ value, hex }) => (
-                  <GlassCheckbox
-                    key={value}
-                    label={value}
-                    colorDot={hex}
-                    checked={colors.includes(value)}
-                    onClick={() => tog(value, colors, setColors)}
-                  />
+                  <GlassCheckbox key={value} label={value} colorDot={hex} checked={colors.includes(value)} onClick={() => tog(value, colors, setColors)} />
                 ))}
               </Section>
-
               <Section title="FINISH">
                 {filtersDB.styles.map((s) => (
-                  <GlassCheckbox
-                    key={s}
-                    label={s}
-                    checked={finishes.includes(s)}
-                    onClick={() => tog(s, finishes, setFinishes)}
-                  />
+                  <GlassCheckbox key={s} label={s} checked={finishes.includes(s)} onClick={() => tog(s, finishes, setFinishes)} />
                 ))}
               </Section>
-
               <Section title="MANUFACTURER">
                 {filtersDB.manufacturers.map((m) => (
-                  <GlassCheckbox
-                    key={m}
-                    label={m}
-                    checked={manufacturers.includes(m)}
-                    onClick={() => tog(m, manufacturers, setManufacturers)}
-                  />
+                  <GlassCheckbox key={m} label={m} checked={manufacturers.includes(m)} onClick={() => tog(m, manufacturers, setManufacturers)} />
                 ))}
               </Section>
             </div>
           </motion.aside>
 
-          {/* Main Content Area */}
           <main className="flex-1 px-8 lg:px-12 pt-8 pb-32">
-
-
-            {/* Grid perfectly matches 5 cols exactly as drawn in the image/request */}
             {errorMsg && !showFavourites ? (
-              <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">
-                API Error: {errorMsg}
-              </div>
+              <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">API Error: {errorMsg}</div>
             ) : (
               <motion.div
                 key={`grid-${page}-${debouncedQuery}`}
                 initial="hidden"
                 animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.06 } }
-                }}
+                variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
                 className={`grid gap-8 ${compact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'}`}
               >
                 {displayedProducts.map((p) => (
@@ -652,42 +612,70 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               </motion.div>
             )}
 
-            <div className="w-full flex justify-center mt-20">
-              {showFavourites ? (
+            {showFavourites ? (
+              <div className="w-full flex justify-center mt-20">
                 <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
                   {favourites.length > 0 ? "All Favourites Displayed" : "No favourites yet"}
                 </span>
-              ) : hasMore ? (
-                <button
-                  onClick={() => setPage((p) => p + 1)}
-                  disabled={loading}
-                  className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#ccab7b] hover:text-[#dfba88] transition-colors border-b border-transparent hover:border-current pb-0.5"
-                >
-                  {loading ? "Loading..." : "LOAD MORE PRODUCTS"}
-                </button>
-              ) : (
-                products.length > 0 && (
+              </div>
+            ) : totalPages > 1 ? (
+              <div className="w-full flex justify-center mt-20">
+                <div className="flex gap-2 items-center bg-[#1a1815] px-4 py-2 rounded-full border border-white/5">
+                  <button 
+                    disabled={page === 1 || loading}
+                    onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
+                  >
+                    PREV
+                  </button>
+                  <div className="w-px h-4 bg-white/10 mx-2" />
+                  {getPagination().map((p, index) => (
+                    p === '...' ? (
+                      <span key={`ellipsis-${index}`} className="text-white/40 px-2 font-bold tracking-widest">...</span>
+                    ) : (
+                      <button
+                        key={p}
+                        disabled={loading}
+                        onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? 'text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]' : 'text-white/60 hover:bg-white/10 hover:text-white'}`}
+                      >
+                        {p}
+                      </button>
+                    )
+                  ))}
+                  <div className="w-px h-4 bg-white/10 mx-2" />
+                  <button 
+                    disabled={page === totalPages || loading}
+                    onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
+                  >
+                    NEXT
+                  </button>
+                </div>
+              </div>
+            ) : (
+              products.length > 0 && !loading && (
+                <div className="w-full flex justify-center mt-20">
                   <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
                     All Collections Displayed
                   </span>
-                )
-              )}
-            </div>
+                </div>
+              )
+            )}
           </main>
         </div>
+        
+        <Footer />
       </div>
 
-      {/* Elegant Details Overlay */}
-      {selected && (
-        <BrickDetailPanel
-          brick={selected}
-          initialTab="overview"
-          onClose={() => setSelected(null)}
-        />
-      )}
-
-      {/* Footer */}
-      <Footer />
+      <AnimatePresence>
+        {selected && (
+          <BrickDetailPanel
+            brick={selected}
+            onClose={() => setSelected(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Floating Compare Bar */}
       <AnimatePresence>
@@ -697,16 +685,12 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#ccab7b]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4"
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#c9a449]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4"
           >
-            {/* Thumbnails */}
             <div className="flex items-center gap-2">
               {compareQueue.map(p => (
-                <div key={p.id} className="w-8 h-8 rounded-full border border-[#ccab7b]/40 overflow-hidden bg-[#111] shrink-0">
-                  {p.image
-                    ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-                    : <div className="w-full h-full bg-[#3a2e1e]" />
-                  }
+                <div key={p.id} className="w-8 h-8 rounded-full border border-[#c9a449]/40 overflow-hidden bg-[#111] shrink-0">
+                  {p.image ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" /> : <div className="w-full h-full bg-[#3a2e1e]" />}
                 </div>
               ))}
               {compareQueue.length < 3 && (
@@ -715,12 +699,12 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             </div>
             <div className="w-px h-4 bg-white/10" />
             <span className="text-[11px] uppercase tracking-widest text-white/60 font-medium">
-              <span className="text-[#ccab7b] font-bold">{compareQueue.length}</span>/3 selected
+              <span className="text-[#c9a449] font-bold">{compareQueue.length}</span>/3 selected
             </span>
             <div className="w-px h-4 bg-white/10" />
             <button
               onClick={() => setShowCompare(true)}
-              className="text-[10px] uppercase tracking-widest text-[#ccab7b] font-bold hover:text-white transition-colors"
+              className="text-[10px] uppercase tracking-widest text-[#c9a449] font-bold hover:text-white transition-colors"
             >
               Compare Now
             </button>
