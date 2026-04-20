@@ -2,13 +2,18 @@
   "name": "modern-masonry",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail -n \"backend,frontend\" -c \"yellow,cyan\" \"npm run dev --prefix Backend\" \"npm run dev --prefix frontend\"",
+    "start": "concurrently --kill-others-on-fail -n \"backend,frontend\" -c \"yellow,cyan\" \"npm run start --prefix Backend\" \"npm run dev --prefix frontend\""
+  },
   "dependencies": {
     "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.6.0",
-    "pg": "^8.20.0",
-    "dotenv": "^17.3.1"
+    "dotenv": "^17.3.1",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "prisma": "^7.6.0"
   }
 }

@@ -202,65 +202,53 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
         </div>
       </div>
 
-      {/* Info Area  */}
-      <div className="flex flex-col p-5 md:p-6 flex-1 bg-black/30 justify-between">
-        <div className="mb-2 shrink-0">
+      {/* Info Area */}
+      <div className="flex flex-col px-5 pt-5 pb-4 flex-1 bg-black/30" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div className="mb-3">
           <h3
-            className="text-[#e2ded9] text-[18px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
+            className="text-[#e2ded9] text-[17px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
             {product.name}
           </h3>
-          <div className="flex items-center gap-1.5 mt-2">
-            <span
-              className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}
-            >
-              {manufacturer}
-            </span>
-          </div>
+          <span className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80" style={{ fontWeight: 600 }}>
+            {manufacturer}
+          </span>
         </div>
 
-        <div
-          className="flex flex-wrap items-center gap-2 mb-3 shrink-0"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
+        <div className="flex flex-wrap items-center gap-2 mb-4">
           {typeLabel && (
-            <span
-              className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase"
-              style={{ fontWeight: 500 }}
-            >
+            <span className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase" style={{ fontWeight: 500 }}>
               {typeLabel}
             </span>
           )}
-          <span
-            className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
-            style={{ fontWeight: 600 }}
-          >
+          <span className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase" style={{ fontWeight: 600 }}>
             {product.finish}
           </span>
         </div>
 
-        <div
-          className="flex items-stretch mt-auto gap-2.5"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
+        {/* Card footer buttons */}
+        <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center" style={{ fontFamily: "'Inter', sans-serif" }}>
           <button
-            className="flex flex-[1.2] items-center justify-center relative overflow-hidden px-2 py-2.5 border border-[#4a3d2c] bg-transparent group/btn hover:bg-[#c9a449] transition-all text-[#c9a449] hover:text-black text-[10px] sm:text-[11px] uppercase tracking-[0.12em] rounded-md"
-            style={{ fontWeight: 600 }}
+            onClick={(e) => { e.stopPropagation(); onSample(product); }}
+            className="flex-1 relative overflow-hidden py-2.5 text-[10px] uppercase tracking-[0.14em] font-bold text-[#c9a449] hover:text-black hover:bg-[#c9a449] transition-all duration-300 rounded-l-md border border-[#c9a449]/25 hover:border-[#c9a449] group/btn"
           >
-            <span className="relative z-10 whitespace-nowrap">Request Sample</span>
-            {/* Shimmer sweep */}
-            <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-500 ease-out skew-x-[-15deg]" />
+            <span className="relative z-10">Request Sample</span>
+            <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 skew-x-[-15deg]" />
           </button>
+
+          <div className="w-px h-8 bg-white/[0.06] shrink-0" />
 
           <button
             onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-            className={`flex flex-1 items-center justify-center gap-1.5 px-2 py-2.5 rounded-md border transition-all text-[10px] sm:text-[11px] uppercase tracking-[0.12em] whitespace-nowrap ${isCompared ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]' : 'border-[#4a3d2c] hover:border-[#c9a449] bg-transparent text-[#c9a449] hover:bg-white/5'}`}
-            style={{ fontWeight: 600 }}
+            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-r-md border-t border-r border-b text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
+              isCompared
+                ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+                : 'border-[#c9a449]/25 text-white/40 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
+            }`}
           >
             {isCompared ? <Check size={12} strokeWidth={2.5} /> : <Plus size={12} />}
-            <span>{isCompared ? "Added" : "Compare"}</span>
+            <span>{isCompared ? 'Added' : 'Compare'}</span>
           </button>
         </div>
       </div>
@@ -681,36 +669,57 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       <AnimatePresence>
         {compareQueue.length > 0 && !showCompare && (
           <motion.div
-            initial={{ y: 40, opacity: 0 }}
+            initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 40, opacity: 0 }}
+            exit={{ y: 80, opacity: 0 }}
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1a1815] border border-[#c9a449]/30 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4"
+            className="fixed bottom-0 left-0 right-0 z-50 bg-[#12100e]/95 backdrop-blur-xl border-t border-[#c9a449]/20 shadow-[0_-8px_40px_rgba(0,0,0,0.6)]"
           >
-            <div className="flex items-center gap-2">
-              {compareQueue.map(p => (
-                <div key={p.id} className="w-8 h-8 rounded-full border border-[#c9a449]/40 overflow-hidden bg-[#111] shrink-0">
-                  {p.image ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" /> : <div className="w-full h-full bg-[#3a2e1e]" />}
-                </div>
-              ))}
-              {compareQueue.length < 3 && (
-                <div className="w-8 h-8 rounded-full border border-dashed border-white/15 flex items-center justify-center text-white/20 text-sm">+</div>
-              )}
+            <div className="max-w-[1800px] mx-auto px-8 xl:px-14 py-4 flex items-center gap-6">
+              {/* Thumbnails */}
+              <div className="flex items-center gap-3 flex-1">
+                {compareQueue.map(p => (
+                  <div key={p.id} className="flex items-center gap-2.5 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2">
+                    <div className="w-10 h-10 rounded-md border border-[#c9a449]/30 overflow-hidden bg-[#1a1815] shrink-0">
+                      {p.image ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" /> : <div className="w-full h-full bg-[#3a2e1e]" />}
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-[11px] text-white/80 font-medium truncate max-w-[120px]">{p.name}</span>
+                      <span className="text-[9px] text-[#c9a449]/60 uppercase tracking-wider truncate">{p.manufacturer}</span>
+                    </div>
+                    <button onClick={() => handleToggleCompare(p)} className="ml-1 text-white/20 hover:text-white/60 transition-colors">
+                      <X size={12} />
+                    </button>
+                  </div>
+                ))}
+                {compareQueue.length < 3 && (
+                  <div className="flex items-center gap-2 border border-dashed border-white/10 rounded-lg px-3 py-2 text-white/15">
+                    <div className="w-10 h-10 rounded-md border border-dashed border-white/10 flex items-center justify-center text-lg">+</div>
+                    <span className="text-[10px] uppercase tracking-wider">Add product</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Right actions */}
+              <div className="flex items-center gap-4 shrink-0">
+                <span className="text-[11px] uppercase tracking-widest text-white/40">
+                  <span className="text-[#c9a449] font-bold">{compareQueue.length}</span>/3 selected
+                </span>
+                <div className="w-px h-5 bg-white/10" />
+                <button
+                  onClick={() => setCompareQueue([])}
+                  className="text-[10px] uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors font-medium"
+                >
+                  Clear
+                </button>
+                <button
+                  onClick={() => setShowCompare(true)}
+                  className="bg-[#c9a449] hover:bg-[#ddb95a] text-black text-[10px] font-bold uppercase tracking-[0.18em] px-6 py-2.5 rounded-md transition-colors"
+                >
+                  Compare Now
+                </button>
+              </div>
             </div>
-            <div className="w-px h-4 bg-white/10" />
-            <span className="text-[11px] uppercase tracking-widest text-white/60 font-medium">
-              <span className="text-[#c9a449] font-bold">{compareQueue.length}</span>/3 selected
-            </span>
-            <div className="w-px h-4 bg-white/10" />
-            <button
-              onClick={() => setShowCompare(true)}
-              className="text-[10px] uppercase tracking-widest text-[#c9a449] font-bold hover:text-white transition-colors"
-            >
-              Compare Now
-            </button>
-            <button onClick={() => setCompareQueue([])} className="text-white/40 hover:text-white ml-1">
-              <X size={14} />
-            </button>
           </motion.div>
         )}
       </AnimatePresence>

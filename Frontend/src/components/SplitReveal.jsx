@@ -104,7 +104,7 @@ export default function SplitReveal({ onComplete }) {
         {/* Video background — positioned to show left half of full frame */}
         <video
           ref={videoLeftRef}
-          src="/Untitled (3).mp4"
+          src="/Untitled%20(3).mp4"
           muted
           loop
           playsInline
@@ -138,7 +138,7 @@ export default function SplitReveal({ onComplete }) {
         {/* Video background — positioned to show right half of full frame */}
         <video
           ref={videoRightRef}
-          src="/Untitled (3).mp4"
+          src="/Untitled%20(3).mp4"
           muted
           loop
           playsInline

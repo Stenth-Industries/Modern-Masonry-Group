@@ -106,10 +106,10 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
               </button>
             </div>
 
-            <div className="w-full overflow-x-auto scrollbar-none pb-12 -mx-4 px-4 md:-mx-8 md:px-8">
-              <div className="min-w-[800px]">
-                <div className="grid gap-px mb-0" style={{ gridTemplateColumns: '220px repeat(3, minmax(200px, 1fr))' }}>
-                  <div className="flex items-end pb-8 pl-6 pr-4">
+            <div className="w-full overflow-x-auto scrollbar-none pb-12">
+              <div className="min-w-[860px]">
+                <div className="grid gap-px mb-0" style={{ gridTemplateColumns: '180px repeat(3, 1fr)' }}>
+                  <div className="flex items-end pb-8 pr-4">
                     <span className="text-[9px] uppercase tracking-[0.3em] text-white/15" style={{ fontFamily: "'Inter', sans-serif" }}>
                       Product
                     </span>
@@ -121,7 +121,7 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                      className="px-4 pb-8"
+                      className="px-5 pb-8 border-l border-white/[0.04]"
                     >
                       {p ? (
                         <div className="flex flex-col">
@@ -192,8 +192,8 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
 
                 {SPEC_GROUPS.map((group, gi) => (
                   <div key={group.label}>
-                    <div className="grid" style={{ gridTemplateColumns: '220px repeat(3, minmax(200px, 1fr))' }}>
-                      <div className="py-6 pl-6 pr-4 flex items-center">
+                    <div className="grid" style={{ gridTemplateColumns: '180px repeat(3, 1fr)' }}>
+                      <div className="py-5 pr-4 flex items-center">
                         <div className="flex items-center gap-3">
                           <div className="h-[1px] flex-1 w-4" style={{ background: `linear-gradient(90deg, transparent, rgba(201,164,73,0.3))` }} />
                           <span className="text-[8.5px] uppercase tracking-[0.35em] font-bold whitespace-nowrap" style={{ color: BRASS }}>
@@ -219,7 +219,7 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
                           }}
                         >
                           <div
-                            className={`flex items-center py-4 pl-6 pr-4 border-t ${diff ? '' : 'border-white/[0.04]'}`}
+                            className={`flex items-center py-4 pr-4 border-t ${diff ? '' : 'border-white/[0.04]'}`}
                             style={diff ? { borderColor: 'rgba(201,164,73,0.15)' } : undefined}
                           >
                             <div className="flex items-center gap-2 w-full">
@@ -239,7 +239,7 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
                           {slots.map((p, i) => (
                             <div
                               key={i}
-                              className={`flex items-center py-4 px-4 border-t border-l ${diff ? '' : 'border-white/[0.04]'}`}
+                              className={`flex items-center py-4 px-5 border-t border-l ${diff ? '' : 'border-white/[0.04]'}`}
                               style={diff ? { borderColor: 'rgba(201,164,73,0.15)' } : undefined}
                             >
                               {p ? (

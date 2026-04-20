@@ -86,6 +86,11 @@ export default function QuotePage({ navigate }) {
     if (step === 1) {
       setStep(2);
     } else {
+      const subject = encodeURIComponent(`Quote Request — ${formData.role} | ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company || 'N/A'}\nProject Type: ${formData.role}\n\nProject Details:\n${formData.details}`
+      );
+      window.location.href = `mailto:info@modernmasonrygroup.ca?subject=${subject}&body=${body}`;
       setStep(3);
     }
   };
