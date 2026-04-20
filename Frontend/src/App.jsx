@@ -13,8 +13,10 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [view]);
 
+  useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash || '#home';
       const [path, queryString] = hash.split('?');
@@ -44,7 +46,6 @@ export default function App() {
 
   const navigate = (to) => {
     window.location.hash = to;
-    window.scrollTo(0, 0);
   };
 
   return (
