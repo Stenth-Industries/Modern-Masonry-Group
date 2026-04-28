@@ -64,10 +64,10 @@ export default function AboutPage({ navigate }) {
           className="absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-75" 
           src="https://usbrick.com/wp-content/uploads/2024/09/4279-476c-ba9c-4ff2bf93a2f9.mov" 
         /> */}
-        <img 
-          src="https://usbrick.com/wp-content/uploads/2024/09/05853e6ea60ef9c81013003cc0a8221b-scaled.jpeg" 
-          alt="Hero background" 
-          className="absolute inset-0 w-full h-full object-cover grayscale-[0.1] brightness-[0.5]" 
+        <img
+          src="/House.png"
+          alt="Hero background"
+          className="absolute inset-0 w-full h-full object-cover grayscale-[0.1] brightness-[0.5]"
         />
         <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent" />
         
@@ -122,7 +122,7 @@ export default function AboutPage({ navigate }) {
           </div>
           <div className="w-full md:w-1/2">
              <FadeUp delay={0.4} className="relative overflow-hidden rounded-sm group">
-               <img src="https://usbrick.com/wp-content/uploads/2024/09/b907a77e2046051c71b62f4bb5d4fcfb.png" alt="Our Roots" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
+               <img src="/Heritage.jpeg" alt="Our Roots" className="w-full h-auto object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105" />
              </FadeUp>
           </div>
         </div>
@@ -157,39 +157,6 @@ Today, Modern Masonry Group is a reflection of everything Carmine believes in: m
         </div>
       </section>
 
-      {/* OUR TEAM */}
-      <section className="relative py-24 px-8 md:px-20 bg-black z-10">
-        <div className="max-w-7xl mx-auto">
-          <FadeUp className="mb-20">
-            <h2 className="text-[var(--brass)] text-4xl font-bold text-center uppercase tracking-widest">Our Team</h2>
-          </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {[
-              { name: "Chris Smith", title: "President", img: "https://usbrick.com/wp-content/uploads/2024/09/fa63b3913f0ab150c9582f18baf46775-scaled.jpeg" },
-              { name: "Jed Lee", title: "Chief Operating Officer", img: "https://usbrick.com/wp-content/uploads/2024/09/6c595fd6a4057f3c2c9c9ee3e7572306-scaled.jpeg" },
-              { name: "Bill Tudor", title: "Chief Manufacturing Officer", img: "https://usbrick.com/wp-content/uploads/2024/09/4ec05f543d11029d3c268998b3baabe8-scaled.jpeg" },
-              { name: "Carl Keenum", title: "Chief Sales Officer", img: "https://usbrick.com/wp-content/uploads/2024/09/ab5fb02f25cb2d9f53d50ec673a9ea94-scaled.jpeg" },
-              { name: "Robert Coker", title: "Chief Revenue Officer", img: "https://usbrick.com/wp-content/uploads/2024/09/9e87a52901f7fed18445e265a2bed055-1-scaled.jpeg" },
-              { name: "Jay Fuqua", title: "EVP: Direct Sales", img: "https://usbrick.com/wp-content/uploads/2024/09/b94ba19bdd3eb581bbcc9731d4228565-scaled.jpeg" },
-              { name: "Steve Shelton", title: "SVP of 3rd-Party Distribution", img: "https://usbrick.com/wp-content/uploads/2024/09/6193f16adbcc178300aeecbe18ac88fa-scaled.jpeg" },
-              { name: "Louis Sabourin", title: "Director of Resale & Sales", img: "https://usbrick.com/wp-content/uploads/2024/09/6a4114754eebcde8c6928fac20b13704-scaled.jpeg" },
-              { name: "Sarah Paige Bozardt", title: "Director of Marketing & PR", img: "https://usbrick.com/wp-content/uploads/2024/09/5394dc1de5795f67081d36cd5211484e.jpeg" },
-              { name: "David Kutner", title: "Director of Operations", img: "https://usbrick.com/wp-content/uploads/2024/09/1e366b5c7b75a7c307ddc262a20dcd4d-scaled.jpeg" },
-              { name: "Marcy Hartjes", title: "HR Manager", img: "https://usbrick.com/wp-content/uploads/2024/09/1328f73ef9bbb86ae77025b999dfa7b6.jpeg" },
-              { name: "Bill Parker", title: "Senior Vice President of IT", img: "https://usbrick.com/wp-content/uploads/2024/09/1013da7ae2afce3171d646559f1a67df-scaled.jpeg" },
-            ].map((member, i) => (
-              <FadeUp delay={i * 0.05} key={i} className="flex flex-col text-center items-center group cursor-pointer">
-                <div className="w-full aspect-[3/4] mb-6 overflow-hidden rounded-sm relative border border-white/5">
-                   <img src={member.img} alt={member.name} className="absolute inset-0 w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
-                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
-                </div>
-                <h3 className="text-white font-bold text-xl mb-1">{member.name}</h3>
-                <p className="text-[var(--brass)] text-sm font-medium tracking-wide uppercase">{member.title}</p>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* PRESS & AFFILIATIONS */}
       {/* <section className="relative py-32 bg-[#0a0a0a] overflow-hidden z-10 border-t border-white/5">
