@@ -30,3 +30,4 @@ Thumbs.db
 
 # Scraper progress/temp files
 scraper/bricks-all-progress.json
+mmg_pitch/
