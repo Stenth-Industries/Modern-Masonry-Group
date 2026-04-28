@@ -19,7 +19,11 @@
       "WebFetch(domain:21st.dev)",
       "Bash(git checkout:*)",
       "Bash(head -550 \"D:\\\\modern\\\\Frontend\\\\src\\\\components\\\\BrickCatalogue.jsx\")",
-      "Bash(cp /tmp/bc_trimmed.jsx \"D:\\\\modern\\\\Frontend\\\\src\\\\components\\\\BrickCatalogue.jsx\")"
+      "Bash(cp /tmp/bc_trimmed.jsx \"D:\\\\modern\\\\Frontend\\\\src\\\\components\\\\BrickCatalogue.jsx\")",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git fetch *)",
+      "Bash(git rebase *)"
     ]
   }
 }

@@ -121,7 +121,7 @@ export default function QuotePage({ navigate }) {
              <div>
                <img src="/Logo-MM (1).png" alt="Modern Masonry" className="h-20 w-auto mb-16 opacity-90 hover:opacity-100 transition-opacity cursor-pointer" onClick={() => navigate('#home')} />
                <div className="w-12 h-[2px] bg-[var(--brass)] mb-6" />
-               <h1 className="text-5xl lg:text-7xl font-black leading-[1.05] text-white mb-6 tracking-tighter uppercase">
+               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-[1.05] text-white mb-6 tracking-tighter uppercase">
                   Initiate<br/>Project.
                </h1>
                <p className="text-[var(--ash)] text-[14px] leading-loose max-w-sm">

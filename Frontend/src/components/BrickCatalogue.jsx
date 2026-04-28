@@ -10,12 +10,14 @@ import {
   Heart,
   Grid3x3,
   Grid,
-  X
+  X,
 } from "lucide-react";
+
 import { BrickWallPattern } from "./BrickWallPattern";
 import { BrickDetailPanel } from "./BrickDetailPanel";
 import CompareModal from "./CompareModal";
 import Footer from "./Footer";
+
 
 // ── Configuration ─────────────────────────────────────────────────────────────
 
@@ -261,6 +263,7 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
 export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
+  const pdfContentRef = useRef(null);
 
   // Sync with router changes seamlessly
   useEffect(() => {
@@ -289,6 +292,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Load database filters once on mount
   useEffect(() => {
@@ -457,7 +461,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
       <div className="relative z-10 flex flex-col flex-grow">
         {/* Top Header structured & refined */}
-        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-28 pb-16 px-10 xl:px-14 relative shrink-0">
+        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-24 md:pt-28 pb-10 md:pb-16 px-6 md:px-10 xl:px-14 relative shrink-0">
           <div className="flex flex-col md:flex-row justify-between w-full gap-8">
             <div>
               <div className="flex items-center mb-5">
@@ -465,7 +469,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                   Our Premium Brick Collection
                 </span>
               </div>
-              <h1 className="text-[20px] md:text-[70px] font-serif tracking-tight leading-[0.9] font-normal text-[#e3decb]">
+              <h1 className="text-[32px] sm:text-[44px] md:text-[54px] lg:text-[70px] font-serif tracking-tight leading-[0.9] font-normal text-[#e3decb]">
                 Modern Masonry <br /> Brick Catalogue
               </h1>
             </div>
@@ -479,17 +483,25 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
         <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
             <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">{showFavourites ? favourites.length : total} products</span>
+            <button
+              onClick={() => setMobileSidebarOpen(true)}
+              className="md:hidden flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors"
+            >
+              <SlidersHorizontal size={14} />
+              Filters{(types.length + colors.length + finishes.length + manufacturers.length) > 0 && ` (${types.length + colors.length + finishes.length + manufacturers.length})`}
+            </button>
             <button
               onClick={() => setShowFavourites(!showFavourites)}
               className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? 'text-[#c9a449]' : 'text-[#9a9488] hover:text-white'}`}
             >
-              <Heart size={14} className={showFavourites ? "text-[#c9a449] fill-[#c9a449]" : "text-[#9a9488]"} /> {showFavourites ? 'View All' : 'List Favourites'}
+              <Heart size={14} className={showFavourites ? "text-[#c9a449] fill-[#c9a449]" : "text-[#9a9488]"} />
+              <span className="hidden sm:inline">{showFavourites ? 'View All' : 'List Favourites'}</span>
             </button>
           </div>
 
-          <div className="flex items-center gap-3 flex-1 justify-center">
+          <div className="hidden md:flex items-center gap-3 flex-1 justify-center">
             {[...types, ...colors, ...finishes, ...manufacturers].map(v => (
               <div key={v} className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm">
                 <span className="text-[11px] text-[#e3decb] tracking-wide">{v}</span>
@@ -508,7 +520,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             )}
           </div>
 
-          <div className="flex items-center gap-6 border-l border-white/5 pl-8">
+          <div className="flex items-center gap-3 md:gap-6 border-l border-white/5 pl-4 md:pl-8">
             <div className="relative group flex items-center">
               <Search size={14} className="absolute left-0 text-[#9a9488] group-focus-within:text-[#c9a449] transition-colors" />
               <input
@@ -533,12 +545,13 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
           </div>
         </div>
 
+
         <div className="flex flex-grow w-full max-w-[1800px] mx-auto min-h-0">
           <motion.aside
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0">
+            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0">
             <div className="px-8 xl:px-10 pt-10 pb-32">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={14} className="text-[#c9a449]" />
@@ -568,7 +581,66 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             </div>
           </motion.aside>
 
-          <main className="flex-1 px-8 lg:px-12 pt-8 pb-32">
+          {/* Mobile filter drawer */}
+          <AnimatePresence>
+            {mobileSidebarOpen && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  className="md:hidden fixed inset-0 bg-black/70 z-[60]"
+                  onClick={() => setMobileSidebarOpen(false)}
+                />
+                <motion.div
+                  initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+                  transition={{ type: 'spring', damping: 30, stiffness: 280 }}
+                  className="md:hidden fixed inset-y-0 left-0 w-[300px] bg-[#0a0a0a] border-r border-white/10 z-[70] overflow-y-auto"
+                >
+                  <div className="px-6 pt-8 pb-16">
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="flex items-center gap-3">
+                        <SlidersHorizontal size={14} className="text-[#c9a449]" />
+                        <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">REFINE</h2>
+                      </div>
+                      <button onClick={() => setMobileSidebarOpen(false)} className="text-white/40 hover:text-white">
+                        <X size={18} />
+                      </button>
+                    </div>
+                    <Section title="COLLECTION">
+                      {filtersDB.collections.map((t) => (
+                        <GlassCheckbox key={t} label={t} checked={types.includes(t)} onClick={() => tog(t, types, setTypes)} />
+                      ))}
+                    </Section>
+                    <Section title="COLOUR">
+                      {filtersDB.colors.map(({ value, hex }) => (
+                        <GlassCheckbox key={value} label={value} colorDot={hex} checked={colors.includes(value)} onClick={() => tog(value, colors, setColors)} />
+                      ))}
+                    </Section>
+                    <Section title="FINISH">
+                      {filtersDB.styles.map((s) => (
+                        <GlassCheckbox key={s} label={s} checked={finishes.includes(s)} onClick={() => tog(s, finishes, setFinishes)} />
+                      ))}
+                    </Section>
+                    <Section title="MANUFACTURER">
+                      {filtersDB.manufacturers.map((m) => (
+                        <GlassCheckbox key={m} label={m} checked={manufacturers.includes(m)} onClick={() => tog(m, manufacturers, setManufacturers)} />
+                      ))}
+                    </Section>
+                    {(types.length > 0 || colors.length > 0 || finishes.length > 0 || manufacturers.length > 0) && (
+                      <button
+                        onClick={() => { setTypes([]); setColors([]); setFinishes([]); setManufacturers([]); }}
+                        className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
+                      >
+                        Clear All Filters
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+
+          <main ref={pdfContentRef} className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32">
+
             {errorMsg && !showFavourites ? (
               <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">API Error: {errorMsg}</div>
             ) : (

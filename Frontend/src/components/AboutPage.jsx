@@ -55,7 +55,7 @@ export default function AboutPage({ navigate }) {
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03] mix-blend-screen bg-repeat" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\"/%3E%3C/svg%3E')" }} />
 
       {/* HERO SECTION */}
-      <section className="relative h-screen bg-black overflow-hidden flex items-center justify-center text-center px-4">
+      <section className="relative bg-black overflow-hidden flex items-center justify-center text-center px-4" style={{ height: "calc(100vh / 0.90)" }}>
         {/* <video 
           autoPlay 
           muted 
@@ -76,7 +76,7 @@ export default function AboutPage({ navigate }) {
             initial={{ y: 50, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-[80px] font-black text-white uppercase tracking-tighter leading-none pr-20"
+            className="text-4xl md:text-6xl lg:text-[80px] font-black text-white uppercase tracking-tighter leading-none pr-0 md:pr-20"
           >
             BORN HERE. BUILT HERE.
           </motion.h1>

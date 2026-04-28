@@ -3,7 +3,7 @@ import Homepage from './components/Homepage';
 import BrickCatalogue from './components/BrickCatalogue';
 import BrickDetail from './components/BrickDetail';
 import Services from './components/Services';
-import Navbar from './components/Navbar';
+import Navbar, { UtilityBar } from './components/Navbar';
 import QuotePage from './components/QuotePage';
 import AboutPage from './components/AboutPage';
 
@@ -50,13 +50,16 @@ export default function App() {
 
   return (
     <>
-      <Navbar navigate={navigate} />
-      {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
-      {view === 'brick' && <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />}
-      {view === 'services' && <Services navigate={navigate} />}
-      {view === 'about' && <AboutPage navigate={navigate} />}
-      {view === 'quote' && <QuotePage navigate={navigate} />}
-      {view === 'home' && <Homepage navigate={navigate} />}
+      <UtilityBar />
+      <div className="overflow-x-hidden" style={{ zoom: 0.9 }}>
+        <Navbar navigate={navigate} />
+        {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
+        {view === 'brick' && <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />}
+        {view === 'services' && <Services navigate={navigate} />}
+        {view === 'about' && <AboutPage navigate={navigate} />}
+        {view === 'quote' && <QuotePage navigate={navigate} />}
+        {view === 'home' && <Homepage navigate={navigate} />}
+      </div>
     </>
   );
 }

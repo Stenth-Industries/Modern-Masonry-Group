@@ -818,7 +818,7 @@ export default function Services({ navigate }) {
                   What We Do
                 </p>
                 <h1
-                  className="text-5xl md:text-7xl lg:text-[6.25rem] font-normal leading-[0.92] text-[#f3ede1] mb-8"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-[6.25rem] font-normal leading-[0.92] text-[#f3ede1] mb-8"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   Masonry Services
@@ -1215,7 +1215,7 @@ export default function Services({ navigate }) {
                 Trade Professionals
               </motion.p>
               <h2
-                className="text-5xl lg:text-6xl font-normal text-[#e3decb] leading-tight mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-[#e3decb] leading-tight mb-6"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Join Over 500 Industry Professionals<br />

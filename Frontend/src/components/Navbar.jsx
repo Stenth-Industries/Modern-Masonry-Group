@@ -2,6 +2,20 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence, useMotionValue } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, ChevronRight } from 'lucide-react';
 
+export function UtilityBar() {
+  return (
+    <div className="bg-[#111111] border-b border-white/10 text-xs py-2 px-6 flex justify-between items-center text-[var(--ash)] z-[60] relative">
+      <div className="flex gap-6">
+        <span className="text-white flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><MapPin size={12} /> 7195 Highway 9, Schomberg, ON</span>
+        <span className="text-white hidden sm:flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><Phone size={12} /> +1 905-939-0695</span>
+      </div>
+      <div className="hidden md:flex gap-4">
+        <div className="text-white hover:cursor-pointer transition-colors flex items-center gap-2 font-bold">Are you a builder / Architect ? <ArrowRight size={12} /></div>
+      </div>
+    </div>
+  );
+}
+
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
 const NAV_ITEMS = [
@@ -212,17 +226,6 @@ export default function Navbar({ navigate }) {
     <>
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} navigate={navigate} />
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} navigate={navigate} onOpenSearch={() => setSearchOpen(true)} />
-
-      {/* UTILITY BAR */}
-      <div className="bg-[#111111] border-b border-white/10 text-xs py-2 px-6 flex justify-between items-center text-[var(--ash)] z-[60] relative">
-        <div className="flex gap-6">
-          <span className="text-white flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><MapPin size={12} /> 7195 Highway 9, Schomberg, ON</span>
-          <span className="text-white hidden sm:flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><Phone size={12} /> +1 905-939-0695</span>
-        </div>
-        <div className="hidden md:flex gap-4">
-          <div className="text-white hover:cursor-pointer transition-colors flex items-center gap-2 font-bold">Are you a builder / Architect ? <ArrowRight size={12} /></div>
-        </div>
-      </div>
 
       {/* NAVBAR */}
       <div className="fixed top-14 left-0 w-full z-50 flex justify-center pointer-events-none px-6"

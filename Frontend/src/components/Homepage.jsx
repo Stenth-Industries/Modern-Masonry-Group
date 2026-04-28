@@ -463,7 +463,7 @@ export default function Homepage({ navigate }) {
       <FloatingCTA scrollY={scrollY} />
 
       {/* HERO */}
-      <section id="home" className="relative h-screen bg-black overflow-hidden" style={{ contain: "layout style" }}>
+      <section id="home" className="relative bg-black overflow-hidden" style={{ contain: "layout style", height: "calc(100vh / 0.90)" }}>
         {/* LOGO IN VIDEO */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -480,7 +480,7 @@ export default function Homepage({ navigate }) {
             <img
               src="/Logo-MM (1).png"
               alt="MMG"
-              className="w-56 h-56 object-contain drop-shadow-[0_4px_16px_rgba(212,175,99,0.2)]"
+              className="w-20 h-20 sm:w-32 sm:h-32 md:w-44 md:h-44 lg:w-56 lg:h-56 object-contain drop-shadow-[0_4px_16px_rgba(212,175,99,0.2)]"
             />
           </motion.div>
         </motion.div>
@@ -512,7 +512,7 @@ export default function Homepage({ navigate }) {
 
         {/* Layer 2: Hero text content */}
         <motion.div style={{ y: heroTextY, opacity: heroOpacity, willChange: "transform, opacity" }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
             <div className="flex gap-[0.25em] flex-wrap">
               {["Where", "Architecture"].map((w, i) => (
                 <div key={i} className="overflow-hidden pb-2">
@@ -550,7 +550,7 @@ export default function Homepage({ navigate }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-xl font-bold md:text-2xl text-[var(--limestone)] font-light max-w-2xl mb-10 leading-relaxed"
+            className="text-sm sm:text-base md:text-xl lg:text-2xl text-[var(--limestone)] font-light max-w-2xl mb-8 md:mb-10 leading-relaxed"
           >
             Premium brick, stone & masonry products for homeowners, architects,
             contractors & builders across Ontario.
@@ -651,7 +651,7 @@ export default function Homepage({ navigate }) {
           <SplitHeading
             text="A Story of Craft"
             Tag="p"
-            className="text-[var(--brass)] text-5xl font-bold tracking-widest uppercase"
+            className="text-[var(--brass)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase"
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
@@ -659,7 +659,7 @@ export default function Homepage({ navigate }) {
             <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-16">
               30 Years of Masonry Excellence
             </h2>
-            <p className="text-gray-400 text-xl leading-relaxed mb-6 font-light">
+            <p className="text-gray-400 text-base sm:text-lg md:text-xl leading-relaxed mb-6 font-light">
               Modern Masonry Group was founded in 1994 with a single mission:
               bring world-class masonry materials to Ontario's Homeowners,
               architects, builders, and contractors at trade pricing.
@@ -902,7 +902,7 @@ export default function Homepage({ navigate }) {
           </p>
           <SplitHeading
             text="What Are You Building Today?"
-            className="text-5xl font-black tracking-tight mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-6"
             delay={0.1}
           />
           <p className="text-gray-400 text-lg">
@@ -1084,9 +1084,9 @@ export default function Homepage({ navigate }) {
         <FadeUp className="max-w-4xl mx-auto relative z-10">
           <SplitHeading
             text="Ready to Start Your Project?"
-            className="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-8 uppercase leading-none"
           />
-          <p className="text-xl md:text-2xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
             Our masonry experts are here to help you select, estimate, and
             supply the perfect materials.
           </p>

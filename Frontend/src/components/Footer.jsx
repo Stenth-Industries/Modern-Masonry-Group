@@ -121,7 +121,7 @@ export default function Footer() {
           </div>
 
           {/* Products */}
-          <div className="mt-24 lg:mt-8 lg:col-span-2 lg:col-start-6">
+          <div className="mt-4 md:mt-24 lg:mt-8 lg:col-span-2 lg:col-start-6">
             <p className="text-white/90 text-[12px] font-semibold tracking-[0.25em] uppercase mb-6 flex items-center gap-2">
               {/* <span className="h-px w-4 bg-[#C9A449] inline-block opacity-70" /> */}
               Products
