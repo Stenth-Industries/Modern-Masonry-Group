@@ -1,4 +1,4 @@
-import prisma from '../config/prisma.js';
+import prisma from "../config/prisma.js";
 
 /**
  * Build a Prisma `where` clause from query params.
@@ -22,82 +22,112 @@ const buildWhere = (query) => {
   const where = {};
   const AND = [];
 
+  if (query.isActive !== undefined) {
+    AND.push({ isActive: query.isActive === "true" });
+  }
+
   // ── Free-text search ────────────────────────────────────────────────────────
   if (search && search.trim()) {
     const q = search.trim();
     AND.push({
       OR: [
-        { name: { contains: q, mode: 'insensitive' } },
-        { slug: { contains: q, mode: 'insensitive' } },
-        { material: { contains: q, mode: 'insensitive' } },
+        { colourName: { contains: q, mode: "insensitive" } },
+        { sku: { contains: q, mode: "insensitive" } },
         {
-          variants: {
-            some: {
-              OR: [
-                { colourName: { contains: q, mode: 'insensitive' } },
-                { sku: { contains: q, mode: 'insensitive' } },
-              ],
-            },
-          },
-        },
-        {
-          categories: {
-            some: {
-              category: { value: { contains: q, mode: 'insensitive' } },
-            },
-          },
-        },
-        {
-          manufacturers: {
-            some: {
-              manufacturer: { name: { contains: q, mode: 'insensitive' } },
-            },
+          product: {
+            OR: [
+              { name: { contains: q, mode: "insensitive" } },
+              { slug: { contains: q, mode: "insensitive" } },
+              { material: { contains: q, mode: "insensitive" } },
+              {
+                categories: {
+                  some: {
+                    category: { value: { contains: q, mode: "insensitive" } },
+                  },
+                },
+              },
+              {
+                manufacturers: {
+                  some: {
+                    manufacturer: {
+                      name: { contains: q, mode: "insensitive" },
+                    },
+                  },
+                },
+              },
+            ],
           },
         },
       ],
     });
   }
 
-  // ── Category filters (colour / collection / style) ─────────────────────────
-  const buildCategoryFilter = (type, rawValue) => {
+  // ── Category filters (collection / style) ─────────────────────────
+  const buildProductCategoryFilter = (type, rawValue) => {
     if (!rawValue) return null;
     const values = rawValue
-      .split(',')
+      .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
     if (!values.length) return null;
     return {
-      categories: {
-        some: {
-          category: {
-            type,
-            value: { in: values, mode: 'insensitive' },
+      product: {
+        categories: {
+          some: {
+            category: {
+              type,
+              value: { in: values, mode: "insensitive" },
+            },
           },
         },
       },
     };
   };
 
-  const colourFilter = buildCategoryFilter('colour', colour);
-  const collectionFilter = buildCategoryFilter('collection', collection);
-  const styleFilter = buildCategoryFilter('style', style);
+  const collectionFilter = buildProductCategoryFilter("collection", collection);
+  const styleFilter = buildProductCategoryFilter("style", style);
 
-  if (colourFilter) AND.push(colourFilter);
   if (collectionFilter) AND.push(collectionFilter);
   if (styleFilter) AND.push(styleFilter);
+
+  if (colour) {
+    const values = colour
+      .split(",")
+      .map((v) => v.trim())
+      .filter(Boolean);
+    if (values.length) {
+      AND.push({
+        OR: [
+          { colourName: { in: values, mode: "insensitive" } },
+          {
+            product: {
+              categories: {
+                some: {
+                  category: {
+                    type: "colour",
+                    value: { in: values, mode: "insensitive" },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      });
+    }
+  }
 
   // ── Manufacturer filter ─────────────────────────────────────────────────────
   if (manufacturer) {
     const names = manufacturer
-      .split(',')
+      .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
     if (names.length) {
       AND.push({
-        manufacturers: {
-          some: {
-            manufacturer: {
-              name: { in: names, mode: 'insensitive' },
+        product: {
+          manufacturers: {
+            some: {
+              manufacturer: { name: { in: names, mode: "insensitive" } },
             },
           },
         },
@@ -108,11 +138,13 @@ const buildWhere = (query) => {
   // ── Material filter ─────────────────────────────────────────────────────────
   if (material) {
     const materials = material
-      .split(',')
+      .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
     if (materials.length) {
-      AND.push({ material: { in: materials, mode: 'insensitive' } });
+      AND.push({
+        product: { material: { in: materials, mode: "insensitive" } },
+      });
     }
   }
 
@@ -129,55 +161,45 @@ export const getProducts = async (query = {}) => {
 
   const where = buildWhere(query);
 
-  // Variant active filter (applied inside include, not at product level)
-  const variantWhere =
-    query.isActive !== undefined
-      ? { isActive: query.isActive === 'true' }
-      : undefined;
-
-  const [total, products] = await Promise.all([
-    prisma.product.count({ where }),
-    prisma.product.findMany({
+  const [total, variants] = await Promise.all([
+    prisma.variant.count({ where }),
+    prisma.variant.findMany({
       where,
       skip,
       take: limit,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       include: {
-        manufacturers: {
-          include: { manufacturer: true },
-        },
-        categories: {
-          include: { category: true },
-        },
-        variants: {
-          where: variantWhere,
-          orderBy: { colourName: 'asc' },
+        product: {
+          include: {
+            manufacturers: { include: { manufacturer: true } },
+            categories: { include: { category: true } },
+          },
         },
       },
     }),
   ]);
 
-  // Flatten for cleaner API response
-  const data = products.map((p) => ({
-    id: p.id,
-    name: p.name,
-    slug: p.slug,
-    description: p.description,
-    material: p.material,
-    createdAt: p.createdAt,
-    manufacturers: p.manufacturers.map((pm) => ({
+  // Flatten for cleaner API response, making Variants act like parent Products
+  const data = variants.map((v) => ({
+    id: v.id,
+    name: `${v.product.name} - ${v.colourName || "Standard"}`,
+    slug: v.product.slug,
+    description: v.product.description,
+    material: v.product.material,
+    createdAt: v.createdAt,
+    manufacturers: v.product.manufacturers.map((pm) => ({
       id: pm.manufacturer.id,
       name: pm.manufacturer.name,
       website: pm.manufacturer.website,
       country: pm.manufacturer.country,
     })),
-    categories: p.categories.map((pc) => ({
+    categories: v.product.categories.map((pc) => ({
       id: pc.category.id,
       type: pc.category.type,
       value: pc.category.value,
       hexCode: pc.category.hexCode,
     })),
-    variants: p.variants,
+    variants: [v], // Place the variant in an array so the frontend seamlessly reads v[0].imageUrl
   }));
 
   return {
@@ -196,17 +218,17 @@ export const getProducts = async (query = {}) => {
 export const getFilterOptions = async () => {
   const [categories, manufacturers, materials] = await Promise.all([
     prisma.category.findMany({
-      orderBy: [{ type: 'asc' }, { value: 'asc' }],
+      orderBy: [{ type: "asc" }, { value: "asc" }],
     }),
     prisma.manufacturer.findMany({
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
       select: { id: true, name: true, country: true },
     }),
     prisma.product.findMany({
       where: { material: { not: null } },
       select: { material: true },
-      distinct: ['material'],
-      orderBy: { material: 'asc' },
+      distinct: ["material"],
+      orderBy: { material: "asc" },
     }),
   ]);
 
@@ -217,9 +239,9 @@ export const getFilterOptions = async () => {
   }, {});
 
   return {
-    colours: grouped['colour'] || [],
-    collections: grouped['collection'] || [],
-    styles: grouped['style'] || [],
+    colours: grouped["colour"] || [],
+    collections: grouped["collection"] || [],
+    styles: grouped["style"] || [],
     manufacturers,
     materials: materials.map((p) => p.material).filter(Boolean),
   };
@@ -233,7 +255,7 @@ export const getProductBySlug = async (slug) => {
     include: {
       manufacturers: { include: { manufacturer: true } },
       categories: { include: { category: true } },
-      variants: { orderBy: { colourName: 'asc' } },
+      variants: { orderBy: { colourName: "asc" } },
     },
   });
 

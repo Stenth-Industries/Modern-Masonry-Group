@@ -1,5 +1,17 @@
-import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import {
   Search,
   ChevronDown,
@@ -18,51 +30,51 @@ import { BrickDetailPanel } from "./BrickDetailPanel";
 import CompareModal from "./CompareModal";
 import Footer from "./Footer";
 
-
 // ── Configuration ─────────────────────────────────────────────────────────────
 
 const ACCENT = "#c9a449";
 
 const COLOR_MAP = {
-  red: '#B4382B',
-  'dark red': '#8B1A1A',
-  tan: '#C4A57B',
-  burgundy: '#5D1E24',
-  grey: '#808080',
-  gray: '#808080',
-  'light grey': '#B0B0B0',
-  'dark grey': '#555555',
-  brown: '#7A5C40',
-  'dark brown': '#4A3728',
-  buff: '#D4B483',
-  cream: '#EDE0C4',
-  white: '#E8E4DC',
-  'off white': '#E0D8CC',
-  black: '#1A1A1A',
-  charcoal: '#4A4A4A',
-  silver: '#A8A8A8',
-  bronze: '#A0724A',
-  gold: '#C9A84C',
-  orange: '#C0622A',
-  pink: '#D4948A',
-  blue: '#4A6FA5',
-  green: '#5A7A5A',
-  yellow: '#D4C060',
-  beige: '#CDB89A',
-  ivory: '#E8DFC8',
-  slate: '#607080',
-  terracotta: '#C06040',
-  'light brown': '#A08060',
-  'medium brown': '#8B6347',
-  'warm grey': '#9A9088',
-  'cool grey': '#8090A0',
-  purple: '#705080',
-  multicolor: 'linear-gradient(135deg, #B4382B 0%, #C4A57B 33%, #808080 66%, #4A3728 100%)',
+  red: "#B4382B",
+  "dark red": "#8B1A1A",
+  tan: "#C4A57B",
+  burgundy: "#5D1E24",
+  grey: "#808080",
+  gray: "#808080",
+  "light grey": "#B0B0B0",
+  "dark grey": "#555555",
+  brown: "#7A5C40",
+  "dark brown": "#4A3728",
+  buff: "#D4B483",
+  cream: "#EDE0C4",
+  white: "#E8E4DC",
+  "off white": "#E0D8CC",
+  black: "#1A1A1A",
+  charcoal: "#4A4A4A",
+  silver: "#A8A8A8",
+  bronze: "#A0724A",
+  gold: "#C9A84C",
+  orange: "#C0622A",
+  pink: "#D4948A",
+  blue: "#4A6FA5",
+  green: "#5A7A5A",
+  yellow: "#D4C060",
+  beige: "#CDB89A",
+  ivory: "#E8DFC8",
+  slate: "#607080",
+  terracotta: "#C06040",
+  "light brown": "#A08060",
+  "medium brown": "#8B6347",
+  "warm grey": "#9A9088",
+  "cool grey": "#8090A0",
+  purple: "#705080",
+  multicolor:
+    "linear-gradient(135deg, #B4382B 0%, #C4A57B 33%, #808080 66%, #4A3728 100%)",
 };
 
 const resolveColorHex = (name, apiHex) => {
   // Ignore #808080 — it's the database default placeholder, not a real color
-  if (apiHex && apiHex !== '#808080') return apiHex;
+  if (apiHex && apiHex !== "#808080") return apiHex;
   if (!name) return null;
   return COLOR_MAP[name.toLowerCase().trim()] || null;
 };
@@ -85,20 +97,22 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
     >
       <div className="flex items-center gap-3">
         <div
-          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
-            ? "bg-[#c9a449] border-[#c9a449]"
-            : "bg-black/20 border-white/15 group-hover:border-white/40"
-            }`}
+          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${
+            checked
+              ? "bg-[#c9a449] border-[#c9a449]"
+              : "bg-black/20 border-white/15 group-hover:border-white/40"
+          }`}
         >
           {checked && (
             <Check size={11} className="text-black" strokeWidth={3.5} />
           )}
         </div>
         <span
-          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${checked
-            ? "text-[#e3decb] font-medium"
-            : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
-            }`}
+          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${
+            checked
+              ? "text-[#e3decb] font-medium"
+              : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
+          }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           {label}
@@ -148,7 +162,14 @@ function Section({ title, children, defaultOpen = true }) {
 
 // ── Recreated Screenshot Dribbble Card (Highly Optimized) ───────────────────
 
-const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavourite, onToggleFavourite, isCompared, onToggleCompare }) {
+const PremiumCard = React.memo(function PremiumCard({
+  product,
+  onSample,
+  isFavourite,
+  onToggleFavourite,
+  isCompared,
+  onToggleCompare,
+}) {
   const typeLabel = product.collection || product.type || "MOULDED";
   const manufacturer = product.manufacturer || "GLEN GERY";
   const [imgError, setImgError] = useState(false);
@@ -157,24 +178,38 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
   const cardRef = useRef(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [7, -7]), { stiffness: 250, damping: 25 });
-  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-7, 7]),  { stiffness: 250, damping: 25 });
+  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [7, -7]), {
+    stiffness: 250,
+    damping: 25,
+  });
+  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-7, 7]), {
+    stiffness: 250,
+    damping: 25,
+  });
 
   const handleMouseMove = (e) => {
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     rawX.set((e.clientX - rect.left) / rect.width - 0.5);
-    rawY.set((e.clientY - rect.top)  / rect.height - 0.5);
+    rawY.set((e.clientY - rect.top) / rect.height - 0.5);
   };
-  const handleMouseLeave = () => { rawX.set(0); rawY.set(0); };
+  const handleMouseLeave = () => {
+    rawX.set(0);
+    rawY.set(0);
+  };
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 800 }}
-      className={`group flex flex-col w-full h-full bg-transparent border ${isCompared ? 'border-[#c9a449]' : 'border-[rgba(255,255,255,0.06)]'} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer`}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 800,
+      }}
+      className={`group flex flex-col w-full h-full bg-transparent border ${isCompared ? "border-[#c9a449]" : "border-[rgba(255,255,255,0.06)]"} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer`}
       onClick={() => onSample(product)}
     >
       {/* Upper Picture Area */}
@@ -192,20 +227,54 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
           <BrickWallPattern colorHex={product.colorHex || "#c9a449"} rows={5} />
         )}
 
+        {/* Top-Left: Stock label bookmark */}
+        {product.stockLabel && (
+          <div className="absolute top-3 left-3 z-10 flex">
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[4px] bg-black/50 backdrop-blur-md border border-[var(--brass)] shadow-lg">
+              <div
+                className={`w-1.5 h-1.5 rounded-full ${
+                  product.stockLabel.toLowerCase() === "in stock"
+                    ? "bg-[#c9a449]"
+                    : "bg-[#e2ded9]/50"
+                }`}
+                style={{
+                  boxShadow:
+                    product.stockLabel.toLowerCase() === "in stock"
+                      ? "0 0 6px rgba(201, 164, 73, 0.6)"
+                      : "none",
+                }}
+              />
+              <span className="text-[9px] uppercase tracking-[0.15em] text-[#e2ded9] font-bold">
+                {product.stockLabel}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Top-Right: Favourites button */}
-        <div className="absolute top-3 right-3 flex flex-col gap-1.5">
+        <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-10">
           <button
-            onClick={(e) => { e.stopPropagation(); onToggleFavourite(product); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavourite(product);
+            }}
             title={isFavourite ? "Remove from Favourites" : "Add to Favourites"}
-            className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isFavourite ? 'border-[#c9a449]' : 'border-transparent group-hover:border-white/20'}`}
+            className={`p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border ${isFavourite ? "border-[#c9a449]" : "border-transparent group-hover:border-white/20"}`}
           >
-            <Heart size={14} fill={isFavourite ? "#c9a449" : "transparent"} color={isFavourite ? "#c9a449" : "rgba(255,255,255,0.7)"} />
+            <Heart
+              size={14}
+              fill={isFavourite ? "#c9a449" : "transparent"}
+              color={isFavourite ? "#c9a449" : "rgba(255,255,255,0.7)"}
+            />
           </button>
         </div>
       </div>
 
       {/* Info Area */}
-      <div className="flex flex-col px-5 pt-5 pb-4 flex-1 bg-black/30" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <div
+        className="flex flex-col px-5 pt-5 pb-4 flex-1 bg-black/30"
+        style={{ fontFamily: "'Inter', sans-serif" }}
+      >
         <div className="mb-3">
           <h3
             className="text-[#e2ded9] text-[17px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
@@ -213,26 +282,41 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
           >
             {product.name}
           </h3>
-          <span className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80" style={{ fontWeight: 600 }}>
+          <span
+            className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
+            style={{ fontWeight: 600 }}
+          >
             {manufacturer}
           </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 mb-4">
           {typeLabel && (
-            <span className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase" style={{ fontWeight: 500 }}>
+            <span
+              className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase"
+              style={{ fontWeight: 500 }}
+            >
               {typeLabel}
             </span>
           )}
-          <span className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase" style={{ fontWeight: 600 }}>
+          <span
+            className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
+            style={{ fontWeight: 600 }}
+          >
             {product.finish}
           </span>
         </div>
 
         {/* Card footer buttons */}
-        <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div
+          className="mt-auto border-t border-white/[0.06] pt-3 flex items-center"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           <button
-            onClick={(e) => { e.stopPropagation(); onSample(product); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSample(product);
+            }}
             className="flex-1 relative overflow-hidden py-2.5 text-[10px] uppercase tracking-[0.14em] font-bold text-[#c9a449] hover:text-black hover:bg-[#c9a449] transition-all duration-300 rounded-l-md border border-[#c9a449]/25 hover:border-[#c9a449] group/btn"
           >
             <span className="relative z-10">Request Sample</span>
@@ -242,15 +326,22 @@ const PremiumCard = React.memo(function PremiumCard({ product, onSample, isFavou
           <div className="w-px h-8 bg-white/[0.06] shrink-0" />
 
           <button
-            onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleCompare(product);
+            }}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-r-md border-t border-r border-b text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
               isCompared
-                ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
-                : 'border-[#c9a449]/25 text-white/40 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
+                ? "border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]"
+                : "border-[#c9a449]/25 text-white/40 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5"
             }`}
           >
-            {isCompared ? <Check size={12} strokeWidth={2.5} /> : <Plus size={12} />}
-            <span>{isCompared ? 'Added' : 'Compare'}</span>
+            {isCompared ? (
+              <Check size={12} strokeWidth={2.5} />
+            ) : (
+              <Plus size={12} />
+            )}
+            <span>{isCompared ? "Added" : "Compare"}</span>
           </button>
         </div>
       </div>
@@ -300,18 +391,34 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       .then(async (res) => {
         const text = await res.text();
         if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
-        if (!text) return { success: true, data: { collections: [], colours: [], styles: [], manufacturers: [] } };
-        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid filter JSON: " + text.substring(0, 100)); }
+        if (!text)
+          return {
+            success: true,
+            data: {
+              collections: [],
+              colours: [],
+              styles: [],
+              manufacturers: [],
+            },
+          };
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          throw new Error("Invalid filter JSON: " + text.substring(0, 100));
+        }
       })
       .then((r) => {
         if (r.success && r.data) {
           setFiltersDB({
             collections: r.data.collections.map((c) => c.value),
             colors: r.data.colours
-              .map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
+              .map((c) => ({
+                value: c.value,
+                hex: resolveColorHex(c.value, c.hexCode),
+              }))
               .sort((a, b) => {
-                const isOtherA = a.value.toLowerCase() === 'other';
-                const isOtherB = b.value.toLowerCase() === 'other';
+                const isOtherA = a.value.toLowerCase() === "other";
+                const isOtherB = b.value.toLowerCase() === "other";
                 if (isOtherA) return 1;
                 if (isOtherB) return -1;
                 return 0;
@@ -351,8 +458,13 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       .then(async (r) => {
         const text = await r.text();
         if (!r.ok) throw new Error(`Status ${r.status}: ${text}`);
-        if (!text) return { success: true, data: [], meta: { total: 0, totalPages: 1 } };
-        try { return JSON.parse(text); } catch(e) { throw new Error("Invalid product JSON: " + text.substring(0, 100)); }
+        if (!text)
+          return { success: true, data: [], meta: { total: 0, totalPages: 1 } };
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          throw new Error("Invalid product JSON: " + text.substring(0, 100));
+        }
       })
       .then((res) => {
         if (res.success && res.data) {
@@ -372,7 +484,9 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               slug: p.slug,
               collection: collCat?.value || "Extruded",
               color: colorCat?.value || "Brown",
-              colorHex: resolveColorHex(colorCat?.value, colorCat?.hexCode) || "#7A5C40",
+              colorHex:
+                resolveColorHex(colorCat?.value, colorCat?.hexCode) ||
+                "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
               finish: styleCat?.value || sizeLabel || "Matt",
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
@@ -387,6 +501,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               waterAbsorption: "≤ 12%",
               frostResistance: "F2 – Exposure Grade",
               inStock: variant?.isActive ?? true,
+              stockLabel: variant?.stock,
               isNew: false,
             };
           });
@@ -399,7 +514,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
         }
       })
       .catch((err) => {
-        if (err.name === 'AbortError') return;
+        if (err.name === "AbortError") return;
         console.error("API Error:", err);
         setErrorMsg(err.message || String(err));
       })
@@ -423,18 +538,18 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   }, []);
 
   const handleToggleFavourite = useCallback((prod) => {
-    setFavourites(prev =>
-      prev.find(p => p.id === prod.id)
-        ? prev.filter(p => p.id !== prod.id)
-        : [...prev, prod]
+    setFavourites((prev) =>
+      prev.find((p) => p.id === prod.id)
+        ? prev.filter((p) => p.id !== prod.id)
+        : [...prev, prod],
     );
   }, []);
 
   const handleToggleCompare = useCallback((prod) => {
-    setCompareQueue(prev =>
-      prev.find(p => p.id === prod.id)
-        ? prev.filter(p => p.id !== prod.id)
-        : [...prev, prod].slice(-3)
+    setCompareQueue((prev) =>
+      prev.find((p) => p.id === prod.id)
+        ? prev.filter((p) => p.id !== prod.id)
+        : [...prev, prod].slice(-3),
     );
   }, []);
 
@@ -445,10 +560,19 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const displayedProducts = showFavourites ? favourites : products;
 
   const getPagination = () => {
-    if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i + 1);
-    if (page <= 3) return [1, 2, 3, 4, '...', totalPages];
-    if (page >= totalPages - 2) return [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
-    return [1, '...', page - 1, page, page + 1, '...', totalPages];
+    if (totalPages <= 5)
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    if (page <= 3) return [1, 2, 3, 4, "...", totalPages];
+    if (page >= totalPages - 2)
+      return [
+        1,
+        "...",
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages,
+      ];
+    return [1, "...", page - 1, page, page + 1, "...", totalPages];
   };
 
   return (
@@ -474,8 +598,15 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               </h1>
             </div>
             <div className="md:max-w-md pt-12 md:pt-14">
-              <p className="text-[24px] md:text-[24px] tracking-[0.02em] leading-relaxed text-white/50 italic" style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}>
-                "Discover premium bricks curated for strength, style, and projects that deserve attention to detail - built for those who build with intention."
+              <p
+                className="text-[24px] md:text-[24px] tracking-[0.02em] leading-relaxed text-white/50 italic"
+                style={{
+                  fontFamily: "'Playfair Display', 'Cormorant Garamond', serif",
+                }}
+              >
+                "Discover premium bricks curated for strength, style, and
+                projects that deserve attention to detail - built for those who
+                build with intention."
               </p>
             </div>
           </div>
@@ -484,37 +615,79 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
         <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-4 md:gap-8">
-            <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">{showFavourites ? favourites.length : total} products</span>
+            <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">
+              {showFavourites ? favourites.length : total} products
+            </span>
             <button
               onClick={() => setMobileSidebarOpen(true)}
               className="md:hidden flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors"
             >
               <SlidersHorizontal size={14} />
-              Filters{(types.length + colors.length + finishes.length + manufacturers.length) > 0 && ` (${types.length + colors.length + finishes.length + manufacturers.length})`}
+              Filters
+              {types.length +
+                colors.length +
+                finishes.length +
+                manufacturers.length >
+                0 &&
+                ` (${types.length + colors.length + finishes.length + manufacturers.length})`}
             </button>
             <button
               onClick={() => setShowFavourites(!showFavourites)}
-              className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? 'text-[#c9a449]' : 'text-[#9a9488] hover:text-white'}`}
+              className={`flex items-center gap-2 text-[10px] font-bold tracking-[0.1em] uppercase transition-colors ${showFavourites ? "text-[#c9a449]" : "text-[#9a9488] hover:text-white"}`}
             >
-              <Heart size={14} className={showFavourites ? "text-[#c9a449] fill-[#c9a449]" : "text-[#9a9488]"} />
-              <span className="hidden sm:inline">{showFavourites ? 'View All' : 'List Favourites'}</span>
+              <Heart
+                size={14}
+                className={
+                  showFavourites
+                    ? "text-[#c9a449] fill-[#c9a449]"
+                    : "text-[#9a9488]"
+                }
+              />
+              <span className="hidden sm:inline">
+                {showFavourites ? "View All" : "List Favourites"}
+              </span>
             </button>
           </div>
 
           <div className="hidden md:flex items-center gap-3 flex-1 justify-center">
-            {[...types, ...colors, ...finishes, ...manufacturers].map(v => (
-              <div key={v} className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm">
-                <span className="text-[11px] text-[#e3decb] tracking-wide">{v}</span>
-                <button onClick={() => {
-                  if (types.includes(v)) setTypes(types.filter(x => x !== v));
-                  if (colors.includes(v)) setColors(colors.filter(x => x !== v));
-                  if (finishes.includes(v)) setFinishes(finishes.filter(x => x !== v));
-                  if (manufacturers.includes(v)) setManufacturers(manufacturers.filter(x => x !== v));
-                }} className="text-[#9a9488] hover:text-white pl-1">×</button>
+            {[...types, ...colors, ...finishes, ...manufacturers].map((v) => (
+              <div
+                key={v}
+                className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm"
+              >
+                <span className="text-[11px] text-[#e3decb] tracking-wide">
+                  {v}
+                </span>
+                <button
+                  onClick={() => {
+                    if (types.includes(v))
+                      setTypes(types.filter((x) => x !== v));
+                    if (colors.includes(v))
+                      setColors(colors.filter((x) => x !== v));
+                    if (finishes.includes(v))
+                      setFinishes(finishes.filter((x) => x !== v));
+                    if (manufacturers.includes(v))
+                      setManufacturers(manufacturers.filter((x) => x !== v));
+                  }}
+                  className="text-[#9a9488] hover:text-white pl-1"
+                >
+                  ×
+                </button>
               </div>
             ))}
-            {(types.length > 0 || colors.length > 0 || finishes.length > 0 || manufacturers.length > 0) && (
-              <button onClick={() => { setTypes([]); setColors([]); setFinishes([]); setManufacturers([]); }} className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3">
+            {(types.length > 0 ||
+              colors.length > 0 ||
+              finishes.length > 0 ||
+              manufacturers.length > 0) && (
+              <button
+                onClick={() => {
+                  setTypes([]);
+                  setColors([]);
+                  setFinishes([]);
+                  setManufacturers([]);
+                }}
+                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
+              >
                 Clear All
               </button>
             )}
@@ -522,60 +695,92 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
           <div className="flex items-center gap-3 md:gap-6 border-l border-white/5 pl-4 md:pl-8">
             <div className="relative group flex items-center">
-              <Search size={14} className="absolute left-0 text-[#9a9488] group-focus-within:text-[#c9a449] transition-colors" />
+              <Search
+                size={14}
+                className="absolute left-0 text-[#9a9488] group-focus-within:text-[#c9a449] transition-colors"
+              />
               <input
                 type="text"
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
                 className="bg-transparent border-none w-[120px] py-1 pl-7 text-[12px] tracking-wide text-[#e3decb] placeholder-[#9a9488] focus:outline-none focus:ring-0"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               />
             </div>
             <div className="flex items-center gap-1 border border-white/10 rounded-md p-1">
-              <button onClick={() => setCompact(false)} title="Comfortable view"
-                className={`p-1.5 rounded transition-colors ${!compact ? 'bg-[#c9a449] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+              <button
+                onClick={() => setCompact(false)}
+                title="Comfortable view"
+                className={`p-1.5 rounded transition-colors ${!compact ? "bg-[#c9a449] text-black" : "text-[#9a9488] hover:text-white"}`}
+              >
                 <Grid size={14} />
               </button>
-              <button onClick={() => setCompact(true)} title="Compact view"
-                className={`p-1.5 rounded transition-colors ${compact ? 'bg-[#c9a449] text-black' : 'text-[#9a9488] hover:text-white'}`}>
+              <button
+                onClick={() => setCompact(true)}
+                title="Compact view"
+                className={`p-1.5 rounded transition-colors ${compact ? "bg-[#c9a449] text-black" : "text-[#9a9488] hover:text-white"}`}
+              >
                 <Grid3x3 size={14} />
               </button>
             </div>
           </div>
         </div>
 
-
         <div className="flex flex-grow w-full max-w-[1800px] mx-auto min-h-0">
           <motion.aside
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0">
+            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] sticky top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20 flex-shrink-0"
+          >
             <div className="px-8 xl:px-10 pt-10 pb-32">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={14} className="text-[#c9a449]" />
-                <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">REFINE</h2>
+                <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">
+                  REFINE
+                </h2>
               </div>
 
               <Section title="COLLECTION">
                 {filtersDB.collections.map((t) => (
-                  <GlassCheckbox key={t} label={t} checked={types.includes(t)} onClick={() => tog(t, types, setTypes)} />
+                  <GlassCheckbox
+                    key={t}
+                    label={t}
+                    checked={types.includes(t)}
+                    onClick={() => tog(t, types, setTypes)}
+                  />
                 ))}
               </Section>
               <Section title="COLOUR">
                 {filtersDB.colors.map(({ value, hex }) => (
-                  <GlassCheckbox key={value} label={value} colorDot={hex} checked={colors.includes(value)} onClick={() => tog(value, colors, setColors)} />
+                  <GlassCheckbox
+                    key={value}
+                    label={value}
+                    colorDot={hex}
+                    checked={colors.includes(value)}
+                    onClick={() => tog(value, colors, setColors)}
+                  />
                 ))}
               </Section>
               <Section title="FINISH">
                 {filtersDB.styles.map((s) => (
-                  <GlassCheckbox key={s} label={s} checked={finishes.includes(s)} onClick={() => tog(s, finishes, setFinishes)} />
+                  <GlassCheckbox
+                    key={s}
+                    label={s}
+                    checked={finishes.includes(s)}
+                    onClick={() => tog(s, finishes, setFinishes)}
+                  />
                 ))}
               </Section>
               <Section title="MANUFACTURER">
                 {filtersDB.manufacturers.map((m) => (
-                  <GlassCheckbox key={m} label={m} checked={manufacturers.includes(m)} onClick={() => tog(m, manufacturers, setManufacturers)} />
+                  <GlassCheckbox
+                    key={m}
+                    label={m}
+                    checked={manufacturers.includes(m)}
+                    onClick={() => tog(m, manufacturers, setManufacturers)}
+                  />
                 ))}
               </Section>
             </div>
@@ -586,48 +791,91 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             {mobileSidebarOpen && (
               <>
                 <motion.div
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   className="md:hidden fixed inset-0 bg-black/70 z-[60]"
                   onClick={() => setMobileSidebarOpen(false)}
                 />
                 <motion.div
-                  initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
-                  transition={{ type: 'spring', damping: 30, stiffness: 280 }}
+                  initial={{ x: "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "-100%" }}
+                  transition={{ type: "spring", damping: 30, stiffness: 280 }}
                   className="md:hidden fixed inset-y-0 left-0 w-[300px] bg-[#0a0a0a] border-r border-white/10 z-[70] overflow-y-auto"
                 >
                   <div className="px-6 pt-8 pb-16">
                     <div className="flex items-center justify-between mb-8">
                       <div className="flex items-center gap-3">
-                        <SlidersHorizontal size={14} className="text-[#c9a449]" />
-                        <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">REFINE</h2>
+                        <SlidersHorizontal
+                          size={14}
+                          className="text-[#c9a449]"
+                        />
+                        <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">
+                          REFINE
+                        </h2>
                       </div>
-                      <button onClick={() => setMobileSidebarOpen(false)} className="text-white/40 hover:text-white">
+                      <button
+                        onClick={() => setMobileSidebarOpen(false)}
+                        className="text-white/40 hover:text-white"
+                      >
                         <X size={18} />
                       </button>
                     </div>
                     <Section title="COLLECTION">
                       {filtersDB.collections.map((t) => (
-                        <GlassCheckbox key={t} label={t} checked={types.includes(t)} onClick={() => tog(t, types, setTypes)} />
+                        <GlassCheckbox
+                          key={t}
+                          label={t}
+                          checked={types.includes(t)}
+                          onClick={() => tog(t, types, setTypes)}
+                        />
                       ))}
                     </Section>
                     <Section title="COLOUR">
                       {filtersDB.colors.map(({ value, hex }) => (
-                        <GlassCheckbox key={value} label={value} colorDot={hex} checked={colors.includes(value)} onClick={() => tog(value, colors, setColors)} />
+                        <GlassCheckbox
+                          key={value}
+                          label={value}
+                          colorDot={hex}
+                          checked={colors.includes(value)}
+                          onClick={() => tog(value, colors, setColors)}
+                        />
                       ))}
                     </Section>
                     <Section title="FINISH">
                       {filtersDB.styles.map((s) => (
-                        <GlassCheckbox key={s} label={s} checked={finishes.includes(s)} onClick={() => tog(s, finishes, setFinishes)} />
+                        <GlassCheckbox
+                          key={s}
+                          label={s}
+                          checked={finishes.includes(s)}
+                          onClick={() => tog(s, finishes, setFinishes)}
+                        />
                       ))}
                     </Section>
                     <Section title="MANUFACTURER">
                       {filtersDB.manufacturers.map((m) => (
-                        <GlassCheckbox key={m} label={m} checked={manufacturers.includes(m)} onClick={() => tog(m, manufacturers, setManufacturers)} />
+                        <GlassCheckbox
+                          key={m}
+                          label={m}
+                          checked={manufacturers.includes(m)}
+                          onClick={() =>
+                            tog(m, manufacturers, setManufacturers)
+                          }
+                        />
                       ))}
                     </Section>
-                    {(types.length > 0 || colors.length > 0 || finishes.length > 0 || manufacturers.length > 0) && (
+                    {(types.length > 0 ||
+                      colors.length > 0 ||
+                      finishes.length > 0 ||
+                      manufacturers.length > 0) && (
                       <button
-                        onClick={() => { setTypes([]); setColors([]); setFinishes([]); setManufacturers([]); }}
+                        onClick={() => {
+                          setTypes([]);
+                          setColors([]);
+                          setFinishes([]);
+                          setManufacturers([]);
+                        }}
                         className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
                       >
                         Clear All Filters
@@ -639,32 +887,45 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             )}
           </AnimatePresence>
 
-          <main ref={pdfContentRef} className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32">
-
+          <main
+            ref={pdfContentRef}
+            className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32"
+          >
             {errorMsg && !showFavourites ? (
-              <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">API Error: {errorMsg}</div>
+              <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">
+                API Error: {errorMsg}
+              </div>
             ) : (
               <motion.div
                 key={`grid-${page}-${debouncedQuery}`}
                 initial="hidden"
                 animate="visible"
-                variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-                className={`grid gap-8 ${compact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'}`}
+                variants={{
+                  visible: { transition: { staggerChildren: 0.06 } },
+                }}
+                className={`grid gap-8 ${compact ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"}`}
               >
                 {displayedProducts.map((p) => (
                   <motion.div
                     key={p.id}
                     variants={{
-                      hidden:  { opacity: 0, y: 28 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }
+                      hidden: { opacity: 0, y: 28 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.45,
+                          ease: [0.22, 1, 0.36, 1],
+                        },
+                      },
                     }}
                   >
                     <PremiumCard
                       product={p}
                       onSample={handleSample}
-                      isFavourite={favourites.some(fav => fav.id === p.id)}
+                      isFavourite={favourites.some((fav) => fav.id === p.id)}
                       onToggleFavourite={handleToggleFavourite}
-                      isCompared={compareQueue.some(comp => comp.id === p.id)}
+                      isCompared={compareQueue.some((comp) => comp.id === p.id)}
                       onToggleCompare={handleToggleCompare}
                     />
                   </motion.div>
@@ -675,38 +936,54 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             {showFavourites ? (
               <div className="w-full flex justify-center mt-20">
                 <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
-                  {favourites.length > 0 ? "All Favourites Displayed" : "No favourites yet"}
+                  {favourites.length > 0
+                    ? "All Favourites Displayed"
+                    : "No favourites yet"}
                 </span>
               </div>
             ) : totalPages > 1 ? (
               <div className="w-full flex justify-center mt-20">
                 <div className="flex gap-2 items-center bg-[#1a1815] px-4 py-2 rounded-full border border-white/5">
-                  <button 
+                  <button
                     disabled={page === 1 || loading}
-                    onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => {
+                      setPage((p) => Math.max(1, p - 1));
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                     className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
                   >
                     PREV
                   </button>
                   <div className="w-px h-4 bg-white/10 mx-2" />
-                  {getPagination().map((p, index) => (
-                    p === '...' ? (
-                      <span key={`ellipsis-${index}`} className="text-white/40 px-2 font-bold tracking-widest">...</span>
+                  {getPagination().map((p, index) =>
+                    p === "..." ? (
+                      <span
+                        key={`ellipsis-${index}`}
+                        className="text-white/40 px-2 font-bold tracking-widest"
+                      >
+                        ...
+                      </span>
                     ) : (
                       <button
                         key={p}
                         disabled={loading}
-                        onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                        className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? 'text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]' : 'text-white/60 hover:bg-white/10 hover:text-white'}`}
+                        onClick={() => {
+                          setPage(p);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`}
                       >
                         {p}
                       </button>
-                    )
-                  ))}
+                    ),
+                  )}
                   <div className="w-px h-4 bg-white/10 mx-2" />
-                  <button 
+                  <button
                     disabled={page === totalPages || loading}
-                    onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => {
+                      setPage((p) => Math.min(totalPages, p + 1));
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                     className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
                   >
                     NEXT
@@ -714,7 +991,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                 </div>
               </div>
             ) : (
-              products.length > 0 && !loading && (
+              products.length > 0 &&
+              !loading && (
                 <div className="w-full flex justify-center mt-20">
                   <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
                     All Collections Displayed
@@ -724,7 +1002,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             )}
           </main>
         </div>
-        
+
         <Footer />
       </div>
 
@@ -744,30 +1022,52 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+            transition={{ type: "spring", damping: 28, stiffness: 300 }}
             className="fixed bottom-0 left-0 right-0 z-50 bg-[#12100e]/95 backdrop-blur-xl border-t border-[#c9a449]/20 shadow-[0_-8px_40px_rgba(0,0,0,0.6)]"
           >
             <div className="max-w-[1800px] mx-auto px-8 xl:px-14 py-4 flex items-center gap-6">
               {/* Thumbnails */}
               <div className="flex items-center gap-3 flex-1">
-                {compareQueue.map(p => (
-                  <div key={p.id} className="flex items-center gap-2.5 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2">
+                {compareQueue.map((p) => (
+                  <div
+                    key={p.id}
+                    className="flex items-center gap-2.5 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2"
+                  >
                     <div className="w-10 h-10 rounded-md border border-[#c9a449]/30 overflow-hidden bg-[#1a1815] shrink-0">
-                      {p.image ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" /> : <div className="w-full h-full bg-[#3a2e1e]" />}
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-[#3a2e1e]" />
+                      )}
                     </div>
                     <div className="flex flex-col min-w-0">
-                      <span className="text-[11px] text-white/80 font-medium truncate max-w-[120px]">{p.name}</span>
-                      <span className="text-[9px] text-[#c9a449]/60 uppercase tracking-wider truncate">{p.manufacturer}</span>
+                      <span className="text-[11px] text-white/80 font-medium truncate max-w-[120px]">
+                        {p.name}
+                      </span>
+                      <span className="text-[9px] text-[#c9a449]/60 uppercase tracking-wider truncate">
+                        {p.manufacturer}
+                      </span>
                     </div>
-                    <button onClick={() => handleToggleCompare(p)} className="ml-1 text-white/20 hover:text-white/60 transition-colors">
+                    <button
+                      onClick={() => handleToggleCompare(p)}
+                      className="ml-1 text-white/20 hover:text-white/60 transition-colors"
+                    >
                       <X size={12} />
                     </button>
                   </div>
                 ))}
                 {compareQueue.length < 3 && (
                   <div className="flex items-center gap-2 border border-dashed border-white/10 rounded-lg px-3 py-2 text-white/15">
-                    <div className="w-10 h-10 rounded-md border border-dashed border-white/10 flex items-center justify-center text-lg">+</div>
-                    <span className="text-[10px] uppercase tracking-wider">Add product</span>
+                    <div className="w-10 h-10 rounded-md border border-dashed border-white/10 flex items-center justify-center text-lg">
+                      +
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider">
+                      Add product
+                    </span>
                   </div>
                 )}
               </div>
@@ -775,7 +1075,10 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               {/* Right actions */}
               <div className="flex items-center gap-4 shrink-0">
                 <span className="text-[11px] uppercase tracking-widest text-white/40">
-                  <span className="text-[#c9a449] font-bold">{compareQueue.length}</span>/3 selected
+                  <span className="text-[#c9a449] font-bold">
+                    {compareQueue.length}
+                  </span>
+                  /3 selected
                 </span>
                 <div className="w-px h-5 bg-white/10" />
                 <button
@@ -797,11 +1100,11 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       </AnimatePresence>
 
       {/* Full Compare Specification Modal */}
-      <CompareModal 
-         open={showCompare} 
-         products={compareQueue} 
-         onClose={() => setShowCompare(false)} 
-         onRemove={handleToggleCompare} 
+      <CompareModal
+        open={showCompare}
+        products={compareQueue}
+        onClose={() => setShowCompare(false)}
+        onRemove={handleToggleCompare}
       />
     </div>
   );
