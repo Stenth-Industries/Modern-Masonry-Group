@@ -308,32 +308,21 @@ const PremiumCard = React.memo(function PremiumCard({
         </div>
 
         {/* Card footer buttons */}
-        <div
-          className="mt-auto border-t border-white/[0.06] pt-3 flex items-center"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
+        <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onSample(product);
-            }}
-            className="flex-1 relative overflow-hidden py-2.5 text-[10px] uppercase tracking-[0.14em] font-bold text-[#c9a449] hover:text-black hover:bg-[#c9a449] transition-all duration-300 rounded-l-md border border-[#c9a449]/25 hover:border-[#c9a449] group/btn"
+            onClick={(e) => { e.stopPropagation(); onSample(product); }}
+            className="flex-1 relative overflow-hidden py-2.5 text-[10px] uppercase tracking-[0.14em] font-bold text-[#c9a449] hover:text-black hover:bg-[#c9a449] transition-all duration-300 rounded-md border border-[#c9a449]/25 hover:border-[#c9a449] group/btn"
           >
             <span className="relative z-10">Request Sample</span>
             <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 skew-x-[-15deg]" />
           </button>
 
-          <div className="w-px h-8 bg-white/[0.06] shrink-0" />
-
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleCompare(product);
-            }}
-            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-r-md border-t border-r border-b text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
+            onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
+            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md border text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
               isCompared
-                ? "border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]"
-                : "border-[#c9a449]/25 text-white/40 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5"
+                ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+                : 'border-white/20 text-white/70 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
             }`}
           >
             {isCompared ? (
