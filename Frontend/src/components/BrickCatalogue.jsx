@@ -23,6 +23,7 @@ import {
   Grid3x3,
   Grid,
   X,
+  Share2,
 } from "lucide-react";
 
 import { BrickWallPattern } from "./BrickWallPattern";
@@ -251,7 +252,7 @@ const PremiumCard = React.memo(function PremiumCard({
           </div>
         )}
 
-        {/* Top-Right: Favourites button */}
+        {/* Top-Right: Favourites & Share buttons */}
         <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-10">
           <button
             onClick={(e) => {
@@ -265,6 +266,29 @@ const PremiumCard = React.memo(function PremiumCard({
               size={14}
               fill={isFavourite ? "#c9a449" : "transparent"}
               color={isFavourite ? "#c9a449" : "rgba(255,255,255,0.7)"}
+            />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              const url = window.location.origin + '/catalog/' + product.id;
+              if (navigator.share) {
+                navigator.share({
+                  title: product.name,
+                  text: `Check out ${product.name} at Modern Masonry`,
+                  url: url,
+                }).catch(err => console.error('Share failed:', err));
+              } else {
+                navigator.clipboard.writeText(url);
+                alert("Link copied to clipboard!");
+              }
+            }}
+            title="Share"
+            className="p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border border-transparent group-hover:border-white/20 opacity-0 group-hover:opacity-100"
+          >
+            <Share2
+              size={14}
+              color="rgba(255,255,255,0.7)"
             />
           </button>
         </div>

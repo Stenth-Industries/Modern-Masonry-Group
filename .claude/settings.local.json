@@ -24,7 +24,13 @@
       "Bash(git stash *)",
       "Bash(git fetch *)",
       "Bash(git rebase *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(npx tsc *)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

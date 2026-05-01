@@ -6,11 +6,23 @@ import pg from "pg";
 
 const { Pool } = pg;
 
-// In serverless (Vercel), use DIRECT_URL to avoid pgBouncer session limits.
-// Locally, DATABASE_URL (pooled) is used if DIRECT_URL isn't set.
-const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL;
+// Always prefer the pooler URL (pgbouncer) for reliable connections.
+// DIRECT_URL is only needed for migrations, not runtime queries.
+const connectionString = process.env.DATABASE_URL;
 
-const pool = new Pool({ connectionString, max: 1 });
+const pool = new Pool({
+  connectionString,
+  max: 5,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
+  allowExitOnIdle: false,
+});
+
+// Log and recover from unexpected pool errors instead of crashing.
+pool.on('error', (err) => {
+  console.error('[prisma pool] Unexpected error on idle client:', err.message);
+});
+
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 

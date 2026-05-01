@@ -76,6 +76,16 @@ const Loader = () => (
     <path d="M21 12a9 9 0 1 1-6.219-8.56" />
   </svg>
 );
+const ShareIcon = ({ size = 16 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+  </svg>
+);
 
 // ─── Lightbox Modal ───────────────────────────────────────────────────────────
 function Lightbox({ images, startIndex, onClose }) {
@@ -527,14 +537,41 @@ export default function BrickDetail({ brickId, navigate }) {
           <div style={styles.rightCol}>
             <div style={styles.stickyWrap}>
 
-              {/* Breadcrumb + Title */}
+              {/* Breadcrumb + Title + Share */}
               <div style={{ marginBottom: '28px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                  <a href="#brick" className="bd-breadcrumb-link">Catalogue</a>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: 10 }}>›</span>
-                  <span style={{ color: 'var(--accent)', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                    {product.name}
-                  </span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <a href="#brick" className="bd-breadcrumb-link">Catalogue</a>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: 10 }}>›</span>
+                    <span style={{ color: 'var(--accent)', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                      {product.name}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      const url = window.location.origin + '/catalog/' + product.id;
+                      if (navigator.share) {
+                        navigator.share({
+                          title: product.name,
+                          text: `Check out ${product.name} at Modern Masonry`,
+                          url: url,
+                        }).catch(err => console.error('Share failed:', err));
+                      } else {
+                        navigator.clipboard.writeText(url);
+                        alert("Link copied to clipboard!");
+                      }
+                    }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent',
+                      border: 'none', color: 'var(--text-secondary)', cursor: 'pointer',
+                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                  >
+                    <ShareIcon size={14} />
+                    <span>Share</span>
+                  </button>
                 </div>
 
                 <h1 style={styles.productTitle}>{product.name}</h1>
