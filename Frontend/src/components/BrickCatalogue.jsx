@@ -271,7 +271,7 @@ const PremiumCard = React.memo(function PremiumCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              const url = window.location.origin + '/catalog/' + product.id;
+              const url = window.location.origin + '/#brick-detail/' + product.id;
               if (navigator.share) {
                 navigator.share({
                   title: product.name,

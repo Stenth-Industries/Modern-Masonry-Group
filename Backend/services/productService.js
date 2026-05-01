@@ -250,7 +250,8 @@ export const getFilterOptions = async () => {
 // ── Single product by slug ─────────────────────────────────────────────────────
 
 export const getProductBySlug = async (slug) => {
-  const product = await prisma.product.findUnique({
+  // First try by slug (normal case)
+  let product = await prisma.product.findUnique({
     where: { slug },
     include: {
       manufacturers: { include: { manufacturer: true } },
@@ -258,6 +259,23 @@ export const getProductBySlug = async (slug) => {
       variants: { orderBy: { colourName: "asc" } },
     },
   });
+
+  // Fallback: slug may actually be a variant UUID (from shared links)
+  if (!product) {
+    const variant = await prisma.variant.findUnique({
+      where: { id: slug },
+      include: {
+        product: {
+          include: {
+            manufacturers: { include: { manufacturer: true } },
+            categories: { include: { category: true } },
+            variants: { orderBy: { colourName: "asc" } },
+          },
+        },
+      },
+    });
+    if (variant) product = variant.product;
+  }
 
   if (!product) return null;
 

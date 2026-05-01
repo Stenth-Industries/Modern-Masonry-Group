@@ -157,7 +157,7 @@ export function BrickDetailPanel({ brick, onClose, initialTab = "overview" }) {
             <div className="flex items-center gap-4 hidden sm:flex">
                 <button
                   onClick={() => {
-                    const url = window.location.origin + '/catalog/' + brick.id;
+                    const url = window.location.origin + '/#brick-detail/' + brick.id;
                     if (navigator.share) {
                       navigator.share({
                         title: brick.name,
