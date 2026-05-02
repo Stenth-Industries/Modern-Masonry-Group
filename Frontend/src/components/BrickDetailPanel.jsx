@@ -11,8 +11,8 @@ import {
   Building2,
   ChevronRight,
   Send,
-  Loader2,
   ArrowLeft,
+  Share2,
 } from "lucide-react";
 import { BrickWallPattern } from "./BrickWallPattern";
 
@@ -155,6 +155,27 @@ export function BrickDetailPanel({ brick, onClose, initialTab = "overview" }) {
               <span className="text-[11px] uppercase tracking-widest font-bold">Back to Catalogue</span>
             </button>
             <div className="flex items-center gap-4 hidden sm:flex">
+                <button
+                  onClick={() => {
+                    const url = window.location.origin + '/#brick-detail/' + brick.id;
+                    if (navigator.share) {
+                      navigator.share({
+                        title: brick.name,
+                        text: `Check out ${brick.name} at Modern Masonry`,
+                        url: url,
+                      }).catch(err => console.error('Share failed:', err));
+                    } else {
+                      navigator.clipboard.writeText(url);
+                      alert("Link copied to clipboard!");
+                    }
+                  }}
+                  className="flex items-center gap-2 text-[#9a9488] hover:text-[#c9a449] transition-colors"
+                  title="Share"
+                >
+                  <Share2 size={14} />
+                  <span className="text-[10px] uppercase tracking-widest font-bold">Share</span>
+                </button>
+                <div className="h-4 w-px bg-white/20"></div>
                 <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]" style={{ fontFamily: "'Inter', sans-serif" }}>Catalogue Reference</span>
                 <span className="px-3 py-1 border border-[#c9a449]/20 text-[#c9a449] rounded bg-[#c9a449]/10 text-[10px] uppercase tracking-widest font-bold">{brick.code}</span>
             </div>

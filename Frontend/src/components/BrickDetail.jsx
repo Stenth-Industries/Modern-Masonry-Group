@@ -1,289 +1,108 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ArrowLeft, Share2, Plus, ArrowUpRight, 
+  Ruler, Package, Zap, Droplets, Thermometer, Building2, Send, ChevronRight 
+} from 'lucide-react';
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-const THUMB_VISIBLE = 4; // show 4 thumbs, last slot = "+N more"
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const COLOR_MAP = {
-  red: '#B4382B',
-  tan: '#D2B48C',
-  grey: '#808080',
-  gray: '#808080',
-  brown: '#5D4037',
-  buff: '#F0DC82',
-  cream: '#FFFDD0',
-  white: '#FFFFFF',
-  black: '#111111',
-  charcoal: '#36454F',
-  charcole: '#36454F',
-  silver: '#C0C0C0',
-  bronze: '#CD7F32',
-  gold: '#FFD700',
-  orange: '#E67E22',
-  pink: '#FADADD',
+  red: '#B4382B', tan: '#D2B48C', grey: '#808080', gray: '#808080',
+  brown: '#5D4037', buff: '#F0DC82', cream: '#FFFDD0', white: '#FFFFFF',
+  black: '#111111', charcoal: '#36454F', charcole: '#36454F', silver: '#C0C0C0',
+  bronze: '#CD7F32', gold: '#FFD700', orange: '#E67E22', pink: '#FADADD',
 };
 
 const resolveColor = (name, hex) => {
   if (!name && !hex) return '#808080';
   if (!name) return hex;
-  const key = name.toLowerCase().trim();
-  // Return mapped color if name is recognized, otherwise fallback to hex or grey
-  return COLOR_MAP[key] || hex || '#808080';
+  return COLOR_MAP[name.toLowerCase().trim()] || hex || '#808080';
 };
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
-const ArrowLeft = ({ size = 16 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M19 12H5M12 19l-7-7 7-7" />
-  </svg>
-);
-const ArrowRight = ({ size = 16 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M12 5l7 7-7 7" />
-  </svg>
-);
-const ArrowUpRight = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 17L17 7M7 7h10v10" />
-  </svg>
-);
-const ShieldCheck = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    <path d="m9 12 2 2 4-4" />
-  </svg>
-);
-const Leaf = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z" />
-    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-  </svg>
-);
-const XIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6 6 18M6 6l12 12" />
-  </svg>
-);
-const Loader = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    style={{ animation: 'spin 1s linear infinite' }}>
-    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-  </svg>
-);
-
-// ─── Lightbox Modal ───────────────────────────────────────────────────────────
-function Lightbox({ images, startIndex, onClose }) {
-  const [idx, setIdx] = useState(startIndex);
-
-  const prev = useCallback(() => setIdx(i => (i - 1 + images.length) % images.length), [images.length]);
-  const next = useCallback(() => setIdx(i => (i + 1) % images.length), [images.length]);
-
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'ArrowLeft') prev();
-      else if (e.key === 'ArrowRight') next();
-      else if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [prev, next, onClose]);
-
-  // Lock body scroll
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-
+function SpecRow({ icon, label, value, delay = 0 }) {
   return (
-    <div style={lbStyles.overlay} onClick={onClose}>
-      <style>{`
-        @keyframes lbFadeIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
-        .lb-nav-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; color:#fff; cursor:pointer; transition: background 0.2s, transform 0.15s; backdrop-filter: blur(8px); }
-        .lb-nav-btn:hover { background: rgba(201,164,73,0.25); transform: scale(1.1); }
-        .lb-thumb-strip { display:flex; gap:8px; overflow-x:auto; padding:0 4px; scrollbar-width:thin; scrollbar-color: var(--accent) transparent; }
-        .lb-thumb-strip::-webkit-scrollbar { height:4px; }
-        .lb-thumb-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius:2px; }
-        .lb-thumb-item { flex-shrink:0; width:64px; height:64px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition: border-color 0.2s, transform 0.15s; }
-        .lb-thumb-item:hover { transform:scale(1.05); }
-        .lb-thumb-item.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(201,164,73,0.3); }
-        .lb-close-btn { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#fff; cursor:pointer; transition:background 0.2s; backdrop-filter:blur(8px); }
-        .lb-close-btn:hover { background:rgba(220,50,50,0.35); }
-      `}</style>
-
-      {/* Backdrop click to close */}
-      <div style={lbStyles.backdrop} />
-
-      {/* Content */}
-      <div style={lbStyles.content} onClick={e => e.stopPropagation()}>
-
-        {/* Header */}
-        <div style={lbStyles.header}>
-          <span style={lbStyles.counter}>{idx + 1} / {images.length}</span>
-          <button className="lb-close-btn" onClick={onClose}><XIcon /></button>
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay, duration: 0.4 }}
+      className="flex items-center justify-between py-6 border-b border-white/[0.04] group hover:border-[#c9a449]/20 transition-colors"
+    >
+      <div className="flex items-center gap-4 text-[#9a9488]">
+        <div className="w-8 h-8 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center text-[#c9a449] group-hover:bg-[#c9a449]/10 transition-colors">
+          {React.cloneElement(icon, { size: 14 })}
         </div>
-
-        {/* Main image area */}
-        <div style={lbStyles.mainArea}>
-          <button className="lb-nav-btn" onClick={prev} style={{ marginRight: '16px' }}>
-            <ArrowLeft size={20} />
-          </button>
-
-          <div style={lbStyles.imgWrap}>
-            <img
-              key={idx}
-              src={images[idx]}
-              alt={`Image ${idx + 1}`}
-              style={lbStyles.mainImg}
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          <button className="lb-nav-btn" onClick={next} style={{ marginLeft: '16px' }}>
-            <ArrowRight size={20} />
-          </button>
-        </div>
-
-        {/* Thumbnail strip */}
-        <div style={lbStyles.thumbStrip}>
-          <div className="lb-thumb-strip">
-            {images.map((img, i) => (
-              <div
-                key={i}
-                className={`lb-thumb-item${i === idx ? ' active' : ''}`}
-                onClick={() => setIdx(i)}
-              >
-                <img
-                  src={img}
-                  alt={`Thumb ${i + 1}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
+        <span className="text-[12px] tracking-widest uppercase font-medium font-sans">{label}</span>
       </div>
-    </div>
+      <span className="text-[13px] text-[#e3decb] font-medium tracking-wide font-sans text-right max-w-[60%] flex flex-wrap justify-end gap-2">
+        {value}
+      </span>
+    </motion.div>
   );
 }
 
-const lbStyles = {
-  overlay: {
-    position: 'fixed', inset: 0, zIndex: 1000,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-  },
-  backdrop: {
-    position: 'absolute', inset: 0,
-    background: 'rgba(10,10,15,0.92)',
-    backdropFilter: 'blur(12px)',
-  },
-  content: {
-    position: 'relative', zIndex: 1,
-    display: 'flex', flexDirection: 'column',
-    width: '90vw', maxWidth: '1000px',
-    maxHeight: '90vh',
-    animation: 'lbFadeIn 0.25s ease',
-  },
-  header: {
-    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-    marginBottom: '16px',
-  },
-  counter: {
-    fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.6)',
-    letterSpacing: '0.05em',
-  },
-  mainArea: {
-    display: 'flex', alignItems: 'center', flex: 1,
-    minHeight: 0,
-  },
-  imgWrap: {
-    flex: 1, aspectRatio: '4/3', borderRadius: '12px', overflow: 'hidden',
-    background: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-  },
-  mainImg: {
-    width: '100%', height: '100%', objectFit: 'contain',
-    animation: 'lbFadeIn 0.2s ease',
-  },
-  thumbStrip: {
-    marginTop: '16px',
-    padding: '8px 0',
-  },
-};
+// ─── Lightbox ─────────────────────────────────────────────────────────────────
 
-// ─── Thumbnail strip with "+N MORE" last cell ─────────────────────────────────
-function ThumbStrip({ images, currentImage, onSelect, onOpenLightbox }) {
-  if (images.length <= 1) return null;
+function Lightbox({ images, startIndex, onClose }) {
+  const [index, setIndex] = useState(startIndex);
+  const [zoomed, setZoomed] = useState(false);
 
-  const showMore = images.length > THUMB_VISIBLE + 1;
-  // Slots: first THUMB_VISIBLE images shown; if more exist, the 4th slot becomes "+N MORE"
-  const visibleImgs = showMore ? images.slice(0, THUMB_VISIBLE) : images;
-  const extraCount = images.length - THUMB_VISIBLE;
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowRight') setIndex((prev) => (prev + 1) % images.length);
+      if (e.key === 'ArrowLeft') setIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [images.length, onClose]);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${THUMB_VISIBLE + 1}, 1fr)`, gap: '10px' }}>
-      {visibleImgs.map((img, i) => (
-        <div
-          key={i}
-          className={`bd-img-thumb${currentImage === img ? ' selected' : ''}`}
-          onClick={() => onSelect(img)}
-          style={{ aspectRatio: '1', overflow: 'hidden', position: 'relative' }}
-        >
-          <img
-            src={img} alt={`View ${i + 1}`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            referrerPolicy="no-referrer"
-          />
-        </div>
-      ))}
+    <motion.div 
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505] cursor-zoom-out"
+      onClick={onClose}
+    >
+      <div className="absolute top-8 left-8 text-[#c9a449] text-[9px] uppercase tracking-[0.3em] font-bold">
+        Material Viewer // {index + 1} of {images.length}
+      </div>
 
-      {/* "+N MORE" slot */}
-      {showMore && (
-        <div
-          className="bd-img-thumb"
-          onClick={() => onOpenLightbox(THUMB_VISIBLE)}
-          style={{ aspectRatio: '1', overflow: 'hidden', position: 'relative', cursor: 'pointer' }}
-        >
-          {/* Background: last hidden image blurred */}
-          <img
-            src={images[THUMB_VISIBLE]}
-            alt="more"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'blur(2px) brightness(0.45)' }}
-            referrerPolicy="no-referrer"
-          />
-          {/* Overlay label */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-            background: 'rgba(201,164,73,0.15)',
-          }}>
-            <span style={{ color: 'var(--accent)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', lineHeight: 1.2 }}>
-              = +{extraCount} MORE
-            </span>
-          </div>
+      <button onClick={onClose} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      
+      <motion.img
+        key={index}
+        initial={{ opacity: 0, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        src={images[index]}
+        onClick={(e) => { e.stopPropagation(); setZoomed(!zoomed); }}
+        className={`transition-all duration-700 ease-[0.22,1,0.36,1] relative z-10 ${zoomed ? 'w-screen h-screen object-cover cursor-zoom-out' : 'max-w-[85vw] max-h-[85vh] object-contain cursor-zoom-in'}`}
+      />
+
+      {images.length > 1 && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
+          {images.map((_, i) => (
+            <div key={i} className={`h-1 transition-all duration-300 rounded-full ${i === index ? 'w-8 bg-[#c9a449]' : 'w-2 bg-white/20'}`} />
+          ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
+
 export default function BrickDetail({ brickId, navigate }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [submitState, setSubmitState] = useState("idle");
   const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -307,23 +126,13 @@ export default function BrickDetail({ brickId, navigate }) {
     if (!product) return [];
     const imgs = new Set();
     (product.variants || []).forEach(v => {
-      // Main variant image
-      if (v.imageUrl && v.imageUrl.startsWith('http')) {
-        imgs.add(v.imageUrl);
-      }
-      // Additional variant images
+      if (v.imageUrl && v.imageUrl.startsWith('http')) imgs.add(v.imageUrl);
       if (Array.isArray(v.imagesUrl)) {
-        v.imagesUrl.forEach(url => {
-          if (url && url.startsWith('http')) {
-            imgs.add(url);
-          }
-        });
+        v.imagesUrl.forEach(url => { if (url && url.startsWith('http')) imgs.add(url); });
       }
     });
     return Array.from(imgs);
   }, [product]);
-
-  const currentImage = selectedImage || images[0] || null;
 
   const catsByType = useMemo(() => {
     if (!product) return {};
@@ -334,338 +143,346 @@ export default function BrickDetail({ brickId, navigate }) {
     }, {});
   }, [product]);
 
-  const openLightbox = useCallback((index) => setLightboxIndex(index), []);
-  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+  const getCat = (type) => {
+    return catsByType[type]?.[0]?.value || "";
   };
 
-  // ── Loading ──
-  if (loading) return (
-    <div style={styles.centerScreen}>
-      <style>{`@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`}</style>
-      <div style={{ color: 'var(--accent)', marginBottom: '12px' }}><Loader /></div>
-      <p style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Loading Material Details…</p>
-    </div>
-  );
+  const handleShare = () => {
+    const url = window.location.origin + '/#brick-detail/' + product.slug;
+    if (navigator.share) {
+      navigator.share({ title: product.name, text: `Check out ${product.name} at Modern Masonry`, url }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard!");
+    }
+  };
 
-  // ── Error ──
-  if (error || !product) return (
-    <div style={styles.centerScreen}>
-      <p style={{ color: '#ef4444', fontWeight: 700, marginBottom: '12px' }}>{error || 'Product not found'}</p>
-      <a href="#brick" style={styles.backLink}><ArrowLeft /> Back to Catalogue</a>
-    </div>
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitState("submitting");
+    setTimeout(() => {
+      setSubmitState("success");
+      setFormData({ fullName: '', company: '', quantity: '', details: '' });
+      setTimeout(() => setSubmitState("idle"), 5000);
+    }, 1500);
+  };
 
-  // ── Main ──
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center">
+        <div className="w-[1px] h-12 bg-white/10 overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-full h-[30%] bg-[#c9a449] animate-[slideDown_1.5s_infinite_ease-in-out]"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center gap-6">
+        <p className="text-white/40 text-[9px] tracking-[0.2em] uppercase">{error || 'Record Not Found'}</p>
+        <a href="#brick" className="text-white text-[10px] tracking-[0.2em] uppercase hover:text-[#c9a449] transition-colors pb-1 border-b border-[#c9a449]/30">
+          Return to Archives
+        </a>
+      </div>
+    );
+  }
+
+  // Mock data to match the panel features exactly
+  const brickDetails = {
+    size: "215 × 102 × 65 mm",
+    weight: "2.4 kg",
+    compressiveStrength: "≥ 50 MPa",
+    waterAbsorption: "≤ 8%",
+    frostResistance: "F2 (Severe)",
+    applications: ["Exterior Facades", "Feature Walls", "Paving"],
+    collection: getCat("collection") || "Signature",
+    finish: getCat("style") || "Textured",
+    manufacturer: product.manufacturers?.[0]?.name || "Stenth Industries"
+  };
+
   return (
-    <div style={styles.page}>
-      <style>{`
-        @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-        .bd-img-thumb { transition:all 0.2s ease; cursor:pointer; border:2px solid transparent; border-radius:10px; overflow:hidden; }
-        .bd-img-thumb:hover { border-color:var(--accent); opacity:0.88; }
-        .bd-img-thumb.selected { border-color:var(--accent); box-shadow:0 0 12px var(--accent-glow); }
-        .bd-input { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:12px 16px; color:var(--text-primary); font-size:14px; width:100%; box-sizing:border-box; outline:none; transition:border-color 0.2s,box-shadow 0.2s; font-family:inherit; }
-        .bd-input::placeholder { color:var(--text-secondary); }
-        .bd-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
-        .bd-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; border-radius:8px; background:var(--accent); color:#111; font-weight:700; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; border:none; cursor:pointer; transition:background 0.2s,box-shadow 0.2s,transform 0.1s; font-family:inherit; }
-        .bd-btn:hover { background:var(--accent-light); box-shadow:0 0 20px var(--accent-glow); }
-        .bd-btn:active { transform:scale(0.98); }
-        .bd-back-link { display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
-        .bd-back-link:hover { color:var(--accent); }
-        .bd-breadcrumb-link { color:var(--text-secondary); text-decoration:none; font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.2s; }
-        .bd-breadcrumb-link:hover { color:var(--accent); }
-        .bd-spec-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .bd-spec-row:last-child { border-bottom:none; }
-        .bd-guarantee-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; display:flex; align-items:center; gap:12px; }
-        .bd-tag { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:4px 10px; font-size:12px; color:var(--text-secondary); }
-        .bd-main-img { width:100%; height:100%; object-fit:cover; animation:fadeIn 0.35s ease; }
-        /* "View all" button on main image */
-        .bd-view-all { position:absolute; bottom:16px; right:16px; background:rgba(17,17,17,0.8); backdrop-filter:blur(8px); border:1px solid rgba(201,164,73,0.3); color:var(--accent); font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:6px 14px; border-radius:100px; cursor:pointer; transition:background 0.2s, border-color 0.2s; display:flex; align-items:center; gap:6px; }
-        .bd-view-all:hover { background:rgba(201,164,73,0.15); border-color:rgba(201,164,73,0.6); }
-      `}</style>
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#c9a449] selection:text-black flex flex-col lg:flex-row relative">
+      
+      {/* ─── BG.PNG TEXTURE OVERLAY ─── */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.25] bg-[url('/bg.png')] mix-blend-overlay z-0"></div>
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <Lightbox images={images} startIndex={lightboxIndex} onClose={closeLightbox} />
-      )}
+      <AnimatePresence>
+        {lightboxIndex !== null && <Lightbox images={images} startIndex={lightboxIndex} onClose={() => setLightboxIndex(null)} />}
+      </AnimatePresence>
 
-      <div style={styles.container}>
-        <div style={styles.twoCol}>
+      {/* ─── LEFT COLUMN: THE CANVAS (Sticky) ─── */}
+      <div className="lg:w-[50%] relative h-[60vh] lg:h-screen lg:sticky lg:top-0 border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#020202] flex flex-col z-10">
+        
+        {/* Top Bar inside Canvas */}
+        <div className="absolute top-0 left-0 w-full p-8 md:p-12 flex justify-between items-center z-20 pointer-events-none">
+          <a href="#brick" className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
+            <ArrowLeft size={16} strokeWidth={1.5} />
+            <span className="text-[9px] tracking-[0.2em] uppercase font-bold mt-[2px]">Index</span>
+          </a>
+          <button onClick={handleShare} className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
+            <span className="text-[9px] tracking-[0.2em] uppercase font-bold mt-[2px]">Share</span>
+            <Share2 size={14} strokeWidth={1.5} />
+          </button>
+        </div>
 
-          {/* ── LEFT COLUMN ─────────────────────────────────────── */}
-          <div style={styles.leftCol}>
-
-            {/* Main image */}
-            <div style={{ marginBottom: '16px' }}>
-              <div style={styles.mainImageWrap}>
-                {currentImage ? (
-                  <img
-                    key={currentImage}
-                    src={currentImage}
-                    alt={product.name}
-                    className="bd-main-img"
-                    referrerPolicy="no-referrer"
-                    onClick={() => openLightbox(images.indexOf(currentImage))}
-                    style={{ cursor: 'zoom-in' }}
-                  />
-                ) : (
-                  <div style={styles.noImage}>
-                    <span style={{ color: 'var(--text-secondary)', opacity: 0.4, fontSize: 14 }}>No Image Available</span>
-                  </div>
-                )}
-
-                {/* Material badge */}
-                <div style={styles.materialBadge}>{product.material || 'MASONRY'}</div>
-
-                {/* View all button (only when there are multiple images) */}
-                {images.length > 1 && (
-                  <button
-                    className="bd-view-all"
-                    onClick={() => openLightbox(images.indexOf(currentImage))}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                      <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-                    </svg>
-                    View All {images.length} Photos
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Thumbnail strip with "+N MORE" */}
-            <div style={{ marginBottom: '32px' }}>
-              <ThumbStrip
-                images={images}
-                currentImage={currentImage}
-                onSelect={setSelectedImage}
-                onOpenLightbox={openLightbox}
+        {/* Main Image Viewer */}
+        <div className="flex-1 w-full h-full flex items-center justify-center p-12 md:p-24 relative group cursor-crosshair" onClick={() => setLightboxIndex(selectedImageIdx)}>
+          
+          <AnimatePresence mode="wait">
+            {images[selectedImageIdx] ? (
+              <motion.img
+                key={selectedImageIdx}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, filter: 'blur(4px)' }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                src={images[selectedImageIdx]}
+                alt={product.name}
+                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10"
               />
-            </div>
+            ) : (
+              <div className="text-white/20 text-[9px] tracking-[0.2em] uppercase z-10">No Visual Data</div>
+            )}
+          </AnimatePresence>
 
-            {/* Material Profile */}
-            <div style={{ marginBottom: '32px' }}>
-              <h3 style={styles.sectionLabel}>Material Profile</h3>
-              <p style={styles.profileText}>
-                <strong style={{ color: 'var(--text-primary)' }}>{product.name}</strong> is a premium{' '}
-                {product.material?.toLowerCase() || 'masonry'} solution
-                {product.manufacturers?.length > 0 ? ` by ${product.manufacturers.map(m => m.name).join(', ')}` : ''}.
-                {product.description ? ` ${product.description}` : ''}
-              </p>
-            </div>
-
-            {/* Technical Specifications */}
-            <div style={styles.specsBox}>
-              <h3 style={{ ...styles.sectionLabel, color: 'var(--text-secondary)', marginBottom: '16px' }}>
-                Technical Specifications
-              </h3>
-
-              {(product.variants || []).length > 0 && (
-                <div style={{ marginBottom: '16px' }}>
-                  <span style={styles.specKey}>Colour Variants</span>
-                  <div style={{ marginTop: '8px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {product.variants.map(v => (
-                      <span key={v.id} className="bd-tag">
-                        <span style={{ 
-                          width: '10px', 
-                          height: '10px', 
-                          borderRadius: '50%', 
-                          background: resolveColor(v.colourName, v.hexCode), 
-                          border: '1px solid rgba(255,255,255,0.2)', 
-                          display: 'inline-block' 
-                        }} />
-                        {v.colourName || v.sku}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {Object.entries(catsByType).map(([type, cats]) => (
-                <div key={type} className="bd-spec-row">
-                  <span style={styles.specKey}>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'flex-end' }}>
-                    {cats.map(cat => (
-                      <span key={cat.id} className="bd-tag">
-                        <span style={{ 
-                          width: '10px', 
-                          height: '10px', 
-                          borderRadius: '50%', 
-                          background: resolveColor(cat.value, cat.hexCode), 
-                          border: '1px solid rgba(255,255,255,0.2)', 
-                          display: 'inline-block' 
-                        }} />
-                        {cat.value}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-
-              {product.material && (
-                <div className="bd-spec-row">
-                  <span style={styles.specKey}>Material</span>
-                  <span style={styles.specValue}>{product.material}</span>
-                </div>
-              )}
-
-              {product.manufacturers?.length > 0 && (
-                <div className="bd-spec-row">
-                  <span style={styles.specKey}>Manufacturer</span>
-                  <span style={styles.specValue}>{product.manufacturers.map(m => m.name).join(', ')}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* ── RIGHT COLUMN (sticky) ────────────────────────────── */}
-          <div style={styles.rightCol}>
-            <div style={styles.stickyWrap}>
-
-              {/* Breadcrumb + Title */}
-              <div style={{ marginBottom: '28px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                  <a href="#brick" className="bd-breadcrumb-link">Catalogue</a>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: 10 }}>›</span>
-                  <span style={{ color: 'var(--accent)', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                    {product.name}
-                  </span>
-                </div>
-
-                <h1 style={styles.productTitle}>{product.name}</h1>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                  <span style={styles.accentBadge}>{product.material || 'Standard Series'}</span>
-                  {product.manufacturers?.map(m => (
-                    <span key={m.id} style={styles.mfgLabel}>{m.name}</span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quote Form */}
-              <div style={styles.formCard}>
-                <h3 style={styles.formTitle}>Specification &amp; Quote</h3>
-
-                {submitted ? (
-                  <div style={styles.successBanner}>
-                    ✓ Request received! Our team will respond within 24 business hours.
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={styles.formRow}>
-                      <div>
-                        <label style={styles.formLabel}>Full Name</label>
-                        <input type="text" placeholder="John Doe" className="bd-input"
-                          value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })} />
-                      </div>
-                      <div>
-                        <label style={styles.formLabel}>Company</label>
-                        <input type="text" placeholder="Architectural Firm" className="bd-input"
-                          value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label style={styles.formLabel}>Estimated Quantity (Sq Ft)</label>
-                      <input type="text" placeholder="1,000" className="bd-input"
-                        value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} />
-                    </div>
-
-                    <div>
-                      <label style={styles.formLabel}>Project Details</label>
-                      <textarea rows={4} placeholder={`Interested in ${product.name} for a new project…`}
-                        className="bd-input" style={{ resize: 'none' }}
-                        value={formData.details} onChange={e => setFormData({ ...formData, details: e.target.value })} />
-                    </div>
-
-                    <button type="submit" className="bd-btn">
-                      Request Firm Quote <ArrowUpRight />
-                    </button>
-                    <p style={styles.formHint}>
-                      Our engineering team will respond with a detailed specification sheet and pricing within 24 business hours.
-                    </p>
-                  </form>
-                )}
-              </div>
-
-              {/* Guarantee Cards */}
-              <div style={styles.guaranteeGrid}>
-                <div className="bd-guarantee-card">
-                  <div style={styles.iconCircle}><ShieldCheck /></div>
-                  <div>
-                    <div style={styles.guaranteeLabel}>Guarantee</div>
-                    <div style={styles.guaranteeValue}>25 Year Warranty</div>
-                  </div>
-                </div>
-                <div className="bd-guarantee-card">
-                  <div style={styles.iconCircle}><Leaf /></div>
-                  <div>
-                    <div style={styles.guaranteeLabel}>Impact</div>
-                    <div style={styles.guaranteeValue}>Low Carbon Path</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="absolute bottom-8 right-8 z-20 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <span className="text-[#c9a449] text-[9px] tracking-[0.2em] uppercase">Inspect</span>
+            <Plus size={14} className="text-[#c9a449]" strokeWidth={1} />
           </div>
         </div>
 
-        {/* Back Button */}
-        <div style={{ marginTop: '48px' }}>
-          <a href="#brick" className="bd-back-link">
-            <ArrowLeft /> Back to Collection
-          </a>
+        {/* Minimalist Image Navigator */}
+        {images.length > 1 && (
+          <div className="absolute bottom-8 left-0 w-full px-12 flex items-center gap-6 z-20">
+            {images.map((img, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setSelectedImageIdx(idx)}
+                className="group flex flex-col items-center gap-2 py-2"
+              >
+                <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${selectedImageIdx === idx ? 'bg-[#c9a449] scale-150' : 'bg-white/20 group-hover:bg-white/50'}`}></div>
+              </button>
+            ))}
+            <div className="ml-auto text-[9px] tracking-[0.3em] font-bold text-white/30 uppercase">
+              {String(selectedImageIdx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ─── RIGHT COLUMN: THE SPECIFICATION (Scrolling) ─── */}
+      <div className="lg:w-[50%] bg-[#050505] z-10">
+        <div className="max-w-[800px] px-8 md:px-16 lg:px-24 py-20 md:py-32 flex flex-col min-h-screen">
+          
+          {/* Header */}
+          <div className="mb-14">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-[9px] tracking-[0.3em] font-bold text-[#c9a449] uppercase">
+                {product.material || 'Material'}
+              </span>
+              <span className="w-8 h-[1px] bg-white/10"></span>
+              <span className="text-[9px] tracking-[0.2em] font-bold text-white/40 uppercase">
+                {brickDetails.manufacturer}
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              {product.name}
+            </h1>
+
+            <p className="text-[16px] text-white/50 leading-relaxed font-light max-w-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>
+              {product.description || "A foundational masonry element combining architectural purity with uncompromising structural integrity. Designed specifically for highly refined residential exterior facades and feature interior installations."}
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-12 mt-10">
+              <div>
+                <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
+                <span className="text-[14px] text-[#e3decb] tracking-wider">{brickDetails.manufacturer}</span>
+              </div>
+              <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
+              <div>
+                <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
+                <span className="text-[14px] text-[#e3decb] tracking-wider">{brickDetails.size}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Tabs */}
+          <div className="border-b border-white/[0.08] mb-12 flex items-center gap-10 overflow-x-auto scrollbar-hide">
+            {["overview", "specs", "quote"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative py-4 text-[12px] uppercase tracking-[0.15em] transition-colors whitespace-nowrap ${
+                  activeTab === tab ? "text-[#c9a449] font-bold" : "text-[#8c857b] font-medium hover:text-[#e3decb]"
+                }`}
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                {tab === "quote" ? "Request Quote" : tab === "specs" ? "Full Specifications" : "Product Features"}
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="active-tab"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#c9a449]"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Contents */}
+          <div className="flex-1 relative">
+            <AnimatePresence mode="wait">
+              {/* OVERVIEW TAB */}
+              {activeTab === "overview" && (
+                <motion.div
+                  key="overview"
+                  initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4 }}
+                  className="max-w-2xl"
+                >
+                  <div className="mb-12">
+                    <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#c9a449] mb-6">
+                      Suitable Applications
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {brickDetails.applications.map((app) => (
+                        <div key={app} className="px-5 py-2.5 rounded-[4px] bg-white/[0.03] border border-white/[0.06] text-[12px] text-[#e3decb] tracking-wide flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#c9a449]" />
+                          {app}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-12">
+                    <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#c9a449] mb-6">
+                      Sustainability & Sourcing
+                    </h4>
+                    <p className="text-[#a8a195] leading-[1.8] text-[14px] font-light">
+                      All our masonry materials are securely sourced from highly vetted manufacturers. Fired in high-efficiency kilns, <span className="text-[#e3decb]">{product.name}</span> maintains exceptional thermal mass characteristics, significantly reducing energy costs over the lifetime of structurally integrated applications.
+                    </p>
+                  </div>
+
+                  <div className="pt-6 border-t border-white/5">
+                    <button
+                      onClick={() => setActiveTab("quote")}
+                      className="px-8 py-4 bg-transparent border border-[#c9a449] text-[#c9a449] font-bold uppercase tracking-[0.15em] text-[12px] hover:bg-[#c9a449] hover:text-black transition-all duration-500 flex items-center justify-center gap-3 group rounded"
+                    >
+                      <Send size={16} />
+                      <span>Build A Quote Request</span>
+                      <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* SPECS TAB */}
+              {activeTab === "specs" && (
+                <motion.div
+                  key="specs"
+                  initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4 }}
+                  className="max-w-3xl"
+                >
+                  <div className="border-t border-white/[0.04]">
+                    <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" value={brickDetails.size} delay={0.05} />
+                    <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.1} />
+                    <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.15} />
+                    <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.2} />
+                    <SpecRow icon={<Thermometer />} label="Frost Resistance Grade" value={brickDetails.frostResistance} delay={0.25} />
+                    <SpecRow icon={<Building2 />} label="Sourcing Manufacturer" value={brickDetails.manufacturer} delay={0.3} />
+                    
+                    {/* Inject dynamic variants at the end */}
+                    {product.variants?.length > 0 && (
+                      <SpecRow 
+                        icon={<Building2 />} 
+                        label="Available Colors" 
+                        delay={0.35}
+                        value={
+                          product.variants.map(v => (
+                            <span key={v.id} className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded text-[11px] text-[#e3decb]">
+                              <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }}></span>
+                              {v.colourName || v.sku}
+                            </span>
+                          ))
+                        }
+                      />
+                    )}
+                  </div>
+
+                  <div className="mt-12 p-6 rounded-[8px] bg-[#c9a449]/5 border-l-[3px] border-[#c9a449]">
+                    <h4 className="text-[12px] uppercase tracking-[0.1em] text-[#c9a449] font-bold mb-2">Architectural Note</h4>
+                    <p className="text-[13px] text-[#e3decb]/80 leading-relaxed font-light">
+                      Variations in colour, texture, and size are natural characteristics of fired clay products. We recommend blending from multiple pallets during installation to ensure an authentic, cohesive facade.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* QUOTE TAB */}
+              {activeTab === "quote" && (
+                <motion.div
+                  key="quote"
+                  initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4 }}
+                  className="max-w-2xl"
+                >
+                  <div className="bg-white/[0.01] border border-white/5 rounded-[8px] p-8 md:p-10">
+                    <h3 className="text-[24px] text-[#e3decb] mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Commission a Quote</h3>
+                    <p className="text-[13px] text-[#8c857b] mb-8 font-light leading-relaxed">
+                      Connect with our engineering team for detailed pricing and availability on <strong className="text-white">{product.name}</strong>.
+                    </p>
+
+                    {submitState === "success" ? (
+                      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
+                        <div className="w-16 h-16 rounded-full bg-[#c9a449]/10 text-[#c9a449] flex items-center justify-center mx-auto mb-6">
+                          <CheckCircle size={32} />
+                        </div>
+                        <h4 className="text-[18px] text-[#e3decb] mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Inquiry Received</h4>
+                        <p className="text-[13px] text-[#8c857b]">An estimation specialist will contact you within 24 hours.</p>
+                      </motion.div>
+                    ) : (
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="flex flex-col gap-2">
+                            <label className="text-[10px] uppercase tracking-[0.15em] text-[#8c857b] font-bold">Full Name</label>
+                            <input required type="text" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} className="bg-black/20 border border-white/10 rounded-[4px] px-4 py-3 text-[13px] text-white focus:border-[#c9a449] focus:outline-none transition-colors" />
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <label className="text-[10px] uppercase tracking-[0.15em] text-[#8c857b] font-bold">Company Name</label>
+                            <input required type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="bg-black/20 border border-white/10 rounded-[4px] px-4 py-3 text-[13px] text-white focus:border-[#c9a449] focus:outline-none transition-colors" />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[10px] uppercase tracking-[0.15em] text-[#8c857b] font-bold">Estimated Area (Sq Ft)</label>
+                          <input required type="text" value={formData.quantity} onChange={e => setFormData({...formData, quantity: e.target.value})} className="bg-black/20 border border-white/10 rounded-[4px] px-4 py-3 text-[13px] text-white focus:border-[#c9a449] focus:outline-none transition-colors" />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[10px] uppercase tracking-[0.15em] text-[#8c857b] font-bold">Project Details & Timeline</label>
+                          <textarea required rows={3} value={formData.details} onChange={e => setFormData({...formData, details: e.target.value})} className="bg-black/20 border border-white/10 rounded-[4px] px-4 py-3 text-[13px] text-white focus:border-[#c9a449] focus:outline-none transition-colors resize-none" />
+                        </div>
+
+                        <button 
+                          disabled={submitState === 'submitting'}
+                          type="submit" 
+                          className="mt-4 w-full bg-[#c9a449] hover:bg-[#d8b75e] text-black font-bold text-[11px] tracking-[0.2em] uppercase py-4 rounded-[4px] flex items-center justify-center gap-3 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                          {submitState === 'submitting' ? 'Processing...' : 'Submit Request'}
+                          {!submitState && <Send size={14} />}
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </div>
   );
 }
-
-// ─── Styles ───────────────────────────────────────────────────────────────────
-const styles = {
-  page: { minHeight: '100vh', background: 'rgba(14,12,10,0.6)', backdropFilter: 'blur(4px)', paddingTop: '120px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px' },
-  container: { maxWidth: '1280px', margin: '0 auto' },
-  twoCol: { display: 'flex', flexDirection: 'row', gap: '64px', flexWrap: 'wrap' },
-  leftCol: { flex: '7', minWidth: '300px' },
-  rightCol: { flex: '5', minWidth: '280px' },
-  stickyWrap: { position: 'sticky', top: '100px' },
-  mainImageWrap: {
-    position: 'relative', width: '100%', aspectRatio: '4/3',
-    borderRadius: '16px', overflow: 'hidden',
-    background: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.07)',
-    boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
-  },
-  noImage: { width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  materialBadge: {
-    position: 'absolute', top: '16px', left: '16px',
-    background: 'rgba(17,17,17,0.85)', backdropFilter: 'blur(8px)',
-    padding: '6px 14px', borderRadius: '100px',
-    fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
-    color: 'var(--accent)', border: '1px solid rgba(201,164,73,0.3)',
-  },
-  sectionLabel: { fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '12px', display: 'block' },
-  profileText: { color: 'rgba(240,235,225,0.75)', lineHeight: 1.7, fontSize: '16px', margin: 0 },
-  specsBox: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '28px' },
-  specKey: { fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-secondary)' },
-  specValue: { fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right', marginLeft: '16px' },
-  productTitle: { fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', margin: '0 0 16px 0', lineHeight: 1.1 },
-  accentBadge: { padding: '4px 12px', background: 'rgba(201,164,73,0.12)', color: 'var(--accent)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', borderRadius: '4px', border: '1px solid rgba(201,164,73,0.25)' },
-  mfgLabel: { fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' },
-  formCard: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: '20px', padding: '28px', marginBottom: '16px', boxShadow: '0 4px 24px rgba(0,0,0,0.3)' },
-  formTitle: { fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 20px 0', letterSpacing: '-0.01em' },
-  formRow: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' },
-  formLabel: { display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '6px' },
-  formHint: { textAlign: 'center', fontSize: '10px', color: 'var(--text-secondary)', lineHeight: 1.6, margin: '0', padding: '0 12px' },
-  successBanner: { background: 'rgba(201,164,73,0.12)', border: '1px solid rgba(201,164,73,0.3)', borderRadius: '10px', padding: '16px', color: 'var(--accent)', fontSize: '14px', fontWeight: 500, textAlign: 'center' },
-  guaranteeGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' },
-  iconCircle: { width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(201,164,73,0.12)', border: '1px solid rgba(201,164,73,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', flexShrink: 0 },
-  guaranteeLabel: { fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '2px' },
-  guaranteeValue: { fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' },
-  centerScreen: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '12px' },
-  backLink: { display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--accent)', textDecoration: 'none', fontSize: '13px', fontWeight: 600 },
-};

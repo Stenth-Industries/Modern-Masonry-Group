@@ -1,9 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 
@@ -79,6 +80,7 @@ model Variant {
   depthMm     Float?
   imageUrl    String?
   imagesUrl   String[]
+  stock       String?  @default("In Stock")
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
 

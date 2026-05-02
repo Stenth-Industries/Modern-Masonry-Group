@@ -64,7 +64,7 @@ const TESTIMONIALS = [
   },
   {
     name: "Sandra K.",
-    role: "Builder",
+    role: "Custom Home Builder",
     company: "Oakwood Homes",
     rating: 5,
     quote:
@@ -564,8 +564,9 @@ export default function Homepage({ navigate }) {
             <MagneticButton className="bg-[var(--brass)] text-black px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors flex items-center gap-2">
               Explore Products <ArrowRight size={16} />
             </MagneticButton>
-            <MagneticButton className="bg-black/40 backdrop-blur-sm border border-white/30 text-white px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
-              Request a Quote
+            <MagneticButton className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--brass)]/50 text-[var(--brass)] px-8 py-4 text-sm font-bold uppercase tracking-wider hover:border-[var(--brass)] hover:text-black transition-all duration-300 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-2">Request a Quote <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" /></span>
+              <span className="absolute inset-0 bg-[var(--brass)] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
             </MagneticButton>
           </motion.div>
         </motion.div>
@@ -912,30 +913,12 @@ export default function Homepage({ navigate }) {
         </FadeUp>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            {
-              title: "Exterior Cladding",
-              img: "/Exterior-Cladding.png",
-            },
-            {
-              title: "Driveways",
-              img: "/Driveways.png",
-            },
-            {
-              title: "Patios & Walkways",
-              img: "/patio.png",
-            },
-            {
-              title: "Retaining Walls",
-              img: "/Retaining-walls.png",
-            },
-            {
-              title: "Pool Decks",
-              img: "/Pool.png",
-            },
-            {
-              title: "Steps & Caps",
-              img: "/Steps.png",
-            },
+            { title: "Exterior Cladding", img: "/Exterior-Cladding.png" },
+            { title: "Driveways", img: "/Driveways.png" },
+            { title: "Patios & Walkways", img: "/patio.png" },
+            { title: "Retaining Walls", img: "/Retaining-walls.png" },
+            { title: "Pool Decks", img: "/Pool.png" },
+            { title: "Steps & Caps", img: "/Steps.png" },
           ].map((s, i) => (
             <FadeUp
               key={i}
@@ -947,12 +930,12 @@ export default function Homepage({ navigate }) {
                 alt={s.title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 group-hover:transition-colors duration-300 z-10" />
-              <div className="absolute bottom-0 left-0 p-8 z-20">
-                <h3 className="text-2xl font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-2 drop-shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <h3 className="text-2xl font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-2">
                   {s.title}
                 </h3>
-                <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold translate-x-0 group-hover:translate-x-1 transition-all duration-300">
                   Explore <ArrowRight size={14} />
                 </span>
               </div>
@@ -982,15 +965,15 @@ export default function Homepage({ navigate }) {
               alt="The Muskoka Residence"
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-80 z-10" />
-            <div className="absolute bottom-0 left-0 z-20 p-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute bottom-0 left-0 z-20 p-10 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
               <span className="text-[var(--brass)] text-xs font-bold tracking-widest uppercase mb-2 block">
                 Featured Project
               </span>
-              <h3 className="text-3xl font-bold text-white">
+              <h3 className="text-3xl font-bold text-white mb-2">
                 The Muskoka Residence
               </h3>
-              <p className="text-white/70 mt-2 max-w-md">
+              <p className="text-white mt-2 max-w-md text-sm leading-relaxed" style={{ textShadow: "0 1px 12px rgba(0,0,0,1), 0 2px 24px rgba(0,0,0,1)" }}>
                 Extensive use of raw limestone and deep black brick for a modern
                 lakeside home.
               </p>
@@ -1011,8 +994,13 @@ export default function Homepage({ navigate }) {
                   alt={t.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 group-hover:transition-colors duration-200" />
-                <h4 className="relative z-10 font-bold">{t.title}</h4>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-20 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <h4 className="font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-1">{t.title}</h4>
+                  <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold translate-x-0 group-hover:translate-x-1 transition-all duration-300">
+                    Explore <ArrowRight size={14} />
+                  </span>
+                </div>
               </SlideReveal>
             ))}
           </div>
