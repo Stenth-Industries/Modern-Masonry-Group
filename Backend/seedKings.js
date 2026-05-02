@@ -4,7 +4,7 @@ import supabase from './config/supabase.js';
 
 // IMPORTANT: Replace this with the actual name of your Supabase storage bucket
 // Make sure this bucket is set to "Public" in the Supabase Dashboard
-const BUCKET_NAME = 'stenth'; 
+const BUCKET_NAME = 'stenth-canada'; 
 
 const ran = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -126,6 +126,8 @@ async function main() {
 
     // Upload Image
     let uploadedImageUrl = null;
+    let uploadedImagesUrl = [];
+
     if (item.image) {
       const parsedUrl = new URL(item.image);
       let filename = String(parsedUrl.pathname.split('/').pop() || 'image.png');
@@ -138,19 +140,25 @@ async function main() {
       uploadedImageUrl = await downloadAndUploadImage(item.image, finalFileName);
     }
 
-    if( item.images){
-      uploadedImagesUrl = [];
-      for(const image of item.images){
-        const parsedUrl = new URL(image);
-        let filename = String(parsedUrl.pathname.split('/').pop() || 'image.png');
-        // Append a timestamp to avoid overwriting existing pictures of the same name from different URLs
-        let parts = filename.split('.');
-        let ext = parts.pop();
-        let nameWithoutExt = parts.join('-');
-        let finalFileName = `${nameWithoutExt}-${Date.now()}.${ext}`;
+    if (item.images && Array.isArray(item.images)) {
+      for (const image of item.images) {
+        try {
+          const parsedUrl = new URL(image);
+          let filename = String(parsedUrl.pathname.split('/').pop() || 'image.png');
+          let parts = filename.split('.');
+          let ext = parts.pop();
+          let nameWithoutExt = parts.join('-');
+          let finalFileName = `${nameWithoutExt}-${Date.now()}.${ext}`;
 
-        uploadedImageUrl = await downloadAndUploadImage(image, finalFileName);
-        uploadedImagesUrl.push(uploadedImageUrl);
+          const imgUrl = await downloadAndUploadImage(image, finalFileName);
+          if (imgUrl) {
+            uploadedImagesUrl.push(imgUrl);
+            // If we don't have a main image yet, use the first one from the gallery
+            if (!uploadedImageUrl) uploadedImageUrl = imgUrl;
+          }
+        } catch (urlErr) {
+          console.error(`Invalid URL in gallery: ${image}`, urlErr.message);
+        }
       }
     }
 

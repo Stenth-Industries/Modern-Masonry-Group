@@ -301,7 +301,7 @@ const PremiumCard = React.memo(function PremiumCard({
             className="text-[#e2ded9] text-[17px] mb-1 tracking-[0.02em] leading-[1.3] line-clamp-1"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
-            {product.name.split(" - ")[1] || product.name}
+            {product.productTitle || product.name}
           
           </h3>
           <span
@@ -504,13 +504,14 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             return {
               id: p.id,
               name: p.name,
-              displayName: colorCat?.value || p.name.split(" – ")[0],
+              productTitle: p.productTitle || p.name.split(" - ")[0],
+              displayName: p.productTitle || p.name.split(" - ")[0],
               slug: p.slug,
               collection: collectionFull || "Brick",
               collectionBadge: collectionBadge || "Brick",
-              color: colorCat?.value || "Brown",
+              color: p.colorName || colorCat?.value || "Brown",
               colorHex:
-                resolveColorHex(colorCat?.value, colorCat?.hexCode) ||
+                resolveColorHex(p.colorName || colorCat?.value, colorCat?.hexCode) ||
                 "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
               finish: styleCat?.value || null,

@@ -237,7 +237,7 @@ export function BrickDetailPanel({ brick, onClose, initialTab = "overview" }) {
             >
               <motion.div variants={itemVariants} className="mb-14">
                 <h1 className="text-[52px] xl:text-[64px] text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  {brick.name}
+                  {brick.productTitle || brick.name}
                 </h1>
                 <p className="text-[16px] text-white/50 leading-relaxed font-light max-w-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>
                   {brick.description || "A foundational masonry element combining architectural purity with uncompromising structural integrity. Designed specifically for highly refined residential exterior facades and feature interior installations."}

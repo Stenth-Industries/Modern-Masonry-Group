@@ -183,6 +183,8 @@ export const getProducts = async (query = {}) => {
   const data = variants.map((v) => ({
     id: v.id,
     name: `${v.product.name} - ${v.colourName || "Standard"}`,
+    productTitle: v.product.name,
+    colorName: v.colourName || "Standard",
     slug: v.product.slug,
     description: v.product.description,
     material: v.product.material,
