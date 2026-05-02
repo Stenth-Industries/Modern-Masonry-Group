@@ -171,8 +171,8 @@ const PremiumCard = React.memo(function PremiumCard({
   isCompared,
   onToggleCompare,
 }) {
-  const typeLabel = product.collection || product.type || "MOULDED";
-  const manufacturer = product.manufacturer || "GLEN GERY";
+  const typeLabel = product.collectionBadge || product.collection || "Brick";
+  const manufacturer = product.manufacturer || "Arriscraft International";
   const [imgError, setImgError] = useState(false);
 
   // 3D tilt on hover
@@ -219,7 +219,7 @@ const PremiumCard = React.memo(function PremiumCard({
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+            className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
             loading="lazy"
             decoding="async"
             onError={() => setImgError(true)}
@@ -301,10 +301,10 @@ const PremiumCard = React.memo(function PremiumCard({
       >
         <div className="mb-3">
           <h3
-            className="text-[#e2ded9] text-[17px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
+            className="text-[#e2ded9] text-[17px] mb-1 tracking-[0.02em] leading-[1.3] line-clamp-1"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
-            {product.name}
+            {product.displayName || product.name}
           </h3>
           <span
             className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
@@ -314,7 +314,7 @@ const PremiumCard = React.memo(function PremiumCard({
           </span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 mb-4">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
           {typeLabel && (
             <span
               className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase"
@@ -323,13 +323,21 @@ const PremiumCard = React.memo(function PremiumCard({
               {typeLabel}
             </span>
           )}
-          <span
-            className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
-            style={{ fontWeight: 600 }}
-          >
-            {product.finish}
-          </span>
+          {product.finish && (
+            <span
+              className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
+              style={{ fontWeight: 600 }}
+            >
+              {product.finish}
+            </span>
+          )}
         </div>
+
+        {product.sizeLabel && (
+          <p className="text-[10px] text-white/35 tracking-[0.05em] mb-2 font-mono">
+            {product.sizeLabel}
+          </p>
+        )}
 
         {/* Card footer buttons */}
         <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -487,27 +495,34 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             const styleCat = p.categories?.find((c) => c.type === "style");
             const variant = p.variants?.[0];
             const sizeLabel = variant?.sizeLabel || null;
-            const sizeDims = variant
-              ? `${variant.widthMm} × ${variant.heightMm} × ${variant.depthMm}mm`
-              : "230 × 63 × 100mm";
+
+            const collectionFull = collCat?.value || null;
+            const collectionBadge = collectionFull
+              ? collectionFull
+                  .replace("Architectural Linear Series Brick", "Linear Series Brick")
+                  .replace("Tumbled Vintage Brick", "Tumbled Vintage")
+                  .replace("Tumbled Georgia Brick", "Tumbled Georgia")
+              : null;
 
             return {
               id: p.id,
               name: p.name,
+              displayName: colorCat?.value || p.name.split(" – ")[0],
               slug: p.slug,
-              collection: collCat?.value || "Extruded",
+              collection: collectionFull || "Brick",
+              collectionBadge: collectionBadge || "Brick",
               color: colorCat?.value || "Brown",
               colorHex:
                 resolveColorHex(colorCat?.value, colorCat?.hexCode) ||
                 "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
-              finish: styleCat?.value || sizeLabel || "Matt",
+              finish: styleCat?.value || null,
+              sizeLabel,
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
-              size: sizeDims,
               image: variant?.imageUrl || null,
+              gallery: variant?.imagesUrl || [],
               description:
                 p.description || "Premium architectural masonry unit.",
-              // Fields needed by BrickDetailPanel
               applications: ["Residential", "Commercial", "Feature Walls"],
               weight: "3.2 kg",
               compressiveStrength: "≥ 25 MPa",
