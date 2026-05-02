@@ -946,6 +946,62 @@ export default function Homepage({ navigate }) {
 
       {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
 
+      {/* ITALIAN COLLECTION */}
+      <section className="py-32 px-8 md:px-20 relative overflow-hidden border-y border-white/5 bg-black">
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--brass)]/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--brass)]/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center relative z-10">
+          
+          <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
+            <FadeUp>
+              <p className="text-[var(--brass)] text-sm font-bold tracking-[0.3em] mb-4 uppercase">
+                Collezione Esclusiva
+              </p>
+              <SplitHeading
+                text="The Italian Collection"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-[1.1] text-white"
+                delay={0.1}
+              />
+              <p className="text-[var(--brass)] text-lg md:text-xl leading-relaxed mb-8 font-serif italic">
+                "La vera bellezza risiede nei dettagli."
+              </p>
+              <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-10 font-light">
+                Sourced directly from the finest quarries and heritage kilns across Italy, this exclusive collection brings authentic Roman clay bricks and premium Tuscan natural stone to Ontario. Elevate your architecture with materials that have defined luxury for centuries.
+              </p>
+              
+              <motion.button
+                whileHover={{ scale: 1.03, x: 5 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-3 text-white border-b border-[var(--brass)] pb-2 text-sm font-bold uppercase tracking-wider hover:text-[var(--brass)] transition-colors self-start"
+              >
+                Esplora La Collezione <ArrowRight size={16} />
+              </motion.button>
+            </FadeUp>
+          </div>
+
+          <div className="lg:col-span-7 order-1 lg:order-2 relative">
+            <SlideReveal delay={0.2} className="aspect-[16/9] lg:aspect-[4/3] overflow-hidden border border-white/10 shadow-2xl">
+              <img
+                src="/italian_col_2.png"
+                alt="Italian Luxury Villa Exterior"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out"
+              />
+            </SlideReveal>
+            
+            <FadeUp delay={0.4} className="absolute -bottom-12 -left-12 w-2/3 md:w-1/2 aspect-[4/5] border-[8px] border-black overflow-hidden z-20 hidden md:block shadow-2xl">
+              <img
+                src="/italian_col_1.png"
+                alt="Roman Masonry Detail"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out"
+              />
+            </FadeUp>
+          </div>
+
+        </div>
+      </section>
+
       {/* GALLERY */}
       <section id="gallery" className="py-24 px-8 md:px-20">
         <FadeUp className="mb-12">

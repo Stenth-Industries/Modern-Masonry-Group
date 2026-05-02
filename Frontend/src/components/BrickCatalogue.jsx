@@ -98,22 +98,20 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
     >
       <div className="flex items-center gap-3">
         <div
-          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${
-            checked
-              ? "bg-[#c9a449] border-[#c9a449]"
-              : "bg-black/20 border-white/15 group-hover:border-white/40"
-          }`}
+          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
+            ? "bg-[#c9a449] border-[#c9a449]"
+            : "bg-black/20 border-white/15 group-hover:border-white/40"
+            }`}
         >
           {checked && (
             <Check size={11} className="text-black" strokeWidth={3.5} />
           )}
         </div>
         <span
-          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${
-            checked
-              ? "text-[#e3decb] font-medium"
-              : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
-          }`}
+          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${checked
+            ? "text-[#e3decb] font-medium"
+            : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
+            }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           {label}
@@ -233,11 +231,10 @@ const PremiumCard = React.memo(function PremiumCard({
           <div className="absolute top-3 left-3 z-10 flex">
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[4px] bg-black/50 backdrop-blur-md border border-[var(--brass)] shadow-lg">
               <div
-                className={`w-1.5 h-1.5 rounded-full ${
-                  product.stockLabel.toLowerCase() === "in stock"
-                    ? "bg-[#c9a449]"
-                    : "bg-[#e2ded9]/50"
-                }`}
+                className={`w-1.5 h-1.5 rounded-full ${product.stockLabel.toLowerCase() === "in stock"
+                  ? "bg-[#c9a449]"
+                  : "bg-[#e2ded9]/50"
+                  }`}
                 style={{
                   boxShadow:
                     product.stockLabel.toLowerCase() === "in stock"
@@ -304,7 +301,8 @@ const PremiumCard = React.memo(function PremiumCard({
             className="text-[#e2ded9] text-[17px] mb-1 tracking-[0.02em] leading-[1.3] line-clamp-1"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
-            {product.displayName || product.name}
+            {product.name.split(" - ")[1] || product.name}
+          
           </h3>
           <span
             className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
@@ -351,11 +349,10 @@ const PremiumCard = React.memo(function PremiumCard({
 
           <button
             onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md border text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
-              isCompared
-                ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
-                : 'border-white/20 text-white/70 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
-            }`}
+            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md border text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${isCompared
+              ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+              : 'border-white/20 text-white/70 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
+              }`}
           >
             {isCompared ? (
               <Check size={12} strokeWidth={2.5} />
@@ -499,9 +496,9 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             const collectionFull = collCat?.value || null;
             const collectionBadge = collectionFull
               ? collectionFull
-                  .replace("Architectural Linear Series Brick", "Linear Series Brick")
-                  .replace("Tumbled Vintage Brick", "Tumbled Vintage")
-                  .replace("Tumbled Georgia Brick", "Tumbled Georgia")
+                .replace("Architectural Linear Series Brick", "Linear Series Brick")
+                .replace("Tumbled Vintage Brick", "Tumbled Vintage")
+                .replace("Tumbled Georgia Brick", "Tumbled Georgia")
               : null;
 
             return {
@@ -707,18 +704,18 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               colors.length > 0 ||
               finishes.length > 0 ||
               manufacturers.length > 0) && (
-              <button
-                onClick={() => {
-                  setTypes([]);
-                  setColors([]);
-                  setFinishes([]);
-                  setManufacturers([]);
-                }}
-                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
-              >
-                Clear All
-              </button>
-            )}
+                <button
+                  onClick={() => {
+                    setTypes([]);
+                    setColors([]);
+                    setFinishes([]);
+                    setManufacturers([]);
+                  }}
+                  className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
+                >
+                  Clear All
+                </button>
+              )}
           </div>
 
           <div className="flex items-center gap-3 md:gap-6 border-l border-white/5 pl-4 md:pl-8">
@@ -897,18 +894,18 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                       colors.length > 0 ||
                       finishes.length > 0 ||
                       manufacturers.length > 0) && (
-                      <button
-                        onClick={() => {
-                          setTypes([]);
-                          setColors([]);
-                          setFinishes([]);
-                          setManufacturers([]);
-                        }}
-                        className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
-                      >
-                        Clear All Filters
-                      </button>
-                    )}
+                        <button
+                          onClick={() => {
+                            setTypes([]);
+                            setColors([]);
+                            setFinishes([]);
+                            setManufacturers([]);
+                          }}
+                          className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
+                        >
+                          Clear All Filters
+                        </button>
+                      )}
                   </div>
                 </motion.div>
               </>
