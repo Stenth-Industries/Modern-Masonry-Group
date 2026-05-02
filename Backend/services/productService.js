@@ -22,9 +22,9 @@ const buildWhere = (query) => {
   const where = {};
   const AND = [];
 
-  if (query.isActive !== undefined) {
-    AND.push({ isActive: query.isActive === "true" });
-  }
+  // Default to only active variants; allow explicit override via ?isActive=false
+  const activeFilter = query.isActive !== undefined ? query.isActive === "true" : true;
+  AND.push({ isActive: activeFilter });
 
   // ── Free-text search ────────────────────────────────────────────────────────
   if (search && search.trim()) {
