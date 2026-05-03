@@ -17,7 +17,7 @@ import prisma from "../config/prisma.js";
  */
 
 const buildWhere = (query) => {
-  const { search, colour, collection, style, manufacturer, material } = query;
+  const { search, colour, collection, style, manufacturer, material, series } = query;
 
   const where = {};
   const AND = [];
@@ -86,9 +86,11 @@ const buildWhere = (query) => {
 
   const collectionFilter = buildProductCategoryFilter("collection", collection);
   const styleFilter = buildProductCategoryFilter("style", style);
+  const seriesFilter = buildProductCategoryFilter("series", series);
 
   if (collectionFilter) AND.push(collectionFilter);
   if (styleFilter) AND.push(styleFilter);
+  if (seriesFilter) AND.push(seriesFilter);
 
   if (colour) {
     const values = colour
@@ -244,6 +246,7 @@ export const getFilterOptions = async () => {
     colours: grouped["colour"] || [],
     collections: grouped["collection"] || [],
     styles: grouped["style"] || [],
+    series: grouped["series"] || [],
     manufacturers,
     materials: materials.map((p) => p.material).filter(Boolean),
   };

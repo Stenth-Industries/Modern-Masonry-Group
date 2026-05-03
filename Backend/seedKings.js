@@ -42,7 +42,7 @@ async function downloadAndUploadImage(url, filename) {
 
 async function main() {
   console.log('Reading kings.json...');
-  const fileContent = await fs.readFile('./kings.json', 'utf-8');
+  const fileContent = await fs.readFile('./kings_with_series.json', 'utf-8');
   const data = JSON.parse(fileContent);
 
   console.log(`Found ${data.length} items. Starting import...`);
@@ -70,8 +70,17 @@ async function main() {
       manufacturerIds.push(mfg.id);
     }
 
-    // Process Categories (Colors, Collections, Styles)
+    // Process Categories (Colors, Collections, Styles, Series)
     const categoryIds = [];
+
+    // Process Series
+    if (item.series_name) {
+      let category = await prisma.category.findUnique({ where: { type_value: { type: 'series', value: item.series_name } } });
+      if (!category) {
+        category = await prisma.category.create({ data: { type: 'series', value: item.series_name } });
+      }
+      categoryIds.push(category.id);
+    }
     
     const colors = item.allColors?.length ? item.allColors : (item.color ? [item.color] : []);
     for (const cName of colors) {

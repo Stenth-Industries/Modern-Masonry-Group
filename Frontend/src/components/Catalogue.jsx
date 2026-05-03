@@ -8,6 +8,7 @@ export default function Catalogue() {
     colours: [],
     collections: [],
     styles: [],
+    series: [],
     manufacturers: [],
     materials: [],
   });
@@ -17,6 +18,7 @@ export default function Catalogue() {
     colour: "",
     collection: "",
     style: "",
+    series: "",
     manufacturer: "",
     material: "",
     page: 1,
@@ -186,6 +188,21 @@ export default function Catalogue() {
 
               <div>
                 <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
+                  Series
+                </label>
+                <Select
+                  placeholder="All Series"
+                  value={queryParams.series}
+                  onChange={(e) => updateFilter("series", e.target.value)}
+                  options={filters.series.map((s) => ({
+                    value: s.value,
+                    label: s.value,
+                  }))}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
                   Manufacturer
                 </label>
                 <Select
@@ -211,6 +228,7 @@ export default function Catalogue() {
                       colour: "",
                       collection: "",
                       style: "",
+                      series: "",
                       manufacturer: "",
                       material: "",
                       page: 1,
@@ -272,7 +290,7 @@ export default function Catalogue() {
                         </div>
 
                         <div className="p-5 flex flex-col flex-grow">
-                          <div className="mb-2">
+                          <div className="mb-2 flex flex-wrap items-center gap-x-2">
                             {product.manufacturers?.map((m) => (
                               <span
                                 key={m.id}
@@ -281,6 +299,21 @@ export default function Catalogue() {
                                 {m.name}
                               </span>
                             ))}
+                            {product.categories?.some((c) => c.type === "series") && (
+                              <span className="text-[var(--text-secondary)] opacity-30 text-xs">
+                                •
+                              </span>
+                            )}
+                            {product.categories
+                              ?.filter((c) => c.type === "series")
+                              .map((s) => (
+                                <span
+                                  key={s.id}
+                                  className="text-xs text-[var(--text-secondary)] font-medium"
+                                >
+                                  {s.value}
+                                </span>
+                              ))}
                           </div>
                           <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2 line-clamp-2">
                             {product.name}

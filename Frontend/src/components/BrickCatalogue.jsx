@@ -85,6 +85,7 @@ const DEFAULT_FILTERS = {
   collections: [],
   colors: [],
   styles: [],
+  series: [],
   manufacturers: [],
 };
 
@@ -329,6 +330,14 @@ const PremiumCard = React.memo(function PremiumCard({
               {product.finish}
             </span>
           )}
+          {product.series && (
+            <span
+              className="text-[9.5px] tracking-[0.08em] text-[#e3decb] bg-white/[0.05] border border-[#e3decb]/20 px-2 py-1 rounded-[4px] uppercase"
+              style={{ fontWeight: 600 }}
+            >
+              {product.series}
+            </span>
+          )}
         </div>
 
         {product.sizeLabel && (
@@ -385,6 +394,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
+  const [series, setSeries] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -416,6 +426,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               collections: [],
               colours: [],
               styles: [],
+              series: [],
               manufacturers: [],
             },
           };
@@ -442,6 +453,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                 return 0;
               }),
             styles: r.data.styles.map((s) => s.value),
+            series: r.data.series ? r.data.series.map((s) => s.value) : [],
             manufacturers: r.data.manufacturers.map((m) => m.name),
           });
         }
@@ -467,6 +479,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
     if (types.length) params.append("collection", types.join(","));
     if (colors.length) params.append("colour", colors.join(","));
     if (finishes.length) params.append("style", finishes.join(","));
+    if (series.length) params.append("series", series.join(","));
     if (manufacturers.length)
       params.append("manufacturer", manufacturers.join(","));
     params.append("page", page);
@@ -490,6 +503,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             const colorCat = p.categories?.find((c) => c.type === "colour");
             const collCat = p.categories?.find((c) => c.type === "collection");
             const styleCat = p.categories?.find((c) => c.type === "style");
+            const seriesCat = p.categories?.find((c) => c.type === "series");
             const variant = p.variants?.[0];
             const sizeLabel = variant?.sizeLabel || null;
 
@@ -515,6 +529,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                 "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
               finish: styleCat?.value || null,
+              series: seriesCat?.value || null,
               sizeLabel,
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
               image: variant?.imageUrl || null,
@@ -549,13 +564,13 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       });
 
     return () => controller.abort();
-  }, [debouncedQuery, types, colors, finishes, manufacturers, page]);
+  }, [debouncedQuery, types, colors, finishes, series, manufacturers, page]);
 
   // Reset pagination on filter change
   useEffect(() => {
     setPage(1);
     setProducts([]);
-  }, [debouncedQuery, types, colors, finishes, manufacturers]);
+  }, [debouncedQuery, types, colors, finishes, series, manufacturers]);
 
   const tog = useCallback((val, getter, setter) => {
     setter(
@@ -676,7 +691,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
           </div>
 
           <div className="hidden md:flex items-center gap-3 flex-1 justify-center">
-            {[...types, ...colors, ...finishes, ...manufacturers].map((v) => (
+            {[...types, ...colors, ...finishes, ...series, ...manufacturers].map((v) => (
               <div
                 key={v}
                 className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm"
@@ -692,6 +707,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                       setColors(colors.filter((x) => x !== v));
                     if (finishes.includes(v))
                       setFinishes(finishes.filter((x) => x !== v));
+                    if (series.includes(v))
+                      setSeries(series.filter((x) => x !== v));
                     if (manufacturers.includes(v))
                       setManufacturers(manufacturers.filter((x) => x !== v));
                   }}
@@ -704,12 +721,14 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             {(types.length > 0 ||
               colors.length > 0 ||
               finishes.length > 0 ||
+              series.length > 0 ||
               manufacturers.length > 0) && (
                 <button
                   onClick={() => {
                     setTypes([]);
                     setColors([]);
                     setFinishes([]);
+                    setSeries([]);
                     setManufacturers([]);
                   }}
                   className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
@@ -799,6 +818,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                   />
                 ))}
               </Section>
+              <Section title="SERIES">
+                {filtersDB.series.map((s) => (
+                  <GlassCheckbox
+                    key={s}
+                    label={s}
+                    checked={series.includes(s)}
+                    onClick={() => tog(s, series, setSeries)}
+                  />
+                ))}
+              </Section>
               <Section title="MANUFACTURER">
                 {filtersDB.manufacturers.map((m) => (
                   <GlassCheckbox
@@ -876,6 +905,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                           label={s}
                           checked={finishes.includes(s)}
                           onClick={() => tog(s, finishes, setFinishes)}
+                        />
+                      ))}
+                    </Section>
+                    <Section title="SERIES">
+                      {filtersDB.series.map((s) => (
+                        <GlassCheckbox
+                          key={s}
+                          label={s}
+                          checked={series.includes(s)}
+                          onClick={() => tog(s, series, setSeries)}
                         />
                       ))}
                     </Section>

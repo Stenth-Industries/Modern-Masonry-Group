@@ -7,15 +7,14 @@ async function main() {
     // Using a transaction to ensure all or nothing is deleted.
     // Deleting in reverse order of relationships to prevent foreign key constraint errors
     // (Though onDelete: Cascade helps, this is the safest approach).
-    await prisma.$transaction([
-      prisma.variant.deleteMany(),
-      prisma.productCategory.deleteMany(),
-      prisma.productManufacturer.deleteMany(),
-      prisma.product.deleteMany(),
-      prisma.category.deleteMany(),
-      prisma.manufacturer.deleteMany(),
-      prisma.quote.deleteMany(),
-    ]);
+    // Running deletes sequentially to avoid transaction timeouts on large datasets
+    await prisma.variant.deleteMany();
+    await prisma.productCategory.deleteMany();
+    await prisma.productManufacturer.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.category.deleteMany();
+    await prisma.manufacturer.deleteMany();
+    await prisma.quote.deleteMany();
 
     console.log("✅ All data successfully deleted from the database.");
   } catch (error) {
