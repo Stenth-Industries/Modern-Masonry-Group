@@ -52,26 +52,32 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="fixed inset-0 z-[90] w-full h-[100dvh] overflow-y-auto scrollbar-none bg-[#0a0806]"
-        >
-          <div
-            className="fixed inset-0 z-0 opacity-40 mix-blend-overlay pointer-events-none"
-            style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'cover', backgroundAttachment: 'fixed' }}
+        <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 sm:p-6 md:p-12">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={onClose}
           />
 
+          {/* Modal Container */}
           <motion.div
-            initial={{ y: 24, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 16, opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 min-h-full max-w-[1380px] mx-auto px-8 md:px-14 py-12 flex flex-col"
+            className="relative z-10 w-full max-w-[1380px] max-h-[90vh] overflow-y-auto scrollbar-none bg-[#0a0806] rounded-2xl border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)]"
           >
-            <div className="flex w-full items-start justify-between mb-10 overflow-hidden">
+            <div
+              className="absolute inset-0 z-0 opacity-40 mix-blend-overlay pointer-events-none rounded-2xl"
+              style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'cover' }}
+            />
+
+            <div className="relative z-10 px-6 md:px-14 py-10 md:py-12 flex flex-col">
+              <div className="flex w-full items-start justify-between mb-10 overflow-hidden">
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="h-[1px] w-8" style={{ background: `linear-gradient(90deg, transparent, ${BRASS})` }} />
@@ -284,8 +290,9 @@ export default function CompareModal({ open, products, onClose, onRemove }) {
             <p className="mt-6 text-center text-[9px] uppercase tracking-[0.3em] text-white/15">
               Modern Masonry Group — Premium Material Selection
             </p>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

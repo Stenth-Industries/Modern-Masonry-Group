@@ -122,23 +122,17 @@ export default function BrickDetail({ brickId, navigate }) {
       .finally(() => setLoading(false));
   }, [brickId]);
 
-  // Find the specific variant that was clicked (brickId may be a variant UUID)
-  const selectedVariant = useMemo(() => {
-    if (!product) return null;
-    return product.variants?.find(v => v.id === brickId) || product.variants?.[0] || null;
-  }, [product, brickId]);
-
   const images = useMemo(() => {
     if (!product) return [];
-    const v = selectedVariant;
-    if (!v) return [];
     const imgs = new Set();
-    if (v.imageUrl && v.imageUrl.startsWith('http')) imgs.add(v.imageUrl);
-    if (Array.isArray(v.imagesUrl)) {
-      v.imagesUrl.forEach(url => { if (url && url.startsWith('http')) imgs.add(url); });
-    }
+    (product.variants || []).forEach(v => {
+      if (v.imageUrl && v.imageUrl.startsWith('http')) imgs.add(v.imageUrl);
+      if (Array.isArray(v.imagesUrl)) {
+        v.imagesUrl.forEach(url => { if (url && url.startsWith('http')) imgs.add(url); });
+      }
+    });
     return Array.from(imgs);
-  }, [product, selectedVariant]);
+  }, [product]);
 
   const catsByType = useMemo(() => {
     if (!product) return {};
@@ -196,7 +190,7 @@ export default function BrickDetail({ brickId, navigate }) {
 
   // Mock data to match the panel features exactly
   const brickDetails = {
-    size: selectedVariant?.sizeLabel || null,
+    size: "215 × 102 × 65 mm",
     weight: "2.4 kg",
     compressiveStrength: "≥ 50 MPa",
     waterAbsorption: "≤ 8%",
@@ -293,14 +287,9 @@ export default function BrickDetail({ brickId, navigate }) {
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-              {selectedVariant?.colourName || product.name}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              {product.name}
             </h1>
-            {selectedVariant?.colourName && (
-              <p className="text-[12px] tracking-[0.2em] uppercase text-white/40 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
-                {product.name}
-              </p>
-            )}
 
             <p className="text-[16px] text-white/50 leading-relaxed font-light max-w-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>
               {product.description || "A foundational masonry element combining architectural purity with uncompromising structural integrity. Designed specifically for highly refined residential exterior facades and feature interior installations."}
@@ -397,7 +386,7 @@ export default function BrickDetail({ brickId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    {brickDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" value={brickDetails.size} delay={0.05} />}
+                    <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" value={brickDetails.size} delay={0.05} />
                     <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.1} />
                     <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.15} />
                     <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.2} />

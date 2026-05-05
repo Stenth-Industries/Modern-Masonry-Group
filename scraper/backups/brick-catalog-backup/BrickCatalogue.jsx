@@ -82,10 +82,10 @@ const resolveColorHex = (name, apiHex) => {
 
 // Dynamic database filters will overwrite this structure on mount
 const DEFAULT_FILTERS = {
-  manufacturersWithCollections: [],
+  collections: [],
   colors: [],
   styles: [],
-  series: [],
+  manufacturers: [],
 };
 
 // ── Simple Elegant Checkbox ──────────────────────────────────────────────────
@@ -98,20 +98,22 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
     >
       <div className="flex items-center gap-3">
         <div
-          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${checked
-            ? "bg-[#c9a449] border-[#c9a449]"
-            : "bg-black/20 border-white/15 group-hover:border-white/40"
-            }`}
+          className={`w-[16px] h-[16px] flex items-center justify-center transition-all duration-300 border rounded-[3px] ${
+            checked
+              ? "bg-[#c9a449] border-[#c9a449]"
+              : "bg-black/20 border-white/15 group-hover:border-white/40"
+          }`}
         >
           {checked && (
             <Check size={11} className="text-black" strokeWidth={3.5} />
           )}
         </div>
         <span
-          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${checked
-            ? "text-[#e3decb] font-medium"
-            : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
-            }`}
+          className={`text-[13px] tracking-[0.03em] transition-colors duration-300 ${
+            checked
+              ? "text-[#e3decb] font-medium"
+              : "text-[#9a9488] group-hover:text-[#e3decb] font-normal"
+          }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           {label}
@@ -134,35 +136,22 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
 
 // ── Dropdown Section ─────────────────────────────────────────────────────────
 
-function Section({ title, children, defaultOpen = true, checked, onCheck }) {
+function Section({ title, children, defaultOpen = true }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="mb-6">
-      <div className="flex items-center justify-between w-full pb-4 border-b border-[rgba(255,255,255,0.05)] mb-4 group">
-        {onCheck ? (
-          <button
-            onClick={onCheck}
-            className="flex items-center gap-2 outline-none"
-          >
-            <div className={`w-3.5 h-3.5 rounded-[3px] border flex items-center justify-center transition-colors ${checked ? "bg-[#c9a449] border-[#c9a449]" : "border-white/20 bg-transparent"}`}>
-              {checked && <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-            </div>
-            <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a449] hover:text-white transition-colors font-bold">
-              {title}
-            </span>
-          </button>
-        ) : (
-          <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a449] font-bold">
-            {title}
-          </span>
-        )}
-        <button onClick={() => setOpen(!open)} className="outline-none ml-2">
-          <ChevronDown
-            size={13}
-            className={`text-white/40 transition-transform duration-500 delay-75 ${open ? "rotate-180" : ""}`}
-          />
-        </button>
-      </div>
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center justify-between w-full pb-4 border-b border-[rgba(255,255,255,0.05)] mb-4 group outline-none"
+      >
+        <span className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] group-hover:text-white transition-colors font-bold">
+          {title}
+        </span>
+        <ChevronDown
+          size={13}
+          className={`text-white/40 transition-transform duration-500 delay-75 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"}`}
       >
@@ -182,8 +171,8 @@ const PremiumCard = React.memo(function PremiumCard({
   isCompared,
   onToggleCompare,
 }) {
-  const typeLabel = product.collectionBadge || product.collection || "Brick";
-  const manufacturer = product.manufacturer || "Arriscraft International";
+  const typeLabel = product.collection || product.type || "MOULDED";
+  const manufacturer = product.manufacturer || "GLEN GERY";
   const [imgError, setImgError] = useState(false);
 
   // 3D tilt on hover
@@ -230,7 +219,7 @@ const PremiumCard = React.memo(function PremiumCard({
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
+            className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
             loading="lazy"
             decoding="async"
             onError={() => setImgError(true)}
@@ -244,10 +233,11 @@ const PremiumCard = React.memo(function PremiumCard({
           <div className="absolute top-3 left-3 z-10 flex">
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[4px] bg-black/50 backdrop-blur-md border border-[var(--brass)] shadow-lg">
               <div
-                className={`w-1.5 h-1.5 rounded-full ${product.stockLabel.toLowerCase() === "in stock"
-                  ? "bg-[#c9a449]"
-                  : "bg-[#e2ded9]/50"
-                  }`}
+                className={`w-1.5 h-1.5 rounded-full ${
+                  product.stockLabel.toLowerCase() === "in stock"
+                    ? "bg-[#c9a449]"
+                    : "bg-[#e2ded9]/50"
+                }`}
                 style={{
                   boxShadow:
                     product.stockLabel.toLowerCase() === "in stock"
@@ -311,10 +301,10 @@ const PremiumCard = React.memo(function PremiumCard({
       >
         <div className="mb-3">
           <h3
-            className="text-[#e2ded9] text-[17px] mb-1 tracking-[0.02em] leading-[1.3] line-clamp-1"
+            className="text-[#e2ded9] text-[17px] mb-1.5 tracking-[0.02em] leading-[1.3] line-clamp-2"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
           >
-            {product.color || product.productTitle || product.name}
+            {product.name}
           </h3>
           <span
             className="text-[11px] uppercase tracking-[0.15em] text-[#c9a449]/80"
@@ -324,7 +314,7 @@ const PremiumCard = React.memo(function PremiumCard({
           </span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 mb-3">
+        <div className="flex flex-wrap items-center gap-2 mb-4">
           {typeLabel && (
             <span
               className="text-[9.5px] tracking-[0.08em] text-white/70 bg-white/[0.05] border border-white/[0.08] px-2 py-1 rounded-[4px] uppercase"
@@ -333,29 +323,13 @@ const PremiumCard = React.memo(function PremiumCard({
               {typeLabel}
             </span>
           )}
-          {product.finish && (
-            <span
-              className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
-              style={{ fontWeight: 600 }}
-            >
-              {product.finish}
-            </span>
-          )}
-          {product.series && (
-            <span
-              className="text-[9.5px] tracking-[0.08em] text-[#e3decb] bg-white/[0.05] border border-[#e3decb]/20 px-2 py-1 rounded-[4px] uppercase"
-              style={{ fontWeight: 600 }}
-            >
-              {product.series}
-            </span>
-          )}
+          <span
+            className="text-[9.5px] tracking-[0.08em] text-[#c9a449] bg-[#c9a449]/10 border border-[#c9a449]/20 px-2 py-1 rounded-[4px] uppercase"
+            style={{ fontWeight: 600 }}
+          >
+            {product.finish}
+          </span>
         </div>
-
-        {product.sizeLabel && (
-          <p className="text-[10px] text-white/35 tracking-[0.05em] mb-2 font-mono">
-            {product.sizeLabel}
-          </p>
-        )}
 
         {/* Card footer buttons */}
         <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -369,10 +343,11 @@ const PremiumCard = React.memo(function PremiumCard({
 
           <button
             onClick={(e) => { e.stopPropagation(); onToggleCompare(product); }}
-            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md border text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${isCompared
-              ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
-              : 'border-white/20 text-white/70 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
-              }`}
+            className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-md border text-[10px] uppercase tracking-[0.14em] font-bold transition-all duration-300 ${
+              isCompared
+                ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+                : 'border-white/20 text-white/70 hover:text-[#c9a449] hover:border-[#c9a449]/60 hover:bg-[#c9a449]/5'
+            }`}
           >
             {isCompared ? (
               <Check size={12} strokeWidth={2.5} />
@@ -405,7 +380,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
-  const [series, setSeries] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -437,7 +411,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               collections: [],
               colours: [],
               styles: [],
-              series: [],
               manufacturers: [],
             },
           };
@@ -450,7 +423,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       .then((r) => {
         if (r.success && r.data) {
           setFiltersDB({
-            manufacturersWithCollections: r.data.manufacturersWithCollections || [],
+            collections: r.data.collections.map((c) => c.value),
             colors: r.data.colours
               .map((c) => ({
                 value: c.value,
@@ -464,7 +437,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                 return 0;
               }),
             styles: r.data.styles.map((s) => s.value),
-            series: r.data.series ? r.data.series.map((s) => s.value).filter((s) => s.trim().toLowerCase() !== "finesse brick") : [],
+            manufacturers: r.data.manufacturers.map((m) => m.name),
           });
         }
       })
@@ -489,7 +462,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
     if (types.length) params.append("collection", types.join(","));
     if (colors.length) params.append("colour", colors.join(","));
     if (finishes.length) params.append("style", finishes.join(","));
-    if (series.length) params.append("series", series.join(","));
     if (manufacturers.length)
       params.append("manufacturer", manufacturers.join(","));
     params.append("page", page);
@@ -513,39 +485,29 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             const colorCat = p.categories?.find((c) => c.type === "colour");
             const collCat = p.categories?.find((c) => c.type === "collection");
             const styleCat = p.categories?.find((c) => c.type === "style");
-            const seriesCat = p.categories?.find((c) => c.type === "series");
             const variant = p.variants?.[0];
             const sizeLabel = variant?.sizeLabel || null;
-
-            const collectionFull = collCat?.value || null;
-            const collectionBadge = collectionFull
-              ? collectionFull
-                .replace("Architectural Linear Series Brick", "Linear Series Brick")
-                .replace("Tumbled Vintage Brick", "Tumbled Vintage")
-                .replace("Tumbled Georgia Brick", "Tumbled Georgia")
-              : null;
+            const sizeDims = variant
+              ? `${variant.widthMm} × ${variant.heightMm} × ${variant.depthMm}mm`
+              : "230 × 63 × 100mm";
 
             return {
               id: p.id,
               name: p.name,
-              productTitle: p.productTitle || p.name.split(" - ")[0],
-              displayName: p.productTitle || p.name.split(" - ")[0],
               slug: p.slug,
-              collection: collectionFull || "Brick",
-              collectionBadge: collectionBadge || "Brick",
-              color: p.colorName || colorCat?.value || "Brown",
+              collection: collCat?.value || "Extruded",
+              color: colorCat?.value || "Brown",
               colorHex:
-                resolveColorHex(p.colorName || colorCat?.value, colorCat?.hexCode) ||
+                resolveColorHex(colorCat?.value, colorCat?.hexCode) ||
                 "#7A5C40",
               manufacturer: p.manufacturers?.[0]?.name || "Stenth Group",
-              finish: styleCat?.value || null,
-              series: seriesCat?.value || null,
-              sizeLabel,
+              finish: styleCat?.value || sizeLabel || "Matt",
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
+              size: sizeDims,
               image: variant?.imageUrl || null,
-              gallery: variant?.imagesUrl || [],
               description:
                 p.description || "Premium architectural masonry unit.",
+              // Fields needed by BrickDetailPanel
               applications: ["Residential", "Commercial", "Feature Walls"],
               weight: "3.2 kg",
               compressiveStrength: "≥ 25 MPa",
@@ -556,10 +518,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
               isNew: false,
             };
           });
-          setProducts(mapped.filter((p) => {
-            const s = (p.series || p.collection || "").trim().toLowerCase();
-            return s !== "finesse brick";
-          }));
+          setProducts(mapped);
           setTotal(res.meta.total);
           setTotalPages(res.meta.totalPages);
           setHasMore(page < res.meta.totalPages);
@@ -577,13 +536,13 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
       });
 
     return () => controller.abort();
-  }, [debouncedQuery, types, colors, finishes, series, manufacturers, page]);
+  }, [debouncedQuery, types, colors, finishes, manufacturers, page]);
 
   // Reset pagination on filter change
   useEffect(() => {
     setPage(1);
     setProducts([]);
-  }, [debouncedQuery, types, colors, finishes, series, manufacturers]);
+  }, [debouncedQuery, types, colors, finishes, manufacturers]);
 
   const tog = useCallback((val, getter, setter) => {
     setter(
@@ -608,7 +567,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
   }, []);
 
   const handleSample = useCallback((product) => {
-    window.location.hash = 'brick-detail/' + product.id;
+    setSelected(product);
   }, []);
 
   const displayedProducts = showFavourites ? favourites : products;
@@ -704,7 +663,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
           </div>
 
           <div className="hidden md:flex items-center gap-3 flex-1 justify-center">
-            {[...types, ...colors, ...finishes, ...series, ...manufacturers].map((v) => (
+            {[...types, ...colors, ...finishes, ...manufacturers].map((v) => (
               <div
                 key={v}
                 className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm"
@@ -720,8 +679,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                       setColors(colors.filter((x) => x !== v));
                     if (finishes.includes(v))
                       setFinishes(finishes.filter((x) => x !== v));
-                    if (series.includes(v))
-                      setSeries(series.filter((x) => x !== v));
                     if (manufacturers.includes(v))
                       setManufacturers(manufacturers.filter((x) => x !== v));
                   }}
@@ -734,21 +691,19 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
             {(types.length > 0 ||
               colors.length > 0 ||
               finishes.length > 0 ||
-              series.length > 0 ||
               manufacturers.length > 0) && (
-                <button
-                  onClick={() => {
-                    setTypes([]);
-                    setColors([]);
-                    setFinishes([]);
-                    setSeries([]);
-                    setManufacturers([]);
-                  }}
-                  className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
-                >
-                  Clear All
-                </button>
-              )}
+              <button
+                onClick={() => {
+                  setTypes([]);
+                  setColors([]);
+                  setFinishes([]);
+                  setManufacturers([]);
+                }}
+                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
+              >
+                Clear All
+              </button>
+            )}
           </div>
 
           <div className="flex items-center gap-3 md:gap-6 border-l border-white/5 pl-4 md:pl-8">
@@ -800,26 +755,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                 </h2>
               </div>
 
-              <div className="mb-2">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturers</span>
-              </div>
-              {filtersDB.manufacturersWithCollections.map((mfg) => (
-                <Section
-                  key={mfg.name}
-                  title={mfg.name}
-                  checked={manufacturers.includes(mfg.name)}
-                  onCheck={() => tog(mfg.name, manufacturers, setManufacturers)}
-                >
-                  {mfg.collections.map((t) => (
-                    <GlassCheckbox
-                      key={t}
-                      label={t}
-                      checked={types.includes(t)}
-                      onClick={() => tog(t, types, setTypes)}
-                    />
-                  ))}
-                </Section>
-              ))}
+              <Section title="COLLECTION">
+                {filtersDB.collections.map((t) => (
+                  <GlassCheckbox
+                    key={t}
+                    label={t}
+                    checked={types.includes(t)}
+                    onClick={() => tog(t, types, setTypes)}
+                  />
+                ))}
+              </Section>
               <Section title="COLOUR">
                 {filtersDB.colors.map(({ value, hex }) => (
                   <GlassCheckbox
@@ -838,6 +783,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                     label={s}
                     checked={finishes.includes(s)}
                     onClick={() => tog(s, finishes, setFinishes)}
+                  />
+                ))}
+              </Section>
+              <Section title="MANUFACTURER">
+                {filtersDB.manufacturers.map((m) => (
+                  <GlassCheckbox
+                    key={m}
+                    label={m}
+                    checked={manufacturers.includes(m)}
+                    onClick={() => tog(m, manufacturers, setManufacturers)}
                   />
                 ))}
               </Section>
@@ -880,26 +835,16 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                         <X size={18} />
                       </button>
                     </div>
-                    <div className="mb-2">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturers</span>
-                    </div>
-                    {filtersDB.manufacturersWithCollections.map((mfg) => (
-                      <Section
-                        key={mfg.name}
-                        title={mfg.name}
-                        checked={manufacturers.includes(mfg.name)}
-                        onCheck={() => tog(mfg.name, manufacturers, setManufacturers)}
-                      >
-                        {mfg.collections.map((t) => (
-                          <GlassCheckbox
-                            key={t}
-                            label={t}
-                            checked={types.includes(t)}
-                            onClick={() => tog(t, types, setTypes)}
-                          />
-                        ))}
-                      </Section>
-                    ))}
+                    <Section title="COLLECTION">
+                      {filtersDB.collections.map((t) => (
+                        <GlassCheckbox
+                          key={t}
+                          label={t}
+                          checked={types.includes(t)}
+                          onClick={() => tog(t, types, setTypes)}
+                        />
+                      ))}
+                    </Section>
                     <Section title="COLOUR">
                       {filtersDB.colors.map(({ value, hex }) => (
                         <GlassCheckbox
@@ -921,22 +866,34 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
                         />
                       ))}
                     </Section>
+                    <Section title="MANUFACTURER">
+                      {filtersDB.manufacturers.map((m) => (
+                        <GlassCheckbox
+                          key={m}
+                          label={m}
+                          checked={manufacturers.includes(m)}
+                          onClick={() =>
+                            tog(m, manufacturers, setManufacturers)
+                          }
+                        />
+                      ))}
+                    </Section>
                     {(types.length > 0 ||
                       colors.length > 0 ||
                       finishes.length > 0 ||
                       manufacturers.length > 0) && (
-                        <button
-                          onClick={() => {
-                            setTypes([]);
-                            setColors([]);
-                            setFinishes([]);
-                            setManufacturers([]);
-                          }}
-                          className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
-                        >
-                          Clear All Filters
-                        </button>
-                      )}
+                      <button
+                        onClick={() => {
+                          setTypes([]);
+                          setColors([]);
+                          setFinishes([]);
+                          setManufacturers([]);
+                        }}
+                        className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
+                      >
+                        Clear All Filters
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               </>
@@ -1061,6 +1018,15 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
 
         <Footer />
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <BrickDetailPanel
+            brick={selected}
+            onClose={() => setSelected(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Floating Compare Bar */}
       <AnimatePresence>

@@ -6,6 +6,7 @@ import Services from './components/Services';
 import Navbar, { UtilityBar } from './components/Navbar';
 import QuotePage from './components/QuotePage';
 import AboutPage from './components/AboutPage';
+import FloatingCTA from './components/FloatingCTA';
 
 export default function App() {
   const [view, setView] = useState('home');
@@ -53,6 +54,7 @@ export default function App() {
       <UtilityBar />
       <div className="overflow-x-hidden" style={{ zoom: 0.9 }}>
         <Navbar navigate={navigate} />
+        <FloatingCTA />
         {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
         {view === 'brick' && <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />}
         {view === 'services' && <Services navigate={navigate} />}

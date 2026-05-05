@@ -250,29 +250,7 @@ const AnimatedStat = ({ value, prefix = "", suffix = "", label }) => {
   );
 };
 
-/* ── Floating CTA ── */
-const FloatingCTA = ({ scrollY }) => {
-  const [vis, setVis] = useState(false);
-  useEffect(() => {
-    const u = scrollY.on("change", (v) => setVis(v > window.innerHeight * 0.8));
-    return () => u();
-  }, [scrollY]);
-  return (
-    <AnimatePresence>
-      {vis && (
-        <motion.a
-          href="#quote"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-8 right-8 z-50 flex items-center gap-2 bg-[var(--brass)] text-black px-5 py-3 rounded-full font-bold text-sm uppercase tracking-wider shadow-2xl hover:bg-[var(--brass-light)] transition-colors"
-        >
-          Free Estimate <ArrowUpRight size={14} />
-        </motion.a>
-      )}
-    </AnimatePresence>
-  );
-};
+
 
 /* ── Fade-up on scroll (reusable) ── */
 const FadeUp = ({ children, delay = 0, className = "", whileHover, whileTap }) => {
@@ -452,7 +430,7 @@ export default function Homepage({ navigate }) {
   useEffect(() => {
     if (introVideoRef.current) introVideoRef.current.playbackRate = 1.5;
     if (sessionStorage.getItem('mmg_introPlayed') === 'true' && mainVideoRef.current) {
-        mainVideoRef.current.play().catch(console.error);
+      mainVideoRef.current.play().catch(console.error);
     }
   }, []);
 
@@ -460,8 +438,6 @@ export default function Homepage({ navigate }) {
     <div
       className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black"
     >
-      <FloatingCTA scrollY={scrollY} />
-
       {/* HERO */}
       <section id="home" className="relative bg-black overflow-hidden" style={{ contain: "layout style", height: "calc(100vh / 0.90)" }}>
         {/* LOGO IN VIDEO */}
@@ -490,7 +466,7 @@ export default function Homepage({ navigate }) {
           src="/video2-optim.mp4"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{
-            opacity: introFading ? 0.9 : 0, 
+            opacity: introFading ? 0.9 : 0,
             transition: "opacity 1.8s ease-in-out",
             willChange: "opacity",
             transform: "translateZ(0)",
@@ -917,25 +893,25 @@ export default function Homepage({ navigate }) {
             { title: "Driveways", img: "/Driveways.png" },
             { title: "Patios & Walkways", img: "/patio.png" },
             { title: "Retaining Walls", img: "/Retaining-walls.png" },
-            { title: "Pool Decks", img: "/Pool.png" },
+            { title: "Chimney & Fireplace", img: "/Chimney.jpg" },
             { title: "Steps & Caps", img: "/Steps.png" },
           ].map((s, i) => (
             <FadeUp
               key={i}
               delay={i * 0.07}
-              className="group relative overflow-hidden cursor-pointer aspect-square border border-white/5 hover:border-[var(--brass)]/30 transition-colors duration-300"
+              className="group relative overflow-hidden cursor-pointer aspect-square border border-white/5"
             >
               <img
                 src={s.img}
                 alt={s.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <h3 className="text-2xl font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-2">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+              <div className="absolute bottom-0 left-0 p-8 z-20">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   {s.title}
                 </h3>
-                <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold translate-x-0 group-hover:translate-x-1 transition-all duration-300">
+                <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold">
                   Explore <ArrowRight size={14} />
                 </span>
               </div>
@@ -952,31 +928,54 @@ export default function Homepage({ navigate }) {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--brass)]/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--brass)]/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center relative z-10">
-          
+        {/* TOP EXCLUSIVE BANNER */}
+        <FadeUp className="relative z-10 mb-16 flex items-center gap-4">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[var(--brass)]/60" />
+          <p className="text-[var(--brass)] text-[10px] font-black tracking-[0.35em] uppercase whitespace-nowrap">
+            ✦ &nbsp; Exclusively Available in Canada &nbsp; ✦
+          </p>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[var(--brass)]/60" />
+        </FadeUp>
+
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center relative z-10">
+
           <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
             <FadeUp>
-              <p className="text-[var(--brass)] text-sm font-bold tracking-[0.3em] mb-4 uppercase">
-                Collezione Esclusiva
+              <p className="text-[var(--brass)] text-xl font-bold tracking-widest mb-4 uppercase">
+                Exclusive Premium Italian Collection
               </p>
               <SplitHeading
-                text="The Italian Collection"
-                className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-[1.1] text-white"
+                text="Solely Distributed By MMG"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-6"
                 delay={0.1}
               />
-              <p className="text-[var(--brass)] text-lg md:text-xl leading-relaxed mb-8 font-serif italic">
-                "La vera bellezza risiede nei dettagli."
-              </p>
-              <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-10 font-light">
+
+              <div className="flex items-start mb-8 pl-5 border-l-2 border-[var(--brass)]">
+                <p className="text-[var(--brass)] text-2xl md:text-3xl leading-relaxed font-serif italic">
+                  "La vera bellezza risiede nei dettagli."
+                </p>
+              </div>
+
+              <p className="text-gray-400 text-xl md:text-2xl leading-relaxed mb-8 font-light">
                 Sourced directly from the finest quarries and heritage kilns across Italy, this exclusive collection brings authentic Roman clay bricks and premium Tuscan natural stone to Ontario. Elevate your architecture with materials that have defined luxury for centuries.
               </p>
-              
+
+              {/* Credential strip */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-10">
+                {["Direct from Italy", "Heritage Quarries", "Only Supplier in Canada"].map((cred, i, arr) => (
+                  <React.Fragment key={cred}>
+                    <span className="text-[var(--brass)]/80 text-sm md:text-base font-bold tracking-[0.2em] uppercase">{cred}</span>
+                    {i < arr.length - 1 && <span className="text-[var(--brass)]/30 text-sm md:text-base">✦</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+
               <motion.button
                 whileHover={{ scale: 1.03, x: 5 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-3 text-white border-b border-[var(--brass)] pb-2 text-sm font-bold uppercase tracking-wider hover:text-[var(--brass)] transition-colors self-start"
+                className="flex items-center gap-3 text-white border-b border-[var(--brass)] pb-2 text-base md:text-lg font-bold uppercase tracking-wider hover:text-[var(--brass)] transition-colors self-start"
               >
-                Esplora La Collezione <ArrowRight size={16} />
+                Explore The Collection <ArrowRight size={20} />
               </motion.button>
             </FadeUp>
           </div>
@@ -984,18 +983,27 @@ export default function Homepage({ navigate }) {
           <div className="lg:col-span-7 order-1 lg:order-2 relative">
             <SlideReveal delay={0.2} className="aspect-[16/9] lg:aspect-[4/3] overflow-hidden border border-white/10 shadow-2xl">
               <img
-                src="/italian_col_2.png"
-                alt="Italian Luxury Villa Exterior"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out"
+                src="/italian_col_2.jpg"
+                alt="Italian Stone Palace Facade"
+                className="w-full h-full object-cover"
               />
             </SlideReveal>
-            
+
+            {/* Stamp badge */}
+            <FadeUp delay={0.5} className="absolute top-4 right-4 z-30">
+              <img src="/stamp.png" alt="Official Exclusive Distributor" className="w-28 h-28 drop-shadow-2xl" />
+            </FadeUp>
+
             <FadeUp delay={0.4} className="absolute -bottom-12 -left-12 w-2/3 md:w-1/2 aspect-[4/5] border-[8px] border-black overflow-hidden z-20 hidden md:block shadow-2xl">
               <img
-                src="/italian_col_1.png"
-                alt="Roman Masonry Detail"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out"
+                src="/italian_col_1.jpg"
+                alt="Galleria Vittorio Emanuele — Milan"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3">
+                <p className="text-[var(--brass)] text-[9px] font-bold tracking-[0.2em] uppercase">Galleria Vittorio Emanuele · Milano</p>
+              </div>
             </FadeUp>
           </div>
 
@@ -1019,10 +1027,10 @@ export default function Homepage({ navigate }) {
             <img
               src="/House.png"
               alt="The Muskoka Residence"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute bottom-0 left-0 z-20 p-10 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 z-20 p-10">
               <span className="text-[var(--brass)] text-xs font-bold tracking-widest uppercase mb-2 block">
                 Featured Project
               </span>
@@ -1048,12 +1056,12 @@ export default function Homepage({ navigate }) {
                 <img
                   src={t.img}
                   alt={t.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-20 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <h4 className="font-bold text-white group-hover:text-[var(--brass)] transition-colors duration-300 mb-1">{t.title}</h4>
-                  <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold translate-x-0 group-hover:translate-x-1 transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+                <div className="relative z-20">
+                  <h4 className="font-bold text-white mb-1">{t.title}</h4>
+                  <span className="text-[var(--brass)] flex items-center gap-2 text-sm font-bold">
                     Explore <ArrowRight size={14} />
                   </span>
                 </div>

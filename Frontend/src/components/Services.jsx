@@ -933,7 +933,7 @@ export default function Services({ navigate }) {
               transition={{ duration: 0.7, delay: 0.8 }}
               className="text-sm sm:text-base md:text-xl lg:text-2xl text-[var(--limestone)] font-light max-w-2xl mb-8 md:mb-10 leading-relaxed"
             >
-              Ontario's most complete masonry supply — 10,000+ products, expert consultation, free site delivery, and end-to-end installation support. Everything your project needs, under one roof.
+              One of Ontario’s most complete masonry suppliers — offering 10,000+ products, expert material guidance, and reliable fleet delivery directly to your site. We support contractors and homeowners from product selection through to project completion, ensuring the right materials are chosen and delivered on time. Everything you need under one roof.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -976,14 +976,14 @@ export default function Services({ navigate }) {
             {/* Left: editorial statement */}
             <div className="lg:w-[38%] lg:pr-16 lg:border-r lg:border-white/[0.06] shrink-0">
               <motion.p
-                className="text-[9px] uppercase tracking-[0.3em] text-[var(--brass)]/50 font-bold mb-4"
+                className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase"
                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
                 viewport={{ once: true }} transition={{ duration: 0.5 }}
               >
                 Established 1994
               </motion.p>
               <motion.h2
-                className="text-[1.9rem] lg:text-[2.3rem] font-medium leading-[1.1] tracking-tight text-[#ede6d6]"
+                className="text-[1.9rem] lg:text-4xl font-medium leading-[1.1] tracking-tight text-[#ede6d6]"
                 style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
                 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -1028,7 +1028,7 @@ export default function Services({ navigate }) {
                     style={{}}
                   />
                   <p className="text-white/50 text-[15px] leading-relaxed max-w-xl">
-                    10,000+ products spanning every material, every application, every budget — curated by professionals, for professionals.
+                    MMG provides their Exclusive Clients with two options to browse through selection of over 10,000+ products spanning every material, every application, every budget — curated by professionals, for professionals.
                   </p>
                 </div>
                 <div className="shrink-0 text-right">
@@ -1073,7 +1073,7 @@ export default function Services({ navigate }) {
                 <p className="text-[9px] uppercase tracking-[0.28em] text-[var(--brass)]/50 font-bold mb-4">Option 01</p>
                 <h3 className="text-[1.55rem] font-bold mb-3 tracking-tight">Browse Online</h3>
                 <p className="text-white/45 text-[14px] leading-relaxed mb-7">
-                  Filter by material, colour, and application. 10,000+ SKUs, searchable and ready to quote.
+                  Filter by Manufacturers, Material, Colour, and Application. 10,000+ SKUs, searchable and ready to quote.
                 </p>
                 <span className="inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.2em] font-bold text-[var(--brass)] group-hover:text-white transition-colors duration-300">
                   Open Catalogue <ArrowUpRight size={12} />

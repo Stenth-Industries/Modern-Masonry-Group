@@ -17,14 +17,14 @@ import prisma from "../config/prisma.js";
  */
 
 const buildWhere = (query) => {
-  const { search, colour, collection, style, manufacturer, material, series } = query;
+  const { search, colour, collection, style, manufacturer, material } = query;
 
   const where = {};
   const AND = [];
 
-  // Default to only active variants; allow explicit override via ?isActive=false
-  const activeFilter = query.isActive !== undefined ? query.isActive === "true" : true;
-  AND.push({ isActive: activeFilter });
+  if (query.isActive !== undefined) {
+    AND.push({ isActive: query.isActive === "true" });
+  }
 
   // ── Free-text search ────────────────────────────────────────────────────────
   if (search && search.trim()) {
@@ -86,11 +86,9 @@ const buildWhere = (query) => {
 
   const collectionFilter = buildProductCategoryFilter("collection", collection);
   const styleFilter = buildProductCategoryFilter("style", style);
-  const seriesFilter = buildProductCategoryFilter("series", series);
 
   if (collectionFilter) AND.push(collectionFilter);
   if (styleFilter) AND.push(styleFilter);
-  if (seriesFilter) AND.push(seriesFilter);
 
   if (colour) {
     const values = colour
@@ -169,7 +167,7 @@ export const getProducts = async (query = {}) => {
       where,
       skip,
       take: limit,
-      orderBy: { product: { name: "asc" } },
+      orderBy: { createdAt: "desc" },
       include: {
         product: {
           include: {
@@ -185,8 +183,6 @@ export const getProducts = async (query = {}) => {
   const data = variants.map((v) => ({
     id: v.id,
     name: `${v.product.name} - ${v.colourName || "Standard"}`,
-    productTitle: v.product.name,
-    colorName: v.colourName || "Standard",
     slug: v.product.slug,
     description: v.product.description,
     material: v.product.material,
@@ -220,48 +216,21 @@ export const getProducts = async (query = {}) => {
 // ── Filter options (for populating sidebar dropdowns) ─────────────────────────
 
 export const getFilterOptions = async () => {
-  // Only return categories linked to at least one active variant
-  const [categories, manufacturerRows, materials] = await Promise.all([
+  const [categories, manufacturers, materials] = await Promise.all([
     prisma.category.findMany({
-      where: {
-        products: {
-          some: {
-            product: { variants: { some: { isActive: true } } },
-          },
-        },
-      },
       orderBy: [{ type: "asc" }, { value: "asc" }],
     }),
-    prisma.$queryRaw`
-      SELECT DISTINCT m.id, m.name, c.value as collection
-      FROM "Manufacturer" m
-      JOIN "ProductManufacturer" pm ON pm."manufacturerId" = m.id
-      JOIN "Product" p ON p.id = pm."productId"
-      JOIN "ProductCategory" pc ON pc."productId" = p.id
-      JOIN "Category" c ON c.id = pc."categoryId" AND c.type = 'collection'
-      JOIN "Variant" v ON v."productId" = p.id AND v."isActive" = true
-      ORDER BY m.name, c.value
-    `,
+    prisma.manufacturer.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, country: true },
+    }),
     prisma.product.findMany({
-      where: {
-        material: { not: null },
-        variants: { some: { isActive: true } },
-      },
+      where: { material: { not: null } },
       select: { material: true },
       distinct: ["material"],
       orderBy: { material: "asc" },
     }),
   ]);
-
-  // Group collections under each manufacturer
-  const mfgMap = {};
-  for (const row of manufacturerRows) {
-    if (!mfgMap[row.name]) mfgMap[row.name] = { id: row.id, name: row.name, collections: [] };
-    mfgMap[row.name].collections.push(row.collection);
-  }
-  const manufacturersWithCollections = Object.values(mfgMap).sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
 
   const grouped = categories.reduce((acc, cat) => {
     if (!acc[cat.type]) acc[cat.type] = [];
@@ -271,9 +240,9 @@ export const getFilterOptions = async () => {
 
   return {
     colours: grouped["colour"] || [],
+    collections: grouped["collection"] || [],
     styles: grouped["style"] || [],
-    series: grouped["series"] || [],
-    manufacturersWithCollections,
+    manufacturers,
     materials: materials.map((p) => p.material).filter(Boolean),
   };
 };

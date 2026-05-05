@@ -30,7 +30,9 @@
       "WebFetch(domain:www.pexels.com)",
       "Bash(gh repo *)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl *)",
+      "Bash(Remove-Item \"D:/modern/Frontend/public/italian_hero_test1.jpg\", \"D:/modern/Frontend/public/italian_hero_test2.jpg\", \"D:/modern/Frontend/public/italian_detail_test1.jpg\", \"D:/modern/Frontend/public/italian_detail_test2.jpg\" -ErrorAction SilentlyContinue)"
     ]
   }
 }
