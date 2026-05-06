@@ -187,9 +187,9 @@ export default function BrickDetail({ brickId, navigate }) {
     return (
       <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center gap-6">
         <p className="text-white/40 text-[9px] tracking-[0.2em] uppercase">{error || 'Record Not Found'}</p>
-        <a href="#brick" className="text-white text-[10px] tracking-[0.2em] uppercase hover:text-[#c9a449] transition-colors pb-1 border-b border-[#c9a449]/30">
+        <button onClick={() => window.history.back()} className="text-white text-[10px] tracking-[0.2em] uppercase hover:text-[#c9a449] transition-colors pb-1 border-b border-[#c9a449]/30">
           Return to Archives
-        </a>
+        </button>
       </div>
     );
   }
@@ -222,10 +222,10 @@ export default function BrickDetail({ brickId, navigate }) {
         
         {/* Top Bar inside Canvas */}
         <div className="absolute top-0 left-0 w-full p-8 md:p-12 flex justify-between items-center z-20 pointer-events-none">
-          <a href="#brick" className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
+          <button onClick={() => window.history.back()} className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
             <ArrowLeft size={16} strokeWidth={1.5} />
             <span className="text-[9px] tracking-[0.2em] uppercase font-bold mt-[2px]">Index</span>
-          </a>
+          </button>
           <button onClick={handleShare} className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
             <span className="text-[9px] tracking-[0.2em] uppercase font-bold mt-[2px]">Share</span>
             <Share2 size={14} strokeWidth={1.5} />

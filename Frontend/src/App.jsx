@@ -65,8 +65,16 @@ export default function App() {
         <Navbar navigate={navigate} />
         <FloatingCTA />
         {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
-        {view === 'brick' && <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />}
-        {view === 'stone' && <StoneCatalogue navigate={navigate} initialQuery={searchQuery} />}
+        {(view === 'brick' || view === 'brick-detail') && (
+          <div style={{ display: view === 'brick' ? 'block' : 'none' }}>
+            <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />
+          </div>
+        )}
+        {(view === 'stone' || view === 'stone-detail') && (
+          <div style={{ display: view === 'stone' ? 'block' : 'none' }}>
+            <StoneCatalogue navigate={navigate} initialQuery={searchQuery} />
+          </div>
+        )}
         {view === 'stone-detail' && <StoneDetail stoneId={stoneId} navigate={navigate} />}
         {view === 'services' && <Services navigate={navigate} />}
         {view === 'about' && <AboutPage navigate={navigate} />}

@@ -32,7 +32,13 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl *)",
-      "Bash(Remove-Item \"D:/modern/Frontend/public/italian_hero_test1.jpg\", \"D:/modern/Frontend/public/italian_hero_test2.jpg\", \"D:/modern/Frontend/public/italian_detail_test1.jpg\", \"D:/modern/Frontend/public/italian_detail_test2.jpg\" -ErrorAction SilentlyContinue)"
+      "Bash(Remove-Item \"D:/modern/Frontend/public/italian_hero_test1.jpg\", \"D:/modern/Frontend/public/italian_hero_test2.jpg\", \"D:/modern/Frontend/public/italian_detail_test1.jpg\", \"D:/modern/Frontend/public/italian_detail_test2.jpg\" -ErrorAction SilentlyContinue)",
+      "Skill(firecrawl-map)",
+      "Skill(firecrawl-scrape)",
+      "Bash(grep -v \"^$\")",
+      "Bash(firecrawl scrape *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\anshr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--modern\\\\efbcea1b-02ed-4dc2-ae9f-2d72908fa923\\\\tasks\\\\bs0terebf.output\" -Wait)",
+      "Bash(Select-String --line-buffered \"Done\\\\.|FAILED|Error|failed\")"
     ]
   }
 }

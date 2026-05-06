@@ -391,7 +391,8 @@ const PremiumCard = React.memo(function PremiumCard({
 
 // ── Main UI ──────────────────────────────────────────────────────────────────
 
-export default function BrickCatalogue({ navigate, initialQuery = "" }) {
+
+export default function BrickCatalogue({ navigate, initialQuery = "", initialPage = 1 }) {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const pdfContentRef = useRef(null);
@@ -608,6 +609,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "" }) {
         : [...prev, prod].slice(-3),
     );
   }, []);
+
 
   const handleSample = useCallback((product) => {
     window.location.hash = 'brick-detail/' + product.id;

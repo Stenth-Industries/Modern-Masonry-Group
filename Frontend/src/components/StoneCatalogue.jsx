@@ -355,6 +355,7 @@ const PremiumCard = React.memo(function PremiumCard({
 
 // ── Main UI ──────────────────────────────────────────────────────────────────
 
+
 export default function StoneCatalogue({ navigate, initialQuery = "" }) {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
@@ -370,6 +371,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
   const [collections, setCollections] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
 
   const [selected, setSelected] = useState(null);
   const [favourites, setFavourites] = useState([]);
@@ -433,6 +435,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
     if (collections.length) params.append("collection", collections.join(","));
     if (colors.length) params.append("colour", colors.join(","));
     if (finishes.length) params.append("style", finishes.join(","));
+    if (manufacturers.length) params.append("manufacturer", manufacturers.join(","));
     params.append("page", page);
     params.append("limit", 20);
 
@@ -486,13 +489,14 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
       });
 
     return () => controller.abort();
-  }, [debouncedQuery, collections, colors, finishes, page]);
+  }, [debouncedQuery, collections, colors, finishes, manufacturers, page]);
 
   // Reset pagination on filter change
   useEffect(() => {
     setPage(1);
     setProducts([]);
-  }, [debouncedQuery, collections, colors, finishes]);
+  }, [debouncedQuery, collections, colors, finishes, manufacturers]);
+
 
   const tog = useCallback((val, getter, setter) => {
     setter(getter.includes(val) ? getter.filter((x) => x !== val) : [...getter, val]);
@@ -528,6 +532,22 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
 
   const SidebarContent = () => (
     <>
+      {filtersDB.manufacturersWithCollections.length > 0 && (
+        <>
+          <div className="mb-2">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturer</span>
+          </div>
+          {filtersDB.manufacturersWithCollections.map((mfg) => (
+            <GlassCheckbox
+              key={mfg.name}
+              label={mfg.name}
+              checked={manufacturers.includes(mfg.name)}
+              onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
+            />
+          ))}
+          <div className="h-px bg-white/10 my-4" />
+        </>
+      )}
       {stoneSeries.length > 0 && (
         <Section title="SERIES">
           {stoneSeries.map((s) => (
