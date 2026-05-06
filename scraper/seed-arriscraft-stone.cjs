@@ -142,7 +142,11 @@ function slugify(text) {
     .replace(/-+/g, '-');
 }
 
-function generateSku(color, series) {
+// Build a unique SKU per product using the slug suffix to differentiate
+// finish (Sawn/Natural) and size (Midtown 2-1/8, 3-5/8, 5-7/8) variants.
+// The slug is already unique, so stripping the {color}-{series} prefix gives
+// a reliable disambiguator (e.g. 'sawn', '218sawn', '358').
+function generateSku(color, series, slug) {
   const c = color.toUpperCase().replace(/[^A-Z0-9]/g, '-').slice(0, 10);
   const seriesCode = {
     'Fresco':                        'FRE',
@@ -171,7 +175,40 @@ function generateSku(color, series) {
     'Sills':                         'SIL',
   };
   const s = seriesCode[series] || 'STN';
-  return `ARRIS-${c}-${s}`;
+
+  // Extract any suffix beyond {colorSlug}-{seriesSlug} from the product slug
+  const colorSlug  = color.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const seriesSlug = series.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const prefix     = colorSlug + '-' + seriesSlug;
+  let suffix = '';
+  if (slug && slug.startsWith(prefix)) {
+    const extra = slug.slice(prefix.length).replace(/^-/, ''); // e.g. 'sawn', '2-1-8-sawn', '3-5-8'
+    if (extra) suffix = '-' + extra.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
+  }
+
+  return `ARRIS-${c}-${s}${suffix}`;
+}
+
+// Derive a short human-readable variant label from the slug suffix.
+// e.g. '2-1-8-sawn' → '2-1/8" Sawn', 'sawn' → 'Sawn', '' → null
+function deriveVariantLabel(color, series, slug) {
+  const colorSlug  = color.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const seriesSlug = series.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const prefix     = colorSlug + '-' + seriesSlug;
+  if (!slug.startsWith(prefix)) return null;
+  const suffix = slug.slice(prefix.length).replace(/^-/, '');
+  if (!suffix) return null;
+
+  // Size pattern: '2-1-8' or '2-1-8-sawn'
+  const sizeMatch = suffix.match(/^(\d+)-(\d+)-(\d+)(?:-(sawn))?$/i);
+  if (sizeMatch) {
+    const height = `${sizeMatch[1]}-${sizeMatch[2]}/${sizeMatch[3]}"`;
+    return sizeMatch[4] ? `${height} Sawn` : height;
+  }
+  // Plain finish
+  if (suffix.toLowerCase() === 'sawn')    return 'Sawn';
+  if (suffix.toLowerCase() === 'natural') return 'Natural';
+  return suffix;
 }
 
 async function findOrCreateCategory(type, value, hexCode = null) {
@@ -229,46 +266,44 @@ async function main() {
 
   console.log(`✅  Categories upserted: ${catCache.size} total\n`);
 
-  // ── 3. Seed each product ───────────────────────────────────────────────────
+  // ── 3. Group stones by (color, series) so same stone = one product ──────────
+  // Different finishes/sizes (Sawn, Natural, 2-1/8", 3-5/8" etc.) become
+  // separate variants of the same product rather than separate products.
+  const HOUSE_PATTERNS = ['Full-Bed-Stone', 'Full-Bed-', 'ALSB', 'Landscape', 'Gies-Hospice'];
+  const isHousePhoto   = (u) => HOUSE_PATTERNS.some(p => u.includes(p));
+
+  function pickPrimaryImage(stone) {
+    const jpgImages  = stone.imageUrls.filter(u => /\.(jpg|jpeg|png)$/i.test(u));
+    const noHouse    = jpgImages.filter(u => !isHousePhoto(u));
+    const fullSize   = noHouse.filter(u => !/[-_]1024x/.test(u));
+    const thumbs     = noHouse.filter(u => /[-_]1024x/.test(u));
+    return fullSize[0] || thumbs[0] || jpgImages[0] || null;
+  }
+
+  // Build ordered groups preserving JSON order
+  const groupOrder = [];
+  const groups     = new Map();
+  for (const stone of stones) {
+    const key = `${stone.color}||${stone.series}`;
+    if (!groups.has(key)) { groups.set(key, []); groupOrder.push(key); }
+    groups.get(key).push(stone);
+  }
+
   let upserted = 0, failed = 0;
 
-  for (const stone of stones) {
-    const productSlug = `arriscraft-${stone.slug}`;
-    const sku         = generateSku(stone.color, stone.series);
-    const productName = stone.name;
-
-    const jpgImages = stone.imageUrls.filter(u => /\.(jpg|jpeg|png)$/i.test(u));
-
-    // Image selection priority (best swatch → worst house photo):
-    //   1. SS (Stone Swatch) images with the product's color
-    //   2. WEB-/Web- prefix images with the color
-    //   3. Any color-matched image that isn't a Full-Bed-Stone / ALSB building photo
-    //   4. First non-ALSB, non-Full-Bed-Stone image
-    //   5. First non-ALSB image
-    //   6. Absolute fallback: first image
-    //
-    // colorParts splits "Steel Grey" → ["steel","grey"] so both hyphens and underscores match.
-    // House-photo patterns — never use these as the card thumbnail.
-    // If no clean swatch exists, leave imageUrl null so the card renders
-    // the colour-pattern fallback instead of a building exterior.
-    const HOUSE_PATTERNS = ['Full-Bed-Stone', 'Full-Bed-', 'ALSB', 'Landscape', 'Gies-Hospice'];
-    const isHousePhoto = (u) => HOUSE_PATTERNS.some(p => u.includes(p));
-
-    const colorParts = stone.color.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/);
-    const urlHasColor = (u) => { const l = u.toLowerCase(); return colorParts.every(p => l.includes(p)); };
-    const noHouse    = jpgImages.filter(u => !isHousePhoto(u));
-    const ssColor    = noHouse.filter(u => /-SS-/i.test(u) && urlHasColor(u));
-    const webColor   = noHouse.filter(u => /\/(WEB-|Web-)/i.test(u) && urlHasColor(u));
-    const cleanColor = noHouse.filter(u => urlHasColor(u));
-    // null means: no clean swatch found — card will use colour-pattern fallback
-    const primaryImage = ssColor[0] || webColor[0] || cleanColor[0] || noHouse[0] || null;
-    const galleryImages = jpgImages.filter(u => u !== primaryImage);
+  for (const key of groupOrder) {
+    const variants    = groups.get(key);
+    const primary     = variants[0];
+    // Base slug: color + series only (no finish/size suffix)
+    const baseSlug    = slugify(primary.color) + '-' + slugify(primary.series);
+    const productSlug = `arriscraft-${baseSlug}`;
+    const productName = primary.name;
 
     try {
       const product = await prisma.product.upsert({
         where:  { slug: productSlug },
-        update: { name: productName, description: stone.description, material: stone.material },
-        create: { slug: productSlug, name: productName, description: stone.description, material: stone.material },
+        update: { name: productName, description: primary.description, material: primary.material },
+        create: { slug: productSlug, name: productName, description: primary.description, material: primary.material },
       });
 
       // Manufacturer link
@@ -278,14 +313,15 @@ async function main() {
         create: { productId: product.id, manufacturerId: manufacturer.id },
       });
 
-      // Categories
+      // Categories — use primary variant for shared fields
+      const allFinishesInGroup = variants.map(v => v.finish).filter(Boolean);
       const cats = [
-        catCache.get(`collection:${stone.series}`),
-        catCache.get(`colour:${stone.color}`),
-        catCache.get(`region:${stone.region}`),
-        stone.finish ? catCache.get(`style:${stone.finish}`) : null,
+        catCache.get(`collection:${primary.series}`),
+        catCache.get(`colour:${primary.color}`),
+        catCache.get(`region:${primary.region}`),
+        ...allFinishesInGroup.map(f => catCache.get(`style:${f}`)).filter(Boolean),
         catCache.get('material:Stone'),
-      ].filter(Boolean);
+      ].filter((c, i, a) => c && a.findIndex(x => x?.id === c.id) === i); // dedupe
 
       for (const cat of cats) {
         await prisma.productCategory.upsert({
@@ -295,33 +331,43 @@ async function main() {
         });
       }
 
-      // Variant
-      await prisma.variant.upsert({
-        where:  { sku },
-        update: {
-          colourName:  stone.color,
-          hexCode:     COLOR_HEX[stone.color] || null,
-          sizeLabel:   stone.sizeLabel || null,
-          imageUrl:    primaryImage,
-          imagesUrl:   { set: galleryImages },
-          isActive:    true,
-        },
-        create: {
-          productId:   product.id,
-          sku,
-          colourName:  stone.color,
-          hexCode:     COLOR_HEX[stone.color] || null,
-          sizeLabel:   stone.sizeLabel || null,
-          imageUrl:    primaryImage,
-          imagesUrl:   galleryImages,
-          isActive:    true,
-        },
-      });
+      // One variant per finish/size combination
+      for (const stone of variants) {
+        const sku          = generateSku(stone.color, stone.series, stone.slug);
+        const variantLabel = deriveVariantLabel(stone.color, stone.series, stone.slug);
+        const primaryImage = pickPrimaryImage(stone);
+        const jpgImages    = stone.imageUrls.filter(u => /\.(jpg|jpeg|png)$/i.test(u));
+        const galleryImages = jpgImages.filter(u => u !== primaryImage);
+
+        await prisma.variant.upsert({
+          where:  { sku },
+          update: {
+            productId:   product.id,
+            colourName:  stone.color,
+            hexCode:     COLOR_HEX[stone.color] || null,
+            sizeLabel:   variantLabel,
+            imageUrl:    primaryImage,
+            imagesUrl:   { set: galleryImages },
+            isActive:    true,
+          },
+          create: {
+            productId:   product.id,
+            sku,
+            colourName:  stone.color,
+            hexCode:     COLOR_HEX[stone.color] || null,
+            sizeLabel:   variantLabel,
+            imageUrl:    primaryImage,
+            imagesUrl:   galleryImages,
+            isActive:    true,
+          },
+        });
+        process.stdout.write(`    · ${stone.color} ${variantLabel ? `[${variantLabel}]` : ''}  ${sku}\n`);
+      }
 
       upserted++;
-      process.stdout.write(`  ✓ ${productName.padEnd(55)} [${sku}]\n`);
+      process.stdout.write(`  ✓ ${productName.padEnd(55)} (${variants.length} variant${variants.length > 1 ? 's' : ''})\n`);
     } catch (err) {
-      console.error(`  ✗ FAILED: ${stone.slug} — ${err.message}`);
+      console.error(`  ✗ FAILED: ${baseSlug} — ${err.message}`);
       failed++;
     }
   }

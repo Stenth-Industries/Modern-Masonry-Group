@@ -202,8 +202,17 @@ export default function StoneDetail({ stoneId, navigate }) {
   const region    = getCat('region') || null;
   const manufacturer = product.manufacturers?.[0]?.name || 'Arriscraft International';
 
+  // Are variants differentiated by size/finish (all same colour) or by colour?
+  const allSameColor = product.variants?.length > 1 &&
+    product.variants.every(v => v.colourName === product.variants[0].colourName);
+  const isMultiVariant = product.variants?.length > 1;
+
+  // Only show sizeLabel in the dimensions row when it looks like a size (contains a quote/inch mark)
+  const variantSizeLabel = selectedVariant?.sizeLabel;
+  const showAsDimension  = variantSizeLabel && /["']/.test(variantSizeLabel);
+
   const stoneDetails = {
-    size:         selectedVariant?.sizeLabel || null,
+    size:         showAsDimension ? variantSizeLabel : null,
     series,
     finish,
     region,
@@ -268,13 +277,34 @@ export default function StoneDetail({ stoneId, navigate }) {
 
         {/* Color selector + image dots */}
         <div className="absolute bottom-0 left-0 w-full px-10 pb-6 z-20 flex flex-col gap-3">
-          {/* Color swatches — only shown when product has multiple variants */}
-          {product.variants?.length > 1 && (
+          {/* Variant switcher — size/finish labels or colour swatches */}
+          {isMultiVariant && (
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[8px] uppercase tracking-[0.25em] text-white/30 font-bold mr-1 shrink-0">Colour</span>
+              <span className="text-[8px] uppercase tracking-[0.25em] text-white/30 font-bold mr-1 shrink-0">
+                {allSameColor ? 'Option' : 'Colour'}
+              </span>
               {product.variants.map((v) => {
-                const hex = resolveColor(v.colourName, v.hexCode);
                 const isActive = v.id === selectedVariant?.id;
+                if (allSameColor) {
+                  const label = v.sizeLabel || 'Natural';
+                  // Size/finish pill buttons
+                  return (
+                    <button
+                      key={v.id}
+                      title={label}
+                      onClick={() => setActiveVariantId(v.id)}
+                      className={`px-3 py-1 rounded text-[9px] font-bold uppercase tracking-[0.15em] border transition-all duration-300 ${
+                        isActive
+                          ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+                          : 'border-white/15 text-white/40 hover:border-white/40 hover:text-white/70'
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  );
+                }
+                // Colour swatch circles
+                const hex = resolveColor(v.colourName, v.hexCode);
                 return (
                   <button
                     key={v.id}
@@ -342,14 +372,32 @@ export default function StoneDetail({ stoneId, navigate }) {
               {series}
             </p>
 
-            {/* Colour switcher — right column */}
-            {product.variants?.length > 1 && (
+            {/* Variant switcher — right column */}
+            {isMultiVariant && (
               <div className="flex items-center gap-3 flex-wrap mb-8">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c9a449] font-bold shrink-0">Colour</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c9a449] font-bold shrink-0">
+                  {allSameColor ? 'Option' : 'Colour'}
+                </span>
                 <div className="flex items-center gap-2 flex-wrap">
                   {product.variants.map((v) => {
-                    const hex = resolveColor(v.colourName, v.hexCode);
                     const isActive = v.id === selectedVariant?.id;
+                    if (allSameColor) {
+                      const label = v.sizeLabel || 'Natural';
+                      return (
+                        <button
+                          key={v.id}
+                          onClick={() => setActiveVariantId(v.id)}
+                          className={`px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-[0.12em] border transition-all duration-300 ${
+                            isActive
+                              ? 'border-[#c9a449] bg-[#c9a449]/10 text-[#c9a449]'
+                              : 'border-white/15 text-white/40 hover:border-white/40 hover:text-white/70'
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    }
+                    const hex = resolveColor(v.colourName, v.hexCode);
                     return (
                       <button
                         key={v.id}
@@ -363,7 +411,9 @@ export default function StoneDetail({ stoneId, navigate }) {
                     );
                   })}
                 </div>
-                <span className="text-[11px] text-white/50 ml-1">{selectedVariant?.colourName}</span>
+                {!allSameColor && (
+                  <span className="text-[11px] text-white/50 ml-1">{selectedVariant?.colourName}</span>
+                )}
               </div>
             )}
 
@@ -481,12 +531,16 @@ export default function StoneDetail({ stoneId, navigate }) {
                     {product.variants?.length > 0 && (
                       <SpecRow
                         icon={<Package />}
-                        label="Available Colours"
+                        label={allSameColor ? 'Available Options' : 'Available Colours'}
                         delay={0.35}
                         value={product.variants.map(v => (
                           <span key={v.id} className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded text-[11px] text-[#e3decb]">
-                            <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }} />
-                            {v.colourName || v.sku}
+                            {allSameColor ? (
+                              <span className="w-2 h-2 rounded-sm bg-[#c9a449]/50" />
+                            ) : (
+                              <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }} />
+                            )}
+                            {allSameColor ? (v.sizeLabel || 'Natural') : (v.colourName || v.sku)}
                           </span>
                         ))}
                       />
