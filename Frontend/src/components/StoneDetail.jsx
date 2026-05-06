@@ -102,6 +102,7 @@ export default function StoneDetail({ stoneId, navigate }) {
   const [activeTab, setActiveTab] = useState('overview');
   const [submitState, setSubmitState] = useState('idle');
   const [formData, setFormData] = useState({ fullName: '', company: '', quantity: '', details: '' });
+  const [activeVariantId, setActiveVariantId] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -110,6 +111,9 @@ export default function StoneDetail({ stoneId, navigate }) {
       .then(data => {
         if (data.success && data.data) {
           setProduct(data.data);
+          // Default to the variant that was clicked, or first variant
+          const initial = data.data.variants?.find(v => v.id === stoneId) || data.data.variants?.[0];
+          setActiveVariantId(initial?.id || null);
         } else {
           setError(data.message || 'Product not found');
         }
@@ -123,8 +127,11 @@ export default function StoneDetail({ stoneId, navigate }) {
 
   const selectedVariant = useMemo(() => {
     if (!product) return null;
-    return product.variants?.find(v => v.id === stoneId) || product.variants?.[0] || null;
-  }, [product, stoneId]);
+    return product.variants?.find(v => v.id === activeVariantId) || product.variants?.[0] || null;
+  }, [product, activeVariantId]);
+
+  // Reset image index when color changes
+  useEffect(() => { setSelectedImageIdx(0); }, [activeVariantId]);
 
   const images = useMemo(() => {
     if (!product) return [];
@@ -259,23 +266,54 @@ export default function StoneDetail({ stoneId, navigate }) {
           </div>
         </div>
 
-        {/* Thumbnail strip */}
-        {images.length > 1 && (
-          <div className="absolute bottom-8 left-0 w-full px-12 flex items-center gap-6 z-20">
-            {images.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setSelectedImageIdx(idx)}
-                className="group flex flex-col items-center gap-2 py-2"
-              >
-                <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${selectedImageIdx === idx ? 'bg-[#c9a449] scale-150' : 'bg-white/20 group-hover:bg-white/50'}`} />
-              </button>
-            ))}
-            <div className="ml-auto text-[9px] tracking-[0.3em] font-bold text-white/30 uppercase">
-              {String(selectedImageIdx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+        {/* Color selector + image dots */}
+        <div className="absolute bottom-0 left-0 w-full px-10 pb-6 z-20 flex flex-col gap-3">
+          {/* Color swatches — only shown when product has multiple variants */}
+          {product.variants?.length > 1 && (
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[8px] uppercase tracking-[0.25em] text-white/30 font-bold mr-1 shrink-0">Colour</span>
+              {product.variants.map((v) => {
+                const hex = resolveColor(v.colourName, v.hexCode);
+                const isActive = v.id === selectedVariant?.id;
+                return (
+                  <button
+                    key={v.id}
+                    title={v.colourName || v.sku}
+                    onClick={() => setActiveVariantId(v.id)}
+                    className={`relative w-7 h-7 rounded-full border-2 transition-all duration-300 shrink-0 ${
+                      isActive ? 'border-[#c9a449] scale-110 shadow-[0_0_10px_rgba(201,164,73,0.5)]' : 'border-white/20 hover:border-white/50 hover:scale-105'
+                    }`}
+                    style={{ background: hex }}
+                  >
+                    {isActive && (
+                      <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] text-[#c9a449] whitespace-nowrap font-bold tracking-wide">
+                        {v.colourName}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
-          </div>
-        )}
+          )}
+
+          {/* Image position dots */}
+          {images.length > 1 && (
+            <div className="flex items-center gap-4 mt-3">
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImageIdx(idx)}
+                  className="group flex flex-col items-center gap-2 py-1"
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${selectedImageIdx === idx ? 'bg-[#c9a449] scale-150' : 'bg-white/20 group-hover:bg-white/50'}`} />
+                </button>
+              ))}
+              <div className="ml-auto text-[9px] tracking-[0.3em] font-bold text-white/30 uppercase">
+                {String(selectedImageIdx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* ─── RIGHT COLUMN: SPECIFICATION (Scrolling) ─── */}
@@ -300,10 +338,33 @@ export default function StoneDetail({ stoneId, navigate }) {
             >
               {selectedVariant?.colourName || product.name}
             </h1>
-            {selectedVariant?.colourName && (
-              <p className="text-[12px] tracking-[0.2em] uppercase text-white/40 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
-                {series}
-              </p>
+            <p className="text-[12px] tracking-[0.2em] uppercase text-white/40 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+              {series}
+            </p>
+
+            {/* Colour switcher — right column */}
+            {product.variants?.length > 1 && (
+              <div className="flex items-center gap-3 flex-wrap mb-8">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c9a449] font-bold shrink-0">Colour</span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {product.variants.map((v) => {
+                    const hex = resolveColor(v.colourName, v.hexCode);
+                    const isActive = v.id === selectedVariant?.id;
+                    return (
+                      <button
+                        key={v.id}
+                        title={v.colourName || v.sku}
+                        onClick={() => setActiveVariantId(v.id)}
+                        className={`group relative w-6 h-6 rounded-full border-2 transition-all duration-300 ${
+                          isActive ? 'border-[#c9a449] scale-110' : 'border-white/15 hover:border-white/50'
+                        }`}
+                        style={{ background: hex }}
+                      />
+                    );
+                  })}
+                </div>
+                <span className="text-[11px] text-white/50 ml-1">{selectedVariant?.colourName}</span>
+              </div>
             )}
 
             <p className="text-[16px] text-white/50 leading-relaxed font-light max-w-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>
