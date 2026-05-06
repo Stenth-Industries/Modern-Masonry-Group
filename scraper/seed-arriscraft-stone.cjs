@@ -15,7 +15,12 @@ const { PrismaClient } = require(path.join(__dirname, '../Backend/node_modules/@
 const { PrismaPg }     = require(path.join(__dirname, '../Backend/node_modules/@prisma/adapter-pg'));
 const { Pool }         = require(path.join(__dirname, '../Backend/node_modules/pg'));
 
-const pool    = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool    = new Pool({
+  connectionString:   process.env.DATABASE_URL,
+  max:                3,
+  idleTimeoutMillis:  0,       // never drop idle connections
+  keepAlive:          true,
+});
 pool.on('error', (err) => console.error('[pool]', err.message));
 const adapter = new PrismaPg(pool);
 const prisma  = new PrismaClient({ adapter });
@@ -243,14 +248,20 @@ async function main() {
     //   6. Absolute fallback: first image
     //
     // colorParts splits "Steel Grey" → ["steel","grey"] so both hyphens and underscores match.
+    // House-photo patterns — never use these as the card thumbnail.
+    // If no clean swatch exists, leave imageUrl null so the card renders
+    // the colour-pattern fallback instead of a building exterior.
+    const HOUSE_PATTERNS = ['Full-Bed-Stone', 'Full-Bed-', 'ALSB', 'Landscape', 'Gies-Hospice'];
+    const isHousePhoto = (u) => HOUSE_PATTERNS.some(p => u.includes(p));
+
     const colorParts = stone.color.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/);
     const urlHasColor = (u) => { const l = u.toLowerCase(); return colorParts.every(p => l.includes(p)); };
-    const noAlsb     = jpgImages.filter(u => !u.toUpperCase().includes('ALSB'));
-    const noHouse    = noAlsb.filter(u => !u.includes('Full-Bed-Stone') && !u.includes('Full-Bed-'));
-    const ssColor    = noAlsb.filter(u => /-SS-/i.test(u) && urlHasColor(u));
-    const webColor   = noAlsb.filter(u => /\/(WEB-|Web-)/i.test(u) && urlHasColor(u));
+    const noHouse    = jpgImages.filter(u => !isHousePhoto(u));
+    const ssColor    = noHouse.filter(u => /-SS-/i.test(u) && urlHasColor(u));
+    const webColor   = noHouse.filter(u => /\/(WEB-|Web-)/i.test(u) && urlHasColor(u));
     const cleanColor = noHouse.filter(u => urlHasColor(u));
-    const primaryImage = ssColor[0] || webColor[0] || cleanColor[0] || noHouse[0] || noAlsb[0] || jpgImages[0] || null;
+    // null means: no clean swatch found — card will use colour-pattern fallback
+    const primaryImage = ssColor[0] || webColor[0] || cleanColor[0] || noHouse[0] || null;
     const galleryImages = jpgImages.filter(u => u !== primaryImage);
 
     try {
