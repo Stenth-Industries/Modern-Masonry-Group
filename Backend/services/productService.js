@@ -219,29 +219,49 @@ export const getProducts = async (query = {}) => {
 
 // ── Filter options (for populating sidebar dropdowns) ─────────────────────────
 
-export const getFilterOptions = async () => {
+export const getFilterOptions = async (query = {}) => {
+  const { material } = query;
+  const materialFilter = material
+    ? { product: { material: { equals: material, mode: "insensitive" } } }
+    : {};
+
   // Only return categories linked to at least one active variant
   const [categories, manufacturerRows, materials] = await Promise.all([
     prisma.category.findMany({
       where: {
         products: {
           some: {
-            product: { variants: { some: { isActive: true } } },
+            product: {
+              variants: { some: { isActive: true } },
+              ...(material ? { material: { equals: material, mode: "insensitive" } } : {}),
+            },
           },
         },
       },
       orderBy: [{ type: "asc" }, { value: "asc" }],
     }),
-    prisma.$queryRaw`
-      SELECT DISTINCT m.id, m.name, c.value as collection
-      FROM "Manufacturer" m
-      JOIN "ProductManufacturer" pm ON pm."manufacturerId" = m.id
-      JOIN "Product" p ON p.id = pm."productId"
-      JOIN "ProductCategory" pc ON pc."productId" = p.id
-      JOIN "Category" c ON c.id = pc."categoryId" AND c.type = 'collection'
-      JOIN "Variant" v ON v."productId" = p.id AND v."isActive" = true
-      ORDER BY m.name, c.value
-    `,
+    material
+      ? prisma.$queryRaw`
+          SELECT DISTINCT m.id, m.name, c.value as collection
+          FROM "Manufacturer" m
+          JOIN "ProductManufacturer" pm ON pm."manufacturerId" = m.id
+          JOIN "Product" p ON p.id = pm."productId"
+          JOIN "ProductCategory" pc ON pc."productId" = p.id
+          JOIN "Category" c ON c.id = pc."categoryId" AND c.type = 'collection'
+          JOIN "Variant" v ON v."productId" = p.id AND v."isActive" = true
+          WHERE LOWER(p.material) = LOWER(${material})
+          ORDER BY m.name, c.value
+        `
+      : prisma.$queryRaw`
+          SELECT DISTINCT m.id, m.name, c.value as collection
+          FROM "Manufacturer" m
+          JOIN "ProductManufacturer" pm ON pm."manufacturerId" = m.id
+          JOIN "Product" p ON p.id = pm."productId"
+          JOIN "ProductCategory" pc ON pc."productId" = p.id
+          JOIN "Category" c ON c.id = pc."categoryId" AND c.type = 'collection'
+          JOIN "Variant" v ON v."productId" = p.id AND v."isActive" = true
+          ORDER BY m.name, c.value
+        `,
     prisma.product.findMany({
       where: {
         material: { not: null },

@@ -221,9 +221,10 @@ const PremiumCard = React.memo(function PremiumCard({
         transformStyle: "preserve-3d",
         perspective: 800,
       }}
-      className={`group flex flex-col w-full h-full bg-transparent border ${isCompared ? "border-[#c9a449]" : "border-[rgba(255,255,255,0.06)]"} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] overflow-hidden cursor-pointer`}
+      className={`group w-full h-full border ${isCompared ? "border-[#c9a449]" : "border-[rgba(255,255,255,0.06)]"} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] cursor-pointer`}
       onClick={() => onSample(product)}
     >
+      <div className="flex flex-col w-full h-full rounded-[12px] overflow-hidden">
       {/* Upper Picture Area */}
       <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
         {product.image && !imgError ? (
@@ -382,6 +383,7 @@ const PremiumCard = React.memo(function PremiumCard({
             <span>{isCompared ? "Added" : "Compare"}</span>
           </button>
         </div>
+      </div>
       </div>
     </motion.div>
   );

@@ -20,9 +20,9 @@ export const getProducts = async (req, res) => {
  * Returns all available filter options (colours, collections, styles,
  * manufacturers, materials) for populating UI dropdowns.
  */
-export const getFilterOptions = async (_req, res) => {
+export const getFilterOptions = async (req, res) => {
   try {
-    const options = await productService.getFilterOptions();
+    const options = await productService.getFilterOptions(req.query);
     res.status(200).json({ success: true, data: options });
   } catch (error) {
     console.error('[productController] getFilterOptions:', error);

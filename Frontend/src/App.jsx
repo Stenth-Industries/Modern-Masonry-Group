@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Homepage from './components/Homepage';
 import BrickCatalogue from './components/BrickCatalogue';
 import BrickDetail from './components/BrickDetail';
+import StoneCatalogue from './components/StoneCatalogue';
+import StoneDetail from './components/StoneDetail';
 import Services from './components/Services';
 import Navbar, { UtilityBar } from './components/Navbar';
 import QuotePage from './components/QuotePage';
@@ -11,6 +13,7 @@ import FloatingCTA from './components/FloatingCTA';
 export default function App() {
   const [view, setView] = useState('home');
   const [brickId, setBrickId] = useState(null);
+  const [stoneId, setStoneId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -28,8 +31,14 @@ export default function App() {
         const id = path.replace('#brick-detail/', '');
         setBrickId(id);
         setView('brick-detail');
+      } else if (path.startsWith('#stone-detail/')) {
+        const id = path.replace('#stone-detail/', '');
+        setStoneId(id);
+        setView('stone-detail');
       } else if (path === '#brick' || path === '#products') {
         setView('brick');
+      } else if (path === '#stone') {
+        setView('stone');
       } else if (path === '#services-page') {
         setView('services');
       } else if (path === '#about') {
@@ -57,6 +66,8 @@ export default function App() {
         <FloatingCTA />
         {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}
         {view === 'brick' && <BrickCatalogue navigate={navigate} initialQuery={searchQuery} />}
+        {view === 'stone' && <StoneCatalogue navigate={navigate} initialQuery={searchQuery} />}
+        {view === 'stone-detail' && <StoneDetail stoneId={stoneId} navigate={navigate} />}
         {view === 'services' && <Services navigate={navigate} />}
         {view === 'about' && <AboutPage navigate={navigate} />}
         {view === 'quote' && <QuotePage navigate={navigate} />}
