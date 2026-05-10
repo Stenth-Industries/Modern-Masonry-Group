@@ -9,6 +9,7 @@ import Navbar, { UtilityBar } from './components/Navbar';
 import QuotePage from './components/QuotePage';
 import AboutPage from './components/AboutPage';
 import FloatingCTA from './components/FloatingCTA';
+import Gallery from './components/Gallery';
 
 export default function App() {
   const [view, setView] = useState('home');
@@ -43,6 +44,8 @@ export default function App() {
         setView('services');
       } else if (path === '#about') {
         setView('about');
+      } else if (path === '#gallery') {
+        setView('gallery');
       } else if (path === '#contact' || path === '#quote') {
         setView('quote');
       } else {
@@ -77,6 +80,7 @@ export default function App() {
         )}
         {view === 'stone-detail' && <StoneDetail stoneId={stoneId} navigate={navigate} />}
         {view === 'services' && <Services navigate={navigate} />}
+        {view === 'gallery' && <Gallery navigate={navigate} />}
         {view === 'about' && <AboutPage navigate={navigate} />}
         {view === 'quote' && <QuotePage navigate={navigate} />}
         {view === 'home' && <Homepage navigate={navigate} />}
