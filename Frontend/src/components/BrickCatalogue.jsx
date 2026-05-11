@@ -987,6 +987,44 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             ref={pdfContentRef}
             className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32"
           >
+            {/* Pagination — top */}
+            {!showFavourites && totalPages > 1 && (
+              <div className="w-full flex justify-center mb-8">
+                <div className="flex gap-2 items-center bg-[#1a1815] px-4 py-2 rounded-full border border-white/5">
+                  <button
+                    disabled={page === 1 || loading}
+                    onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
+                  >
+                    PREV
+                  </button>
+                  <div className="w-px h-4 bg-white/10 mx-2" />
+                  {getPagination().map((p, index) =>
+                    p === "..." ? (
+                      <span key={`top-ellipsis-${index}`} className="text-white/40 px-2 font-bold tracking-widest">...</span>
+                    ) : (
+                      <button
+                        key={`top-${p}`}
+                        disabled={loading}
+                        onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`}
+                      >
+                        {p}
+                      </button>
+                    ),
+                  )}
+                  <div className="w-px h-4 bg-white/10 mx-2" />
+                  <button
+                    disabled={page === totalPages || loading}
+                    onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
+                  >
+                    NEXT
+                  </button>
+                </div>
+              </div>
+            )}
+
             {errorMsg && !showFavourites ? (
               <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">
                 API Error: {errorMsg}
@@ -1042,10 +1080,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                 <div className="flex gap-2 items-center bg-[#1a1815] px-4 py-2 rounded-full border border-white/5">
                   <button
                     disabled={page === 1 || loading}
-                    onClick={() => {
-                      setPage((p) => Math.max(1, p - 1));
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
+                    onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                     className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
                   >
                     PREV
@@ -1053,20 +1088,12 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                   <div className="w-px h-4 bg-white/10 mx-2" />
                   {getPagination().map((p, index) =>
                     p === "..." ? (
-                      <span
-                        key={`ellipsis-${index}`}
-                        className="text-white/40 px-2 font-bold tracking-widest"
-                      >
-                        ...
-                      </span>
+                      <span key={`ellipsis-${index}`} className="text-white/40 px-2 font-bold tracking-widest">...</span>
                     ) : (
                       <button
                         key={p}
                         disabled={loading}
-                        onClick={() => {
-                          setPage(p);
-                          window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}
+                        onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                         className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`}
                       >
                         {p}
@@ -1076,10 +1103,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                   <div className="w-px h-4 bg-white/10 mx-2" />
                   <button
                     disabled={page === totalPages || loading}
-                    onClick={() => {
-                      setPage((p) => Math.min(totalPages, p + 1));
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
+                    onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                     className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
                   >
                     NEXT
