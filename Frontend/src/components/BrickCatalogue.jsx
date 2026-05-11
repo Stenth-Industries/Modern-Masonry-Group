@@ -240,8 +240,8 @@ const PremiumCard = React.memo(function PremiumCard({
           <img
             src={`https://wsrv.nl/?url=${encodeURIComponent(product.image)}&w=600&output=webp&q=75`}
             alt={product.name}
-            className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
-            style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
+            className="w-full h-full object-cover scale-110 group-hover:scale-125"
+            style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease, transform 2s ease-out" }}
             loading="lazy"
             decoding="async"
             onLoad={() => setImgLoaded(true)}
