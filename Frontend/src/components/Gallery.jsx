@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn } from 'lucide-react';
+import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import Footer from './Footer';
 
 const galleryData = [
@@ -25,15 +25,47 @@ const galleryData = [
 
 const CATEGORIES = ['All', 'Residential', 'Commercial'];
 
-const wsrv = (src) => src;
-
 export default function Gallery({ navigate }) {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [selected, setSelected] = useState(null);
+  const [selectedIdx, setSelectedIdx] = useState(null);
+  const [imgKey, setImgKey] = useState(0);
 
   const filtered = activeCategory === 'All'
     ? galleryData
     : galleryData.filter(img => img.category === activeCategory);
+
+  const selected = selectedIdx !== null ? filtered[selectedIdx] : null;
+
+  const goNext = useCallback((e) => {
+    e?.stopPropagation();
+    setSelectedIdx(i => (i + 1) % filtered.length);
+    setImgKey(k => k + 1);
+  }, [filtered.length]);
+
+  const goPrev = useCallback((e) => {
+    e?.stopPropagation();
+    setSelectedIdx(i => (i - 1 + filtered.length) % filtered.length);
+    setImgKey(k => k + 1);
+  }, [filtered.length]);
+
+  const close = useCallback(() => setSelectedIdx(null), []);
+
+  useEffect(() => {
+    if (selectedIdx === null) return;
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'Escape') close();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedIdx, goNext, goPrev, close]);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    document.body.style.overflow = selectedIdx !== null ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selectedIdx]);
 
   return (
     <div className="min-h-screen relative font-sans text-white flex flex-col">
@@ -92,7 +124,7 @@ export default function Gallery({ navigate }) {
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.3, ease: 'easeOut', staggerChildren: 0.05 } }}
+              animate={{ opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } }}
               exit={{ opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }}
               className="columns-1 sm:columns-2 lg:columns-3 gap-5"
             >
@@ -102,10 +134,10 @@ export default function Gallery({ navigate }) {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.35, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] } }}
                   className="relative group mb-5 break-inside-avoid overflow-hidden rounded-[10px] border border-white/[0.06] hover:border-[#c9a449]/60 cursor-pointer shadow-xl shadow-black/40 transition-colors duration-300"
-                  onClick={() => setSelected(img)}
+                  onClick={() => setSelectedIdx(i)}
                 >
                   <img
-                    src={wsrv(img.src)}
+                    src={img.src}
                     alt={img.title}
                     className="w-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                     loading="lazy"
@@ -134,46 +166,100 @@ export default function Gallery({ navigate }) {
         <Footer />
       </div>
 
-      {/* Lightbox */}
+      {/* Full-screen lightbox */}
       <AnimatePresence>
         {selected && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/92 backdrop-blur-sm"
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-50 bg-black flex flex-col"
+            onClick={close}
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-5xl w-full bg-[#0d0b09] rounded-[12px] overflow-hidden border border-[#c9a449]/20 shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
-            >
-              <button
-                onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 border border-white/10 text-white/60 hover:text-white transition-colors"
-              >
-                <X size={18} />
-              </button>
+            {/* Counter */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10">
+              <span className="text-white/30 text-[12px] font-mono tracking-widest">
+                {selectedIdx + 1} / {filtered.length}
+              </span>
+            </div>
 
-              <div className="bg-black flex items-center justify-center max-h-[80vh]">
-                <img
-                  src={wsrv(selected.src, 1400)}
+            {/* Close */}
+            <button
+              onClick={close}
+              className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Image */}
+            <div className="flex-1 flex items-center justify-center overflow-hidden" onClick={close}>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={imgKey}
+                  src={selected.src}
                   alt={selected.title}
-                  className="max-w-full max-h-[80vh] object-contain"
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.97 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="max-w-full max-h-full object-contain select-none"
+                  onClick={(e) => e.stopPropagation()}
+                  draggable={false}
                 />
+              </AnimatePresence>
+            </div>
+
+            {/* Left arrow */}
+            <button
+              onClick={goPrev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[#c9a449]/40 transition-all duration-200"
+            >
+              <ChevronLeft size={22} />
+            </button>
+
+            {/* Right arrow */}
+            <button
+              onClick={goNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[#c9a449]/40 transition-all duration-200"
+            >
+              <ChevronRight size={22} />
+            </button>
+
+            {/* Bottom info bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.35, delay: 0.1 }}
+              className="w-full px-8 py-6 flex items-center justify-between"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div>
+                <span className="text-[#c9a449] text-[10px] font-bold tracking-[0.25em] uppercase block mb-1">
+                  {selected.category}
+                </span>
+                <h3
+                  className="text-[#e3decb] text-[22px] leading-tight"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
+                >
+                  {selected.title}
+                </h3>
               </div>
 
-              <div className="px-6 py-5 border-t border-[#c9a449]/10 flex justify-between items-center">
-                <div>
-                  <h3 className="text-[#e3decb] text-[20px]" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}>
-                    {selected.title}
-                  </h3>
-                  <span className="text-[#c9a449] text-[10px] font-bold tracking-[0.2em] uppercase">{selected.category}</span>
-                </div>
+              {/* Dot strip */}
+              <div className="hidden sm:flex gap-1.5 items-center">
+                {filtered.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setSelectedIdx(i); setImgKey(k => k + 1); }}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === selectedIdx
+                        ? 'w-5 h-1.5 bg-[#c9a449]'
+                        : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
+                    }`}
+                  />
+                ))}
               </div>
             </motion.div>
           </motion.div>
