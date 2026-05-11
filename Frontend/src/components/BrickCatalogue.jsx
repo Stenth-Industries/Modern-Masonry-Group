@@ -230,7 +230,7 @@ const PremiumCard = React.memo(function PremiumCard({
       <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
         {product.image && !imgError ? (
           <img
-            src={product.image}
+            src={`https://wsrv.nl/?url=${encodeURIComponent(product.image)}&w=600&output=webp&q=75`}
             alt={product.name}
             className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
             loading="lazy"
@@ -1102,7 +1102,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                     <div className="w-10 h-10 rounded-md border border-[#c9a449]/30 overflow-hidden bg-[#1a1815] shrink-0">
                       {p.image ? (
                         <img
-                          src={p.image}
+                          src={`https://wsrv.nl/?url=${encodeURIComponent(p.image)}&w=80&output=webp&q=70`}
                           alt={p.name}
                           className="w-full h-full object-cover"
                         />
