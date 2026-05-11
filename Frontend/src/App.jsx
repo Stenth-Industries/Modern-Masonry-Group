@@ -10,6 +10,7 @@ import QuotePage from './components/QuotePage';
 import AboutPage from './components/AboutPage';
 import FloatingCTA from './components/FloatingCTA';
 import Gallery from './components/Gallery';
+import UnderConstruction from './components/UnderConstruction';
 
 export default function App() {
   const [view, setView] = useState('home');
@@ -46,6 +47,8 @@ export default function App() {
         setView('about');
       } else if (path === '#gallery') {
         setView('gallery');
+      } else if (path === '#under-construction') {
+        setView('under-construction');
       } else if (path === '#contact' || path === '#quote') {
         setView('quote');
       } else {
@@ -83,6 +86,7 @@ export default function App() {
         {view === 'gallery' && <Gallery navigate={navigate} />}
         {view === 'about' && <AboutPage navigate={navigate} />}
         {view === 'quote' && <QuotePage navigate={navigate} />}
+        {view === 'under-construction' && <UnderConstruction navigate={navigate} />}
         {view === 'home' && <Homepage navigate={navigate} />}
       </div>
     </>
