@@ -1,135 +1,116 @@
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock, ArrowRight } from 'lucide-react';
-import Footer from './Footer';
-import { ProgressiveBlur } from './ui/progressive-blur';
+import { ArrowRight, MapPin, Phone } from 'lucide-react';
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
 export default function UnderConstruction({ navigate }) {
   return (
-    <div className="min-h-screen relative font-sans text-white selection:bg-[var(--brass)] selection:text-black flex flex-col overflow-hidden">
-      
+    <div className="h-screen relative font-sans text-white flex flex-col overflow-hidden">
+
       {/* Background */}
-      <div className="fixed inset-0 z-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/bg.png')" }} />
+      <div className="fixed inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg.png')" }} />
       <div className="fixed inset-0 z-0 bg-black/60" />
-      
-      <div className="relative z-10 flex flex-col flex-grow w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-20 pt-32 pb-24">
-        
-        {/* Main Content Area */}
-        <div className="flex-grow flex flex-col justify-center items-center text-center">
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-10"
-          >
-            <div className="inline-block border-b border-[var(--brass)]/30 pb-2">
-              <span className="text-[var(--brass)] text-[11px] font-bold tracking-[0.3em] uppercase">
-                Currently In Development
-              </span>
-            </div>
+
+      <div className="relative z-10 flex flex-col h-full w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-20">
+
+        {/* ── Top: main message ── */}
+        <div className="flex-1 flex flex-col justify-center">
+
+          {/* Label */}
+          <motion.div {...fade(0)} className="mb-6 flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a449] animate-pulse" />
+            <span className="text-[#c9a449] text-[11px] font-bold tracking-[0.3em] uppercase">
+              Currently In Development
+            </span>
           </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[56px] sm:text-[72px] md:text-[90px] lg:text-[110px] leading-[0.9] tracking-tighter text-white mb-8"
-            style={{ fontFamily: "var(--font-display)" }}
+          {/* Heading */}
+          <motion.h1
+            {...fade(0.1)}
+            className="text-[44px] sm:text-[60px] md:text-[76px] lg:text-[90px] leading-[0.92] tracking-tighter text-white mb-6"
+            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
           >
             We're Refining<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brass)] to-[var(--brass-light)] italic pr-4">
-              Every Last Detail.
-            </span>
+            <em className="text-[#c9a449]">Every Last Detail.</em>
           </motion.h1>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[var(--text-secondary)] text-[22px] sm:text-[24px] md:text-[26px] max-w-2xl leading-relaxed font-light mb-16"
+          {/* Body */}
+          <motion.p
+            {...fade(0.2)}
+            className="text-white/50 text-[17px] sm:text-[19px] max-w-xl leading-relaxed font-light mb-8"
           >
-            This section of our website is still being developed. We apologise for the inconvenience — it will be live shortly. In the meantime, our showroom is open and our team is ready to help with any product requests.
+            This section is still in development — it will be live shortly.
+            In the meantime, our studio is open and our team is ready to help
+            with any inquiry or product request.
           </motion.p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row items-center gap-6"
-          >
+          {/* Buttons */}
+          <motion.div {...fade(0.3)} className="flex flex-wrap items-center gap-5">
             <button
               onClick={() => navigate('#contact')}
-              className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--brass)]/50 text-[var(--brass)] px-10 py-5 text-[12px] font-bold uppercase tracking-[0.2em] hover:border-[var(--brass)] hover:text-black transition-all duration-300 flex items-center gap-3"
+              className="group relative overflow-hidden border border-[#c9a449]/50 text-[#c9a449] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.2em] hover:text-black transition-colors duration-300 flex items-center gap-2"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Inquire Now <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
+                Inquire Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
               </span>
-              <span className="absolute inset-0 bg-[var(--brass)] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+              <span className="absolute inset-0 bg-[#c9a449] -translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out" />
             </button>
             <button
               onClick={() => navigate('#home')}
-              className="group text-white/40 text-[18px] font-bold tracking-[0.2em] uppercase hover:text-[var(--brass)] transition-colors duration-300 flex items-center gap-2"
+              className="text-white/35 text-[13px] font-bold tracking-[0.2em] uppercase hover:text-white transition-colors duration-200"
             >
-              <span className="w-0 h-px bg-[var(--brass)] group-hover:w-6 transition-all duration-500"></span>
-              Return Home
+              ← Return Home
             </button>
           </motion.div>
         </div>
 
-        {/* Contact Info */}
+        {/* ── Bottom: contact strip ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-28 w-full relative"
+          {...fade(0.45)}
+          className="border-t border-[#c9a449]/20 py-8 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-0"
         >
-          {/* Top rule */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--brass)]/35 to-transparent mb-14" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
-
-            {/* Showroom */}
-            <div className="md:pr-16 md:border-r border-[var(--brass)]/15">
-              <p className="text-[16px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
-                Showroom
-              </p>
-              <p className="text-white text-[28px] sm:text-[34px] leading-[1.15] tracking-tight mb-1" style={{ fontFamily: "var(--font-display)" }}>
-                7195 Highway 9
-              </p>
-              <p className="text-white/40 text-[20px] sm:text-[24px] leading-snug tracking-tight italic mb-8" style={{ fontFamily: "var(--font-display)" }}>
-                Schomberg, ON
-              </p>
-              <div className="flex items-center gap-4 text-[17px] tracking-[0.12em] uppercase">
-                <span className="text-white/60">Mon – Fri</span>
-                <span className="text-white/80 font-medium">8 am – 5 pm</span>
-                <span className="w-px h-4 bg-[var(--brass)]/30" />
-                <span className="text-white/60">Sat</span>
-                <span className="text-white/80 font-medium">9 am – 2 pm</span>
-              </div>
+          {/* Showroom */}
+          <div className="sm:pr-12 sm:border-r border-[#c9a449]/15 flex items-start gap-4">
+            <div className="w-10 h-10 shrink-0 rounded-full border border-[#c9a449]/30 flex items-center justify-center mt-0.5">
+              <MapPin size={16} className="text-[#c9a449]" />
             </div>
-
-            {/* Direct Line */}
-            <div className="md:pl-16 flex flex-col justify-between gap-6">
-              <p className="text-[16px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
-                Direct Line
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[#c9a449] mb-2">Showroom</p>
+              <p className="text-white text-[18px] leading-snug mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                7195 Highway 9, Schomberg ON
               </p>
+              <p className="text-white/40 text-[13px] tracking-wide">
+                Mon – Fri &nbsp;8 am – 5 pm &nbsp;·&nbsp; Sat &nbsp;9 am – 2 pm
+              </p>
+            </div>
+          </div>
+
+          {/* Direct Line */}
+          <div className="sm:pl-12 flex items-start gap-4">
+            <div className="w-10 h-10 shrink-0 rounded-full border border-[#c9a449]/30 flex items-center justify-center mt-0.5">
+              <Phone size={16} className="text-[#c9a449]" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[#c9a449] mb-2">Direct Line</p>
               <a
                 href="tel:+19059390695"
-                className="text-white text-[36px] sm:text-[48px] lg:text-[56px] leading-none tracking-tight hover:text-[var(--brass)] transition-colors duration-300 block"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="text-white text-[28px] sm:text-[32px] leading-none tracking-tight hover:text-[#c9a449] transition-colors duration-200 block mb-1"
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 +1 905 939 0695
               </a>
-              <p className="text-white/35 text-[19px] leading-relaxed max-w-sm font-light">
-                Our specialists are available during showroom hours to assist with product selection, pricing, and project planning.
+              <p className="text-white/40 text-[13px] leading-relaxed">
+                Available during showroom hours for product &amp; project inquiries.
               </p>
             </div>
-
           </div>
         </motion.div>
+
       </div>
-      
-      <Footer />
     </div>
   );
 }
