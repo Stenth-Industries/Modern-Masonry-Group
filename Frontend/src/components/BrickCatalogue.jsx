@@ -231,7 +231,7 @@ const PremiumCard = React.memo(function PremiumCard({
       {/* Upper Picture Area */}
       <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
         {/* Colour placeholder shown until image loads */}
-        {!imgLoaded && !imgError && (
+        {product.image && !imgLoaded && !imgError && (
           <div
             className="absolute inset-0 pointer-events-none"
             style={{ background: product.colorHex || "#2a2218", filter: "brightness(0.4)" }}
