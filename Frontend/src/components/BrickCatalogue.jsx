@@ -775,7 +775,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                 key={v}
                 className="flex items-center gap-1.5 bg-white/[0.06] border border-white/10 px-3 py-1 rounded-full shrink-0"
               >
-                <span className="text-[11px] text-[#e3decb] tracking-wide whitespace-nowrap">{v}</span>
+                <span className="text-[13px] text-[#e3decb] tracking-wide whitespace-nowrap">{v}</span>
                 <button
                   onClick={() => {
                     if (types.includes(v)) setTypes(types.filter((x) => x !== v));
