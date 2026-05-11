@@ -418,18 +418,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const pdfContentRef = useRef(null);
-  const [mainCenter, setMainCenter] = useState("50%");
-
-  useEffect(() => {
-    const update = () => {
-      if (!pdfContentRef.current) return;
-      const rect = pdfContentRef.current.getBoundingClientRect();
-      setMainCenter(`${rect.left + rect.width / 2}px`);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
 
   // Sync with router changes seamlessly
   useEffect(() => {
@@ -1042,58 +1030,57 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                 </span>
               </div>
             )}
+
+            {/* Sticky floating pagination — stays inside catalog, stops before footer */}
+            <AnimatePresence>
+              {!showFavourites && totalPages > 1 && (
+                <div className={`sticky flex justify-center pointer-events-none z-40 mt-10 ${compareQueue.length > 0 && !showCompare ? "bottom-24" : "bottom-6"}`}>
+                  <motion.div
+                    initial={{ y: 40, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 40, opacity: 0 }}
+                    transition={{ type: "spring", damping: 28, stiffness: 300 }}
+                    className="pointer-events-auto flex gap-1 items-center bg-[#12100e]/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] shadow-[0_8px_40px_rgba(0,0,0,0.6)] px-3 py-2 rounded-full"
+                  >
+                    <button
+                      disabled={page === 1 || loading}
+                      onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                      className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
+                    >
+                      ← PREV
+                    </button>
+                    <div className="w-px h-4 bg-white/10 mx-1" />
+                    {getPagination().map((p, index) =>
+                      p === "..." ? (
+                        <span key={`float-ellipsis-${index}`} className="text-white/30 px-1 text-[11px] font-bold">...</span>
+                      ) : (
+                        <button
+                          key={`float-${p}`}
+                          disabled={loading}
+                          onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                          className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_12px_rgba(201,164,73,0.4)]" : "text-white/50 hover:bg-white/10 hover:text-white"}`}
+                        >
+                          {p}
+                        </button>
+                      )
+                    )}
+                    <div className="w-px h-4 bg-white/10 mx-1" />
+                    <button
+                      disabled={page === totalPages || loading}
+                      onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                      className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
+                    >
+                      NEXT →
+                    </button>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
           </main>
         </div>
 
         <Footer />
       </div>
-
-      {/* Floating Pagination Bar */}
-      <AnimatePresence>
-        {!showFavourites && totalPages > 1 && (
-          <motion.div
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className={`fixed -translate-x-1/2 z-40 transition-all duration-300 ${compareQueue.length > 0 && !showCompare ? "bottom-24" : "bottom-6"}`}
-            style={{ left: mainCenter }}
-          >
-            <div className="flex gap-1 items-center bg-[#12100e]/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] shadow-[0_8px_40px_rgba(0,0,0,0.6)] px-3 py-2 rounded-full">
-              <button
-                disabled={page === 1 || loading}
-                onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
-              >
-                ← PREV
-              </button>
-              <div className="w-px h-4 bg-white/10 mx-1" />
-              {getPagination().map((p, index) =>
-                p === "..." ? (
-                  <span key={`float-ellipsis-${index}`} className="text-white/30 px-1 text-[11px] font-bold">...</span>
-                ) : (
-                  <button
-                    key={`float-${p}`}
-                    disabled={loading}
-                    onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                    className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_12px_rgba(201,164,73,0.4)]" : "text-white/50 hover:bg-white/10 hover:text-white"}`}
-                  >
-                    {p}
-                  </button>
-                )
-              )}
-              <div className="w-px h-4 bg-white/10 mx-1" />
-              <button
-                disabled={page === totalPages || loading}
-                onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
-              >
-                NEXT →
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Floating Compare Bar */}
       <AnimatePresence>
