@@ -187,6 +187,7 @@ const PremiumCard = React.memo(function PremiumCard({
   const manufacturer = product.manufacturer || "Arriscraft International";
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   // 3D tilt on hover
   const cardRef = useRef(null);
@@ -210,12 +211,14 @@ const PremiumCard = React.memo(function PremiumCard({
   const handleMouseLeave = () => {
     rawX.set(0);
     rawY.set(0);
+    setHovered(false);
   };
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={{
         rotateX,
@@ -237,11 +240,19 @@ const PremiumCard = React.memo(function PremiumCard({
           />
         )}
         {product.image && !imgError ? (
-          <img
+          <motion.img
             src={`https://wsrv.nl/?url=${encodeURIComponent(product.image)}&w=600&output=webp&q=75`}
             alt={product.name}
-            className="w-full h-full object-cover scale-110 group-hover:scale-125"
-            style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease, transform 2s ease-out" }}
+            className="w-full h-full object-cover"
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{
+              scale: hovered ? 1.18 : 1.08,
+              opacity: imgLoaded ? 1 : 0,
+            }}
+            transition={{
+              scale: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+              opacity: { duration: 0.4, ease: "easeOut" },
+            }}
             loading="lazy"
             decoding="async"
             onLoad={() => setImgLoaded(true)}
