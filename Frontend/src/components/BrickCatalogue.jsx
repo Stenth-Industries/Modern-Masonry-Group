@@ -186,6 +186,7 @@ const PremiumCard = React.memo(function PremiumCard({
   const typeLabel = product.collectionBadge || product.collection || "Brick";
   const manufacturer = product.manufacturer || "Arriscraft International";
   const [imgError, setImgError] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   // 3D tilt on hover
   const cardRef = useRef(null);
@@ -228,13 +229,22 @@ const PremiumCard = React.memo(function PremiumCard({
       <div className="flex flex-col w-full h-full rounded-[12px] overflow-hidden">
       {/* Upper Picture Area */}
       <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
+        {/* Colour placeholder shown until image loads */}
+        {!imgLoaded && !imgError && (
+          <div
+            className="absolute inset-0"
+            style={{ background: product.colorHex || "#2a2218", filter: "brightness(0.4)" }}
+          />
+        )}
         {product.image && !imgError ? (
           <img
             src={`https://wsrv.nl/?url=${encodeURIComponent(product.image)}&w=600&output=webp&q=75`}
             alt={product.name}
             className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
+            style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
             loading="lazy"
             decoding="async"
+            onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
           />
         ) : (
@@ -505,7 +515,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
     if (manufacturers.length)
       params.append("manufacturer", manufacturers.join(","));
     params.append("page", page);
-    params.append("limit", 20);
+    params.append("limit", 12);
 
     fetch(`/api/products?${params.toString()}`, { signal: controller.signal })
       .then(async (r) => {
