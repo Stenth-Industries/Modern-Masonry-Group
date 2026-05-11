@@ -22,7 +22,7 @@ export default function UnderConstruction({ navigate }) {
 
           {/* Label */}
           <motion.div {...fade(0)} className="mb-6 flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a449] animate-pulse" />
+
             <span className="text-[#c9a449] text-[11px] font-bold tracking-[0.3em] uppercase">
               Currently In Development
             </span>
@@ -43,9 +43,9 @@ export default function UnderConstruction({ navigate }) {
             {...fade(0.2)}
             className="text-white/50 text-[17px] sm:text-[19px] max-w-xl leading-relaxed font-light mb-8"
           >
-            This section is still in development — it will be live shortly.
-            In the meantime, our studio is open and our team is ready to help
-            with any inquiry or product request.
+            This section is currently being finalized and will be available shortly. In the meantime, our team is ready to help with any product questions, availability, or project requirements.
+
+            For faster assistance, please call us directly and we’ll be happy to guide you.
           </motion.p>
 
           {/* Buttons */}
