@@ -7,6 +7,9 @@ export default function UnderConstruction({ navigate }) {
   return (
     <div className="min-h-screen relative font-sans text-white selection:bg-[var(--brass)] selection:text-black flex flex-col overflow-hidden">
       
+      {/* Dark background overlay */}
+      <div className="fixed inset-0 z-0 bg-black/85" />
+
       {/* Progressive Blur Overlays for Obsidian Aesthetic */}
       <ProgressiveBlur direction="top" className="absolute top-0 w-full h-48 z-0 opacity-80" />
       <ProgressiveBlur direction="bottom" className="absolute bottom-0 w-full h-48 z-0 opacity-80" />
