@@ -235,7 +235,7 @@ const PremiumCard = React.memo(function PremiumCard({
         {/* Colour placeholder shown until image loads */}
         {!imgLoaded && !imgError && (
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{ background: product.colorHex || "#2a2218", filter: "brightness(0.4)" }}
           />
         )}
@@ -286,7 +286,7 @@ const PremiumCard = React.memo(function PremiumCard({
         )}
 
         {/* Top-Right: Favourites & Share buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-10">
+        <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-20">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -306,23 +306,15 @@ const PremiumCard = React.memo(function PremiumCard({
               e.stopPropagation();
               const url = window.location.origin + '/#brick-detail/' + product.id;
               if (navigator.share) {
-                navigator.share({
-                  title: product.name,
-                  text: `Check out ${product.name} at Modern Masonry`,
-                  url: url,
-                }).catch(err => console.error('Share failed:', err));
+                navigator.share({ title: product.name, text: `Check out ${product.name} at Modern Masonry`, url }).catch(() => {});
               } else {
-                navigator.clipboard.writeText(url);
-                alert("Link copied to clipboard!");
+                navigator.clipboard.writeText(url).then(() => alert("Link copied!")).catch(() => alert("Share link: " + url));
               }
             }}
             title="Share"
-            className="p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border border-transparent group-hover:border-white/20 opacity-0 group-hover:opacity-100"
+            className="p-1.5 rounded-[4px] bg-black/40 hover:bg-black/60 transition-colors border border-transparent group-hover:border-white/20 opacity-40 group-hover:opacity-100 transition-opacity"
           >
-            <Share2
-              size={14}
-              color="rgba(255,255,255,0.7)"
-            />
+            <Share2 size={14} color="rgba(255,255,255,0.7)" />
           </button>
         </div>
       </div>
