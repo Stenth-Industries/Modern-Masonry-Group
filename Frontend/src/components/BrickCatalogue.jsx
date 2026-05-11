@@ -418,7 +418,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const pdfContentRef = useRef(null);
-  const footerSentinelRef = useRef(null);
   const [mainCenter, setMainCenter] = useState("50%");
   const [paginationVisible, setPaginationVisible] = useState(true);
 
@@ -436,10 +435,14 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
   }, []);
 
   useEffect(() => {
-    if (!footerSentinelRef.current) return;
-    const io = new IntersectionObserver(([e]) => setPaginationVisible(!e.isIntersecting), { threshold: 0 });
-    io.observe(footerSentinelRef.current);
-    return () => io.disconnect();
+    const handleScroll = () => {
+      if (!pdfContentRef.current) return;
+      const rect = pdfContentRef.current.getBoundingClientRect();
+      setPaginationVisible(rect.bottom > window.innerHeight + 60);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Sync with router changes seamlessly
@@ -1054,8 +1057,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
               </div>
             )}
 
-            {/* Sentinel — hides floating pagination when footer comes into view */}
-            <div ref={footerSentinelRef} />
           </main>
         </div>
 
