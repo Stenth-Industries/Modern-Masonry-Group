@@ -788,13 +788,14 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
           </div>
         </div>
 
-        <div className="flex flex-grow w-full max-w-[1800px] mx-auto min-h-0 md:pl-[320px] 2xl:pl-[380px]">
+        <div className="flex flex-grow w-full max-w-[1800px] mx-auto min-h-0">
           <motion.aside
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] fixed top-[82px] h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20 z-20"
+            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] self-start sticky top-[82px] flex-shrink-0 z-20"
           >
+            <div className="h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20">
             <div className="px-8 xl:px-10 pt-10 pb-32">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={14} className="text-[#c9a449]" />
@@ -847,6 +848,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                   />
                 ))}
               </Section>
+            </div>
             </div>
           </motion.aside>
 
