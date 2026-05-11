@@ -72,8 +72,8 @@ export default function UnderConstruction({ navigate }) {
                 Come See Us In Person
               </h3>
               <p className="text-white/40 text-[13px] leading-relaxed mb-1">
-                1 King Street West<br />
-                Brampton, ON
+                7195 Highway 9<br />
+                Schomberg, ON
               </p>
               <div className="flex items-center gap-1.5 mt-4 text-white/30">
                 <Clock size={12} />
@@ -91,11 +91,11 @@ export default function UnderConstruction({ navigate }) {
                 Speak With an Expert
               </h3>
               <a
-                href="tel:18005551234"
+                href="tel:+19059390695"
                 className="text-white/70 text-[22px] font-light tracking-wide hover:text-[#c9a449] transition-colors duration-200"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                1‑800‑555‑1234
+                +1 905‑939‑0695
               </a>
               <p className="text-white/30 text-[12px] mt-3">
                 Our team is available during showroom hours to assist with product selection, pricing, and project planning.
