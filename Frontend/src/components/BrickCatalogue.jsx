@@ -418,6 +418,18 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const pdfContentRef = useRef(null);
+  const [mainCenter, setMainCenter] = useState("50%");
+
+  useEffect(() => {
+    const update = () => {
+      if (!pdfContentRef.current) return;
+      const rect = pdfContentRef.current.getBoundingClientRect();
+      setMainCenter(`${rect.left + rect.width / 2}px`);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   // Sync with router changes seamlessly
   useEffect(() => {
@@ -1044,7 +1056,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className={`fixed -translate-x-1/2 z-40 transition-all duration-300 left-1/2 md:left-[calc(50%+160px)] 2xl:left-[calc(50%+190px)] ${compareQueue.length > 0 && !showCompare ? "bottom-24" : "bottom-6"}`}
+            className={`fixed -translate-x-1/2 z-40 transition-all duration-300 ${compareQueue.length > 0 && !showCompare ? "bottom-24" : "bottom-6"}`}
+            style={{ left: mainCenter }}
           >
             <div className="flex gap-1 items-center bg-[#12100e]/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] shadow-[0_8px_40px_rgba(0,0,0,0.6)] px-3 py-2 rounded-full">
               <button
