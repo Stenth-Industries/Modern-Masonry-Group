@@ -193,7 +193,17 @@ export default function Gallery({ navigate }) {
             </button>
 
             {/* Image */}
-            <div className="flex-1 flex items-center justify-center overflow-hidden" onClick={close}>
+            <motion.div
+              className="flex-1 flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -60) goNext();
+                else if (info.offset.x > 60) goPrev();
+              }}
+              onClick={close}
+            >
               <AnimatePresence mode="wait">
                 <motion.img
                   key={imgKey}
@@ -203,12 +213,11 @@ export default function Gallery({ navigate }) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="max-w-full max-h-full object-contain select-none"
-                  onClick={(e) => e.stopPropagation()}
+                  className="max-w-full max-h-full object-contain select-none pointer-events-none"
                   draggable={false}
                 />
               </AnimatePresence>
-            </div>
+            </motion.div>
 
             {/* Left arrow */}
             <button
