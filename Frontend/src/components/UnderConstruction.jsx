@@ -50,7 +50,7 @@ export default function UnderConstruction({ navigate }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[var(--text-secondary)] text-[16px] sm:text-[18px] md:text-[20px] max-w-2xl leading-relaxed font-light mb-16"
+            className="text-[var(--text-secondary)] text-[18px] sm:text-[20px] md:text-[22px] max-w-2xl leading-relaxed font-light mb-16"
           >
             This section of our website is still being developed. We apologise for the inconvenience — it will be live shortly. In the meantime, our showroom is open and our team is ready to help with any product requests.
           </motion.p>
@@ -72,7 +72,7 @@ export default function UnderConstruction({ navigate }) {
             </button>
             <button
               onClick={() => navigate('#home')}
-              className="group text-white/40 text-[12px] font-bold tracking-[0.2em] uppercase hover:text-[var(--brass)] transition-colors duration-300 flex items-center gap-2"
+              className="group text-white/40 text-[15px] font-bold tracking-[0.2em] uppercase hover:text-[var(--brass)] transition-colors duration-300 flex items-center gap-2"
             >
               <span className="w-0 h-px bg-[var(--brass)] group-hover:w-6 transition-all duration-500"></span>
               Return Home
@@ -94,7 +94,7 @@ export default function UnderConstruction({ navigate }) {
 
             {/* Showroom */}
             <div className="md:pr-16 md:border-r border-[var(--brass)]/15">
-              <p className="text-[9px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
+              <p className="text-[12px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
                 Showroom
               </p>
               <p className="text-white text-[28px] sm:text-[34px] leading-[1.15] tracking-tight mb-1" style={{ fontFamily: "var(--font-display)" }}>
@@ -103,7 +103,7 @@ export default function UnderConstruction({ navigate }) {
               <p className="text-white/40 text-[20px] sm:text-[24px] leading-snug tracking-tight italic mb-8" style={{ fontFamily: "var(--font-display)" }}>
                 Schomberg, ON
               </p>
-              <div className="flex items-center gap-4 text-[12px] tracking-[0.12em] uppercase">
+              <div className="flex items-center gap-4 text-[14px] tracking-[0.12em] uppercase">
                 <span className="text-white/60">Mon – Fri</span>
                 <span className="text-white/80 font-medium">8 am – 5 pm</span>
                 <span className="w-px h-4 bg-[var(--brass)]/30" />
@@ -114,7 +114,7 @@ export default function UnderConstruction({ navigate }) {
 
             {/* Direct Line */}
             <div className="md:pl-16 flex flex-col justify-between gap-6">
-              <p className="text-[9px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
+              <p className="text-[12px] font-bold tracking-[0.35em] uppercase text-[var(--brass)] mb-6">
                 Direct Line
               </p>
               <a
@@ -124,7 +124,7 @@ export default function UnderConstruction({ navigate }) {
               >
                 +1 905 939 0695
               </a>
-              <p className="text-white/35 text-[13px] leading-relaxed max-w-sm font-light">
+              <p className="text-white/35 text-[16px] leading-relaxed max-w-sm font-light">
                 Our specialists are available during showroom hours to assist with product selection, pricing, and project planning.
               </p>
             </div>
