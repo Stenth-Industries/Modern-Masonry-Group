@@ -1,0 +1,72 @@
+{
+  "Black": {
+    "lab_l": 23.0,
+    "lab_a": 0.0,
+    "lab_b": 2.0,
+    "tolerance": 12,
+    "description": "Very dark / near-black brick"
+  },
+  "Brown": {
+    "lab_l": 38.0,
+    "lab_a": 10.0,
+    "lab_b": 20.0,
+    "tolerance": 11,
+    "description": "Earthy mid-brown brick"
+  },
+  "Buff": {
+    "lab_l": 70.0,
+    "lab_a": 6.0,
+    "lab_b": 26.0,
+    "tolerance": 13,
+    "description": "Classic sandy / golden buff brick — warm yellow-beige"
+  },
+  "Burgundy": {
+    "lab_l": 30.0,
+    "lab_a": 22.0,
+    "lab_b": 10.0,
+    "tolerance": 13,
+    "description": "Deep wine / maroon red brick"
+  },
+  "Cream": {
+    "lab_l": 86.0,
+    "lab_a": 2.0,
+    "lab_b": 13.0,
+    "tolerance": 12,
+    "description": "Very light warm off-white brick"
+  },
+  "Grey": {
+    "lab_l": 58.0,
+    "lab_a": 0.0,
+    "lab_b": 3.0,
+    "tolerance": 22,
+    "description": "Neutral grey brick — covers dark to light grey with low chroma"
+  },
+  "Orange": {
+    "lab_l": 55.0,
+    "lab_a": 26.0,
+    "lab_b": 38.0,
+    "tolerance": 13,
+    "description": "Orange / terracotta-orange brick"
+  },
+  "Pink": {
+    "lab_l": 68.0,
+    "lab_a": 16.0,
+    "lab_b": 5.0,
+    "tolerance": 11,
+    "description": "Blush / rose pink brick — pinkish hue, low yellow component"
+  },
+  "Red": {
+    "lab_l": 44.0,
+    "lab_a": 30.0,
+    "lab_b": 22.0,
+    "tolerance": 14,
+    "description": "Classic brick red"
+  },
+  "White": {
+    "lab_l": 90.0,
+    "lab_a": 1.0,
+    "lab_b": 5.0,
+    "tolerance": 10,
+    "description": "Very light / near-white brick — high L, low chroma"
+  }
+}
