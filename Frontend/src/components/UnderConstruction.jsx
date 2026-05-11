@@ -7,16 +7,9 @@ export default function UnderConstruction({ navigate }) {
   return (
     <div className="min-h-screen relative font-sans text-white selection:bg-[var(--brass)] selection:text-black flex flex-col overflow-hidden">
       
-      {/* Dark background overlay */}
-      <div className="fixed inset-0 z-0 bg-black/85" />
-
-      {/* Progressive Blur Overlays for Obsidian Aesthetic */}
-      <ProgressiveBlur direction="top" className="absolute top-0 w-full h-48 z-0 opacity-80" />
-      <ProgressiveBlur direction="bottom" className="absolute bottom-0 w-full h-48 z-0 opacity-80" />
-
-      {/* Decorative Gradients exactly as used in the rest of the app */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_15%_50%,rgba(201,164,73,0.055),transparent)] pointer-events-none z-0" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,164,73,0.12),transparent_70%)] pointer-events-none z-0" />
+      {/* Background */}
+      <div className="fixed inset-0 z-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/bg.png')" }} />
+      <div className="fixed inset-0 z-0 bg-black/60" />
       
       <div className="relative z-10 flex flex-col flex-grow w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-20 pt-32 pb-24">
         
