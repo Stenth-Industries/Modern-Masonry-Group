@@ -768,7 +768,37 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             </button>
           </div>
 
-          <div className="hidden md:flex flex-1" />
+          {/* Active filter chips — live in the bar */}
+          <div className="hidden md:flex flex-1 items-center gap-2 px-6 overflow-x-auto scrollbar-none">
+            {[...types, ...colors, ...finishes, ...series, ...manufacturers].map((v) => (
+              <div
+                key={v}
+                className="flex items-center gap-1.5 bg-white/[0.06] border border-white/10 px-3 py-1 rounded-full shrink-0"
+              >
+                <span className="text-[11px] text-[#e3decb] tracking-wide whitespace-nowrap">{v}</span>
+                <button
+                  onClick={() => {
+                    if (types.includes(v)) setTypes(types.filter((x) => x !== v));
+                    if (colors.includes(v)) setColors(colors.filter((x) => x !== v));
+                    if (finishes.includes(v)) setFinishes(finishes.filter((x) => x !== v));
+                    if (series.includes(v)) setSeries(series.filter((x) => x !== v));
+                    if (manufacturers.includes(v)) setManufacturers(manufacturers.filter((x) => x !== v));
+                  }}
+                  className="text-[#9a9488] hover:text-white transition-colors"
+                >
+                  <X size={10} />
+                </button>
+              </div>
+            ))}
+            {[...types, ...colors, ...finishes, ...series, ...manufacturers].length > 1 && (
+              <button
+                onClick={() => { setTypes([]); setColors([]); setFinishes([]); setSeries([]); setManufacturers([]); }}
+                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-[#c9a449] uppercase transition-colors shrink-0 ml-1"
+              >
+                Clear All
+              </button>
+            )}
+          </div>
 
           <div className="flex items-center gap-3 md:gap-6 border-l border-white/5 pl-4 md:pl-8">
             <div className="relative group flex items-center">
@@ -975,37 +1005,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32"
           >
 
-            {/* Active filter chips */}
-            {[...types, ...colors, ...finishes, ...series, ...manufacturers].length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 mb-6">
-                {[...types, ...colors, ...finishes, ...series, ...manufacturers].map((v) => (
-                  <div
-                    key={v}
-                    className="flex items-center gap-2 bg-[#1a1815] border border-white/10 px-3 py-1.5 rounded-full"
-                  >
-                    <span className="text-[11px] text-[#e3decb] tracking-wide">{v}</span>
-                    <button
-                      onClick={() => {
-                        if (types.includes(v)) setTypes(types.filter((x) => x !== v));
-                        if (colors.includes(v)) setColors(colors.filter((x) => x !== v));
-                        if (finishes.includes(v)) setFinishes(finishes.filter((x) => x !== v));
-                        if (series.includes(v)) setSeries(series.filter((x) => x !== v));
-                        if (manufacturers.includes(v)) setManufacturers(manufacturers.filter((x) => x !== v));
-                      }}
-                      className="text-[#9a9488] hover:text-white transition-colors"
-                    >
-                      <X size={11} />
-                    </button>
-                  </div>
-                ))}
-                <button
-                  onClick={() => { setTypes([]); setColors([]); setFinishes([]); setSeries([]); setManufacturers([]); }}
-                  className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-[#c9a449] uppercase transition-colors ml-1"
-                >
-                  Clear All
-                </button>
-              </div>
-            )}
 
             {errorMsg && !showFavourites ? (
               <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">
