@@ -732,7 +732,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
         </div>
 
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
-        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 grid grid-cols-[auto_1fr_auto] items-center gap-4 z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-4 md:gap-8">
             <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">
               {showFavourites ? favourites.length : total} products
@@ -768,8 +768,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             </button>
           </div>
 
-          {/* Active filter chips — live in the bar */}
-          <div className="hidden md:flex flex-1 items-center gap-2 px-6 overflow-x-auto scrollbar-none">
+          {/* Active filter chips — centered column */}
+          <div className="hidden md:flex items-center justify-center gap-2 overflow-x-auto scrollbar-none">
             {[...types, ...colors, ...finishes, ...series, ...manufacturers].map((v) => (
               <div
                 key={v}
