@@ -88,17 +88,20 @@ export default function Gallery({ navigate }) {
 
         {/* Masonry grid */}
         <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-32">
-          <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 gap-5">
-            <AnimatePresence>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.3, ease: 'easeOut', staggerChildren: 0.05 } }}
+              exit={{ opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }}
+              className="columns-1 sm:columns-2 lg:columns-3 gap-5"
+            >
               {filtered.map((img, i) => (
                 <motion.div
-                  layout
                   key={img.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative group mb-5 break-inside-avoid overflow-hidden rounded-[10px] border border-white/[0.06] hover:border-[#c9a449]/60 cursor-pointer shadow-xl shadow-black/40 transition-all duration-500"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.35, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] } }}
+                  className="relative group mb-5 break-inside-avoid overflow-hidden rounded-[10px] border border-white/[0.06] hover:border-[#c9a449]/60 cursor-pointer shadow-xl shadow-black/40 transition-colors duration-300"
                   onClick={() => setSelected(img)}
                 >
                   <img
@@ -124,8 +127,8 @@ export default function Gallery({ navigate }) {
                   </div>
                 </motion.div>
               ))}
-            </AnimatePresence>
-          </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <Footer />
