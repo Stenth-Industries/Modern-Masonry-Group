@@ -220,16 +220,14 @@ const PremiumCard = React.memo(function PremiumCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-        perspective: 800,
-      }}
-      className={`group w-full h-full border ${isCompared ? "border-[#c9a449]" : "border-[rgba(255,255,255,0.06)]"} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px] cursor-pointer`}
-      onClick={(e) => { if (e.target.closest("button")) return; onSample(product); }}
+      style={{ rotateX, rotateY, perspective: 800 }}
+      className={`group w-full h-full relative border ${isCompared ? "border-[#c9a449]" : "border-[rgba(255,255,255,0.06)]"} hover:border-[#c9a449] hover:shadow-2xl hover:shadow-black/60 shadow-xl shadow-black/40 hover:-translate-y-0.5 transition-all duration-500 rounded-[12px]`}
     >
-      <div className="flex flex-col w-full h-full rounded-[12px] overflow-hidden">
+      {/* Navigation click target — sits behind all content */}
+      <div className="absolute inset-0 z-0 rounded-[12px] cursor-pointer" onClick={() => onSample(product)} />
+
+      {/* Card content — pointer-events-none so clicks fall through to nav div above */}
+      <div className="relative z-10 pointer-events-none flex flex-col w-full h-full rounded-[12px] overflow-hidden">
       {/* Upper Picture Area */}
       <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
         {/* Colour placeholder shown until image loads */}
@@ -286,7 +284,7 @@ const PremiumCard = React.memo(function PremiumCard({
         )}
 
         {/* Top-Right: Favourites & Share buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-20">
+        <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-20 pointer-events-auto">
           <button
             onClick={() => onToggleFavourite(product)}
             title={isFavourite ? "Remove from Favourites" : "Add to Favourites"}
@@ -369,7 +367,7 @@ const PremiumCard = React.memo(function PremiumCard({
         )}
 
         {/* Card footer buttons */}
-        <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2 pointer-events-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
           <button
             onClick={() => onSample(product)}
             className="flex-1 relative overflow-hidden py-2.5 text-[10px] uppercase tracking-[0.14em] font-bold text-[#c9a449] hover:text-black hover:bg-[#c9a449] transition-all duration-300 rounded-md border border-[#c9a449]/25 hover:border-[#c9a449] group/btn"
