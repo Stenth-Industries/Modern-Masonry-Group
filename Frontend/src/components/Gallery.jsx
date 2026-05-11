@@ -25,8 +25,7 @@ const galleryData = [
 
 const CATEGORIES = ['All', 'Residential', 'Commercial'];
 
-const wsrv = (src, w = 800) =>
-  `https://wsrv.nl/?url=${encodeURIComponent(`${window.location.origin}${src}`)}&w=${w}&output=webp&q=80`;
+const wsrv = (src) => src;
 
 export default function Gallery({ navigate }) {
   const [activeCategory, setActiveCategory] = useState('All');
