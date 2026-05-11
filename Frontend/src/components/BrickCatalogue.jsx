@@ -84,6 +84,7 @@ const resolveColorHex = (name, apiHex) => {
 const DEFAULT_FILTERS = {
   manufacturersWithCollections: [],
   colors: [],
+  standardColors: [], // populated after color-extraction pipeline runs
   styles: [],
   series: [],
 };
@@ -452,9 +453,17 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
       })
       .then((r) => {
         if (r.success && r.data) {
+          const rawColours = r.data.colours || [];
+          const rawStandard = r.data.standardColors || [];
+
           setFiltersDB({
             manufacturersWithCollections: r.data.manufacturersWithCollections || [],
-            colors: r.data.colours
+            // If the pipeline has run, use standard colors; otherwise fall back to raw colour categories
+            standardColors: rawStandard.map((c) => ({
+              value: c.value,
+              hex: resolveColorHex(c.value, c.hexCode),
+            })),
+            colors: rawColours
               .map((c) => ({
                 value: c.value,
                 hex: resolveColorHex(c.value, c.hexCode),
@@ -825,7 +834,10 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                 </Section>
               ))}
               <Section title="COLOUR">
-                {filtersDB.colors.map(({ value, hex }) => (
+                {(filtersDB.standardColors.length > 0
+                  ? filtersDB.standardColors
+                  : filtersDB.colors
+                ).map(({ value, hex }) => (
                   <GlassCheckbox
                     key={value}
                     label={value}
@@ -905,7 +917,10 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                       </Section>
                     ))}
                     <Section title="COLOUR">
-                      {filtersDB.colors.map(({ value, hex }) => (
+                      {(filtersDB.standardColors.length > 0
+                        ? filtersDB.standardColors
+                        : filtersDB.colors
+                      ).map(({ value, hex }) => (
                         <GlassCheckbox
                           key={value}
                           label={value}

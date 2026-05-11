@@ -100,14 +100,21 @@ const buildWhere = (query) => {
     if (values.length) {
       AND.push({
         OR: [
+          // Per-variant standard color (most precise — set by color extraction pipeline)
+          { standardColor: { in: values, mode: "insensitive" } },
+          // Fallback: exact colour name match
           { colourName: { in: values, mode: "insensitive" } },
+          // Fallback: product-level colour category (for products without per-variant data)
           {
             product: {
               categories: {
                 some: {
                   category: {
                     type: "colour",
-                    value: { in: values, mode: "insensitive" },
+                    OR: [
+                      { value: { in: values, mode: "insensitive" } },
+                      { standardColor: { in: values, mode: "insensitive" } },
+                    ],
                   },
                 },
               },
@@ -162,14 +169,13 @@ export const getProducts = async (query = {}) => {
   const skip = (page - 1) * limit;
 
   const where = buildWhere(query);
-
   const [total, variants] = await Promise.all([
     prisma.variant.count({ where }),
     prisma.variant.findMany({
       where,
       skip,
       take: limit,
-      orderBy: { product: { name: "asc" } },
+      orderBy: [{ colourName: "asc" }, { product: { name: "asc" } }],
       include: {
         product: {
           include: {
@@ -285,14 +291,31 @@ export const getFilterOptions = async (query = {}) => {
 
   const grouped = categories.reduce((acc, cat) => {
     if (!acc[cat.type]) acc[cat.type] = [];
-    acc[cat.type].push({ id: cat.id, value: cat.value, hexCode: cat.hexCode });
+    acc[cat.type].push({
+      id: cat.id,
+      value: cat.value,
+      hexCode: cat.hexCode,
+      standardColor: cat.standardColor || null,
+    });
     return acc;
   }, {});
+
+  // Derive distinct standard colors from colour categories that have been matched
+  const standardColorMap = {};
+  for (const cat of (grouped["colour"] || [])) {
+    if (cat.standardColor && !standardColorMap[cat.standardColor]) {
+      standardColorMap[cat.standardColor] = cat.hexCode || null;
+    }
+  }
+  const standardColors = Object.entries(standardColorMap)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([value, hexCode]) => ({ value, hexCode }));
 
   return {
     colours: grouped["colour"] || [],
     styles: grouped["style"] || [],
     series: grouped["series"] || [],
+    standardColors,           // populated after extract_brick_colors.py --sync --confirm
     manufacturersWithCollections,
     materials: materials.map((p) => p.material).filter(Boolean),
   };

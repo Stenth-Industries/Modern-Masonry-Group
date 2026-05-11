@@ -46,10 +46,14 @@ model ProductManufacturer {
 
 
 model Category {
-  id      String  @id @default(uuid())
-  type    String  // 'colour' | 'collection' | 'style'
-  value   String  // 'Black' | 'Handmades' | 'Extruded'
-  hexCode String? // optional, for colour swatches
+  id            String  @id @default(uuid())
+  type          String  // 'colour' | 'collection' | 'style'
+  value         String  // 'Black' | 'Handmades' | 'Extruded'
+  hexCode       String? // extracted dominant hex from product image
+  labL          Float?  // CIE L* (lightness)
+  labA          Float?  // CIE a* (green–red)
+  labB          Float?  // CIE b* (blue–yellow)
+  standardColor String? // matched standard color name e.g. 'Grey', 'Red'
 
   products ProductCategory[]
 
@@ -78,11 +82,12 @@ model Variant {
   widthMm     Float?
   heightMm    Float?
   depthMm     Float?
-  imageUrl    String?
-  imagesUrl   String[]
-  stock       String?  @default("In Stock")
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  imageUrl      String?
+  imagesUrl     String[]
+  stock         String?  @default("In Stock")
+  isActive      Boolean  @default(true)
+  standardColor String?
+  createdAt     DateTime @default(now())
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
