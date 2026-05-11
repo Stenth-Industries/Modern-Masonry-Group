@@ -419,6 +419,29 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const pdfContentRef = useRef(null);
   const [mainCenter, setMainCenter] = useState("50%");
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let currentTop = 82;
+    const onScroll = () => {
+      const el = sidebarRef.current;
+      if (!el) return;
+      const scrollY = window.scrollY;
+      const sidebarH = el.offsetHeight;
+      const vh = window.innerHeight;
+      const delta = scrollY - lastScrollY;
+      if (sidebarH <= vh - 82) {
+        currentTop = 82;
+      } else {
+        currentTop = Math.min(82, Math.max(vh - sidebarH, currentTop - delta));
+      }
+      el.style.top = `${currentTop}px`;
+      lastScrollY = scrollY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const measure = () => {
@@ -793,10 +816,11 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] self-start sticky top-[82px] flex-shrink-0 z-20"
+            ref={sidebarRef}
+            className="hidden md:flex md:flex-col w-[320px] 2xl:w-[380px] self-start sticky flex-shrink-0 z-20 border-r border-[rgba(255,255,255,0.06)] bg-black/20"
+            style={{ top: 82 }}
           >
-            <div className="h-[calc(100vh-82px)] overflow-y-auto scrollbar-none border-r border-[rgba(255,255,255,0.06)] bg-black/20">
-            <div className="px-8 xl:px-10 pt-10 pb-32">
+            <div className="px-8 xl:px-10 pt-10 pb-16">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={14} className="text-[#c9a449]" />
                 <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">
@@ -848,7 +872,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                   />
                 ))}
               </Section>
-            </div>
             </div>
           </motion.aside>
 
