@@ -491,10 +491,9 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
     return () => controller.abort();
   }, [debouncedQuery, collections, colors, finishes, manufacturers, page]);
 
-  // Reset pagination on filter change
+  // Reset pagination on filter change (do NOT clear products — keep old images visible until new ones load)
   useEffect(() => {
     setPage(1);
-    setProducts([]);
   }, [debouncedQuery, collections, colors, finishes, manufacturers]);
 
 
@@ -768,7 +767,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
               </div>
             ) : (
               <motion.div
-                key={`grid-${page}-${debouncedQuery}`}
+                key="product-grid"
                 initial="hidden"
                 animate="visible"
                 variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
