@@ -102,23 +102,28 @@ const buildWhere = (query) => {
         OR: [
           // Per-variant standard color (most precise — set by color extraction pipeline)
           { standardColor: { in: values, mode: "insensitive" } },
-          // Fallback: exact colour name match
-          { colourName: { in: values, mode: "insensitive" } },
-          // Fallback: product-level colour category (for products without per-variant data)
+          // Fallback: product-level colour category, only when variant has no standardColor
+          // (prevents Brampton-style products where multiple colours share one parent product
+          //  from leaking all their variants into every colour bucket)
           {
-            product: {
-              categories: {
-                some: {
-                  category: {
-                    type: "colour",
-                    OR: [
-                      { value: { in: values, mode: "insensitive" } },
-                      { standardColor: { in: values, mode: "insensitive" } },
-                    ],
+            AND: [
+              { standardColor: null },
+              {
+                product: {
+                  categories: {
+                    some: {
+                      category: {
+                        type: "colour",
+                        OR: [
+                          { value: { in: values, mode: "insensitive" } },
+                          { standardColor: { in: values, mode: "insensitive" } },
+                        ],
+                      },
+                    },
                   },
                 },
               },
-            },
+            ],
           },
         ],
       });
