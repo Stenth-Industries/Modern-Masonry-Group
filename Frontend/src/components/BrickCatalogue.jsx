@@ -80,11 +80,25 @@ const resolveColorHex = (name, apiHex) => {
   return COLOR_MAP[name.toLowerCase().trim()] || null;
 };
 
+// Hardcoded standard color fallback — matches the color-extraction pipeline output.
+// Used when the pipeline hasn't been run on a local database.
+const FALLBACK_STANDARD_COLORS = [
+  { value: "Black",     hex: "#1A1A1A" },
+  { value: "Brown",     hex: "#7A5C40" },
+  { value: "Buff",      hex: "#D4B483" },
+  { value: "Burgundy",  hex: "#5D1E24" },
+  { value: "Cream",     hex: "#EDE0C4" },
+  { value: "Gray",      hex: "#808080" },
+  { value: "Orange",    hex: "#C0622A" },
+  { value: "Red",       hex: "#B4382B" },
+  { value: "White",     hex: "#E8E4DC" },
+];
+
 // Dynamic database filters will overwrite this structure on mount
 const DEFAULT_FILTERS = {
   manufacturersWithCollections: [],
   colors: [],
-  standardColors: [], // populated after color-extraction pipeline runs
+  standardColors: FALLBACK_STANDARD_COLORS,
   styles: [],
   series: [],
 };
@@ -510,11 +524,10 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
 
           setFiltersDB({
             manufacturersWithCollections: r.data.manufacturersWithCollections || [],
-            // If the pipeline has run, use standard colors; otherwise fall back to raw colour categories
-            standardColors: rawStandard.map((c) => ({
-              value: c.value,
-              hex: resolveColorHex(c.value, c.hexCode),
-            })),
+            // Use pipeline standard colors if available, otherwise hardcoded fallback
+            standardColors: rawStandard.length > 0
+              ? rawStandard.map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
+              : FALLBACK_STANDARD_COLORS,
             colors: rawColours
               .map((c) => ({
                 value: c.value,
