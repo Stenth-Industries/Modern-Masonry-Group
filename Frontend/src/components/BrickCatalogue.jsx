@@ -80,25 +80,11 @@ const resolveColorHex = (name, apiHex) => {
   return COLOR_MAP[name.toLowerCase().trim()] || null;
 };
 
-// Hardcoded standard color fallback — matches the color-extraction pipeline output.
-// Used when the pipeline hasn't been run on a local database.
-const FALLBACK_STANDARD_COLORS = [
-  { value: "Black",     hex: "#1A1A1A" },
-  { value: "Brown",     hex: "#7A5C40" },
-  { value: "Buff",      hex: "#D4B483" },
-  { value: "Burgundy",  hex: "#5D1E24" },
-  { value: "Cream",     hex: "#EDE0C4" },
-  { value: "Gray",      hex: "#808080" },
-  { value: "Orange",    hex: "#C0622A" },
-  { value: "Red",       hex: "#B4382B" },
-  { value: "White",     hex: "#E8E4DC" },
-];
-
 // Dynamic database filters will overwrite this structure on mount
 const DEFAULT_FILTERS = {
   manufacturersWithCollections: [],
   colors: [],
-  standardColors: FALLBACK_STANDARD_COLORS,
+  standardColors: [], // populated after color-extraction pipeline runs
   styles: [],
   series: [],
 };
@@ -496,7 +482,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
 
   // Load database filters once on mount
   useEffect(() => {
-    fetch("/api/products/filters?material=Brick")
+    fetch("/api/products/filters")
       .then(async (res) => {
         const text = await res.text();
         if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
@@ -524,10 +510,11 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
 
           setFiltersDB({
             manufacturersWithCollections: r.data.manufacturersWithCollections || [],
-            // Use pipeline standard colors if available, otherwise hardcoded fallback
-            standardColors: rawStandard.length > 0
-              ? rawStandard.map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
-              : FALLBACK_STANDARD_COLORS,
+            // If the pipeline has run, use standard colors; otherwise fall back to raw colour categories
+            standardColors: rawStandard.map((c) => ({
+              value: c.value,
+              hex: resolveColorHex(c.value, c.hexCode),
+            })),
             colors: rawColours
               .map((c) => ({
                 value: c.value,
@@ -571,7 +558,6 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
       params.append("manufacturer", manufacturers.join(","));
     params.append("page", page);
     params.append("limit", 12);
-    params.append("material", "Brick");
 
     fetch(`/api/products?${params.toString()}`, { signal: controller.signal })
       .then(async (r) => {
@@ -865,89 +851,49 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                 </h2>
               </div>
 
-              <Section title="MANUFACTURER" defaultOpen={true}>
-                <div className="flex flex-wrap gap-2 pt-2 pb-1">
-                  {filtersDB.manufacturersWithCollections.map((mfg) => {
-                    const active = manufacturers.includes(mfg.name);
-                    return (
-                      <button
-                        key={mfg.name}
-                        onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                          active
-                            ? "bg-white/10 border-white/30 text-white"
-                            : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                        }`}
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
-                        {mfg.name}
-                      </button>
-                    );
-                  })}
-                </div>
-                {/* Render collections ONLY for selected manufacturers */}
-                <AnimatePresence>
-                  {manufacturers.length > 0 && (
-                     <motion.div 
-                       initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                       animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                       exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                       className="p-4 border border-white/10 bg-white/[0.02] rounded-xl overflow-hidden"
-                     >
-                        <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold mb-3 block">Collections</span>
-                        <div className="flex flex-wrap gap-2">
-                          {filtersDB.manufacturersWithCollections
-                             .filter(mfg => manufacturers.includes(mfg.name))
-                             .flatMap(mfg => mfg.collections)
-                             .map(t => {
-                                const active = types.includes(t);
-                                return (
-                                  <button
-                                    key={t}
-                                    onClick={() => tog(t, types, setTypes)}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11px] font-medium transition-colors ${
-                                      active
-                                        ? "bg-[#c9a449]/20 border-[#c9a449]/50 text-white"
-                                        : "bg-black/20 border-white/10 text-[#9a9488] hover:border-white/30 hover:text-[#e3decb]"
-                                    }`}
-                                    style={{ fontFamily: "'Inter', sans-serif" }}
-                                  >
-                                    {t}
-                                  </button>
-                                );
-                             })}
-                        </div>
-                     </motion.div>
-                  )}
-                </AnimatePresence>
-              </Section>
+              <div className="mb-2">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturers</span>
+              </div>
+              {filtersDB.manufacturersWithCollections.map((mfg) => (
+                <Section
+                  key={mfg.name}
+                  title={mfg.name}
+                  checked={manufacturers.includes(mfg.name)}
+                  onCheck={() => tog(mfg.name, manufacturers, setManufacturers)}
+                >
+                  {mfg.collections.map((t) => (
+                    <GlassCheckbox
+                      key={t}
+                      label={t}
+                      checked={types.includes(t)}
+                      onClick={() => tog(t, types, setTypes)}
+                    />
+                  ))}
+                </Section>
+              ))}
               <Section title="COLOUR">
-                <div className="flex flex-wrap gap-2 pt-2 pb-1">
-                  {(filtersDB.standardColors.length > 0
-                    ? filtersDB.standardColors
-                    : filtersDB.colors
-                  ).map(({ value, hex }) => {
-                    const active = colors.includes(value);
-                    return (
-                      <button
-                        key={value}
-                        onClick={() => tog(value, colors, setColors)}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                          active
-                            ? "bg-white/10 border-white/30 text-white"
-                            : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                        }`}
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
-                        <span
-                          className="w-2.5 h-2.5 rounded-full border border-white/20 shadow-sm"
-                          style={{ background: hex }}
-                        />
-                        {value}
-                      </button>
-                    );
-                  })}
-                </div>
+                {(filtersDB.standardColors.length > 0
+                  ? filtersDB.standardColors
+                  : filtersDB.colors
+                ).map(({ value, hex }) => (
+                  <GlassCheckbox
+                    key={value}
+                    label={value}
+                    colorDot={hex}
+                    checked={colors.includes(value)}
+                    onClick={() => tog(value, colors, setColors)}
+                  />
+                ))}
+              </Section>
+              <Section title="FINISH">
+                {filtersDB.styles.map((s) => (
+                  <GlassCheckbox
+                    key={s}
+                    label={s}
+                    checked={finishes.includes(s)}
+                    onClick={() => tog(s, finishes, setFinishes)}
+                  />
+                ))}
               </Section>
             </div>
           </motion.aside>
@@ -988,88 +934,49 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                         <X size={18} />
                       </button>
                     </div>
-                    <Section title="MANUFACTURER" defaultOpen={true}>
-                      <div className="flex flex-wrap gap-2 pt-2 pb-1">
-                        {filtersDB.manufacturersWithCollections.map((mfg) => {
-                          const active = manufacturers.includes(mfg.name);
-                          return (
-                            <button
-                              key={mfg.name}
-                              onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
-                              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                                active
-                                  ? "bg-white/10 border-white/30 text-white"
-                                  : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                              }`}
-                              style={{ fontFamily: "'Inter', sans-serif" }}
-                            >
-                              {mfg.name}
-                            </button>
-                          );
-                        })}
-                      </div>
-                      <AnimatePresence>
-                        {manufacturers.length > 0 && (
-                           <motion.div 
-                             initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                             animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                             exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                             className="p-4 border border-white/10 bg-white/[0.02] rounded-xl overflow-hidden"
-                           >
-                              <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold mb-3 block">Collections</span>
-                              <div className="flex flex-wrap gap-2">
-                                {filtersDB.manufacturersWithCollections
-                                   .filter(mfg => manufacturers.includes(mfg.name))
-                                   .flatMap(mfg => mfg.collections)
-                                   .map(t => {
-                                      const active = types.includes(t);
-                                      return (
-                                        <button
-                                          key={t}
-                                          onClick={() => tog(t, types, setTypes)}
-                                          className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11px] font-medium transition-colors ${
-                                            active
-                                              ? "bg-[#c9a449]/20 border-[#c9a449]/50 text-white"
-                                              : "bg-black/20 border-white/10 text-[#9a9488] hover:border-white/30 hover:text-[#e3decb]"
-                                          }`}
-                                          style={{ fontFamily: "'Inter', sans-serif" }}
-                                        >
-                                          {t}
-                                        </button>
-                                      );
-                                   })}
-                              </div>
-                           </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </Section>
+                    <div className="mb-2">
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturers</span>
+                    </div>
+                    {filtersDB.manufacturersWithCollections.map((mfg) => (
+                      <Section
+                        key={mfg.name}
+                        title={mfg.name}
+                        checked={manufacturers.includes(mfg.name)}
+                        onCheck={() => tog(mfg.name, manufacturers, setManufacturers)}
+                      >
+                        {mfg.collections.map((t) => (
+                          <GlassCheckbox
+                            key={t}
+                            label={t}
+                            checked={types.includes(t)}
+                            onClick={() => tog(t, types, setTypes)}
+                          />
+                        ))}
+                      </Section>
+                    ))}
                     <Section title="COLOUR">
-                      <div className="flex flex-wrap gap-2 pt-2 pb-1">
-                        {(filtersDB.standardColors.length > 0
-                          ? filtersDB.standardColors
-                          : filtersDB.colors
-                        ).map(({ value, hex }) => {
-                          const active = colors.includes(value);
-                          return (
-                            <button
-                              key={value}
-                              onClick={() => tog(value, colors, setColors)}
-                              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                                active
-                                  ? "bg-white/10 border-white/30 text-white"
-                                  : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                              }`}
-                              style={{ fontFamily: "'Inter', sans-serif" }}
-                            >
-                              <span
-                                className="w-2.5 h-2.5 rounded-full border border-white/20 shadow-sm"
-                                style={{ background: hex }}
-                              />
-                              {value}
-                            </button>
-                          );
-                        })}
-                      </div>
+                      {(filtersDB.standardColors.length > 0
+                        ? filtersDB.standardColors
+                        : filtersDB.colors
+                      ).map(({ value, hex }) => (
+                        <GlassCheckbox
+                          key={value}
+                          label={value}
+                          colorDot={hex}
+                          checked={colors.includes(value)}
+                          onClick={() => tog(value, colors, setColors)}
+                        />
+                      ))}
+                    </Section>
+                    <Section title="FINISH">
+                      {filtersDB.styles.map((s) => (
+                        <GlassCheckbox
+                          key={s}
+                          label={s}
+                          checked={finishes.includes(s)}
+                          onClick={() => tog(s, finishes, setFinishes)}
+                        />
+                      ))}
                     </Section>
                     {(types.length > 0 ||
                       colors.length > 0 ||
@@ -1080,6 +987,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
                             setTypes([]);
                             setColors([]);
                             setFinishes([]);
+                            setSeries([]);
                             setManufacturers([]);
                           }}
                           className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
