@@ -16,11 +16,24 @@ import prisma from "../config/prisma.js";
  *  limit        – results per page (default 20, max 100)
  */
 
+const EXCLUDED_MANUFACTURERS = ['Glen Gery'];
+
 const buildWhere = (query) => {
   const { search, colour, collection, style, manufacturer, material, series } = query;
 
   const where = {};
   const AND = [];
+
+  // Always exclude certain manufacturers
+  AND.push({
+    product: {
+      manufacturers: {
+        none: {
+          manufacturer: { name: { in: EXCLUDED_MANUFACTURERS, mode: 'insensitive' } },
+        },
+      },
+    },
+  });
 
   // Default to only active variants; allow explicit override via ?isActive=false
   const activeFilter = query.isActive !== undefined ? query.isActive === "true" : true;
@@ -284,9 +297,10 @@ export const getFilterOptions = async (query = {}) => {
     }),
   ]);
 
-  // Group collections under each manufacturer
+  // Group collections under each manufacturer (skip excluded manufacturers)
   const mfgMap = {};
   for (const row of manufacturerRows) {
+    if (EXCLUDED_MANUFACTURERS.some(e => e.toLowerCase() === row.name.toLowerCase())) continue;
     if (!mfgMap[row.name]) mfgMap[row.name] = { id: row.id, name: row.name, collections: [] };
     mfgMap[row.name].collections.push(row.collection);
   }

@@ -36,7 +36,10 @@ function getStyles(brick) {
 }
 
 // Process all bricks
-export const bricks = bricksRaw.map((b, i) => {
+export const bricks = bricksRaw.filter(b => {
+  const mfr = (b.manufacturer || b.allManufacturers?.[0] || '').toLowerCase();
+  return !mfr.includes('glen gery');
+}).map((b, i) => {
   const colors = getAllColors(b);
   const collections = normalizeCollections(b);
   const styles = getStyles(b);
@@ -79,9 +82,11 @@ function normalizeCollectionName(name) {
   return name;
 }
 
+const HIDDEN_COLLECTIONS = new Set(['Elongated Brick', 'Tumbled', 'Tumbled Brick']);
+
 export const allCollections = [...new Set(
   bricks.flatMap(b => b.collections.map(normalizeCollectionName)).filter(Boolean)
-)].sort();
+)].sort().filter(c => !HIDDEN_COLLECTIONS.has(c));
 
 export const allStyles = [...new Set(bricks.flatMap(b => b.styles).filter(Boolean))].sort();
 

@@ -41,12 +41,25 @@ export default function UnderConstruction({ navigate }) {
           {/* Body */}
           <motion.p
             {...fade(0.2)}
-            className="text-white/50 text-[17px] sm:text-[19px] max-w-xl leading-relaxed font-light mb-8"
+            className="text-white/50 text-[17px] sm:text-[19px] max-w-xl leading-relaxed font-light mb-6"
           >
-            This section is currently being finalized and will be available shortly. In the meantime, our team is ready to help with any product questions, availability, or project requirements.
-
-            For faster assistance, please call us directly and we’ll be happy to guide you.
+            This section is currently being finalized and will be available shortly. In the meantime, our team is ready to help with any product inquiries, availability, or project requirements. Either call us directly or visit our showroom, where you can browse through a wide selection of 10,000+ products. See the materials up close, touch them, and experience the feeling in person before choosing what’s right for your project.
           </motion.p>
+
+          {/* Call CTA highlight */}
+          <motion.a
+            {...fade(0.28)}
+            href="tel:+19059390695"
+            className="group inline-flex items-center gap-2 mb-8 text-white/40 hover:text-white/70 transition-colors duration-300"
+          >
+            <Phone size={13} className="text-[#c9a449] flex-shrink-0" />
+            <span className="text-[15px] font-bold tracking-wide">
+              For faster assistance —{' '}
+              <span className="text-[#c9a449] group-hover:underline underline-offset-4">
+                call us directly
+              </span>
+            </span>
+          </motion.a>
 
           {/* Buttons */}
           <motion.div {...fade(0.3)} className="flex flex-wrap items-center gap-5">
