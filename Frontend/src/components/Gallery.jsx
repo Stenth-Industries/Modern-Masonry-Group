@@ -75,25 +75,21 @@ export default function Gallery({ navigate }) {
 
       <div className="relative z-10 flex flex-col flex-grow">
         {/* Header */}
-        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-28 pb-14 text-center">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-36 pb-14 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="text-[#c9a449] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">
+            <span className="text-[var(--brass)] text-[13px] font-bold tracking-[0.25em] uppercase mb-4 block">
               Our Work
             </span>
             <h1
-              className="text-[40px] sm:text-[56px] md:text-[72px] font-serif tracking-tight leading-[0.9] text-[#e3decb] mb-6"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
+              className="text-[40px] sm:text-[56px] md:text-[72px] font-black tracking-tight leading-[0.9] text-[var(--limestone)] mb-6"
             >
               Project Gallery
             </h1>
-            <p
-              className="text-[18px] text-white/40 max-w-xl mx-auto leading-relaxed italic"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
+            <p className="text-[18px] text-white/40 max-w-xl mx-auto leading-relaxed font-light">
               A curated collection of our finest masonry installations across residential and commercial projects.
             </p>
           </motion.div>
@@ -108,7 +104,7 @@ export default function Gallery({ navigate }) {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-6 py-2 rounded-full text-[11px] font-bold tracking-[0.12em] uppercase transition-all duration-300 ${
                   activeCategory === cat
-                    ? 'bg-[#c9a449] text-black shadow-[0_0_20px_rgba(201,164,73,0.3)]'
+                    ? 'bg-[var(--brass)] text-black shadow-[0_0_20px_rgba(201,164,73,0.3)]'
                     : 'text-white/50 hover:text-white'
                 }`}
               >
@@ -133,7 +129,7 @@ export default function Gallery({ navigate }) {
                   key={img.id}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.35, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] } }}
-                  className="relative group mb-5 break-inside-avoid overflow-hidden rounded-[10px] border border-white/[0.06] hover:border-[#c9a449]/60 cursor-pointer shadow-xl shadow-black/40 transition-colors duration-300"
+                  className="relative group mb-5 break-inside-avoid overflow-hidden rounded-[10px] border border-white/[0.06] hover:border-[var(--brass)]/60 cursor-pointer shadow-xl shadow-black/40 transition-colors duration-300"
                   onClick={() => setSelectedIdx(i)}
                 >
                   <img
@@ -150,10 +146,10 @@ export default function Gallery({ navigate }) {
                   {/* Info on hover */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 flex justify-between items-end">
                     <div>
-                      <span className="text-[#c9a449] text-[9px] font-bold tracking-[0.2em] uppercase block mb-1">{img.category}</span>
-                      <h3 className="text-white text-[15px] font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{img.title}</h3>
+                      <span className="text-[var(--brass)] text-[9px] font-bold tracking-[0.2em] uppercase block mb-1">{img.category}</span>
+                      <h3 className="text-white text-[15px] font-semibold tracking-tight">{img.title}</h3>
                     </div>
-                    <div className="w-9 h-9 rounded-full bg-black/50 border border-[#c9a449]/40 flex items-center justify-center text-[#c9a449]">
+                    <div className="w-9 h-9 rounded-full bg-black/50 border border-[var(--brass)]/40 flex items-center justify-center text-[var(--brass)]">
                       <ZoomIn size={15} />
                     </div>
                   </div>
@@ -222,7 +218,7 @@ export default function Gallery({ navigate }) {
             {/* Left arrow */}
             <button
               onClick={goPrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[#c9a449]/40 transition-all duration-200"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[var(--brass)]/40 transition-all duration-200"
             >
               <ChevronLeft size={22} />
             </button>
@@ -230,7 +226,7 @@ export default function Gallery({ navigate }) {
             {/* Right arrow */}
             <button
               onClick={goNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[#c9a449]/40 transition-all duration-200"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 hover:border-[var(--brass)]/40 transition-all duration-200"
             >
               <ChevronRight size={22} />
             </button>
@@ -245,13 +241,10 @@ export default function Gallery({ navigate }) {
               onClick={(e) => e.stopPropagation()}
             >
               <div>
-                <span className="text-[#c9a449] text-[10px] font-bold tracking-[0.25em] uppercase block mb-1">
+                <span className="text-[var(--brass)] text-[10px] font-bold tracking-[0.25em] uppercase block mb-1">
                   {selected.category}
                 </span>
-                <h3
-                  className="text-[#e3decb] text-[22px] leading-tight"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
-                >
+                <h3 className="text-[var(--limestone)] text-[22px] leading-tight font-bold tracking-tight">
                   {selected.title}
                 </h3>
               </div>
@@ -264,7 +257,7 @@ export default function Gallery({ navigate }) {
                     onClick={() => { setSelectedIdx(i); setImgKey(k => k + 1); }}
                     className={`rounded-full transition-all duration-300 ${
                       i === selectedIdx
-                        ? 'w-5 h-1.5 bg-[#c9a449]'
+                        ? 'w-5 h-1.5 bg-[var(--brass)]'
                         : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                     }`}
                   />
