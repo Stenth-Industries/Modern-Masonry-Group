@@ -97,6 +97,7 @@ const resolveColorHex = (name, apiHex) => {
 const DEFAULT_FILTERS = {
   manufacturersWithCollections: [],
   colors: [],
+  standardColors: [],
   styles: [],
   series: [],
 };
@@ -147,14 +148,28 @@ function GlassCheckbox({ checked, label, count, onClick, colorDot }) {
 
 // ── Dropdown Section ─────────────────────────────────────────────────────────
 
-function Section({ title, children, defaultOpen = true }) {
+function Section({ title, children, defaultOpen = true, checked, onCheck }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="mb-6">
-      <div className="flex items-center justify-between w-full pb-4 border-b border-[rgba(255,255,255,0.05)] mb-4">
-        <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a449] font-bold">
-          {title}
-        </span>
+      <div className="flex items-center justify-between w-full pb-4 border-b border-[rgba(255,255,255,0.05)] mb-4 group">
+        {onCheck ? (
+          <button
+            onClick={onCheck}
+            className="flex items-center gap-2 outline-none"
+          >
+            <div className={`w-3.5 h-3.5 rounded-[3px] border flex items-center justify-center transition-colors ${checked ? "bg-[#c9a449] border-[#c9a449]" : "border-white/20 bg-transparent"}`}>
+              {checked && <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+            </div>
+            <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a449] hover:text-white transition-colors font-bold">
+              {title}
+            </span>
+          </button>
+        ) : (
+          <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a449] font-bold">
+            {title}
+          </span>
+        )}
         <button onClick={() => setOpen(!open)} className="outline-none ml-2">
           <ChevronDown
             size={13}
@@ -355,10 +370,37 @@ const PremiumCard = React.memo(function PremiumCard({
 
 // ── Main UI ──────────────────────────────────────────────────────────────────
 
-
 export default function StoneCatalogue({ navigate, initialQuery = "" }) {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
+
+  const pdfContentRef = useRef(null);
+  const [mainCenter, setMainCenter] = useState("50%");
+  const [paginationVisible, setPaginationVisible] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (pdfContentRef.current) {
+        const rect = pdfContentRef.current.getBoundingClientRect();
+        setPaginationVisible(rect.bottom > window.innerHeight + 60);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      if (!pdfContentRef.current) return;
+      const rect = pdfContentRef.current.getBoundingClientRect();
+      setMainCenter(`${rect.left + rect.width / 2}px`);
+    };
+    const ro = new ResizeObserver(measure);
+    if (pdfContentRef.current) ro.observe(pdfContentRef.current);
+    window.addEventListener("resize", measure);
+    setTimeout(measure, 50);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
 
   useEffect(() => {
     if (initialQuery !== query) {
@@ -388,32 +430,43 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-  // Load filters for stone material only
+  // Load filters — Stone for structure, Brick for standardColors (pipeline runs on Brick)
   useEffect(() => {
-    fetch("/api/products/filters?material=Stone")
-      .then(async (res) => {
-        const text = await res.text();
-        if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
-        if (!text) return { success: true, data: { manufacturersWithCollections: [], colours: [], styles: [], series: [] } };
-        try { return JSON.parse(text); } catch (e) { throw new Error("Invalid filter JSON: " + text.substring(0, 100)); }
-      })
-      .then((r) => {
-        if (r.success && r.data) {
-          setFiltersDB({
-            manufacturersWithCollections: r.data.manufacturersWithCollections || [],
-            colors: r.data.colours
-              .map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
-              .sort((a, b) => {
-                const isOtherA = a.value.toLowerCase() === "other";
-                const isOtherB = b.value.toLowerCase() === "other";
-                if (isOtherA) return 1;
-                if (isOtherB) return -1;
-                return 0;
-              }),
-            styles: r.data.styles.map((s) => s.value),
-            series: r.data.series ? r.data.series.map((s) => s.value) : [],
-          });
-        }
+    const parseJSON = async (res) => {
+      const text = await res.text();
+      if (!res.ok) throw new Error(`Status ${res.status}: ${text}`);
+      if (!text) return { success: true, data: { manufacturersWithCollections: [], colours: [], styles: [], series: [], standardColors: [] } };
+      try { return JSON.parse(text); } catch (e) { throw new Error("Invalid filter JSON: " + text.substring(0, 100)); }
+    };
+
+    Promise.all([
+      fetch("/api/products/filters?material=Stone").then(parseJSON),
+      fetch("/api/products/filters?material=Brick").then(parseJSON),
+    ])
+      .then(([stoneR, brickR]) => {
+        if (!stoneR.success || !stoneR.data) return;
+        const rawColours = stoneR.data.colours || [];
+        // Always use Brick's standardColors as the master color list so both catalogues show identical options
+        const rawStandard = brickR.data?.standardColors || stoneR.data.standardColors || [];
+
+        setFiltersDB({
+          manufacturersWithCollections: stoneR.data.manufacturersWithCollections || [],
+          standardColors: rawStandard.map((c) => ({
+            value: c.value,
+            hex: resolveColorHex(c.value, c.hexCode),
+          })),
+          colors: rawColours
+            .map((c) => ({ value: c.value, hex: resolveColorHex(c.value, c.hexCode) }))
+            .sort((a, b) => {
+              const isOtherA = a.value.toLowerCase() === "other";
+              const isOtherB = b.value.toLowerCase() === "other";
+              if (isOtherA) return 1;
+              if (isOtherB) return -1;
+              return 0;
+            }),
+          styles: stoneR.data.styles.map((s) => s.value),
+          series: stoneR.data.series ? stoneR.data.series.map((s) => s.value) : [],
+        });
       })
       .catch((e) => console.error("Stone Filter Fetch Error:", e));
   }, []);
@@ -491,11 +544,11 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
     return () => controller.abort();
   }, [debouncedQuery, collections, colors, finishes, manufacturers, page]);
 
-  // Reset pagination on filter change (do NOT clear products — keep old images visible until new ones load)
+  // Reset pagination on filter change
   useEffect(() => {
     setPage(1);
+    setProducts([]);
   }, [debouncedQuery, collections, colors, finishes, manufacturers]);
-
 
   const tog = useCallback((val, getter, setter) => {
     setter(getter.includes(val) ? getter.filter((x) => x !== val) : [...getter, val]);
@@ -519,9 +572,6 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
 
   const displayedProducts = showFavourites ? favourites : products;
 
-  // Stone series = collections from Arriscraft International
-  const stoneSeries = filtersDB.manufacturersWithCollections[0]?.collections || [];
-
   const getPagination = () => {
     if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i + 1);
     if (page <= 3) return [1, 2, 3, 4, "...", totalPages];
@@ -529,57 +579,115 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
     return [1, "...", page - 1, page, page + 1, "...", totalPages];
   };
 
-  const SidebarContent = () => (
+  // Shared sidebar filter JSX — rendered inline (not as inner component) to keep AnimatePresence working
+  const renderSidebarFilters = () => (
     <>
-      {filtersDB.manufacturersWithCollections.length > 0 && (
-        <>
-          <div className="mb-2">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold">Manufacturer</span>
+      <Section title="MANUFACTURER" defaultOpen={true}>
+        <div className="flex flex-wrap gap-2 pt-2 pb-1">
+          {filtersDB.manufacturersWithCollections.map((mfg) => {
+            const active = manufacturers.includes(mfg.name);
+            return (
+              <button
+                key={mfg.name}
+                onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                  active
+                    ? "bg-white/10 border-white/30 text-white"
+                    : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                }`}
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                {mfg.name}
+              </button>
+            );
+          })}
+        </div>
+        <AnimatePresence>
+          {manufacturers.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              className="p-4 border border-white/10 bg-white/[0.02] rounded-xl overflow-hidden"
+            >
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold mb-3 block">Series</span>
+              <div className="flex flex-wrap gap-2">
+                {filtersDB.manufacturersWithCollections
+                  .filter(mfg => manufacturers.includes(mfg.name))
+                  .flatMap(mfg => mfg.collections)
+                  .map(t => {
+                    const active = collections.includes(t);
+                    return (
+                      <button
+                        key={t}
+                        onClick={() => tog(t, collections, setCollections)}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11px] font-medium transition-colors ${
+                          active
+                            ? "bg-[#c9a449]/20 border-[#c9a449]/50 text-white"
+                            : "bg-black/20 border-white/10 text-[#9a9488] hover:border-white/30 hover:text-[#e3decb]"
+                        }`}
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        {t}
+                      </button>
+                    );
+                  })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Section>
+      <Section title="COLOUR">
+        <div className="flex flex-wrap gap-2 pt-2 pb-1">
+          {(filtersDB.standardColors.length > 0
+            ? filtersDB.standardColors
+            : filtersDB.colors
+          ).map(({ value, hex }) => {
+            const active = colors.includes(value);
+            return (
+              <button
+                key={value}
+                onClick={() => tog(value, colors, setColors)}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                  active
+                    ? "bg-white/10 border-white/30 text-white"
+                    : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                }`}
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                <span
+                  className="w-2.5 h-2.5 rounded-full border border-white/20 shadow-sm"
+                  style={{ background: hex }}
+                />
+                {value}
+              </button>
+            );
+          })}
+        </div>
+      </Section>
+      {filtersDB.styles.length > 0 && (
+        <Section title="FINISH">
+          <div className="flex flex-wrap gap-2 pt-2 pb-1">
+            {filtersDB.styles.map((s) => {
+              const active = finishes.includes(s);
+              return (
+                <button
+                  key={s}
+                  onClick={() => tog(s, finishes, setFinishes)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                    active
+                      ? "bg-white/10 border-white/30 text-white"
+                      : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                  }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  {s}
+                </button>
+              );
+            })}
           </div>
-          {filtersDB.manufacturersWithCollections.map((mfg) => (
-            <GlassCheckbox
-              key={mfg.name}
-              label={mfg.name}
-              checked={manufacturers.includes(mfg.name)}
-              onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
-            />
-          ))}
-          <div className="h-px bg-white/10 my-4" />
-        </>
-      )}
-      {stoneSeries.length > 0 && (
-        <Section title="SERIES">
-          {stoneSeries.map((s) => (
-            <GlassCheckbox
-              key={s}
-              label={s}
-              checked={collections.includes(s)}
-              onClick={() => tog(s, collections, setCollections)}
-            />
-          ))}
         </Section>
       )}
-      <Section title="COLOUR">
-        {filtersDB.colors.map(({ value, hex }) => (
-          <GlassCheckbox
-            key={value}
-            label={value}
-            colorDot={hex}
-            checked={colors.includes(value)}
-            onClick={() => tog(value, colors, setColors)}
-          />
-        ))}
-      </Section>
-      <Section title="FINISH">
-        {filtersDB.styles.map((s) => (
-          <GlassCheckbox
-            key={s}
-            label={s}
-            checked={finishes.includes(s)}
-            onClick={() => tog(s, finishes, setFinishes)}
-          />
-        ))}
-      </Section>
     </>
   );
 
@@ -618,8 +726,8 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
           </div>
         </div>
 
-        {/* Sticky Filter Bar */}
-        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 flex items-center justify-between z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+        {/* FULL WIDTH HORIZONTAL FILTER BAR */}
+        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 grid grid-cols-[auto_1fr_auto] items-center gap-4 z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-4 md:gap-8">
             <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">
               {showFavourites ? favourites.length : total} products
@@ -630,8 +738,8 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
             >
               <SlidersHorizontal size={14} />
               Filters
-              {collections.length + colors.length + finishes.length > 0 &&
-                ` (${collections.length + colors.length + finishes.length})`}
+              {collections.length + colors.length + finishes.length + manufacturers.length > 0 &&
+                ` (${collections.length + colors.length + finishes.length + manufacturers.length})`}
             </button>
             <button
               onClick={() => setShowFavourites(!showFavourites)}
@@ -642,26 +750,31 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
             </button>
           </div>
 
-          <div className="hidden md:flex items-center gap-3 flex-1 justify-center">
-            {[...collections, ...colors, ...finishes].map((v) => (
-              <div key={v} className="flex items-center gap-2 bg-[#1a1815] border border-white/5 px-3 py-1.5 rounded-sm">
-                <span className="text-[11px] text-[#e3decb] tracking-wide">{v}</span>
+          {/* Active filter chips — centered column */}
+          <div className="hidden md:flex items-center justify-center gap-2 overflow-x-auto scrollbar-none">
+            {[...collections, ...colors, ...finishes, ...manufacturers].map((v) => (
+              <div
+                key={v}
+                className="flex items-center gap-1.5 bg-white/[0.06] border border-white/10 px-3 py-1 rounded-full shrink-0"
+              >
+                <span className="text-[13px] text-[#e3decb] tracking-wide whitespace-nowrap">{v}</span>
                 <button
                   onClick={() => {
                     if (collections.includes(v)) setCollections(collections.filter((x) => x !== v));
                     if (colors.includes(v)) setColors(colors.filter((x) => x !== v));
                     if (finishes.includes(v)) setFinishes(finishes.filter((x) => x !== v));
+                    if (manufacturers.includes(v)) setManufacturers(manufacturers.filter((x) => x !== v));
                   }}
-                  className="text-[#9a9488] hover:text-white pl-1"
+                  className="text-[#9a9488] hover:text-white transition-colors"
                 >
-                  ×
+                  <X size={10} />
                 </button>
               </div>
             ))}
-            {(collections.length > 0 || colors.length > 0 || finishes.length > 0) && (
+            {[...collections, ...colors, ...finishes, ...manufacturers].length > 1 && (
               <button
-                onClick={() => { setCollections([]); setColors([]); setFinishes([]); }}
-                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors ml-3"
+                onClick={() => { setCollections([]); setColors([]); setFinishes([]); setManufacturers([]); }}
+                className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-[#c9a449] uppercase transition-colors shrink-0 ml-1"
               >
                 Clear All
               </button>
@@ -712,7 +825,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                 <SlidersHorizontal size={14} className="text-[#c9a449]" />
                 <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#e3decb] font-bold">REFINE</h2>
               </div>
-              <SidebarContent />
+              {renderSidebarFilters()}
             </div>
           </motion.aside>
 
@@ -744,10 +857,115 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                         <X size={18} />
                       </button>
                     </div>
-                    <SidebarContent />
-                    {(collections.length > 0 || colors.length > 0 || finishes.length > 0) && (
+                    <Section title="MANUFACTURER" defaultOpen={true}>
+                      <div className="flex flex-wrap gap-2 pt-2 pb-1">
+                        {filtersDB.manufacturersWithCollections.map((mfg) => {
+                          const active = manufacturers.includes(mfg.name);
+                          return (
+                            <button
+                              key={mfg.name}
+                              onClick={() => tog(mfg.name, manufacturers, setManufacturers)}
+                              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                                active
+                                  ? "bg-white/10 border-white/30 text-white"
+                                  : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                              }`}
+                              style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                              {mfg.name}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <AnimatePresence>
+                        {manufacturers.length > 0 && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                            animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                            className="p-4 border border-white/10 bg-white/[0.02] rounded-xl overflow-hidden"
+                          >
+                            <span className="text-[10px] uppercase tracking-[0.25em] text-[#c9a449] font-bold mb-3 block">Series</span>
+                            <div className="flex flex-wrap gap-2">
+                              {filtersDB.manufacturersWithCollections
+                                .filter(mfg => manufacturers.includes(mfg.name))
+                                .flatMap(mfg => mfg.collections)
+                                .map(t => {
+                                  const active = collections.includes(t);
+                                  return (
+                                    <button
+                                      key={t}
+                                      onClick={() => tog(t, collections, setCollections)}
+                                      className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11px] font-medium transition-colors ${
+                                        active
+                                          ? "bg-[#c9a449]/20 border-[#c9a449]/50 text-white"
+                                          : "bg-black/20 border-white/10 text-[#9a9488] hover:border-white/30 hover:text-[#e3decb]"
+                                      }`}
+                                      style={{ fontFamily: "'Inter', sans-serif" }}
+                                    >
+                                      {t}
+                                    </button>
+                                  );
+                                })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </Section>
+                    <Section title="COLOUR">
+                      <div className="flex flex-wrap gap-2 pt-2 pb-1">
+                        {(filtersDB.standardColors.length > 0
+                          ? filtersDB.standardColors
+                          : filtersDB.colors
+                        ).map(({ value, hex }) => {
+                          const active = colors.includes(value);
+                          return (
+                            <button
+                              key={value}
+                              onClick={() => tog(value, colors, setColors)}
+                              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                                active
+                                  ? "bg-white/10 border-white/30 text-white"
+                                  : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                              }`}
+                              style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                              <span
+                                className="w-2.5 h-2.5 rounded-full border border-white/20 shadow-sm"
+                                style={{ background: hex }}
+                              />
+                              {value}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </Section>
+                    {filtersDB.styles.length > 0 && (
+                      <Section title="FINISH">
+                        <div className="flex flex-wrap gap-2 pt-2 pb-1">
+                          {filtersDB.styles.map((s) => {
+                            const active = finishes.includes(s);
+                            return (
+                              <button
+                                key={s}
+                                onClick={() => tog(s, finishes, setFinishes)}
+                                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
+                                  active
+                                    ? "bg-white/10 border-white/30 text-white"
+                                    : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                                }`}
+                                style={{ fontFamily: "'Inter', sans-serif" }}
+                              >
+                                {s}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </Section>
+                    )}
+                    {(collections.length > 0 || colors.length > 0 || finishes.length > 0 || manufacturers.length > 0) && (
                       <button
-                        onClick={() => { setCollections([]); setColors([]); setFinishes([]); }}
+                        onClick={() => { setCollections([]); setColors([]); setFinishes([]); setManufacturers([]); }}
                         className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
                       >
                         Clear All Filters
@@ -760,14 +978,14 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
           </AnimatePresence>
 
           {/* Main Grid */}
-          <main className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32">
+          <main ref={pdfContentRef} className="flex-1 px-4 md:px-8 lg:px-12 pt-8 pb-32">
             {errorMsg && !showFavourites ? (
               <div className="w-full p-8 bg-red-900/40 border border-red-500 text-white rounded">
                 API Error: {errorMsg}
               </div>
             ) : (
               <motion.div
-                key="product-grid"
+                key={`grid-${page}-${debouncedQuery}`}
                 initial="hidden"
                 animate="visible"
                 variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
@@ -794,61 +1012,72 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
               </motion.div>
             )}
 
-            {showFavourites ? (
+            {showFavourites && (
               <div className="w-full flex justify-center mt-20">
                 <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
                   {favourites.length > 0 ? "All Favourites Displayed" : "No favourites yet"}
                 </span>
               </div>
-            ) : totalPages > 1 ? (
+            )}
+            {!showFavourites && totalPages <= 1 && products.length > 0 && !loading && (
               <div className="w-full flex justify-center mt-20">
-                <div className="flex gap-2 items-center bg-[#1a1815] px-4 py-2 rounded-full border border-white/5">
-                  <button
-                    disabled={page === 1 || loading}
-                    onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
-                  >
-                    PREV
-                  </button>
-                  <div className="w-px h-4 bg-white/10 mx-2" />
-                  {getPagination().map((p, index) =>
-                    p === "..." ? (
-                      <span key={`ellipsis-${index}`} className="text-white/40 px-2 font-bold tracking-widest">...</span>
-                    ) : (
-                      <button
-                        key={p}
-                        disabled={loading}
-                        onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                        className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_15px_rgba(201,164,73,0.3)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`}
-                      >
-                        {p}
-                      </button>
-                    )
-                  )}
-                  <div className="w-px h-4 bg-white/10 mx-2" />
-                  <button
-                    disabled={page === totalPages || loading}
-                    onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase disabled:opacity-30 text-white/50 hover:text-[#c9a449] transition-colors"
-                  >
-                    NEXT
-                  </button>
-                </div>
+                <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
+                  All Collections Displayed
+                </span>
               </div>
-            ) : (
-              products.length > 0 && !loading && (
-                <div className="w-full flex justify-center mt-20">
-                  <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
-                    All Collections Displayed
-                  </span>
-                </div>
-              )
             )}
           </main>
         </div>
 
         <Footer />
       </div>
+
+      {/* Floating Pagination Bar */}
+      <AnimatePresence>
+        {!showFavourites && totalPages > 1 && paginationVisible && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ type: "spring", damping: 28, stiffness: 300 }}
+            className="fixed z-40 -translate-x-1/2"
+            style={{ left: mainCenter, bottom: compareQueue.length > 0 && !showCompare ? "6rem" : "1.5rem" }}
+          >
+            <div className="flex gap-1 items-center bg-[#12100e]/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] shadow-[0_8px_40px_rgba(0,0,0,0.6)] px-3 py-2 rounded-full">
+              <button
+                disabled={page === 1 || loading}
+                onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
+              >
+                ← PREV
+              </button>
+              <div className="w-px h-4 bg-white/10 mx-1" />
+              {getPagination().map((p, index) =>
+                p === "..." ? (
+                  <span key={`float-ellipsis-${index}`} className="text-white/30 px-1 text-[11px] font-bold">...</span>
+                ) : (
+                  <button
+                    key={`float-${p}`}
+                    disabled={loading}
+                    onClick={() => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className={`w-8 h-8 flex items-center justify-center rounded-full text-[11px] font-bold transition-all ${p === page ? "text-black bg-[#c9a449] shadow-[0_0_12px_rgba(201,164,73,0.4)]" : "text-white/50 hover:bg-white/10 hover:text-white"}`}
+                  >
+                    {p}
+                  </button>
+                )
+              )}
+              <div className="w-px h-4 bg-white/10 mx-1" />
+              <button
+                disabled={page === totalPages || loading}
+                onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase disabled:opacity-25 text-white/50 hover:text-[#c9a449] transition-colors"
+              >
+                NEXT →
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Floating Compare Bar */}
       <AnimatePresence>
