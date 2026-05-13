@@ -1012,6 +1012,37 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
               </motion.div>
             )}
 
+            {!loading && !showFavourites && !errorMsg && products.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full flex flex-col items-center justify-center py-32 gap-5"
+              >
+                <div className="w-12 h-px bg-[#c9a449]/30" />
+                <p
+                  className="text-[28px] text-[#e3decb]/50 font-normal tracking-tight"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  No Products Found
+                </p>
+                <p
+                  className="text-[11px] uppercase tracking-[0.2em] text-[#9a9488]"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  Try adjusting or clearing your filters
+                </p>
+                <div className="w-12 h-px bg-[#c9a449]/30" />
+                <button
+                  onClick={() => { setCollections([]); setColors([]); setFinishes([]); setManufacturers([]); setQuery(""); }}
+                  className="mt-1 px-6 py-2 text-[11px] font-bold uppercase tracking-[0.15em] border border-[#c9a449]/40 text-[#c9a449] hover:bg-[#c9a449]/10 rounded-full transition-colors"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  Clear All Filters
+                </button>
+              </motion.div>
+            )}
+
             {showFavourites && (
               <div className="w-full flex justify-center mt-20">
                 <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-white/30">
