@@ -12,6 +12,12 @@ import FloatingCTA from './components/FloatingCTA';
 import Gallery from './components/Gallery';
 import UnderConstruction from './components/UnderConstruction';
 
+// Flip to false when the page is ready to go live
+const UNDER_CONSTRUCTION = {
+  about: true,
+  services: true,
+};
+
 export default function App() {
   const [view, setView] = useState('home');
   const [brickId, setBrickId] = useState(null);
@@ -82,9 +88,9 @@ export default function App() {
           </div>
         )}
         {view === 'stone-detail' && <StoneDetail stoneId={stoneId} navigate={navigate} />}
-        {view === 'services' && <Services navigate={navigate} />}
+        {view === 'services' && (UNDER_CONSTRUCTION.services ? <UnderConstruction navigate={navigate} /> : <Services navigate={navigate} />)}
         {view === 'gallery' && <Gallery navigate={navigate} />}
-        {view === 'about' && <AboutPage navigate={navigate} />}
+        {view === 'about' && (UNDER_CONSTRUCTION.about ? <UnderConstruction navigate={navigate} /> : <AboutPage navigate={navigate} />)}
         {view === 'quote' && <QuotePage navigate={navigate} />}
         {view === 'under-construction' && <UnderConstruction navigate={navigate} />}
         {view === 'home' && <Homepage navigate={navigate} />}
