@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
   try {
-    const options = await getFilterOptions();
+    const options = await getFilterOptions(req.query);
     res.status(200).json({ success: true, data: options });
   } catch (error) {
     console.error('[api/products/filters] getFilterOptions:', error);
