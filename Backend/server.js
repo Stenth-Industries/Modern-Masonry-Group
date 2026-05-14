@@ -14,6 +14,9 @@ const ALLOWED_ORIGINS = [
   'https://modern-masonry-group.vercel.app',
 ];
 
+// Trust the first hop (Vercel / reverse proxy) so req.ip is the real client IP
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(helmet());
 app.use(cors({

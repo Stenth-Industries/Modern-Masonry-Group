@@ -6,7 +6,7 @@ export const getAllBricks = async (req, res) => {
         res.status(200).json({ success: true, count: data.length, data });
     } catch (error) {
         console.error('Error in getAllBricks controller:', error);
-        res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
 
@@ -22,7 +22,7 @@ export const getBrickById = async (req, res) => {
         res.status(200).json({ success: true, data });
     } catch (error) {
         console.error('Error in getBrickById controller:', error);
-        res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
 
