@@ -708,8 +708,8 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
         <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-20 md:pt-28 pb-8 md:pb-16 px-4 sm:px-6 md:px-10 xl:px-14 relative shrink-0">
           <div className="flex flex-col md:flex-row justify-between w-full gap-4 md:gap-8">
             <div>
-              <div className="flex items-center mb-5">
-                <span className="text-[#c9a449] text-m font-bold tracking-widest uppercase">
+              <div className="mb-5">
+                <span className="text-[#c9a449] text-[10px] sm:text-[11px] font-bold tracking-[0.12em] sm:tracking-widest uppercase">
                   Our Premium Brick Collection
                 </span>
               </div>
@@ -719,7 +719,7 @@ export default function BrickCatalogue({ navigate, initialQuery = "", initialPag
             </div>
             <div className="md:max-w-md pt-4 md:pt-14">
               <p
-                className="text-[15px] sm:text-[18px] md:text-[22px] tracking-[0.02em] leading-relaxed text-white/50 italic"
+                className="text-[15px] sm:text-[18px] md:text-[22px] tracking-[0.02em] leading-relaxed text-white/50 italic line-clamp-3 md:line-clamp-none"
                 style={{
                   fontFamily: "'Playfair Display', 'Cormorant Garamond', serif",
                 }}
