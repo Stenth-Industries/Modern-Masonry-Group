@@ -343,6 +343,8 @@ export const getFilterOptions = async (query = {}) => {
 // ── Single product by slug ─────────────────────────────────────────────────────
 
 export const getProductBySlug = async (slug) => {
+  if (!slug || typeof slug !== 'string' || slug.length > 200) return null;
+
   // First try by slug (normal case)
   let product = await prisma.product.findUnique({
     where: { slug },

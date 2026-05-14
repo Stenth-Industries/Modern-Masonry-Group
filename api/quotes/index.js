@@ -24,7 +24,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
-  const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket?.remoteAddress || 'unknown';
+  // x-real-ip is set by Vercel and cannot be spoofed; fall back to the
+  // rightmost (proxy-supplied) entry in x-forwarded-for, not the leftmost
+  // (which the client can forge).
+  const ip = req.headers['x-real-ip']
+    || req.headers['x-forwarded-for']?.split(',').at(-1)?.trim()
+    || 'unknown';
   if (isRateLimited(ip)) {
     return res.status(429).json({ success: false, message: 'Too many requests. Please try again later.' });
   }

@@ -1,4 +1,3 @@
-import supabase from '../config/supabase.js';
 import prisma from '../config/prisma.js';
 
 export const getAllExamples = async () => {

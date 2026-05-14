@@ -38,13 +38,23 @@ const quoteLimiter = rateLimit({
   message: { success: false, message: 'Too many requests. Please try again later.' },
 });
 
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many requests. Please try again later.' },
+});
+
 // Routes
 app.use('/api/quotes', quoteLimiter);
-app.use('/api', routes);
+app.use('/api', apiLimiter, routes);
 
-// Health check endpoint
-app.get('/', (req, res) => {
-    res.send('Backend server is running!');
+// Global error handler — catches any unhandled error from routes/middleware
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, _next) => {
+  console.error('[unhandled error]', err);
+  res.status(500).json({ success: false, message: 'Internal server error' });
 });
 
 // Start Server
