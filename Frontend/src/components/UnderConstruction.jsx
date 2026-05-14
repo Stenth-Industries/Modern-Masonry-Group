@@ -10,16 +10,16 @@ const fade = (delay = 0) => ({
 
 export default function UnderConstruction({ navigate }) {
   return (
-    <div className="min-h-screen relative font-sans text-white flex flex-col">
+    <div className="min-h-screen relative font-sans text-white flex flex-col items-center">
 
       {/* Background */}
       <div className="fixed inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg.png')" }} />
       <div className="fixed inset-0 z-0 bg-black/60" />
 
-      <div className="relative z-10 flex flex-col h-screen w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-20">
+      <div className="relative z-10 mt-32 mb-8 mx-auto w-[min(88vw,88vh)] aspect-square border border-[#c9a449]/40 flex flex-col px-8 sm:px-14 md:px-20 py-10 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]">
 
         {/* ── Top: main message ── */}
-        <div className="flex-1 flex flex-col justify-center items-center text-center pt-20">
+        <div className="flex-1 flex flex-col justify-center items-center text-center">
 
           {/* Label */}
           <motion.div {...fade(0)} className="mb-6 flex items-center gap-3">
@@ -77,48 +77,48 @@ export default function UnderConstruction({ navigate }) {
           </motion.div>
         </div>
 
-        {/* ── Bottom: contact strip ── */}
-        <motion.div
-          {...fade(0.45)}
-          className="border-t border-[var(--brass)]/20 py-8 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-0"
-        >
-          {/* Showroom */}
-          <div className="sm:pr-12 sm:border-r border-[var(--brass)]/15 flex items-start gap-4">
-            <div className="w-10 h-10 shrink-0 rounded-full border border-[var(--brass)]/30 flex items-center justify-center mt-0.5">
-              <MapPin size={16} className="text-[var(--brass)]" />
-            </div>
-            <div>
-              <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[var(--brass)] mb-2">Showroom</p>
-              <p className="text-[var(--limestone)] text-[18px] leading-snug mb-1">
-                7195 Highway 9, Schomberg ON
-              </p>
-              <p className="text-[var(--ash)] text-[13px] tracking-wide">
-                Mon &ndash; Fri &nbsp;8 am &ndash; 5 pm &nbsp;&middot;&nbsp; Sat &nbsp;9 am &ndash; 2 pm
-              </p>
-            </div>
-          </div>
-
-          {/* Direct Line */}
-          <div className="sm:pl-12 flex items-start gap-4">
-            <div className="w-10 h-10 shrink-0 rounded-full border border-[var(--brass)]/30 flex items-center justify-center mt-0.5">
-              <Phone size={16} className="text-[var(--brass)]" />
-            </div>
-            <div>
-              <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[var(--brass)] mb-2">Direct Line</p>
-              <a
-                href="tel:+19059390695"
-                className="text-[var(--limestone)] text-[28px] sm:text-[32px] leading-none tracking-tight hover:text-[var(--brass)] transition-colors duration-200 block mb-1"
-              >
-                +1 905 939 0695
-              </a>
-              <p className="text-[var(--ash)] text-[13px] leading-relaxed">
-                Available during showroom hours for product &amp; project inquiries.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
       </div>
+
+      {/* ── Bottom: contact strip ── */}
+      <motion.div
+        {...fade(0.45)}
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-20 border-t border-[var(--brass)]/20 py-8 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-0"
+      >
+        {/* Showroom */}
+        <div className="sm:pr-12 sm:border-r border-[var(--brass)]/15 flex items-start gap-4">
+          <div className="w-10 h-10 shrink-0 rounded-full border border-[var(--brass)]/30 flex items-center justify-center mt-0.5">
+            <MapPin size={16} className="text-[var(--brass)]" />
+          </div>
+          <div>
+            <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[var(--brass)] mb-2">Showroom</p>
+            <p className="text-[var(--limestone)] text-[18px] leading-snug mb-1">
+              7195 Highway 9, Schomberg ON
+            </p>
+            <p className="text-[var(--ash)] text-[13px] tracking-wide">
+              Mon &ndash; Fri &nbsp;8 am &ndash; 5 pm &nbsp;&middot;&nbsp; Sat &nbsp;9 am &ndash; 2 pm
+            </p>
+          </div>
+        </div>
+
+        {/* Direct Line */}
+        <div className="sm:pl-12 flex items-start gap-4">
+          <div className="w-10 h-10 shrink-0 rounded-full border border-[var(--brass)]/30 flex items-center justify-center mt-0.5">
+            <Phone size={16} className="text-[var(--brass)]" />
+          </div>
+          <div>
+            <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-[var(--brass)] mb-2">Direct Line</p>
+            <a
+              href="tel:+19059390695"
+              className="text-[var(--limestone)] text-[28px] sm:text-[32px] leading-none tracking-tight hover:text-[var(--brass)] transition-colors duration-200 block mb-1"
+            >
+              +1 905 939 0695
+            </a>
+            <p className="text-[var(--ash)] text-[13px] leading-relaxed">
+              Available during showroom hours for product &amp; project inquiries.
+            </p>
+          </div>
+        </div>
+      </motion.div>
 
       <Footer />
 

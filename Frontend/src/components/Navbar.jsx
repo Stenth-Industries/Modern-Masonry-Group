@@ -249,13 +249,17 @@ export default function Navbar({ navigate }) {
                 <div className="absolute top-[calc(100%+24px)] -left-4 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col py-3 border border-white/10 rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.6)] backdrop-blur-md bg-[var(--charcoal)]">
                   <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-white/[0.03] to-transparent pointer-events-none" />
                   <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{ backgroundImage: NOISE_SVG }} />
-                  {['Brick', 'Stone', 'Landscaping', 'Accessories', 'Rialux Siding'].map(p => (
-                    <a key={p} href={`#${p.toLowerCase()}`}
-                      onClick={e => { e.preventDefault(); navigate(`#${p.toLowerCase()}`); }}
+                  {['Brick', 'Stone', 'Landscaping', 'Accessories', 'Rialux Siding'].map(p => {
+                    const UC = ['Landscaping', 'Accessories', 'Rialux Siding'];
+                    const href = UC.includes(p) ? '#under-construction' : `#${p.toLowerCase()}`;
+                    return (
+                    <a key={p} href={href}
+                      onClick={e => { e.preventDefault(); navigate(href); }}
                       className="relative z-10 px-6 py-3 hover:bg-white/5 transition-colors text-xs uppercase tracking-[0.15em] font-medium text-white/60 hover:text-white border-b last:border-0 border-white/5 flex justify-between items-center">
                       {p} <ChevronDown size={12} className="opacity-30 -rotate-90" />
                     </a>
-                  ))}
+                  );
+                  })}
                 </div>
               </div>
             ) : <MagneticLink key={item.label} href={item.href}>{item.label}</MagneticLink>)}

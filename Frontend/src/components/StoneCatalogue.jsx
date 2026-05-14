@@ -242,7 +242,7 @@ const PremiumCard = React.memo(function PremiumCard({
         <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden border-b border-[rgba(255,255,255,0.02)] bg-[#111]">
           {product.image && !imgError ? (
             <img
-              src={product.image}
+              src={`https://wsrv.nl/?url=${encodeURIComponent(product.image)}&w=600&output=webp&q=75`}
               alt={product.name}
               className="w-full h-full object-cover scale-110 transition-transform duration-[2s] ease-out group-hover:scale-125"
               loading="lazy"
@@ -665,29 +665,6 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
           })}
         </div>
       </Section>
-      {filtersDB.styles.length > 0 && (
-        <Section title="FINISH">
-          <div className="flex flex-wrap gap-2 pt-2 pb-1">
-            {filtersDB.styles.map((s) => {
-              const active = finishes.includes(s);
-              return (
-                <button
-                  key={s}
-                  onClick={() => tog(s, finishes, setFinishes)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                    active
-                      ? "bg-white/10 border-white/30 text-white"
-                      : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                  }`}
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
-                  {s}
-                </button>
-              );
-            })}
-          </div>
-        </Section>
-      )}
     </>
   );
 
@@ -738,8 +715,8 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
             >
               <SlidersHorizontal size={14} />
               Filters
-              {collections.length + colors.length + finishes.length + manufacturers.length > 0 &&
-                ` (${collections.length + colors.length + finishes.length + manufacturers.length})`}
+              {collections.length + colors.length + manufacturers.length > 0 &&
+                ` (${collections.length + colors.length + manufacturers.length})`}
             </button>
             <button
               onClick={() => setShowFavourites(!showFavourites)}
@@ -752,7 +729,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
 
           {/* Active filter chips — centered column */}
           <div className="hidden md:flex items-center justify-center gap-2 overflow-x-auto scrollbar-none">
-            {[...collections, ...colors, ...finishes, ...manufacturers].map((v) => (
+            {[...collections, ...colors, ...manufacturers].map((v) => (
               <div
                 key={v}
                 className="flex items-center gap-1.5 bg-white/[0.06] border border-white/10 px-3 py-1 rounded-full shrink-0"
@@ -762,7 +739,6 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                   onClick={() => {
                     if (collections.includes(v)) setCollections(collections.filter((x) => x !== v));
                     if (colors.includes(v)) setColors(colors.filter((x) => x !== v));
-                    if (finishes.includes(v)) setFinishes(finishes.filter((x) => x !== v));
                     if (manufacturers.includes(v)) setManufacturers(manufacturers.filter((x) => x !== v));
                   }}
                   className="text-[#9a9488] hover:text-white transition-colors"
@@ -771,9 +747,9 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                 </button>
               </div>
             ))}
-            {[...collections, ...colors, ...finishes, ...manufacturers].length > 1 && (
+            {[...collections, ...colors, ...manufacturers].length > 1 && (
               <button
-                onClick={() => { setCollections([]); setColors([]); setFinishes([]); setManufacturers([]); }}
+                onClick={() => { setCollections([]); setColors([]); setManufacturers([]); }}
                 className="text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-[#c9a449] uppercase transition-colors shrink-0 ml-1"
               >
                 Clear All
@@ -940,32 +916,9 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                         })}
                       </div>
                     </Section>
-                    {filtersDB.styles.length > 0 && (
-                      <Section title="FINISH">
-                        <div className="flex flex-wrap gap-2 pt-2 pb-1">
-                          {filtersDB.styles.map((s) => {
-                            const active = finishes.includes(s);
-                            return (
-                              <button
-                                key={s}
-                                onClick={() => tog(s, finishes, setFinishes)}
-                                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-medium transition-colors ${
-                                  active
-                                    ? "bg-white/10 border-white/30 text-white"
-                                    : "bg-transparent border-white/15 text-white/60 hover:border-white/30 hover:text-white"
-                                }`}
-                                style={{ fontFamily: "'Inter', sans-serif" }}
-                              >
-                                {s}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </Section>
-                    )}
-                    {(collections.length > 0 || colors.length > 0 || finishes.length > 0 || manufacturers.length > 0) && (
+                    {(collections.length > 0 || colors.length > 0 || manufacturers.length > 0) && (
                       <button
-                        onClick={() => { setCollections([]); setColors([]); setFinishes([]); setManufacturers([]); }}
+                        onClick={() => { setCollections([]); setColors([]); setManufacturers([]); }}
                         className="mt-4 w-full text-[10px] font-bold tracking-[0.1em] text-[#9a9488] hover:text-white uppercase transition-colors border border-white/10 py-2 rounded"
                       >
                         Clear All Filters
@@ -1126,7 +1079,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                   <div key={p.id} className="flex items-center gap-2.5 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2">
                     <div className="w-10 h-10 rounded-md border border-[#c9a449]/30 overflow-hidden bg-[#1a1815] shrink-0">
                       {p.image ? (
-                        <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                        <img src={`https://wsrv.nl/?url=${encodeURIComponent(p.image)}&w=80&output=webp&q=70`} alt={p.name} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-[#3a2e1e]" />
                       )}

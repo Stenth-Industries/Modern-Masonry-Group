@@ -53,7 +53,7 @@ export default function App() {
         setView('about');
       } else if (path === '#gallery') {
         setView('gallery');
-      } else if (path === '#under-construction') {
+      } else if (path === '#under-construction' || path === '#landscaping' || path === '#accessories') {
         setView('under-construction');
       } else if (path === '#contact' || path === '#quote') {
         setView('quote');
