@@ -4,10 +4,10 @@ import { ArrowRight, ArrowUpRight, ChevronDown, Search, MapPin, Phone, Menu, X, 
 
 export function UtilityBar() {
   return (
-    <div className="bg-[#111111] border-b border-white/10 text-xs py-2 px-6 flex justify-between items-center text-[var(--ash)] z-[60] relative">
-      <div className="flex gap-6">
-        <span className="text-white flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><MapPin size={12} /> 7195 Highway 9, Schomberg, ON</span>
-        <span className="text-white hidden sm:flex items-center gap-2 hover:cursor-pointer transition-colors font-bold"><Phone size={12} /> +1 905-939-0695</span>
+    <div className="bg-[#111111] border-b border-white/10 text-xs py-2 px-3 sm:px-6 flex justify-between items-center text-[var(--ash)] z-[60] relative">
+      <div className="flex gap-3 sm:gap-6 min-w-0">
+        <span className="text-white flex items-center gap-1.5 sm:gap-2 hover:cursor-pointer transition-colors font-bold"><MapPin size={12} className="shrink-0" /> <span className="hidden sm:inline">7195 Highway 9, Schomberg, ON</span><span className="sm:hidden">Schomberg, ON</span></span>
+        <span className="text-white hidden sm:flex items-center gap-2 hover:cursor-pointer transition-colors font-bold shrink-0"><Phone size={12} /> +1 905-939-0695</span>
       </div>
       <div className="hidden md:flex gap-4">
         <div className="text-white hover:cursor-pointer transition-colors flex items-center gap-2 font-bold">Are you a builder / Architect ? <ArrowRight size={12} /></div>

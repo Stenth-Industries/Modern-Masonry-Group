@@ -394,7 +394,7 @@ const FAQSection = () => {
   const mid = Math.ceil(FAQS.length / 2);
 
   return (
-    <section id="faq" className="py-24 px-8 md:px-20">
+    <section id="faq" className="py-16 md:py-24 px-5 sm:px-8 md:px-20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-14 text-center">
           <p className="text-[var(--brass)] text-lg font-bold tracking-widest mb-4 uppercase">
@@ -439,7 +439,7 @@ export default function Homepage({ navigate }) {
       className="min-h-screen text-[var(--limestone)] font-sans selection:bg-[var(--brass)] selection:text-black"
     >
       {/* HERO */}
-      <section id="home" className="relative bg-black overflow-hidden" style={{ contain: "layout style", height: "calc(100vh / 0.90)" }}>
+      <section id="home" className="relative bg-black overflow-hidden" style={{ contain: "layout style", minHeight: "100svh" }}>
         {/* LOGO IN VIDEO */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -487,7 +487,7 @@ export default function Homepage({ navigate }) {
         </div>
 
         {/* Layer 2: Hero text content */}
-        <motion.div style={{ y: heroTextY, opacity: heroOpacity, willChange: "transform, opacity" }} className="px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[18vh]">
+        <motion.div style={{ y: heroTextY, opacity: heroOpacity, willChange: "transform, opacity" }} className="px-5 sm:px-8 md:px-20 z-10 relative w-full max-w-7xl pt-[20vh] sm:pt-[18vh]">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 text-white uppercase drop-shadow-2xl">
             <div className="flex gap-[0.25em] flex-wrap">
               {["Where", "Architecture"].map((w, i) => (
@@ -537,10 +537,10 @@ export default function Homepage({ navigate }) {
             transition={{ duration: 0.7, delay: 1 }}
             className="flex flex-wrap gap-4"
           >
-            <MagneticButton className="bg-[var(--brass)] text-black px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors flex items-center gap-2">
+            <MagneticButton className="bg-[var(--brass)] text-black px-5 py-3 sm:px-8 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-[var(--brass-light)] transition-colors flex items-center gap-2">
               Explore Products <ArrowRight size={16} />
             </MagneticButton>
-            <MagneticButton className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--brass)]/50 text-[var(--brass)] px-8 py-4 text-sm font-bold uppercase tracking-wider hover:border-[var(--brass)] hover:text-black transition-all duration-300 flex items-center gap-2">
+            <MagneticButton className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--brass)]/50 text-[var(--brass)] px-5 py-3 sm:px-8 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-wider hover:border-[var(--brass)] hover:text-black transition-all duration-300 flex items-center gap-2">
               <span className="relative z-10 flex items-center gap-2">Request a Quote <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" /></span>
               <span className="absolute inset-0 bg-[var(--brass)] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
             </MagneticButton>
@@ -620,10 +620,10 @@ export default function Homepage({ navigate }) {
         </div>
       </section> */}
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      <div className="mx-5 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* ABOUT */}
-      <section id="about" className="py-32 px-8 md:px-20 text-white">
+      <section id="about" className="py-16 md:py-32 px-5 sm:px-8 md:px-20 text-white">
         <div className="max-w-7xl mx-auto mb-16 text-center">
           <SplitHeading
             text="A Story of Craft"
@@ -641,7 +641,7 @@ export default function Homepage({ navigate }) {
               bring world-class masonry materials to Ontario's Homeowners,
               architects, builders, and contractors at trade pricing.
             </p>
-            <p className="text-gray-400 text-xl leading-relaxed mb-10 font-light">
+            <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-10 font-light">
               Today we're Ontario's premier masonry supplier stocking over
               10,000 + products from the industry's most trusted brands, with
               fleet delivery across the province.
@@ -683,7 +683,7 @@ export default function Homepage({ navigate }) {
       {/* <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" /> */}
 
       {/* FEATURED PRODUCTS */}
-      <section id="products" className="py-24 px-8 md:px-20">
+      <section id="products" className="py-16 md:py-24 px-5 sm:px-8 md:px-20">
         <FadeUp className="flex justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
             <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
@@ -757,7 +757,7 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      <div className="mx-5 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* BRAND MARQUEE */}
       <section className="py-24 relative overflow-hidden w-full bg-transparent flex flex-col items-center">
@@ -825,10 +825,10 @@ export default function Homepage({ navigate }) {
         </div>
       </section>
 
-      <div className="mx-8 md:mx-20 border-t border-[var(--brass)]/20" />
+      <div className="mx-5 md:mx-20 border-t border-[var(--brass)]/20" />
 
       {/* SERVICES */}
-      <section id="services" className="py-24 px-8 md:px-20">
+      <section id="services" className="py-16 md:py-24 px-5 sm:px-8 md:px-20">
         <FadeUp className="mb-14">
           <p className="text-[var(--brass)] text-m font-bold tracking-widest mb-2 uppercase">
             What Defines Us
@@ -872,7 +872,7 @@ export default function Homepage({ navigate }) {
       <div className="mx-8 md:mx-20 border-t border-[var(--charcoal)]/20" />
 
       {/* SHOP BY SPACE */}
-      <section className="py-24 px-8 md:px-20 text-white">
+      <section className="py-16 md:py-24 px-5 sm:px-8 md:px-20 text-white">
         <FadeUp className="text-center mb-16 max-w-2xl mx-auto">
           <p className="text-[var(--brass)] text-xl font-bold tracking-widest mb-4 uppercase">
             Browse by Project Type
@@ -1011,7 +1011,7 @@ export default function Homepage({ navigate }) {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="py-24 px-8 md:px-20">
+      <section id="gallery" className="py-16 md:py-24 px-5 sm:px-8 md:px-20">
         <FadeUp className="mb-12">
           <p className="text-[var(--brass)] text-s font-bold tracking-widest mb-2 uppercase">
             Project Gallery

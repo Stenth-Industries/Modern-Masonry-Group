@@ -678,7 +678,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
 
       <div className="relative z-10 flex flex-col flex-grow">
         {/* Header */}
-        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-24 md:pt-28 pb-10 md:pb-16 px-6 md:px-10 xl:px-14 relative shrink-0">
+        <div className="w-full max-w-[1800px] mx-auto flex flex-col items-start pt-20 md:pt-28 pb-8 md:pb-16 px-4 sm:px-6 md:px-10 xl:px-14 relative shrink-0">
           <div className="flex flex-col md:flex-row justify-between w-full gap-8">
             <div>
               <div className="flex items-center mb-5">
@@ -690,9 +690,9 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                 Modern Masonry <br /> Stone Catalogue
               </h1>
             </div>
-            <div className="md:max-w-md pt-12 md:pt-14">
+            <div className="md:max-w-md pt-4 md:pt-14">
               <p
-                className="text-[24px] md:text-[24px] tracking-[0.02em] leading-relaxed text-white/50 italic"
+                className="text-[15px] sm:text-[18px] md:text-[22px] tracking-[0.02em] leading-relaxed text-white/50 italic"
                 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', serif" }}
               >
                 "Discover premium natural stone curated for elegance, durability,
@@ -704,7 +704,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
         </div>
 
         {/* FULL WIDTH HORIZONTAL FILTER BAR */}
-        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-8 xl:px-14 py-5 grid grid-cols-[auto_1fr_auto] items-center gap-4 z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+        <div className="w-full bg-black/80 backdrop-blur-xl border-y border-[rgba(255,255,255,0.06)] px-4 sm:px-8 xl:px-14 py-5 grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-4 z-40 sticky top-0 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-4 md:gap-8">
             <span className="text-[11px] font-bold tracking-[0.05em] text-[#c9a449] uppercase">
               {showFavourites ? favourites.length : total} products
@@ -765,7 +765,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
-                className="bg-transparent border-none w-[120px] py-1 pl-7 text-[12px] tracking-wide text-[#e3decb] placeholder-[#9a9488] focus:outline-none focus:ring-0"
+                className="bg-transparent border-none w-[70px] sm:w-[120px] py-1 pl-7 text-[12px] tracking-wide text-[#e3decb] placeholder-[#9a9488] focus:outline-none focus:ring-0"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               />
             </div>

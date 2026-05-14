@@ -75,7 +75,7 @@ export default function Gallery({ navigate }) {
 
       <div className="relative z-10 flex flex-col flex-grow">
         {/* Header */}
-        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-36 pb-14 text-center">
+        <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 pt-24 md:pt-36 pb-10 md:pb-14 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -115,7 +115,7 @@ export default function Gallery({ navigate }) {
         </div>
 
         {/* Masonry grid */}
-        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-32">
+        <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 pb-20 md:pb-32">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}

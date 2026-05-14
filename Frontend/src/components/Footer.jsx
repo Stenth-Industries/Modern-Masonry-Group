@@ -20,16 +20,16 @@ export default function Footer() {
       </div>
 
       {/* MAIN GRID */}
-      <div className="relative z-10 px-8 lg:px-16 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 items-start">
+      <div className="relative z-10 px-5 sm:px-8 lg:px-16 pt-10 sm:pt-16 pb-8 sm:pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-12 items-start">
           {/* Brand */}
           <div className="lg:col-span-4 flex flex-col">
             {/* Fine-tuned negative margins to align the visible left edge and top edge */}
-            <div className="-mt-16 -mb-12 -ml-6 lg:-ml-4">
+            <div className="-mt-8 -mb-6 -ml-4 md:-mt-16 md:-mb-12 md:-ml-6 lg:-ml-4">
               <img
                 src="/Logo-PNG.png"
                 alt="Modern Masonry Group"
-                className="block w-[260px] md:w-[320px] max-w-none h-auto object-contain object-left"
+                className="block w-[180px] sm:w-[240px] md:w-[320px] max-w-full h-auto object-contain object-left"
               />
             </div>
             <p className="mt-0 text-sm leading-relaxed text-white/40 max-w-[260px]">
@@ -230,7 +230,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative z-10 px-8 lg:px-16 pb-6">
+      <div className="relative z-10 px-5 sm:px-8 lg:px-16 pb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent mb-8" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/20">
           <p className="tracking-wide">

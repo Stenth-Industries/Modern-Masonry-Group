@@ -73,7 +73,7 @@ export default function App() {
   return (
     <>
       <UtilityBar />
-      <div className="overflow-x-hidden" style={{ zoom: 0.9 }}>
+      <div className="overflow-x-hidden">
         <Navbar navigate={navigate} />
         <FloatingCTA />
         {view === 'brick-detail' && <BrickDetail brickId={brickId} navigate={navigate} />}

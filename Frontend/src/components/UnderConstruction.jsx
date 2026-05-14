@@ -16,7 +16,7 @@ export default function UnderConstruction({ navigate }) {
       <div className="fixed inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg.png')" }} />
       <div className="fixed inset-0 z-0 bg-black/60" />
 
-      <div className="relative z-10 mt-32 mb-8 mx-auto w-[min(88vw,88vh)] aspect-square border border-[#c9a449]/40 flex flex-col px-8 sm:px-14 md:px-20 py-10 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]">
+      <div className="relative z-10 mt-20 sm:mt-32 mb-8 mx-auto w-[min(92vw,88vh)] aspect-square border border-[#c9a449]/40 flex flex-col px-5 sm:px-14 md:px-20 py-8 sm:py-10 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]">
 
         {/* ── Top: main message ── */}
         <div className="flex-1 flex flex-col justify-center items-center text-center">
@@ -61,7 +61,7 @@ export default function UnderConstruction({ navigate }) {
           <motion.div {...fade(0.3)} className="flex flex-wrap justify-center items-center gap-5">
             <button
               onClick={() => navigate('#contact')}
-              className="group relative overflow-hidden border border-[var(--brass)]/50 text-[var(--brass)] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.2em] hover:text-black transition-colors duration-300 flex items-center gap-2"
+              className="group relative overflow-hidden border border-[var(--brass)]/50 text-[var(--brass)] px-5 sm:px-8 py-3 sm:py-4 text-[12px] font-bold uppercase tracking-[0.2em] hover:text-black transition-colors duration-300 flex items-center gap-2"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Inquire Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />

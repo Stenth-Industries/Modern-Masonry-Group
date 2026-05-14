@@ -147,7 +147,7 @@ export default function QuotePage({ navigate }) {
         </div>
 
         {/* RIGHT PANEL: DYNAMIC FORM */}
-        <div className="w-full md:w-[45%] min-h-screen relative z-10 flex flex-col justify-center px-6 py-12 md:p-16 lg:px-24 pt-32 md:pt-40">
+        <div className="w-full md:w-[45%] min-h-screen relative z-10 flex flex-col justify-center px-5 sm:px-6 py-8 md:p-16 lg:px-24 pt-24 md:pt-40">
           
           {/* Step Indicator */}
           <div className="w-full max-w-lg mx-auto mb-16 flex items-center justify-between relative">

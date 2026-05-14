@@ -235,7 +235,7 @@ export default function StoneDetail({ stoneId, navigate }) {
       <div className="lg:w-[50%] relative h-[60vh] lg:h-screen lg:sticky lg:top-0 border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#020202] flex flex-col z-10">
 
         {/* Top bar */}
-        <div className="absolute top-0 left-0 w-full p-8 md:p-12 flex justify-between items-center z-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full p-5 sm:p-8 md:p-12 flex justify-between items-center z-20 pointer-events-none">
           <button onClick={() => window.history.back()} className="pointer-events-auto flex items-center gap-3 text-white/50 hover:text-[#c9a449] transition-colors">
             <ArrowLeft size={16} strokeWidth={1.5} />
             <span className="text-[9px] tracking-[0.2em] uppercase font-bold mt-[2px]">Stone Catalogue</span>
@@ -248,7 +248,7 @@ export default function StoneDetail({ stoneId, navigate }) {
 
         {/* Main image */}
         <div
-          className="flex-1 w-full h-full flex items-center justify-center p-12 md:p-24 relative group cursor-crosshair"
+          className="flex-1 w-full h-full flex items-center justify-center p-8 md:p-24 relative group cursor-crosshair"
           onClick={() => images.length > 0 && setLightboxIndex(selectedImageIdx)}
         >
           <AnimatePresence mode="wait">
@@ -275,7 +275,7 @@ export default function StoneDetail({ stoneId, navigate }) {
         </div>
 
         {/* Color selector + image dots */}
-        <div className="absolute bottom-0 left-0 w-full px-10 pb-6 z-20 flex flex-col gap-3">
+        <div className="absolute bottom-0 left-0 w-full px-4 sm:px-10 pb-6 z-20 flex flex-col gap-3">
           {/* Variant switcher — size/finish labels or colour swatches */}
           {isMultiVariant && (
             <div className="flex items-center gap-2 flex-wrap">
@@ -347,7 +347,7 @@ export default function StoneDetail({ stoneId, navigate }) {
 
       {/* ─── RIGHT COLUMN: SPECIFICATION (Scrolling) ─── */}
       <div className="lg:w-[50%] bg-[#050505] z-10">
-        <div className="max-w-[800px] px-8 md:px-16 lg:px-24 py-20 md:py-32 flex flex-col min-h-screen">
+        <div className="max-w-[800px] px-5 sm:px-8 md:px-16 lg:px-24 py-14 md:py-32 flex flex-col min-h-screen">
 
           {/* Header */}
           <div className="mb-14">
@@ -362,7 +362,7 @@ export default function StoneDetail({ stoneId, navigate }) {
             </div>
 
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-3"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#e3decb] tracking-[0.01em] leading-[1.05] mb-3"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               {selectedVariant?.colourName || product.name}
@@ -420,7 +420,7 @@ export default function StoneDetail({ stoneId, navigate }) {
               {product.description || 'A premium natural stone unit delivering enduring beauty and structural integrity — crafted for architectural cladding, feature walls, and refined landscape applications.'}
             </p>
 
-            <div className="flex flex-wrap items-center gap-12 mt-10">
+            <div className="flex flex-wrap items-center gap-6 sm:gap-12 mt-10">
               <div>
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
