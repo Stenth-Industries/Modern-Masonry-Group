@@ -7,6 +7,24 @@ import {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+const SKU_SUFFIX_LABELS = {
+  'SAWN': 'Sawn',
+  '218': '2-1/8"', '218SAWN': '2-1/8" Sawn',
+  '358': '3-5/8"', '358SAWN': '3-5/8" Sawn',
+  '578': '5-7/8"', '578SAWN': '5-7/8" Sawn',
+};
+
+function getVariantLabel(variant, allVariants) {
+  const skus = allVariants.map(v => v.sku);
+  let prefix = skus[0];
+  for (const sku of skus.slice(1)) {
+    while (prefix.length > 0 && !sku.startsWith(prefix)) prefix = prefix.slice(0, -1);
+  }
+  const suffix = variant.sku.slice(prefix.length).replace(/^-/, '');
+  if (!suffix) return 'Natural';
+  return SKU_SUFFIX_LABELS[suffix] ?? suffix;
+}
+
 const COLOR_MAP = {
   grey: '#808080', gray: '#808080', white: '#E8E4DC', black: '#1A1A1A',
   charcoal: '#4A4A4A', brown: '#7A5C40', tan: '#C4A57B', beige: '#CDB89A',
@@ -285,7 +303,7 @@ export default function StoneDetail({ stoneId, navigate }) {
               {product.variants.map((v) => {
                 const isActive = v.id === selectedVariant?.id;
                 if (allSameColor) {
-                  const label = v.sizeLabel || 'Natural';
+                  const label = getVariantLabel(v, product.variants);
                   // Size/finish pill buttons
                   return (
                     <button
@@ -381,7 +399,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                   {product.variants.map((v) => {
                     const isActive = v.id === selectedVariant?.id;
                     if (allSameColor) {
-                      const label = v.sizeLabel || 'Natural';
+                      const label = getVariantLabel(v, product.variants);
                       return (
                         <button
                           key={v.id}
@@ -539,7 +557,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                             ) : (
                               <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }} />
                             )}
-                            {allSameColor ? (v.sizeLabel || 'Natural') : (v.colourName || v.sku)}
+                            {allSameColor ? getVariantLabel(v, product.variants) : (v.colourName || v.sku)}
                           </span>
                         ))}
                       />
