@@ -208,7 +208,7 @@ export default function StoneDetail({ stoneId, navigate }) {
 
   // Only show sizeLabel in the dimensions row when it looks like a size (contains a quote/inch mark)
   const variantSizeLabel = selectedVariant?.sizeLabel;
-  const showAsDimension  = variantSizeLabel && /["']/.test(variantSizeLabel);
+  const showAsDimension  = variantSizeLabel && (/["']/.test(variantSizeLabel) || variantSizeLabel.includes('×'));
 
   const stoneDetails = {
     size:         showAsDimension ? variantSizeLabel : null,
@@ -430,7 +430,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider">{stoneDetails.size}</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
                   </div>
                 </>
               )}
