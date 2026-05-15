@@ -410,18 +410,23 @@ export default function BrickDetail({ brickId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    <SpecRow icon={<Building2 />} label="Manufacturer" value={brickDetails.manufacturer} delay={0.05} />
-                    {brickDetails.collection && <SpecRow icon={<Mountain />} label="Series" value={brickDetails.collection} delay={0.1} />}
-                    {brickDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions" value={brickDetails.size} delay={0.15} />}
-                    <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.2} />
-                    <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.25} />
-                    <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.3} />
-                    <SpecRow icon={<Thermometer />} label="Frost Resistance Grade" value={brickDetails.frostResistance} delay={0.35} />
+                    {brickDetails.size && (
+                      <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" delay={0.05} value={
+                        brickDetails.size.includes('\n')
+                          ? <span className="flex flex-col items-end gap-1">{brickDetails.size.split('\n').map((s, i) => <span key={i}>{s}</span>)}</span>
+                          : brickDetails.size
+                      } />
+                    )}
+                    <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.1} />
+                    <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.15} />
+                    <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.2} />
+                    <SpecRow icon={<Thermometer />} label="Frost Resistance Grade" value={brickDetails.frostResistance} delay={0.25} />
+                    <SpecRow icon={<Building2 />} label="Sourcing Manufacturer" value={brickDetails.manufacturer} delay={0.3} />
                     {product.variants?.length > 0 && (
                       <SpecRow
                         icon={<Package />}
                         label="Available Colours"
-                        delay={0.4}
+                        delay={0.35}
                         value={
                           product.variants.map(v => (
                             <span key={v.id} className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded text-[11px] text-[#e3decb]">

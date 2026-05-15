@@ -538,12 +538,18 @@ export default function StoneDetail({ stoneId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    <SpecRow icon={<Building2 />} label="Manufacturer" value={manufacturer} delay={0.05} />
+                    {stoneDetails.size && (
+                      <SpecRow icon={<Ruler />} label="Unit Dimensions" delay={0.05} value={
+                        stoneDetails.size.includes('\n')
+                          ? <span className="flex flex-col items-end gap-1">{stoneDetails.size.split('\n').map((s, i) => <span key={i}>{s}</span>)}</span>
+                          : stoneDetails.size
+                      } />
+                    )}
                     <SpecRow icon={<Mountain />} label="Series" value={series} delay={0.1} />
-                    <SpecRow icon={<Droplets />} label="Material" value={product.material || 'Calcium Silicate Stone'} delay={0.15} />
-                    {finish && <SpecRow icon={<Thermometer />} label="Surface Finish" value={finish} delay={0.2} />}
-                    {region && <SpecRow icon={<Building2 />} label="Manufacturing Region" value={region === 'USA' ? 'USA — Fort Valley, Georgia' : 'Canada — Cambridge, Ontario'} delay={0.25} />}
-                    {stoneDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions" value={stoneDetails.size} delay={0.3} />}
+                    {finish && <SpecRow icon={<Thermometer />} label="Surface Finish" value={finish} delay={0.15} />}
+                    {region && <SpecRow icon={<Building2 />} label="Manufacturing Region" value={region === 'USA' ? 'USA — Fort Valley, Georgia' : 'Canada — Cambridge, Ontario'} delay={0.2} />}
+                    <SpecRow icon={<Droplets />} label="Material" value={product.material || 'Calcium Silicate Stone'} delay={0.25} />
+                    <SpecRow icon={<Building2 />} label="Manufacturer" value={manufacturer} delay={0.3} />
 
                     {product.variants?.length > 0 && (
                       <SpecRow
