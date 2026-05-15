@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, Share2, Plus, ArrowUpRight, 
-  Ruler, Package, Zap, Droplets, Thermometer, Building2, Send, ChevronRight 
+  ArrowLeft, Share2, Plus, ArrowUpRight,
+  Ruler, Package, Zap, Droplets, Thermometer, Building2, Mountain, Send, ChevronRight
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -410,19 +410,18 @@ export default function BrickDetail({ brickId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    {brickDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" value={brickDetails.size} delay={0.05} />}
-                    <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.1} />
-                    <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.15} />
-                    <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.2} />
-                    <SpecRow icon={<Thermometer />} label="Frost Resistance Grade" value={brickDetails.frostResistance} delay={0.25} />
-                    <SpecRow icon={<Building2 />} label="Sourcing Manufacturer" value={brickDetails.manufacturer} delay={0.3} />
-                    
-                    {/* Inject dynamic variants at the end */}
+                    <SpecRow icon={<Building2 />} label="Manufacturer" value={brickDetails.manufacturer} delay={0.05} />
+                    {brickDetails.collection && <SpecRow icon={<Mountain />} label="Series" value={brickDetails.collection} delay={0.1} />}
+                    {brickDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions" value={brickDetails.size} delay={0.15} />}
+                    <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.2} />
+                    <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.25} />
+                    <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.3} />
+                    <SpecRow icon={<Thermometer />} label="Frost Resistance Grade" value={brickDetails.frostResistance} delay={0.35} />
                     {product.variants?.length > 0 && (
-                      <SpecRow 
-                        icon={<Building2 />} 
-                        label="Available Colors" 
-                        delay={0.35}
+                      <SpecRow
+                        icon={<Package />}
+                        label="Available Colours"
+                        delay={0.4}
                         value={
                           product.variants.map(v => (
                             <span key={v.id} className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded text-[11px] text-[#e3decb]">
