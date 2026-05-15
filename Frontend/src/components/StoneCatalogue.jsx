@@ -331,12 +331,6 @@ const PremiumCard = React.memo(function PremiumCard({
             )}
           </div>
 
-          {product.sizeLabel && (
-            <p className="text-[10px] text-white/35 tracking-[0.05em] mb-2 font-mono">
-              {product.sizeLabel}
-            </p>
-          )}
-
           {/* Card footer buttons */}
           <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
             <button

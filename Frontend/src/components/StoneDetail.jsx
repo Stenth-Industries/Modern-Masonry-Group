@@ -443,21 +443,21 @@ export default function StoneDetail({ stoneId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
               </div>
-              {stoneDetails.size && (
-                <>
-                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
-                  <div>
-                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
-                  </div>
-                </>
-              )}
               {series && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Series</span>
                     <span className="text-[14px] text-[#e3decb] tracking-wider">{series}</span>
+                  </div>
+                </>
+              )}
+              {stoneDetails.size && (
+                <>
+                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
+                  <div>
+                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
                   </div>
                 </>
               )}
