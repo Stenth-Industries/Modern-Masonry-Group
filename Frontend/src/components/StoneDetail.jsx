@@ -208,7 +208,7 @@ export default function StoneDetail({ stoneId, navigate }) {
 
   // Only show sizeLabel in the dimensions row when it looks like a size (contains a quote/inch mark)
   const variantSizeLabel = selectedVariant?.sizeLabel;
-  const showAsDimension  = variantSizeLabel && /["']/.test(variantSizeLabel);
+  const showAsDimension  = variantSizeLabel && (/["']/.test(variantSizeLabel) || variantSizeLabel.includes('×'));
 
   const stoneDetails = {
     size:         showAsDimension ? variantSizeLabel : null,
@@ -285,7 +285,7 @@ export default function StoneDetail({ stoneId, navigate }) {
               {product.variants.map((v) => {
                 const isActive = v.id === selectedVariant?.id;
                 if (allSameColor) {
-                  const label = v.sizeLabel || 'Natural';
+                  const label = v.sku?.includes('SAWN') ? 'Sawn' : (v.sizeLabel && !/["'×]/.test(v.sizeLabel) ? v.sizeLabel : 'Natural');
                   // Size/finish pill buttons
                   return (
                     <button
@@ -430,7 +430,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider">{stoneDetails.size}</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
                   </div>
                 </>
               )}
@@ -539,7 +539,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                             ) : (
                               <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }} />
                             )}
-                            {allSameColor ? (v.sizeLabel || 'Natural') : (v.colourName || v.sku)}
+                            {allSameColor ? (v.sku?.includes('SAWN') ? 'Sawn' : (v.sizeLabel && !/["'×]/.test(v.sizeLabel) ? v.sizeLabel : 'Natural')) : (v.colourName || v.sku)}
                           </span>
                         ))}
                       />

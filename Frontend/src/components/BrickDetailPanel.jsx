@@ -248,11 +248,6 @@ export function BrickDetailPanel({ brick, onClose, initialTab = "overview" }) {
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                     <span className="text-[14px] text-[#e3decb] tracking-wider">{brick.manufacturer}</span>
                   </div>
-                  <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
-                  <div>
-                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider">{brick.size}</span>
-                  </div>
                 </div>
               </motion.div>
 

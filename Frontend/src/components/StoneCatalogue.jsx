@@ -331,11 +331,6 @@ const PremiumCard = React.memo(function PremiumCard({
             )}
           </div>
 
-          {product.sizeLabel && (
-            <p className="text-[10px] text-white/35 tracking-[0.05em] mb-2 font-mono">
-              {product.sizeLabel}
-            </p>
-          )}
 
           {/* Card footer buttons */}
           <div className="mt-auto border-t border-white/[0.06] pt-3 flex items-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -516,7 +511,7 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
               color: p.colorName || colorCat?.value || "Natural",
               colorHex: resolveColorHex(p.colorName || colorCat?.value, colorCat?.hexCode) || "#A09080",
               manufacturer: p.manufacturers?.[0]?.name || "Arriscraft International",
-              finish: styleCat?.value || null,
+              finish: variant?.sku?.includes('SAWN') ? 'Sawn' : (styleCat?.value || null),
               sizeLabel: variant?.sizeLabel || null,
               code: variant?.sku || p.id.slice(0, 8).toUpperCase(),
               image: variant?.imageUrl || null,
