@@ -156,7 +156,7 @@ async function main() {
         data: {
           productId:  product.id,
           sku:        item.sku,
-          colourName: item.color ? toTitleCase(item.color) : null,
+          colourName: item.name,
           sizeLabel,
           heightMm:   primarySize?.heightMm ?? null,
           widthMm:    primarySize?.lengthMm ?? null,
