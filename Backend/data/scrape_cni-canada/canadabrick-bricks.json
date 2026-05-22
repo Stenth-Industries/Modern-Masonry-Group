@@ -1,0 +1,5463 @@
+[
+  {
+    "name": "50 Bark",
+    "url": "https://canadabrick.com/products/50-bark/",
+    "sku": "CB-50-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0051_50-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Adelaide",
+    "url": "https://canadabrick.com/products/adelaide/",
+    "sku": "CB-ADELAIDE",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Adelaide-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Adelaide Smooth Ironspot",
+    "url": "https://canadabrick.com/products/adelaide-smooth-ironspot/",
+    "sku": "CB-ADELAIDE-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-AdelaideSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Adelaide Velour",
+    "url": "https://canadabrick.com/products/adelaide-velour/",
+    "sku": "CB-ADELAIDE-VELOUR",
+    "collection": "District Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_Adelaide-Velour-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Albion",
+    "url": "https://canadabrick.com/products/albion/",
+    "sku": "CB-ALBION",
+    "collection": "Canada Collection",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Aldershot-Albion-0817-1024x514.jpg",
+    "description": "The beauty of a Canada Brick home is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Alpine White – Tumbled Vintage Brick",
+    "url": "https://canadabrick.com/products/alpine-white-tumbled-vintage-brick/",
+    "sku": "CB-ALPINE-WHITE-TUMBLED-VINTAGE-BRICK",
+    "collection": "Tumbled Vintage Brick",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/TumbledVintageBrick-Alpine-White-1024x768.png",
+    "description": "Tumbled Vintage Brick is all about old-world charm with a modern twist. These bricks are crafted from calcium silicate and feature naturally tumbled edges, giving them a weathered, timeworn look thats perfect for rustic, traditional, or farmhouse-style designs."
+  },
+  {
+    "name": "Antique Copper",
+    "url": "https://canadabrick.com/products/antique-copper/",
+    "sku": "CB-ANTIQUE-COPPER",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-AntiqueCopper-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Ballycroy Matt",
+    "url": "https://canadabrick.com/products/ballycroy-matt/",
+    "sku": "CB-BALLYCROY-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BallycroyMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Ballycroy Smooth",
+    "url": "https://canadabrick.com/products/ballycroy-smooth/",
+    "sku": "CB-BALLYCROY-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BallycroySmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Black Coral – Avanti",
+    "url": "https://canadabrick.com/products/black-coral-avanti/",
+    "sku": "CB-BLACK-CORAL-AVANTI",
+    "collection": "Avanti",
+    "color": "black",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/wAvanti_0003_Black-Coral-24.jpg",
+    "description": "Create a rustic chic vibe or modern finish with our versatile Avanti brick. This calcium silicate brick features a natural, fine-grained texture which we age to create a uniquely smooth weathered brick. Available in four natural colours. If you want long and linear, Avanti is the product youre looking for."
+  },
+  {
+    "name": "Brookview Matt",
+    "url": "https://canadabrick.com/products/brookview-matt/",
+    "sku": "CB-BROOKVIEW-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BrookviewMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Brookview Smooth",
+    "url": "https://canadabrick.com/products/brookview-smooth/",
+    "sku": "CB-BROOKVIEW-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BrookviewSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Brookview Smooth Ironspot",
+    "url": "https://canadabrick.com/products/brookview-smooth-ironspot/",
+    "sku": "CB-BROOKVIEW-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BrookviewSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Brunswick Matt",
+    "url": "https://canadabrick.com/products/brunswick-matt/",
+    "sku": "CB-BRUNSWICK-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Brunswick-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Burlington Matt",
+    "url": "https://canadabrick.com/products/burlington-matt/",
+    "sku": "CB-BURLINGTON-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-BurlingtonMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Caledonia",
+    "url": "https://canadabrick.com/products/caledonia/",
+    "sku": "CB-CALEDONIA",
+    "collection": "Canada Collection",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Caledonia-0817-1024x531.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Carleton Blend",
+    "url": "https://canadabrick.com/products/carleton-blend/",
+    "sku": "CB-CARLETON-BLEND",
+    "collection": "Canada Architectural Series",
+    "color": "blend",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-CarletonBlend-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Cavendish II",
+    "url": "https://canadabrick.com/products/cavendish-ii/",
+    "sku": "CB-CAVENDISH-II",
+    "collection": "Canada Collection",
+    "color": "red",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2018/06/MB_Canada_Cavendish_II_WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Charcoal – Architectural Linear Series Brick",
+    "url": "https://canadabrick.com/products/charcoal-architectural-linear-series-brick/",
+    "sku": "CB-CHARCOAL-ARCHITECTURAL-LINEAR-SERIES-BRICK",
+    "collection": "Architectural Linear Series Brick",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/ALSB-Charcoal-1024x768.jpg",
+    "description": "The distinctive weathered finish and sleek 2-1/4&#8243; face height set apart our popular Architectural Linear Series from any other brick in the market. The purposeful weathering and blend of shorter and longer bricks (random lengths up to 23-5/8) enhance the brick&#8217;s new-old world aesthetic. NOTE: Skids are complete with up to 35% naturally fractured units, which should be used within the wall to achieve a random pattern, and for door, window openings etc."
+  },
+  {
+    "name": "Chateau Locas",
+    "url": "https://canadabrick.com/products/chateau-locas/",
+    "sku": "CB-CHATEAU-LOCAS",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2018/06/MB_CanadaArch_ChateauLocas_WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Coastal Fog – Avanti",
+    "url": "https://canadabrick.com/products/coastal-fog-avanti/",
+    "sku": "CB-COASTAL-FOG-AVANTI",
+    "collection": "Avanti",
+    "color": "buff",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/Avanti-Coastal-Fog-RGB.jpg",
+    "description": "Create a rustic chic vibe or modern finish with our versatile Avanti brick. This calcium silicate brick (like our stone products) features a natural, fine-grained texture which we age to create a uniquely smooth weathered brick. If you want long and linear, Avanti is the product youre looking for."
+  },
+  {
+    "name": "Conestoga",
+    "url": "https://canadabrick.com/products/conestoga/",
+    "sku": "CB-CONESTOGA",
+    "collection": "Canada Collection",
+    "color": "buff",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/10/MB-Burlington_Conestoga-WR-800x800.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range &#8211; from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Copper Bark",
+    "url": "https://canadabrick.com/products/copper-bark/",
+    "sku": "CB-COPPER-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0049_Copper-Bark-CSR_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Copper Matt",
+    "url": "https://canadabrick.com/products/copper-matt/",
+    "sku": "CB-COPPER-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-CopperMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Copper Smooth",
+    "url": "https://canadabrick.com/products/copper-smooth/",
+    "sku": "CB-COPPER-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-CopperSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Copper Smooth Ironspot",
+    "url": "https://canadabrick.com/products/copper-smooth-ironspot/",
+    "sku": "CB-COPPER-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-CopperSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Cortes",
+    "url": "https://canadabrick.com/products/cortes/",
+    "sku": "CB-CORTES",
+    "collection": "Canada Collection",
+    "color": "buff",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Cortes-0817-1024x531.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Creekside Matt",
+    "url": "https://canadabrick.com/products/creekside-matt/",
+    "sku": "CB-CREEKSIDE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "gray",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/07/CB-CanadaArchitectural_Creekside-Matt-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Creekside Velour",
+    "url": "https://canadabrick.com/products/creekside-velour/",
+    "sku": "CB-CREEKSIDE-VELOUR",
+    "collection": "Canada Architectural Series",
+    "color": "gray",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_Creekside-Velour-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Creekside Velour",
+    "url": "https://canadabrick.com/products/creekside-velour-2/",
+    "sku": "CB-CREEKSIDE-VELOUR-2",
+    "collection": "District Series",
+    "color": "gray",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_Creekside-Velour-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Dakota",
+    "url": "https://canadabrick.com/products/dakota/",
+    "sku": "CB-DAKOTA",
+    "collection": "Canada Collection",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/09/CB-CanadaCollection-Dakota-Web-1-1024x568.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Dunkerron Matt",
+    "url": "https://canadabrick.com/products/dunkerron-matt/",
+    "sku": "CB-DUNKERRON-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-DunkerronMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Dunkerron Smooth",
+    "url": "https://canadabrick.com/products/dunkerron-smooth/",
+    "sku": "CB-DUNKERRON-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-DunkerronSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Dunkerron Smooth Ironspot",
+    "url": "https://canadabrick.com/products/dunkerron-smooth-ironspot/",
+    "sku": "CB-DUNKERRON-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-DunkerronSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Full Range Bark",
+    "url": "https://canadabrick.com/products/full-range-bark/",
+    "sku": "CB-FULL-RANGE-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0047_Full-Range-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Full Range Rugg",
+    "url": "https://canadabrick.com/products/full-range-rugg/",
+    "sku": "CB-FULL-RANGE-RUGG",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0046_Full-Range-Russ-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Georgetown",
+    "url": "https://canadabrick.com/products/georgetown/",
+    "sku": "CB-GEORGETOWN",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0041_Georgetown-QBC_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Georgetown MK II",
+    "url": "https://canadabrick.com/products/georgetown-mk-ii/",
+    "sku": "CB-GEORGETOWN-MK-II",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0044_GeorgeTown-MKII-QBC_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Hazelton",
+    "url": "https://canadabrick.com/products/hazelton/",
+    "sku": "CB-HAZELTON",
+    "collection": "Canada Collection",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/09/CB-CanadaCollection-Hazelton-1024x569.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Heritage Beige",
+    "url": "https://canadabrick.com/products/heritage-beige/",
+    "sku": "CB-HERITAGE-BEIGE",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0039_Heritage-Beige-Ont_Review_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Heritage Brown",
+    "url": "https://canadabrick.com/products/heritage-brown/",
+    "sku": "CB-HERITAGE-BROWN",
+    "collection": "Renovation Products",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0037_Heritage-Brown-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Heritage Grey",
+    "url": "https://canadabrick.com/products/heritage-grey/",
+    "sku": "CB-HERITAGE-GREY",
+    "collection": "Renovation Products",
+    "color": "gray",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0035_Heritage-Grey-Max_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Heritage Rust",
+    "url": "https://canadabrick.com/products/heritage-rust/",
+    "sku": "CB-HERITAGE-RUST",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0032_Heritage-Rust-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Hickory Velour",
+    "url": "https://canadabrick.com/products/hickory-velour/",
+    "sku": "CB-HICKORY-VELOUR",
+    "collection": "District Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_Hickory-Velour-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Hudson",
+    "url": "https://canadabrick.com/products/hudson/",
+    "sku": "CB-HUDSON",
+    "collection": "Canada Collection",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Aldershot-Hudson-0817-1024x514.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Ironspot MK II",
+    "url": "https://canadabrick.com/products/ironspot-mk-ii/",
+    "sku": "CB-IRONSPOT-MK-II",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-IronspotMKII-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Ironstone",
+    "url": "https://canadabrick.com/products/ironstone/",
+    "sku": "CB-IRONSTONE",
+    "collection": "Canada Architectural Series",
+    "color": "black",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Ironstone-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Ivory White – Contemporary Brick",
+    "url": "https://canadabrick.com/products/ivory-white-contemporary-brick/",
+    "sku": "CB-IVORY-WHITE-CONTEMPORARY-BRICK",
+    "collection": "Contemporary Brick",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/Brick-Arriscraft-Contemporary-Brick-Ivory-White-Contemporary-Brick-1.jpg",
+    "description": "Contemporary Brick is a sleek, oversized masonry product designed to deliver a modern, linear aesthetic. Made from calcium silicate stone, it&#8217;s fine-grained texture has the appearance of natural stone."
+  },
+  {
+    "name": "Kelowna",
+    "url": "https://canadabrick.com/products/kelowna/",
+    "sku": "CB-KELOWNA",
+    "collection": "Canada Collection",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2019/09/MB-CanadaCollection_Kelowna_8.19_WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Kingsway Blend",
+    "url": "https://canadabrick.com/products/kingsway-blend/",
+    "sku": "CB-KINGSWAY-BLEND",
+    "collection": "Canada Architectural Series",
+    "color": "blend",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-KingswayBlend-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Labrador",
+    "url": "https://canadabrick.com/products/labrador/",
+    "sku": "CB-LABRADOR",
+    "collection": "Canada Collection",
+    "color": "black",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2018/06/MB_Canada_Labrador_WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Lakeshore",
+    "url": "https://canadabrick.com/products/lakeshore/",
+    "sku": "CB-LAKESHORE",
+    "collection": "Canada Collection",
+    "color": "pastel",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Lakeshore-0817-1024x531.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Mahogany Velour Ironspot",
+    "url": "https://canadabrick.com/products/mahogany-velour-ironspot/",
+    "sku": "CB-MAHOGANY-VELOUR-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-MohaganyVelourIronspot_HBC-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Medium Range Rugg",
+    "url": "https://canadabrick.com/products/medium-range-rugg/",
+    "sku": "CB-MEDIUM-RANGE-RUGG",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0031_Medium-Range-Rugg-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Medium Range Shaletex",
+    "url": "https://canadabrick.com/products/medium-range-shaletex/",
+    "sku": "CB-MEDIUM-RANGE-SHALETEX",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0029_Medium-Range-Shale-Tex-MTM_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Midnight Grey – Architectural Linear Series Brick",
+    "url": "https://canadabrick.com/products/midnight-grey-architectural-linear-series-brick/",
+    "sku": "CB-MIDNIGHT-GREY-ARCHITECTURAL-LINEAR-SERIES-BRICK",
+    "collection": "Architectural Linear Series Brick",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/ALSB-Midnight-Grey.jpeg",
+    "description": "The distinctive weathered finish and sleek 2-1/4&#8243; face height set apart our popular Architectural Linear Series from any other brick in the market. The purposeful weathering and blend of shorter and longer bricks (random lengths up to 23-5/8) enhance the brick&#8217;s new-old world aesthetic. NOTE: Skids are complete with up to 35% naturally fractured units, which should be used within the wall to achieve a random pattern, and for door, window openings etc."
+  },
+  {
+    "name": "Mystic Grey – Contemporary Brick",
+    "url": "https://canadabrick.com/products/mystic-grey-contemporary-brick/",
+    "sku": "CB-MYSTIC-GREY-CONTEMPORARY-BRICK",
+    "collection": "Contemporary Brick",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/Brick-Arriscraft-Contemporary-Brick-Mystic-Grey-Contemporary-Brick-1.jpg",
+    "description": "Contemporary Brick is a sleek, oversized masonry product designed to deliver a modern, linear aesthetic. Made from calcium silicate stone, it&#8217;s fine-grained texture has the appearance of natural stone."
+  },
+  {
+    "name": "Mystic Grey – Tumbled Vintage Brick",
+    "url": "https://canadabrick.com/products/mystic-grey-tumbled-vintage-brick/",
+    "sku": "CB-MYSTIC-GREY-TUMBLED-VINTAGE-BRICK",
+    "collection": "Tumbled Vintage Brick",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/Brick-Arriscraft-Tumbled-Vintage-Brick-Mystic-Grey-Tumbled-Vintage-Brick-1.jpg",
+    "description": "Tumbled Vintage Brick is all about old-world charm with a modern twist. These bricks are crafted from calcium silicate and feature naturally tumbled edges, giving them a weathered, timeworn look thats perfect for rustic, traditional, or farmhouse-style designs."
+  },
+  {
+    "name": "Obsidian – Architectural Linear Series Brick",
+    "url": "https://canadabrick.com/products/obsidian-architectural-linear-series-brick/",
+    "sku": "CB-OBSIDIAN-ARCHITECTURAL-LINEAR-SERIES-BRICK",
+    "collection": "Architectural Linear Series Brick",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/ALSB-Obsidian-1024x768.jpg",
+    "description": "The distinctive weathered finish and sleek 2-1/4&#8243; face height set apart our popular Architectural Linear Series from any other brick in the market. The purposeful weathering and blend of shorter and longer bricks (random lengths up to 23-5/8) enhance the brick&#8217;s new-old world aesthetic. NOTE: Skids are complete with up to 35% naturally fractured units, which should be used within the wall to achieve a random pattern, and for door, window openings etc."
+  },
+  {
+    "name": "Ocean Mist – Avanti",
+    "url": "https://canadabrick.com/products/ocean-mist-avanti/",
+    "sku": "CB-OCEAN-MIST-AVANTI",
+    "collection": "Avanti",
+    "color": "buff",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/wAvanti_0001_Ocean-Mist-24.jpg",
+    "description": "Create a rustic chic vibe or modern finish with our versatile Avanti brick. This calcium silicate brick (like our stone products) features a natural, fine-grained texture which we age to create a uniquely smooth weathered brick. Available in four natural colours. If you want long and linear, Avanti is the product youre looking for."
+  },
+  {
+    "name": "Old Aztec",
+    "url": "https://canadabrick.com/products/old-aztec/",
+    "sku": "CB-OLD-AZTEC",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0026_Old-Aztec-MTM_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Opal – Architectural Linear Series Brick",
+    "url": "https://canadabrick.com/products/opal-architectural-linear-series-brick/",
+    "sku": "CB-OPAL-ARCHITECTURAL-LINEAR-SERIES-BRICK",
+    "collection": "Architectural Linear Series Brick",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/ALSB-Opal-1024x768.jpg",
+    "description": "The distinctive weathered finish and sleek 2-1/4&#8243; face height set apart our popular Architectural Linear Series from any other brick in the market. The purposeful weathering and blend of shorter and longer bricks (random lengths up to 23-5/8) enhance the brick&#8217;s new-old world aesthetic. NOTE: Skids are complete with up to 35% naturally fractured units, which should be used within the wall to achieve a random pattern, and for door, window openings etc."
+  },
+  {
+    "name": "Osiana Matt",
+    "url": "https://canadabrick.com/products/osiana-matt/",
+    "sku": "CB-OSIANA-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-OsianaMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Osiana Smooth",
+    "url": "https://canadabrick.com/products/osiana-smooth/",
+    "sku": "CB-OSIANA-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-OsianaSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Osiana Smooth Ironspot",
+    "url": "https://canadabrick.com/products/osiana-smooth-ironspot/",
+    "sku": "CB-OSIANA-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-OsianaSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Port Carling",
+    "url": "https://canadabrick.com/products/port-carling/",
+    "sku": "CB-PORT-CARLING",
+    "collection": "Waterfront Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/05/CB-Waterfront-Series-Port-Carling_1-1024x547.jpg",
+    "description": "The Waterfront Series modular-sized bricks are a perfect blend of functionality and aesthetics. This series features a natural colour range, offering earthy tones that harmonize beautifully with various architectural styles. Their textures add depth and character, making them suitable for both modern and traditional designs, providing a timeless and adaptable solution."
+  },
+  {
+    "name": "Port Cartier",
+    "url": "https://canadabrick.com/products/port-cartier/",
+    "sku": "CB-PORT-CARTIER",
+    "collection": "Waterfront Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/05/CB-Waterfront-Series-Port-Cartier_1_1.jpg",
+    "description": "The Waterfront Series modular-sized bricks are a perfect blend of functionality and aesthetics. This series features a natural colour range, offering earthy tones that harmonize beautifully with various architectural styles. Their textures add depth and character, making them suitable for both modern and traditional designs, providing a timeless and adaptable solution."
+  },
+  {
+    "name": "Port Dover",
+    "url": "https://canadabrick.com/products/port-dover/",
+    "sku": "CB-PORT-DOVER",
+    "collection": "Waterfront Series",
+    "color": "blend",
+    "brickSizes": [
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/05/CB-Waterfront-Series-Port-Dover_1_1.jpg",
+    "description": "The Waterfront Series modular-sized bricks are a perfect blend of functionality and aesthetics. This series features a natural colour range, offering earthy tones that harmonize beautifully with various architectural styles. Their textures add depth and character, making them suitable for both modern and traditional designs, providing a timeless and adaptable solution."
+  },
+  {
+    "name": "Port Elgin",
+    "url": "https://canadabrick.com/products/port-elgin/",
+    "sku": "CB-PORT-ELGIN",
+    "collection": "Waterfront Series",
+    "color": "blend",
+    "brickSizes": [
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/05/CB-Waterfront-Series-Port-Elgin_1_1.jpg",
+    "description": "The Waterfront Series modular-sized bricks are a perfect blend of functionality and aesthetics. This series features a natural colour range, offering earthy tones that harmonize beautifully with various architectural styles. Their textures add depth and character, making them suitable for both modern and traditional designs, providing a timeless and adaptable solution."
+  },
+  {
+    "name": "Portland",
+    "url": "https://canadabrick.com/products/portland/",
+    "sku": "CB-PORTLAND",
+    "collection": "Canada Collection",
+    "color": "gray",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2019/04/MB_R_Canada_Portland_WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Richland Matt",
+    "url": "https://canadabrick.com/products/richland-matt/",
+    "sku": "CB-RICHLAND-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/11/CB-CanadaArchitectural_RichlandMatt-1106-WR-01-1024x591.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Riverdale Bark",
+    "url": "https://canadabrick.com/products/riverdale-bark/",
+    "sku": "CB-RIVERDALE-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0025_Riverdale-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Riverdale Brushtex",
+    "url": "https://canadabrick.com/products/riverdale-brushtex/",
+    "sku": "CB-RIVERDALE-BRUSHTEX",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0023_Riverdale-Brushtex-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Riverdale Matt",
+    "url": "https://canadabrick.com/products/riverdale-matt/",
+    "sku": "CB-RIVERDALE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-RiverdaleMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Riverdale Rugg",
+    "url": "https://canadabrick.com/products/riverdale-rugg/",
+    "sku": "CB-RIVERDALE-RUGG",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0020_Riverdale-Rugg-QBC_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Riverdale Smooth",
+    "url": "https://canadabrick.com/products/riverdale-smooth/",
+    "sku": "CB-RIVERDALE-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-RiverdaleSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Riverdale Smooth Ironspot",
+    "url": "https://canadabrick.com/products/riverdale-smooth-ironspot/",
+    "sku": "CB-RIVERDALE-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-RiverdaleSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Robindale",
+    "url": "https://canadabrick.com/products/robindale/",
+    "sku": "CB-ROBINDALE",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Robindale-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Rutherford",
+    "url": "https://canadabrick.com/products/rutherford/",
+    "sku": "CB-RUTHERFORD",
+    "collection": "Canada Collection",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2019/09/MB-Rutherford-WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Sea Shell – Avanti",
+    "url": "https://canadabrick.com/products/sea-shell-avanti/",
+    "sku": "CB-SEA-SHELL-AVANTI",
+    "collection": "Avanti",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/wAvanti_0000_Sea-Shell-24.jpg",
+    "description": "Create a rustic chic vibe or modern finish with our versatile Avanti brick. This calcium silicate brick (like our stone products) features a natural, fine-grained texture which we age to create a uniquely smooth weathered brick. Available in four natural colours. If you want long and linear, Avanti is the product youre looking for."
+  },
+  {
+    "name": "Shadow Ridge Matt",
+    "url": "https://canadabrick.com/products/shadow-ridge-matt/",
+    "sku": "CB-SHADOW-RIDGE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "black",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_Shadow-Ridge-Matt-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Shadow Ridge Velour",
+    "url": "https://canadabrick.com/products/shadow-ridge-velour/",
+    "sku": "CB-SHADOW-RIDGE-VELOUR",
+    "collection": "Canada Architectural Series",
+    "color": "black",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_Shadow-Ridge-Velour-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Shadow Ridge Velour",
+    "url": "https://canadabrick.com/products/shadow-ridge-velour-2/",
+    "sku": "CB-SHADOW-RIDGE-VELOUR-2",
+    "collection": "District Series",
+    "color": "black",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_Shadow-Ridge-Velour-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Sierra Sandstone",
+    "url": "https://canadabrick.com/products/sierra-sandstone/",
+    "sku": "CB-SIERRA-SANDSTONE",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SierraSandstone-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sierra Sandstone Smooth",
+    "url": "https://canadabrick.com/products/sierra-sandstone-smooth/",
+    "sku": "CB-SIERRA-SANDSTONE-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SierraSandstoneSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sonoma Bark",
+    "url": "https://canadabrick.com/products/sonoma-bark/",
+    "sku": "CB-SONOMA-BARK",
+    "collection": "Renovation Products",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0018_Sonoma-Bark-QBC_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Sonoma Brushtex",
+    "url": "https://canadabrick.com/products/sonoma-brushtex/",
+    "sku": "CB-SONOMA-BRUSHTEX",
+    "collection": "Renovation Products",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0017_Sonoma-Brushtex-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Sonoma Matt",
+    "url": "https://canadabrick.com/products/sonoma-matt/",
+    "sku": "CB-SONOMA-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SonomaMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sonoma Smooth",
+    "url": "https://canadabrick.com/products/sonoma-smooth/",
+    "sku": "CB-SONOMA-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SonomaSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sonoma Smooth Ironspot",
+    "url": "https://canadabrick.com/products/sonoma-smooth-ironspot/",
+    "sku": "CB-SONOMA-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SonomaSmoothIronspot-0817-1-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Spadina",
+    "url": "https://canadabrick.com/products/spadina/",
+    "sku": "CB-SPADINA",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/10/MB-Spadina-WR-800x800.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Spring Hill Matt",
+    "url": "https://canadabrick.com/products/spring-hill-matt/",
+    "sku": "CB-SPRING-HILL-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_Spring-Hill-Matt-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Spring Hill Velour",
+    "url": "https://canadabrick.com/products/spring-hill-velour/",
+    "sku": "CB-SPRING-HILL-VELOUR",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_Spring-Hill-Velour-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Spring Hill Velour",
+    "url": "https://canadabrick.com/products/spring-hill-velour-2/",
+    "sku": "CB-SPRING-HILL-VELOUR-2",
+    "collection": "District Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_Spring-Hill-Velour-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Sundance Bark",
+    "url": "https://canadabrick.com/products/sundance-bark/",
+    "sku": "CB-SUNDANCE-BARK",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0014_Sundance-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Sundance Matt",
+    "url": "https://canadabrick.com/products/sundance-matt/",
+    "sku": "CB-SUNDANCE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SundanceMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sundance Rugg",
+    "url": "https://canadabrick.com/products/sundance-rugg/",
+    "sku": "CB-SUNDANCE-RUGG",
+    "collection": "Renovation Products",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0013_Sundance-Russ-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Sundance Smooth",
+    "url": "https://canadabrick.com/products/sundance-smooth/",
+    "sku": "CB-SUNDANCE-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SundanceSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sundance Smooth Ironspot",
+    "url": "https://canadabrick.com/products/sundance-smooth-ironspot/",
+    "sku": "CB-SUNDANCE-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SundanceSmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sunnybrook Blend",
+    "url": "https://canadabrick.com/products/sunnybrook-blend/",
+    "sku": "CB-SUNNYBROOK-BLEND",
+    "collection": "Canada Architectural Series",
+    "color": "blend",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SunnybrookBlend-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sunnydale Matt",
+    "url": "https://canadabrick.com/products/sunnydale-matt/",
+    "sku": "CB-SUNNYDALE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-Sunnydale-0817-1-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Sussex",
+    "url": "https://canadabrick.com/products/sussex/",
+    "sku": "CB-SUSSEX",
+    "collection": "Canada Collection",
+    "color": "white",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-SussexGrey-0817-1-1024x531.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Talbot Antique",
+    "url": "https://canadabrick.com/products/talbot-antique/",
+    "sku": "CB-TALBOT-ANTIQUE",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0011_Talbot-Antique-MTM_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Talbot Square",
+    "url": "https://canadabrick.com/products/talbot-square/",
+    "sku": "CB-TALBOT-SQUARE",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0008_Talbot-Square-CSR_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Taupe Bark",
+    "url": "https://canadabrick.com/products/taupe-bark/",
+    "sku": "CB-TAUPE-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0007_Taupe-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Taupe Matt",
+    "url": "https://canadabrick.com/products/taupe-matt/",
+    "sku": "CB-TAUPE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-TaupeMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Taupe Smooth",
+    "url": "https://canadabrick.com/products/taupe-smooth/",
+    "sku": "CB-TAUPE-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "buff",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-TaupeSmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Terra Nova 2",
+    "url": "https://canadabrick.com/products/terra-nova-2/",
+    "sku": "CB-TERRA-NOVA-2",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0004_Terra-Nova-QBC_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Trinity",
+    "url": "https://canadabrick.com/products/trinity/",
+    "sku": "CB-TRINITY",
+    "collection": "Canada Collection",
+    "color": "red",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Aldershot-Trinity-0817-1024x514.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Tuxedo",
+    "url": "https://canadabrick.com/products/tuxedo/",
+    "sku": "CB-TUXEDO",
+    "collection": "Canada Architectural Series",
+    "color": "black",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2018/06/MB_CanadaArch_Tuxedo_WR-1.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Vanier",
+    "url": "https://canadabrick.com/products/vanier/",
+    "sku": "CB-VANIER",
+    "collection": "Canada Collection",
+    "color": "black",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Aldershot-Vanier-0817-1024x514.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Varsity Matt",
+    "url": "https://canadabrick.com/products/varsity-matt/",
+    "sku": "CB-VARSITY-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-VarsityMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Varsity Smooth",
+    "url": "https://canadabrick.com/products/varsity-smooth/",
+    "sku": "CB-VARSITY-SMOOTH",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-VarsitySmooth-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Varsity Smooth Ironspot",
+    "url": "https://canadabrick.com/products/varsity-smooth-ironspot/",
+    "sku": "CB-VARSITY-SMOOTH-IRONSPOT",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-VarsitySmoothIronspot-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Vintage Bark",
+    "url": "https://canadabrick.com/products/vintage-bark/",
+    "sku": "CB-VINTAGE-BARK",
+    "collection": "Renovation Products",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/07/Reno_0003_Vintage-Bark-Ont_Lighter.jpg",
+    "description": "This special collection of Renovation Products features classic and discontinued brick colours that are often specified for repairs and additions. Please contact us for more information for details and how to order. Special conditions apply."
+  },
+  {
+    "name": "Vintage Matt",
+    "url": "https://canadabrick.com/products/vintage-matt/",
+    "sku": "CB-VINTAGE-MATT",
+    "collection": "Canada Architectural Series",
+    "color": "brown",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Burlington-VintageMatt-0817-1024x531.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Weathered Oak – Tumbled Vintage Brick",
+    "url": "https://canadabrick.com/products/weathered-oak-tumbled-vintage-brick/",
+    "sku": "CB-WEATHERED-OAK-TUMBLED-VINTAGE-BRICK",
+    "collection": "Tumbled Vintage Brick",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2025/06/Brick-Arriscraft-Tumbled-Vintage-Brick-Weathered-Oak-Tumbled-Vintage-Brick-1.jpg",
+    "description": "Tumbled Vintage Brick is all about old-world charm with a modern twist. These bricks are crafted from calcium silicate and feature naturally tumbled edges, giving them a weathered, timeworn look thats perfect for rustic, traditional, or farmhouse-style designs."
+  },
+  {
+    "name": "Wellington",
+    "url": "https://canadabrick.com/products/wellington/",
+    "sku": "CB-WELLINGTON",
+    "collection": "Canada Collection",
+    "color": "red",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/08/MB-Aldershot-Wellington-0817-1024x514.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range  from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "Westford Square",
+    "url": "https://canadabrick.com/products/westford-square/",
+    "sku": "CB-WESTFORD-SQUARE",
+    "collection": "Canada Collection",
+    "color": "brown",
+    "brickSizes": [],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2019/09/MB_R_CanadaColl_WestfordSquare_WR.jpg",
+    "description": "The beauty of a Canada Brick exterior is a clear expression of your distinct personality. Choose from our wide colour range &#8211; from bright whites, to traditional red and earth tones, to dramatic darks. And have your pick of straight edges or tumbled and textured styles to create a statement that truly reflects your personal style."
+  },
+  {
+    "name": "White Ash",
+    "url": "https://canadabrick.com/products/white-ash/",
+    "sku": "CB-WHITE-ASH",
+    "collection": "Canada Architectural Series",
+    "color": "white",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2022/08/CB-CanadaArchitectural_White-Ash-0722-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "White Ash",
+    "url": "https://canadabrick.com/products/white-ash-2/",
+    "sku": "CB-WHITE-ASH-2",
+    "collection": "District Series",
+    "color": "white",
+    "brickSizes": [
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2023/08/CB-DistrictSeries_White-Ash-WR.jpg",
+    "description": "Nothing beats a high-quality masonry exterior for performance and longevity. Elevate your masonry projects with our fabulous District Series brick. Featuring a curated collection of designer colours and a linear format, District Series will up your design game and deliver a new level of sophistication."
+  },
+  {
+    "name": "Williamsburg",
+    "url": "https://canadabrick.com/products/williamsburg/",
+    "sku": "CB-WILLIAMSBURG",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/05/CB-CanadaArchitectural_Williamsburg-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Williamsburg MK II",
+    "url": "https://canadabrick.com/products/williamsburg-mk-ii/",
+    "sku": "CB-WILLIAMSBURG-MK-II",
+    "collection": "Canada Architectural Series",
+    "color": "red",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2024/05/CB-CanadaArchitectural_WilliamsburgMKII-0624-WR.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  },
+  {
+    "name": "Winterbourne",
+    "url": "https://canadabrick.com/products/winterbourne/",
+    "sku": "CB-WINTERBOURNE",
+    "collection": "Canada Architectural Series",
+    "color": "white",
+    "brickSizes": [
+      {
+        "code": "CSR",
+        "name": "CSR",
+        "heightMm": 70,
+        "lengthMm": 230,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 9 1 16 × 3 1 2"
+      },
+      {
+        "code": "ENN",
+        "name": "Engineer Norman",
+        "heightMm": 70,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 3 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MJU",
+        "name": "Metric Jumbo",
+        "heightMm": 90,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "3 1 2 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "MTM",
+        "name": "Metric Modular",
+        "heightMm": 57,
+        "lengthMm": 190,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 7 1 2 × 3 1 2"
+      },
+      {
+        "code": "MNO",
+        "name": "Metric Norman",
+        "heightMm": 57,
+        "lengthMm": 290,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 11 1 2 × 3 1 2"
+      },
+      {
+        "code": "ONT",
+        "name": "Ontario",
+        "heightMm": 60,
+        "lengthMm": 213,
+        "depthMm": 102,
+        "inchLabel": "2 3 8 × 8 3 8 × 4"
+      },
+      {
+        "code": "MOD",
+        "name": "Quebec",
+        "heightMm": 57,
+        "lengthMm": 203,
+        "depthMm": 90,
+        "inchLabel": "2 1 4 × 8 × 3 1 2"
+      }
+    ],
+    "imageUrl": "https://canadabrick.com/wp-content/uploads/sites/12/2017/10/MB-Burlington_Winterboure-WR-800x800.jpg",
+    "description": "The exquisite allure of Canada Brick Architectural Series on your project is a bold expression of your unique vision. With its rich palette of colours and strict adherence to CSA and ASTM standards, our clay brick products enable you to create unique designs; transforming your next project into a signature statement for generations to come."
+  }
+]

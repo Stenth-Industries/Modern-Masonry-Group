@@ -316,7 +316,11 @@ export default function BrickDetail({ brickId, navigate }) {
                   <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider">{brickDetails.size}</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider flex flex-col gap-0.5">
+                      {brickDetails.size.includes('\n')
+                        ? brickDetails.size.split('\n').map((s, i) => <span key={i}>{s}</span>)
+                        : brickDetails.size}
+                    </span>
                   </div>
                 </>
               )}
