@@ -15,25 +15,25 @@
       {
         "name": "Champagne",
         "sku": "BB-STONE-ART2-CHA",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Champagne.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/USA-Artiste2-Champagne.jpg.webp",
         "stocked": true
       },
       {
         "name": "Dover",
         "sku": "BB-STONE-ART2-DOV",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Dover.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/USA-Artiste2-Dover.jpg.webp",
         "stocked": true
       },
       {
         "name": "Marble Gray",
         "sku": "BB-STONE-ART2-MAR",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Marble-Grey.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/USA-Artiste2-Marble-Grey.jpg.webp",
         "stocked": true
       },
       {
         "name": "Shoreline",
         "sku": "BB-STONE-ART2-SHO",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Shoreline.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/USA-Artiste2-Shoreline.jpg.webp",
         "stocked": true
       }
     ]
@@ -59,37 +59,37 @@
       {
         "name": "Cloudburst",
         "sku": "BB-STONE-BON-CLO",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Cloudburst_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Cloudburst_168x590.jpg.webp",
         "stocked": true
       },
       {
         "name": "Dover",
         "sku": "BB-STONE-BON-DOV",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Dover_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Dover_168x590.jpg.webp",
         "stocked": true
       },
       {
         "name": "Nickel",
         "sku": "BB-STONE-BON-NIC",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Nickel_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Nickel_168x590.jpg.webp",
         "stocked": true
       },
       {
         "name": "Polar White",
         "sku": "BB-STONE-BON-POL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Polar-White_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Polar-White_168x590.jpg.webp",
         "stocked": true
       },
       {
         "name": "Sandbar",
         "sku": "BB-STONE-BON-SAN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Sandbar_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Sandbar_168x590.jpg.webp",
         "stocked": true
       },
       {
         "name": "Twilight",
         "sku": "BB-STONE-BON-TWI",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Twilight_168x590.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/BONNEVILLE-Twilight_168x590.jpg.webp",
         "stocked": true
       }
     ]
@@ -110,37 +110,37 @@
       {
         "name": "Dover",
         "sku": "BB-STONE-CON-DOV",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Dover_Multi_BCP-23_0.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Contempo-Dover_Multi_BCP-23_0.jpg.webp",
         "stocked": true
       },
       {
         "name": "Nickel",
         "sku": "BB-STONE-CON-NIC",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Nickel_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Contempo-Nickel_Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Onyx",
         "sku": "BB-STONE-CON-ONY",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Onyx_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Contempo-Onyx_Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Polar White",
         "sku": "BB-STONE-CON-POL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Contempo_Polar-White.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Contempo_Polar-White.jpg.webp",
         "stocked": true
       },
       {
         "name": "Sandbar",
         "sku": "BB-STONE-CON-SAN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo_Sandbar-Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Contempo_Sandbar-Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Shadow",
         "sku": "BB-STONE-CON-SHA",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo_Shadow_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Contempo_Shadow_Multi.jpg.webp",
         "stocked": true
       }
     ]
@@ -175,67 +175,67 @@
       {
         "name": "Ebony",
         "sku": "BB-STONE-FIN-EBO",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Ebony-Smooth-CloseUp_1.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Ebony-Smooth-CloseUp_1.jpg.webp",
         "stocked": false
       },
       {
         "name": "Academy Black",
         "sku": "BB-STONE-FIN-ACA",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Academy-Black-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2020_Finesse-Academy-Black-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Onyx",
         "sku": "BB-STONE-FIN-ONY",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Onyx-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2020_Finesse-Onyx-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Eclipse",
         "sku": "BB-STONE-FIN-ECL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Eclipse-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2020_Finesse-Eclipse-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Mineral Gray",
         "sku": "BB-STONE-FIN-MIN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Mineral-Gray-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Mineral-Gray-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Peel Silver",
         "sku": "BB-STONE-FIN-PEE",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Peel-Silver-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2020_Finesse-Peel-Silver-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Polar White",
         "sku": "BB-STONE-FIN-POL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Polar-White-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2020_Finesse-Polar-White-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Iceland White",
         "sku": "BB-STONE-FIN-ICE",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Iceland-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Iceland-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Wheatfield",
         "sku": "BB-STONE-FIN-WHE",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Wheatfield-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Wheatfield-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Canvas Beige",
         "sku": "BB-STONE-FIN-CAN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Canvas-Beige-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Canvas-Beige-Smooth-CloseUp.jpg.webp",
         "stocked": false
       },
       {
         "name": "Almond",
         "sku": "BB-STONE-FIN-ALM",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Almond-Smooth-CloseUp.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Finesse-Almond-Smooth-CloseUp.jpg.webp",
         "stocked": false
       }
     ]
@@ -256,43 +256,43 @@
       {
         "name": "Ashland",
         "sku": "BB-STONE-GRA-ASH",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Ashland_BCP-23.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Granada-Ashland_BCP-23.jpg.webp",
         "stocked": true
       },
       {
         "name": "Cinder",
         "sku": "BB-STONE-GRA-CIN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada_Cinder_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Granada_Cinder_Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Mackinaw",
         "sku": "BB-STONE-GRA-MAC",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Mackinaw_BCP-24.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Granada-Mackinaw_BCP-24.jpg.webp",
         "stocked": true
       },
       {
         "name": "Marble Gray",
         "sku": "BB-STONE-GRA-MAR",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Marble-Gray_BCP-23.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Granada-Marble-Gray_BCP-23.jpg.webp",
         "stocked": true
       },
       {
         "name": "Midnight",
         "sku": "BB-STONE-GRA-MID",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada-Midnight_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Granada-Midnight_Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Polar White",
         "sku": "BB-STONE-GRA-POL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada-PolarWhite-2_Multi.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/2021_Granada-PolarWhite-2_Multi.jpg.webp",
         "stocked": true
       },
       {
         "name": "Sunrise",
         "sku": "BB-STONE-GRA-SUN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Sunrise_BCP-23.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Granada-Sunrise_BCP-23.jpg.webp",
         "stocked": true
       }
     ]
@@ -345,37 +345,37 @@
       {
         "name": "Cinder",
         "sku": "BB-STONE-TAL-CIN",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Cinder_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-Cinder_BCP-25_web.jpg.webp",
         "stocked": true
       },
       {
         "name": "Mackinaw",
         "sku": "BB-STONE-TAL-MAC",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Mackinaw_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-Mackinaw_BCP-25_web.jpg.webp",
         "stocked": true
       },
       {
         "name": "Oslo",
         "sku": "BB-STONE-TAL-OSL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Oslo_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-Oslo_BCP-25_web.jpg.webp",
         "stocked": true
       },
       {
         "name": "Palermo Beige",
         "sku": "BB-STONE-TAL-PAL",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-PalermoBeige_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-PalermoBeige_BCP-25_web.jpg.webp",
         "stocked": true
       },
       {
         "name": "Tempest",
         "sku": "BB-STONE-TAL-TEM",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Tempest_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-Tempest_BCP-25_web.jpg.webp",
         "stocked": true
       },
       {
         "name": "Twilight",
         "sku": "BB-STONE-TAL-TWI",
-        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Twilight_BCP-25_web.jpg.webp",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__image__full/public/pm_image/Talia-Twilight_BCP-25_web.jpg.webp",
         "stocked": true
       }
     ]

@@ -125,9 +125,10 @@ async function main() {
         continue;
       }
 
+      const highResImage = colour.image?.replace("styles/product_model__pm_image__search", "styles/product_model__image__full") ?? colour.image;
       const safeFilename = `bb-stone-${colour.sku.toLowerCase()}-${Date.now()}.webp`;
       console.log(`  Uploading image for ${colour.name}...`);
-      const imageUrl = await downloadAndUploadImage(colour.image, safeFilename);
+      const imageUrl = await downloadAndUploadImage(highResImage, safeFilename);
 
       const colourNameCat = await ensureCategory("colour", colour.name);
       await linkProductCategory(product.id, colourNameCat.id);

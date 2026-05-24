@@ -6,13 +6,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_FILE = path.join(__dirname, "data", "brampton-stone.json");
 const OUT_DIR = path.join(__dirname, "data", "stone-images");
 
-function toOriginalUrl(url) {
-  // Strip Drupal image style: /styles/<style>/public/ → /files/
-  return url.replace(/\/styles\/[^/]+\/public\//, "/files/");
+function toHighResUrl(url) {
+  // Swap Drupal thumbnail style for the full-size colour swatch style
+  return url.replace("styles/product_model__pm_image__search", "styles/product_model__image__full");
 }
 
 async function downloadImage(url, dest) {
-  const res = await fetch(toOriginalUrl(url), {
+  const res = await fetch(toHighResUrl(url), {
     headers: { "User-Agent": "Mozilla/5.0 (compatible; bot/1.0)" },
     signal: AbortSignal.timeout(15000),
   });
@@ -51,4 +51,11 @@ async function main() {
     }
   }
 
-  console.log(`\
+  console.log(`\nDone — ${ok} downloaded, ${fail} failed`);
+  console.log(`Saved to: ${OUT_DIR}\n`);
+}
+
+main().catch((err) => {
+  console.error("Fatal:", err.message);
+  process.exit(1);
+});
