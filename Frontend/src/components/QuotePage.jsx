@@ -77,21 +77,54 @@ const RadioCard = ({ selected, onClick, label, desc }) => (
 
 export default function QuotePage({ navigate }) {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', company: '', role: 'Architect / Designer', details: '', file: null
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (step === 1) {
+      if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+        setError('Please fill in all required fields.');
+        return;
+      }
+      setError(null);
       setStep(2);
     } else {
-      const subject = encodeURIComponent(`Quote Request — ${formData.role} | ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company || 'N/A'}\nProject Type: ${formData.role}\n\nProject Details:\n${formData.details}`
-      );
-      window.location.href = `mailto:info@modernmasonrygroup.ca?subject=${subject}&body=${body}`;
-      setStep(3);
+      setIsSubmitting(true);
+      setError(null);
+      try {
+        const formDataPayload = new FormData();
+        formDataPayload.append('fullName', formData.name);
+        formDataPayload.append('email', formData.email);
+        formDataPayload.append('phone', formData.phone);
+        formDataPayload.append('company', formData.company);
+        formDataPayload.append('role', formData.role);
+        formDataPayload.append('details', formData.details);
+        if (formData.file) {
+          formDataPayload.append('attachment', formData.file);
+        }
+
+        const response = await fetch(`/api/quotes`, {
+          method: 'POST',
+          body: formDataPayload,
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to submit quote');
+        }
+
+        setStep(3);
+      } catch (err) {
+        console.error("Quote submission error:", err);
+        setError(err.message || 'Something went wrong. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -180,6 +213,12 @@ export default function QuotePage({ navigate }) {
                   <InputField label="Phone Number" icon={Phone} type="tel" placeholder="+1 (555) 000-0000" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
                   <InputField label="Company (Optional)" icon={Briefcase} placeholder="Doe Design Group" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} />
                   
+                  {error && (
+                    <div className="text-red-400 text-sm font-medium p-3 bg-red-400/10 rounded-lg border border-red-400/20 text-center mt-2 mb-4">
+                      {error}
+                    </div>
+                  )}
+
                   <button type="submit" className="w-full mt-4 bg-[var(--brass)] hover:bg-[var(--brass-light)] text-black font-bold uppercase tracking-[0.2em] text-[11px] py-5 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(212,175,99,0.3)] hover:shadow-[0_0_30px_rgba(212,175,99,0.5)]">
                     Continue to Project Scope <ArrowRight size={14} />
                   </button>
@@ -226,13 +265,20 @@ export default function QuotePage({ navigate }) {
                     onChange={e => setFormData({...formData, file: e.target.files[0]})} 
                   />
                   
-                  <div className="flex gap-4">
-                    <button type="button" onClick={() => setStep(1)} className="w-1/3 border border-white/20 text-white/60 hover:text-white hover:border-[var(--brass)] font-bold uppercase tracking-[0.1em] text-[11px] py-5 rounded-lg flex items-center justify-center gap-2 transition-colors">
-                      Back
-                    </button>
-                    <button type="submit" className="w-2/3 bg-[var(--brass)] hover:bg-[var(--brass-light)] text-black font-bold uppercase tracking-[0.2em] text-[11px] py-5 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(212,175,99,0.3)]">
-                      Submit Inquiry <ArrowRight size={14} />
-                    </button>
+                  <div className="flex gap-4 flex-col mt-6">
+                    {error && (
+                      <div className="text-red-400 text-sm font-medium p-3 bg-red-400/10 rounded-lg border border-red-400/20 text-center">
+                        {error}
+                      </div>
+                    )}
+                    <div className="flex gap-4">
+                      <button type="button" onClick={() => setStep(1)} disabled={isSubmitting} className="w-1/3 border border-white/20 text-white/60 hover:text-white hover:border-[var(--brass)] font-bold uppercase tracking-[0.1em] text-[11px] py-5 rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-50">
+                        Back
+                      </button>
+                      <button type="submit" disabled={isSubmitting} className="w-2/3 bg-[var(--brass)] hover:bg-[var(--brass-light)] text-black font-bold uppercase tracking-[0.2em] text-[11px] py-5 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(212,175,99,0.3)] disabled:opacity-50">
+                        {isSubmitting ? 'Submitting...' : 'Submit Inquiry'} {!isSubmitting && <ArrowRight size={14} />}
+                      </button>
+                    </div>
                   </div>
                 </motion.form>
               )}

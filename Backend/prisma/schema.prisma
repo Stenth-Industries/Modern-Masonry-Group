@@ -96,10 +96,13 @@ model Quote {
   id        String   @id @default(uuid())
   fullName  String
   email     String
+  phone     String?
+  role      String?
   company   String?
   quantity  String?
   details   String?
   productId String?
   isGeneral Boolean  @default(false)
+  attachment String?
   createdAt DateTime @default(now())
 }
