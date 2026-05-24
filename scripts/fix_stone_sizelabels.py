@@ -8,6 +8,7 @@ Issues fixed:
   - Arris Tile:  6 lines → 3 (remove Return/corner entries)
   - Stack:       remove STA21: prefix from line 1; trim to 3 lines (remove incomplete entries)
   - Coastal:     remove COA21: prefix from line 1
+  - Midtown:     set size-specific labels (14 variants matched by colourName height token)
 """
 
 import argparse
@@ -64,6 +65,28 @@ COASTAL_FIXED = (
     '6-1/8 Height × Fragmented (4 to 10) Lengths × 1-1/8 Bed × 2 to 4 Depth'
 )
 
+MIDTOWN_21_FIXED = (
+    '2-1/8" Height × Fragmented (4" to 23-5/8") Lengths × Mixed (7/8" 1" 1-1/8" 1-1/4") Bed\n'
+    '2-1/8" Height × Fragmented (4" to 10") Lengths × Mixed (7/8" 1" 1-1/8" 1-1/4") Bed × 2" to 4" Depth'
+)
+
+MIDTOWN_35_FIXED = (
+    '3-5/8" Height × Fragmented (4" to 23-5/8") Lengths × Mixed (7/8" 1" 1-1/8" 1-1/4") Bed\n'
+    '3-5/8" Height × Fragmented (4" to 10") Lengths × Mixed (7/8" 1" 1-1/8" 1-1/4") Bed × 2" to 4" Depth'
+)
+
+MIDTOWN_57_FIXED = (
+    '5-7/8" Height × Fragmented (up to 23-5/8") Lengths × 1-1/2" Bed\n'
+    '5-7/8" Height × Fragmented (4" to 10") Lengths × 1-1/2" Bed × 2" to 4" Depth'
+)
+
+# Keys match the existing short sizeLabel values (with or without " Sawn" suffix)
+MIDTOWN_SIZE_MAP = {
+    '2-1/8': MIDTOWN_21_FIXED,
+    '3-5/8': MIDTOWN_35_FIXED,
+    '5-7/8': MIDTOWN_57_FIXED,
+}
+
 FIXES = {
     'Arris Clip': ARRIS_CLIP_FIXED,
     'Arris Tile': ARRIS_TILE_FIXED,
@@ -112,6 +135,28 @@ def main():
                 print(f"    was:  {repr(current[:80])}")
                 print(f"    now:  {repr(fixed_label[:80])}")
                 all_updates.append((v['id'], fixed_label))
+
+    # Midtown: each variant's colourName contains the height token
+    midtown_variants = fetch_variants(conn, 'Midtown')
+    print(f"\n── Midtown ({len(midtown_variants)} variants) ────────────────────────────")
+    for v in midtown_variants:
+        current = v['sizeLabel'] or ''
+        display = f"{v['colourName']} — {current}"
+        fixed_label = None
+        for token, label in MIDTOWN_SIZE_MAP.items():
+            if current.startswith(token):
+                fixed_label = label
+                break
+        if fixed_label is None:
+            print(f"  {display:50} — SKIPPED (unrecognised sizeLabel)")
+            continue
+        if current == fixed_label:
+            print(f"  {display:50} — already correct")
+        else:
+            print(f"  {display:50} — WILL UPDATE")
+            print(f"    was:  {repr(current[:80])}")
+            print(f"    now:  {repr(fixed_label[:80])}")
+            all_updates.append((v['id'], fixed_label))
 
     print(f"\n{'DRY RUN — ' if not args.confirm else ''}Total updates: {len(all_updates)}")
 

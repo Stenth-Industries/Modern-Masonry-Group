@@ -1,0 +1,397 @@
+[
+  {
+    "series_name": "Artiste 2",
+    "collection": "Rialto",
+    "material": "Concrete",
+    "description": "Featuring straight top and bottom edges and a fresh spectrum of earth-tone colours, Artiste 2 is the evolution of our original Artiste stone. Improving on excellence, Artiste 2 offers an even more natural stone texture while also being easier to install.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Range in Colour",
+    "colour_class": "Grey, Buff, Tan, Brown",
+    "finish": "Embossed, Textured, Standard Finish",
+    "size_type": "multi-bundle",
+    "size_label": "Multi-Bundle System",
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/artiste-2-stone",
+    "colours": [
+      {
+        "name": "Champagne",
+        "sku": "BB-STONE-ART2-CHA",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Champagne.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Dover",
+        "sku": "BB-STONE-ART2-DOV",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Dover.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Marble Gray",
+        "sku": "BB-STONE-ART2-MAR",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Marble-Grey.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Shoreline",
+        "sku": "BB-STONE-ART2-SHO",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/USA-Artiste2-Shoreline.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Bonneville",
+    "collection": "Nueva",
+    "material": "Concrete",
+    "description": "From inception, Bonneville was created with the versatility required to shape modern home design. Softly blended, natural colours were specifically developed to make Bonneville the perfect complement to our well-coordinated clay or concrete bricks. The smooth surface, clean lines, and modern proportions make Bonneville stand apart from other stones.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Modern, Linear, Straight Edge, Range in Colour",
+    "colour_class": "Grey, Cream, White",
+    "finish": "Smooth, Standard Finish",
+    "size_type": "fixed",
+    "size_label": "Multiple Sizes (79–257 × 590 mm, 90 mm deep)",
+    "sizes": [
+      { "label": "90 × 79 × 590 mm", "heightMm": 79, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 168 × 590 mm", "heightMm": 168, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 257 × 590 mm", "heightMm": 257, "widthMm": 590, "depthMm": 90 }
+    ],
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/bonneville-stone",
+    "colours": [
+      {
+        "name": "Cloudburst",
+        "sku": "BB-STONE-BON-CLO",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Cloudburst_168x590.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Dover",
+        "sku": "BB-STONE-BON-DOV",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Dover_168x590.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Nickel",
+        "sku": "BB-STONE-BON-NIC",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Nickel_168x590.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Polar White",
+        "sku": "BB-STONE-BON-POL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Polar-White_168x590.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Sandbar",
+        "sku": "BB-STONE-BON-SAN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Sandbar_168x590.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Twilight",
+        "sku": "BB-STONE-BON-TWI",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/BONNEVILLE-Twilight_168x590.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Contempo Stone",
+    "collection": "Nueva",
+    "material": "Concrete",
+    "description": "Add elegance to modern designs. Through its elemental colours, Contempo brings fresh sophistication to a fluid stone system. Its smooth surface and natural colours pair noticeably well with textured products such as Granada.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Modern, Linear, Straight Edge, Solid Colour",
+    "colour_class": "Grey",
+    "finish": "Smooth, Standard Finish",
+    "size_type": "multi-bundle",
+    "size_label": "Multi-Bundle System",
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/contempo-stone-stone",
+    "colours": [
+      {
+        "name": "Dover",
+        "sku": "BB-STONE-CON-DOV",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Dover_Multi_BCP-23_0.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Nickel",
+        "sku": "BB-STONE-CON-NIC",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Nickel_Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Onyx",
+        "sku": "BB-STONE-CON-ONY",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo-Onyx_Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Polar White",
+        "sku": "BB-STONE-CON-POL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Contempo_Polar-White.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Sandbar",
+        "sku": "BB-STONE-CON-SAN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo_Sandbar-Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Shadow",
+        "sku": "BB-STONE-CON-SHA",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Contempo_Shadow_Multi.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Finesse",
+    "collection": "Nueva",
+    "material": "Concrete",
+    "description": "Finesse stone unites colours and textures designed to deliver the perfect aesthetic touch to any build. Explore the vast range of sizes, colours, and finishes, including smooth, suave, quartz, polished and leather. This product is 100% made to order, and is also produced with a water-repellent additive.",
+    "recommended_use": "Commercial",
+    "style": "Modern, Linear, Straight Edge, Solid Colour",
+    "colour_class": "Black",
+    "finish": "Smooth",
+    "size_type": "fixed",
+    "size_label": "Multiple Sizes (57–290 mm height, 90 mm deep) – Made to Order",
+    "sizes": [
+      { "label": "Metric Norman 90 × 57 × 290 mm", "heightMm": 57, "widthMm": 290, "depthMm": 90 },
+      { "label": "Metric Saxon 90 × 57 × 390 mm", "heightMm": 57, "widthMm": 390, "depthMm": 90 },
+      { "label": "Premier Plus 90 × 79 × 257 mm", "heightMm": 79, "widthMm": 257, "depthMm": 90 },
+      { "label": "Metric Jumbo 90 × 90 × 290 mm", "heightMm": 90, "widthMm": 290, "depthMm": 90 },
+      { "label": "90 × 79 × 590 mm", "heightMm": 79, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 90 × 390 mm", "heightMm": 90, "widthMm": 390, "depthMm": 90 },
+      { "label": "90 × 90 × 590 mm", "heightMm": 90, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 168 × 590 mm", "heightMm": 168, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 190 × 390 mm", "heightMm": 190, "widthMm": 390, "depthMm": 90 },
+      { "label": "90 × 190 × 590 mm", "heightMm": 190, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 257 × 590 mm", "heightMm": 257, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 290 × 590 mm", "heightMm": 290, "widthMm": 590, "depthMm": 90 }
+    ],
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/finesse-stone",
+    "colours": [
+      {
+        "name": "Ebony",
+        "sku": "BB-STONE-FIN-EBO",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Ebony-Smooth-CloseUp_1.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Academy Black",
+        "sku": "BB-STONE-FIN-ACA",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Academy-Black-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Onyx",
+        "sku": "BB-STONE-FIN-ONY",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Onyx-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Eclipse",
+        "sku": "BB-STONE-FIN-ECL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Eclipse-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Mineral Gray",
+        "sku": "BB-STONE-FIN-MIN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Mineral-Gray-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Peel Silver",
+        "sku": "BB-STONE-FIN-PEE",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Peel-Silver-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Polar White",
+        "sku": "BB-STONE-FIN-POL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2020_Finesse-Polar-White-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Iceland White",
+        "sku": "BB-STONE-FIN-ICE",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Iceland-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Wheatfield",
+        "sku": "BB-STONE-FIN-WHE",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Wheatfield-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Canvas Beige",
+        "sku": "BB-STONE-FIN-CAN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Canvas-Beige-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      },
+      {
+        "name": "Almond",
+        "sku": "BB-STONE-FIN-ALM",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Finesse-Almond-Smooth-CloseUp.jpg.webp",
+        "stocked": false
+      }
+    ]
+  },
+  {
+    "series_name": "Granada",
+    "collection": "Rialto",
+    "material": "Concrete",
+    "description": "Its fresh, marbled colour compositions make Granada an adaptable stone for today's chic design trends. Offered in an array of alluring colours, Granada's refined textures combine easily with other products, integrating especially well with Contempo.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Modern, Linear, Straight Edge, Range in Colour",
+    "colour_class": "Brown, Grey, Black",
+    "finish": "Embossed, Textured, Standard Finish",
+    "size_type": "multi-bundle",
+    "size_label": "Multi-Bundle System",
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/granada-stone",
+    "colours": [
+      {
+        "name": "Ashland",
+        "sku": "BB-STONE-GRA-ASH",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Ashland_BCP-23.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Cinder",
+        "sku": "BB-STONE-GRA-CIN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada_Cinder_Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Mackinaw",
+        "sku": "BB-STONE-GRA-MAC",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Mackinaw_BCP-24.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Marble Gray",
+        "sku": "BB-STONE-GRA-MAR",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Marble-Gray_BCP-23.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Midnight",
+        "sku": "BB-STONE-GRA-MID",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada-Midnight_Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Polar White",
+        "sku": "BB-STONE-GRA-POL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/2021_Granada-PolarWhite-2_Multi.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Sunrise",
+        "sku": "BB-STONE-GRA-SUN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Granada-Sunrise_BCP-23.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Preston",
+    "collection": "Nueva",
+    "material": "Concrete",
+    "description": "Preston stone embodies the solid look of modern concrete stone veneer with a smooth face and clean lines in harmony with today's design trends. Stocked in established, natural colours; Preston's modular proportions make it the perfect companion for other metric brick and block.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Modern, Linear, Straight Edge, Solid Colour",
+    "colour_class": "Grey, White",
+    "finish": "Smooth, Standard Finish",
+    "size_type": "fixed",
+    "size_label": "Multiple Sizes (190–290 × 390–590 mm, 90 mm deep)",
+    "sizes": [
+      { "label": "90 × 190 × 390 mm", "heightMm": 190, "widthMm": 390, "depthMm": 90 },
+      { "label": "90 × 190 × 590 mm", "heightMm": 190, "widthMm": 590, "depthMm": 90 },
+      { "label": "90 × 290 × 590 mm", "heightMm": 290, "widthMm": 590, "depthMm": 90 }
+    ],
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/preston-stone",
+    "colours": [
+      {
+        "name": "Nickel",
+        "sku": "BB-STONE-PRE-NIC",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_gallery/public/product_image_gallery/Preston-Nickel_190%C3%97590_TMP-2modho-05-23_0.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Polar White",
+        "sku": "BB-STONE-PRE-POL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_gallery/public/product_image_gallery/Preston-Polar-White_190%C3%97590_TMP-modho-05-23%20copy_0.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Talia",
+    "collection": "Nueva",
+    "material": "Concrete",
+    "description": "Add a sleek and modern aesthetic to your next home or building project with Talia stone. Its multi length bundle and 57mm (2 1/4\") coursing height works seamlessly with Modular and Norman size brick allowing for a continuous linear look from brick to stone.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Modern, Linear, Straight Edge, Range in Colour",
+    "colour_class": "Black, Grey",
+    "finish": "Smooth, Standard Finish",
+    "size_type": "multi-bundle",
+    "size_label": "Multi-Bundle System (57 mm coursing height)",
+    "product_url": "https://bramptonbrick.com/en/masonry-products-products/talia-stone",
+    "colours": [
+      {
+        "name": "Cinder",
+        "sku": "BB-STONE-TAL-CIN",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Cinder_BCP-25_web.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Mackinaw",
+        "sku": "BB-STONE-TAL-MAC",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Mackinaw_BCP-25_web.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Oslo",
+        "sku": "BB-STONE-TAL-OSL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Oslo_BCP-25_web.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Palermo Beige",
+        "sku": "BB-STONE-TAL-PAL",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-PalermoBeige_BCP-25_web.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Tempest",
+        "sku": "BB-STONE-TAL-TEM",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Tempest_BCP-25_web.jpg.webp",
+        "stocked": true
+      },
+      {
+        "name": "Twilight",
+        "sku": "BB-STONE-TAL-TWI",
+        "image": "https://bramptonbrick.com/sites/default/files/styles/product_model__pm_image__search/public/pm_image/Talia-Twilight_BCP-25_web.jpg.webp",
+        "stocked": true
+      }
+    ]
+  },
+  {
+    "series_name": "Vivace Stone",
+    "collection": "Rialto",
+    "material": "Concrete",
+    "description": "Vivace Stone offers a bold multi-bundle system with a variety of sizes, bringing a striking dimensional appearance to residential and commercial exteriors.",
+    "recommended_use": "Commercial, Residential",
+    "style": "Range in Colour",
+    "colour_class": "Grey, Black, Tan, Cream, Brown, Buff",
+    "finish": "Textured, Standard Finish",
+    "size_type": "multi-bundle",
+    "size_label": "Multi-Bundle System (90 mm deep, 14 unit sizes)",
+    "product_url": "https://bramptonbrick.com/en/masonry-products/vivace-US-exterior-stone",
+    "colours": []
+  }
+]
