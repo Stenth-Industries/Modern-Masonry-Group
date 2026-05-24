@@ -9,7 +9,7 @@ config({ path: path.join(__dirname, ".env") });
 import { createClient } from "@supabase/supabase-js";
 import prisma from "./config/prisma.js";
 
-const BUCKET = "stenth-canada";
+const BUCKET = "stenth";
 const IMG_DIR = path.join(__dirname, "data", "stone-images");
 
 const supabase = createClient(

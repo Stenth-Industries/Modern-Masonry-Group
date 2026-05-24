@@ -9,7 +9,7 @@ config({ path: path.join(__dirname, ".env") });
 import prisma from "./config/prisma.js";
 import supabase from "./config/supabase.js";
 
-const BUCKET_NAME = "stenth-canada";
+const BUCKET_NAME = "stenth";
 const DATA_FILE = path.join(__dirname, "data", "brampton-stone.json");
 
 async function downloadAndUploadImage(url, filename) {
