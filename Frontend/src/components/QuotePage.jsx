@@ -124,7 +124,7 @@ export default function QuotePage({ navigate }) {
                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-[1.05] text-white mb-6 tracking-tighter uppercase">
                   Initiate<br/>Project.
                </h1>
-               <p className="text-[var(--ash)] text-[14px] leading-loose max-w-sm">
+               <p className="text-[#fffbf7] text-[14px] leading-loose max-w-sm">
                  Partner with the premier masonry supplier in Ontario. Let our experts actualize your architectural vision with uncompromising quality.
                </p>
              </div>
@@ -172,7 +172,7 @@ export default function QuotePage({ navigate }) {
                 >
                   <div className="mb-10">
                     <h2 className="text-3xl font-black text-white uppercase tracking-tighter mb-3">Client Details</h2>
-                    <p className="text-[var(--ash)] text-[13px] font-medium uppercase tracking-wider">Please provide your contact information so our team can reach you.</p>
+                    <p className="text-[#fffbf7] text-[13px] font-medium uppercase tracking-wider">Please provide your contact information so our team can reach you.</p>
                   </div>
 
                   <InputField label="Full Name" icon={User} placeholder="John Doe" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
