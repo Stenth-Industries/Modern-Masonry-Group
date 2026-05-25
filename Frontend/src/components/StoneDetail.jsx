@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, Share2, Plus, CheckCircle,
-  Ruler, Package, Mountain, Droplets, Thermometer, Building2, Send, ChevronRight
+  Ruler, Package, Mountain, Droplets, Thermometer, Building2, Send, ChevronRight, FileText
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -209,6 +209,7 @@ export default function StoneDetail({ stoneId, navigate }) {
   // Only show sizeLabel in the dimensions row when it looks like a size (contains a quote/inch mark)
   const variantSizeLabel = selectedVariant?.sizeLabel;
   const showAsDimension  = variantSizeLabel && (/["']/.test(variantSizeLabel) || variantSizeLabel.includes('×'));
+  const techSheetUrl     = selectedVariant?.techSheetUrl ?? null;
 
   const stoneDetails = {
     size:         showAsDimension ? variantSizeLabel : null,
@@ -425,12 +426,25 @@ export default function StoneDetail({ stoneId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
               </div>
-              {stoneDetails.size && (
+              {(stoneDetails.size || techSheetUrl) && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
+                    {stoneDetails.size
+                      ? <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
+                      : techSheetUrl && (
+                          <a
+                            href={techSheetUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[13px] text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
+                          >
+                            <FileText size={13} />
+                            Product Tech. Sheet
+                          </a>
+                        )
+                    }
                   </div>
                 </>
               )}
@@ -520,7 +534,27 @@ export default function StoneDetail({ stoneId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    {stoneDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions" value={stoneDetails.size} delay={0.05} />}
+                    {stoneDetails.size
+                      ? <SpecRow icon={<Ruler />} label="Unit Dimensions" value={stoneDetails.size} delay={0.05} />
+                      : techSheetUrl && (
+                          <SpecRow
+                            icon={<Ruler />}
+                            label="Unit Dimensions"
+                            delay={0.05}
+                            value={
+                              <a
+                                href={techSheetUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
+                              >
+                                <FileText size={13} />
+                                Product Tech. Sheet
+                              </a>
+                            }
+                          />
+                        )
+                    }
                     <SpecRow icon={<Mountain />} label="Series" value={series} delay={0.1} />
                     {finish && <SpecRow icon={<Thermometer />} label="Surface Finish" value={finish} delay={0.15} />}
                     {region && <SpecRow icon={<Building2 />} label="Manufacturing Region" value={region === 'USA' ? 'USA — Fort Valley, Georgia' : 'Canada — Cambridge, Ontario'} delay={0.2} />}

@@ -87,6 +87,7 @@ model Variant {
   stock         String?  @default("In Stock")
   isActive      Boolean  @default(true)
   standardColor String?
+  techSheetUrl  String?
   createdAt     DateTime @default(now())
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
