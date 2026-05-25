@@ -16,7 +16,7 @@
   "https://arriscraft.com/products/blueridge-matterhorn/": "4-15/16\" H × Random L × 3-7/16\" (±1/2\") D\n10 1/4\" H × Random L × 3 1/2\" (±1/2\") D",
   "https://arriscraft.com/products/big-horn-old-country/": "2-1/4\" H × 23-5/8? L × 3-13/16\" D\n3-5/8\" H × Random L × 3-13/16\" D\n4-7/8\" H × Random L × 3-13/16\" D",
   "https://arriscraft.com/products/tacoma-shadow-stone/": "2-5/16\" H × 23-5/8\" L × 3-5/8\" (±1/4\") D\n5\" H × 31-5/8\" L × 3-1/4\" (±1/4\") D\n7-5/8\"? H × 23-5/8\" L × 3-3/8\" (±1/4\") D",
-  "https://arriscraft.com/product-landing-page-stack/": "STA21: 2-1/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/2\" Bed\n3-5/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/4\" Bed\n5-7/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/8\" Bed\n2-1/8\" Height × Fragmented (4\" to 10\") Lengths x\n3-5/8\" Height × Fragmented (4\" to 10\") Lengths x\n5-7/8\" Height × Fragmented (4\" to 10\") Lengths x",
+  "https://arriscraft.com/product-landing-page-stack/": "STA21: 2-1/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/2\" Bed\n3-5/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/4\" Bed\n5-7/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/8\" Bed\n2-1/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/2\" Bed × 2\" to 4\" Depth\n3-5/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/4\" Bed × 2\" to 4\" Depth\n5-7/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/8\" Bed × 2\" to 4\" Depth",
   "https://arriscraft.com/products/tacoma-urban-ledgestone/": "2-5/16\" H × 23-5/8\" L × 3-5/8\" (±1/4\") D\n3-5/8\" H × Random L × 3-1/2\" (+/-1/4\") D\n5\" H × 31-5/8\" L × 3-1/4\" (±1/4\") D",
   "https://arriscraft.com/products/gray-rocked-georgia-sill/": "5-1/2\"W x 3-1/8\"H x 23-5/8\"L",
   "https://arriscraft.com/products/brown-rocked-georgia-sill/": "5-1/2\"W x 3-1/8\"H x 23-5/8\"L",
@@ -35,5 +35,6 @@
   "collection:Old Country": "2-1/4\" H × 23-5/8? L × 3-13/16\" D\n3-5/8\" H × Random L × 3-13/16\" D\n4-7/8\" H × Random L × 3-13/16\" D",
   "collection:Adair Limestone": "2-5/16\" H × Random L × 3-5/8\" (+/-1/4\") D\n5\" H × Random L × 3-5/8\" (+/-1/4\") D\n7-5/8\" H × Random L × 3-5/8\" (+/-1/4\") D",
   "collection:Adair Masonry Units": "3-1/2\" H × 23-1/4\" L × 3-1/2\" D\n7-1/2\" H × 23-1/4\" L × 3-1/2\" D\n11-3/8\" H × 23-1/4\" L × 3-1/2\" D\n3-5/8\" H × 23-1/4\" L × 3-1/2\" D\n7-5/8\" H × 23-1/4\" L × 3-1/2\" D\n11-5/8\" H × 23-1/4\" L × 3-1/2\" D",
-  "collection:Edge Rock": "4-15/16\" H × Random L × 3-1/2\" (±1/2\") D\n10-1/4\" H × Random L × 3-1/2\" (±1/2\") D"
+  "collection:Edge Rock": "4-15/16\" H × Random L × 3-1/2\" (±1/2\") D\n10-1/4\" H × Random L × 3-1/2\" (±1/2\") D",
+  "collection:Stack": "STA21: 2-1/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/2\" Bed\n3-5/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/4\" Bed\n5-7/8\" Height × Fragmented (4\" to 23-5/8\") Lengths × 1-1/8\" Bed\n2-1/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/2\" Bed × 2\" to 4\" Depth\n3-5/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/4\" Bed × 2\" to 4\" Depth\n5-7/8\" Height × Fragmented (4\" to 10\") Lengths × 1-1/8\" Bed × 2\" to 4\" Depth"
 }
