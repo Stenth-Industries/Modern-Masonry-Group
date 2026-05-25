@@ -414,7 +414,20 @@ export default function BrickDetail({ brickId, navigate }) {
                   className="max-w-3xl"
                 >
                   <div className="border-t border-white/[0.04]">
-                    {brickDetails.size && <SpecRow icon={<Ruler />} label="Unit Dimensions (L × W × H)" value={brickDetails.size} delay={0.05} />}
+                    {brickDetails.size && (
+                      <SpecRow
+                        icon={<Ruler />}
+                        label="Unit Dimensions (L × W × H)"
+                        delay={0.05}
+                        value={
+                          brickDetails.size.includes('\n')
+                            ? <span className="flex flex-col items-end gap-0.5">
+                                {brickDetails.size.split('\n').map((s, i) => <span key={i}>{s.trim()}</span>)}
+                              </span>
+                            : brickDetails.size
+                        }
+                      />
+                    )}
                     <SpecRow icon={<Package />} label="Average Weight per unit" value={brickDetails.weight} delay={0.1} />
                     <SpecRow icon={<Zap />} label="Compressive Strength" value={brickDetails.compressiveStrength} delay={0.15} />
                     <SpecRow icon={<Droplets />} label="Max Water Absorption" value={brickDetails.waterAbsorption} delay={0.2} />

@@ -535,7 +535,18 @@ export default function StoneDetail({ stoneId, navigate }) {
                 >
                   <div className="border-t border-white/[0.04]">
                     {stoneDetails.size
-                      ? <SpecRow icon={<Ruler />} label="Unit Dimensions" value={stoneDetails.size} delay={0.05} />
+                      ? <SpecRow
+                          icon={<Ruler />}
+                          label="Unit Dimensions"
+                          delay={0.05}
+                          value={
+                            stoneDetails.size.includes('\n')
+                              ? <span className="flex flex-col items-end gap-0.5">
+                                  {stoneDetails.size.split('\n').map((s, i) => <span key={i}>{s.trim()}</span>)}
+                                </span>
+                              : stoneDetails.size
+                          }
+                        />
                       : techSheetUrl && (
                           <SpecRow
                             icon={<Ruler />}
