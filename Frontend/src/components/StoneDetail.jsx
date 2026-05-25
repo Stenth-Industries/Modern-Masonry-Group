@@ -91,6 +91,64 @@ function Lightbox({ images, startIndex, onClose }) {
   );
 }
 
+// Matches an inch-mark size like 2-1/8" or 4″ or 1". Uses Unicode escapes so the
+// character class survives editors that normalize curly/straight quotes.
+const SIZE_RE = /\d[\d\-\/]*["“”′″]/g;
+
+// Short pill label for a variant when all variants share a colour.
+const getVariantLabel = (v) => {
+  const isSawn = v.sku?.toUpperCase().includes('SAWN') || v.sizeLabel?.toLowerCase().includes('sawn');
+  const size   = v.sizeLabel?.match(SIZE_RE)?.[0];
+  if (size) return isSawn && !/sawn/i.test(v.sizeLabel) ? `${size} Sawn` : v.sizeLabel;
+  if (isSawn) return 'Sawn';
+  return v.sizeLabel || 'Natural';
+};
+
+// Parse a rich Arriscraft sizeLabel into {label, value, qualifier} rows for Height/Length/Bed.
+const parseDimensions = (text) => {
+  if (!text) return null;
+  const dims = [];
+  for (const part of text.split(/\s+x\s+/i)) {
+    const isHeight = /height/i.test(part);
+    const isLength = /length/i.test(part);
+    const isBed    = /bed/i.test(part);
+    if (!isHeight && !isLength && !isBed) continue;
+    const label     = isHeight ? 'Height' : isLength ? 'Length' : 'Bed';
+    const qualifier = part.match(/\b(Fragmented|Mixed)\b/i)?.[1].toLowerCase();
+    const parens    = part.match(/\(([^)]+)\)/)?.[1].trim();
+    let value;
+    if (parens) {
+      const upTo = parens.match(/up\s*to\s*(\d[\d\-\/]*["“”′″])/i);
+      if (upTo) {
+        value = `up to ${upTo[1]}`;
+      } else {
+        const sizes = parens.match(SIZE_RE) || [];
+        value = sizes.length >= 2 ? `${sizes[0]}–${sizes[sizes.length - 1]}` : (sizes[0] || parens);
+      }
+    } else {
+      value = part.match(SIZE_RE)?.[0];
+    }
+    if (value) dims.push({ label, value, qualifier });
+  }
+  return dims.length > 0 ? dims : null;
+};
+
+const renderDimensions = (size) => {
+  if (!size) return null;
+  if (typeof size === 'string') return size;
+  return (
+    <span className="inline-flex flex-col gap-1 items-start text-left">
+      {size.map(d => (
+        <span key={d.label} className="whitespace-nowrap">
+          <span className="text-[#c9a449] text-[10px] uppercase tracking-[0.15em] mr-2 font-bold">{d.label}</span>
+          <span>{d.value}</span>
+          {d.qualifier && <span className="text-white/40 italic ml-1.5 text-[11px]">({d.qualifier})</span>}
+        </span>
+      ))}
+    </span>
+  );
+};
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function StoneDetail({ stoneId, navigate }) {
@@ -206,13 +264,17 @@ export default function StoneDetail({ stoneId, navigate }) {
     product.variants.every(v => v.colourName === product.variants[0].colourName);
   const isMultiVariant = product.variants?.length > 1;
 
-  // Only show sizeLabel in the dimensions row when it looks like a size (contains a quote/inch mark)
   const variantSizeLabel = selectedVariant?.sizeLabel;
-  const showAsDimension  = variantSizeLabel && (/["']/.test(variantSizeLabel) || variantSizeLabel.includes('×'));
+  const variantDetails   = selectedVariant?.dimensionDetails;
   const techSheetUrl     = selectedVariant?.techSheetUrl ?? null;
+  const parsedDims       = parseDimensions(variantDetails);
+  const dimensionDisplay = parsedDims
+    ?? (variantDetails && !variantDetails.includes('Units') ? variantDetails : null)
+    ?? variantSizeLabel
+    ?? null;
 
   const stoneDetails = {
-    size:         showAsDimension ? variantSizeLabel : null,
+    size:         dimensionDisplay,
     series,
     finish,
     region,
@@ -286,7 +348,7 @@ export default function StoneDetail({ stoneId, navigate }) {
               {product.variants.map((v) => {
                 const isActive = v.id === selectedVariant?.id;
                 if (allSameColor) {
-                  const label = v.sku?.includes('SAWN') ? 'Sawn' : (v.sizeLabel && !/["'×]/.test(v.sizeLabel) ? v.sizeLabel : 'Natural');
+                  const label = getVariantLabel(v);
                   // Size/finish pill buttons
                   return (
                     <button
@@ -382,7 +444,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                   {product.variants.map((v) => {
                     const isActive = v.id === selectedVariant?.id;
                     if (allSameColor) {
-                      const label = v.sizeLabel || 'Natural';
+                      const label = getVariantLabel(v);
                       return (
                         <button
                           key={v.id}
@@ -426,6 +488,15 @@ export default function StoneDetail({ stoneId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
               </div>
+              {stoneDetails.size && (
+                <>
+                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
+                  <div>
+                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{renderDimensions(stoneDetails.size)}</span>
+                  </div>
+                </>
+              )}
               {series && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
@@ -535,18 +606,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                 >
                   <div className="border-t border-white/[0.04]">
                     {stoneDetails.size
-                      ? <SpecRow
-                          icon={<Ruler />}
-                          label="Unit Dimensions"
-                          delay={0.05}
-                          value={
-                            stoneDetails.size.includes('\n')
-                              ? <span className="flex flex-col items-end gap-0.5">
-                                  {stoneDetails.size.split('\n').map((s, i) => <span key={i}>{s.trim()}</span>)}
-                                </span>
-                              : stoneDetails.size
-                          }
-                        />
+                      ? <SpecRow icon={<Ruler />} label="Unit Dimensions" value={renderDimensions(stoneDetails.size)} delay={0.05} />
                       : techSheetUrl && (
                           <SpecRow
                             icon={<Ruler />}
@@ -584,7 +644,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                             ) : (
                               <span className="w-2 h-2 rounded-full border border-white/20" style={{ background: resolveColor(v.colourName, v.hexCode) }} />
                             )}
-                            {allSameColor ? (v.sku?.includes('SAWN') ? 'Sawn' : (v.sizeLabel && !/["'×]/.test(v.sizeLabel) ? v.sizeLabel : 'Natural')) : (v.colourName || v.sku)}
+                            {allSameColor ? getVariantLabel(v) : (v.colourName || v.sku)}
                           </span>
                         ))}
                       />

@@ -78,7 +78,8 @@ model Variant {
   sku         String?  @unique
   colourName  String?
   hexCode     String?
-  sizeLabel   String?  
+  sizeLabel        String?
+  dimensionDetails String?
   widthMm     Float?
   heightMm    Float?
   depthMm     Float?
