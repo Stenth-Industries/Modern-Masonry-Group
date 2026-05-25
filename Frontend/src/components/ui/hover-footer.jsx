@@ -8,12 +8,13 @@ export const TextHoverEffect = ({ text, duration, className = "" }) => {
   const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%" });
 
   useEffect(() => {
-    if (svgRef.current) {
-      const svgRect = svgRef.current.getBoundingClientRect();
-      const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
-      const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
-      setMaskPosition({ cx: `${cxPercentage}%`, cy: `${cyPercentage}%` });
-    }
+    if (!svgRef.current) return;
+    const svgRect = svgRef.current.getBoundingClientRect();
+    if (!svgRect.width || !svgRect.height) return;
+    const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
+    const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
+    if (!Number.isFinite(cxPercentage) || !Number.isFinite(cyPercentage)) return;
+    setMaskPosition({ cx: `${cxPercentage}%`, cy: `${cyPercentage}%` });
   }, [cursor]);
 
   const sharedTextProps = {

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {ArrowRight, CheckCircle, Mail, MapPin, Phone, User, Briefcase, MessageSquare, ChevronRight, Upload} from 'lucide-react';
 import Footer from './Footer';
 
-const InputField = ({ label, icon: Icon, ...props }) => (
+const InputField = ({ label, icon: Icon, textarea, ...props }) => (
   <div className="relative group mb-8">
     <label className="absolute -top-3 left-4 bg-black px-2 text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--brass)] z-10">
       {label}
@@ -12,7 +12,7 @@ const InputField = ({ label, icon: Icon, ...props }) => (
       <div className="absolute left-4 text-white/30 group-focus-within:text-[var(--brass)] transition-colors">
         {Icon && <Icon size={16} />}
       </div>
-      {props.textarea ? (
+      {textarea ? (
         <textarea
           {...props}
           className="w-full bg-white/5 border border-white/10 rounded-lg py-4 pl-12 pr-4 text-[14px] text-white placeholder-white/20 focus:outline-none focus:border-[var(--brass)] focus:bg-[var(--brass)]/5 transition-all min-h-[120px] resize-none"

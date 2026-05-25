@@ -345,7 +345,9 @@ async function main() {
             productId:        product.id,
             colourName:       stone.color,
             hexCode:          COLOR_HEX[stone.color] || null,
-            sizeLabel:        variantLabel,
+            // sizeLabel intentionally omitted on update so we don't clobber
+            // enriched values written by scrape_arriscraft_stone_dimensions.py
+            // (e.g. Stack-series multi-line size lists).
             dimensionDetails: stone.sizeLabel || null,
             imageUrl:         primaryImage,
             imagesUrl:        { set: galleryImages },
