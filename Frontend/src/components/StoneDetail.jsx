@@ -98,7 +98,9 @@ const SIZE_RE = /\d[\d\-\/]*["“”′″]/g;
 // Short pill label for a variant when all variants share a colour.
 const getVariantLabel = (v) => {
   const isSawn = v.sku?.toUpperCase().includes('SAWN') || v.sizeLabel?.toLowerCase().includes('sawn');
-  const size   = v.sizeLabel?.match(SIZE_RE)?.[0];
+  // Multi-line sizeLabel = blob of all available sizes; variants only differ by finish.
+  if (v.sizeLabel?.includes('\n')) return isSawn ? 'Sawn' : 'Natural';
+  const size = v.sizeLabel?.match(SIZE_RE)?.[0];
   if (size) return isSawn && !/sawn/i.test(v.sizeLabel) ? `${size} Sawn` : v.sizeLabel;
   if (isSawn) return 'Sawn';
   return v.sizeLabel || 'Natural';
@@ -267,8 +269,12 @@ export default function StoneDetail({ stoneId, navigate }) {
   const variantSizeLabel = selectedVariant?.sizeLabel;
   const variantDetails   = selectedVariant?.dimensionDetails;
   const techSheetUrl     = selectedVariant?.techSheetUrl ?? null;
-  const parsedDims       = parseDimensions(variantDetails);
+  // Multi-line sizeLabel already lists every available size and is more complete
+  // than the single-line dimensionDetails — prefer it as-is in that case.
+  const isMultiLineSize  = variantSizeLabel?.includes('\n');
+  const parsedDims       = isMultiLineSize ? null : parseDimensions(variantDetails);
   const dimensionDisplay = parsedDims
+    ?? (isMultiLineSize ? variantSizeLabel : null)
     ?? (variantDetails && !variantDetails.includes('Units') ? variantDetails : null)
     ?? variantSizeLabel
     ?? null;
@@ -488,15 +494,6 @@ export default function StoneDetail({ stoneId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
               </div>
-              {stoneDetails.size && (
-                <>
-                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
-                  <div>
-                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{renderDimensions(stoneDetails.size)}</span>
-                  </div>
-                </>
-              )}
               {series && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
@@ -512,7 +509,7 @@ export default function StoneDetail({ stoneId, navigate }) {
                   <div>
                     <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Standard Dimensions</span>
                     {stoneDetails.size
-                      ? <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{stoneDetails.size}</span>
+                      ? <span className="text-[14px] text-[#e3decb] tracking-wider whitespace-pre-line">{renderDimensions(stoneDetails.size)}</span>
                       : techSheetUrl && (
                           <a
                             href={techSheetUrl}
@@ -606,7 +603,18 @@ export default function StoneDetail({ stoneId, navigate }) {
                 >
                   <div className="border-t border-white/[0.04]">
                     {stoneDetails.size
-                      ? <SpecRow icon={<Ruler />} label="Unit Dimensions" value={renderDimensions(stoneDetails.size)} delay={0.05} />
+                      ? <SpecRow
+                          icon={<Ruler />}
+                          label="Unit Dimensions"
+                          delay={0.05}
+                          value={
+                            typeof stoneDetails.size === 'string' && stoneDetails.size.includes('\n')
+                              ? <span className="flex flex-col items-end gap-0.5">
+                                  {stoneDetails.size.split('\n').map((s, i) => <span key={i}>{s.trim()}</span>)}
+                                </span>
+                              : renderDimensions(stoneDetails.size)
+                          }
+                        />
                       : techSheetUrl && (
                           <SpecRow
                             icon={<Ruler />}
