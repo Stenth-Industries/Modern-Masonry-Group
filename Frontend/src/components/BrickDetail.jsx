@@ -253,7 +253,7 @@ export default function BrickDetail({ brickId, navigate }) {
           </AnimatePresence>
 
           <div className="absolute bottom-8 right-8 z-20 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-            <span className="text-[#c9a449] text-[9px] tracking-[0.2em] uppercase">Inspect</span>
+            <span className="text-[#c9a449] text-[9px] tracking-[0.2em] uppercase">Click to Zoom</span>
             <Plus size={14} className="text-[#c9a449]" strokeWidth={1} />
           </div>
         </div>
