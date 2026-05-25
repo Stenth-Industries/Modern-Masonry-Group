@@ -311,6 +311,15 @@ export default function BrickDetail({ brickId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{brickDetails.manufacturer}</span>
               </div>
+              {brickDetails.collection && (
+                <>
+                  <div className="h-8 w-px bg-white/10 hidden sm:block"></div>
+                  <div>
+                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Series</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider">{brickDetails.collection}</span>
+                  </div>
+                </>
+              )}
               {brickDetails.size && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block"></div>

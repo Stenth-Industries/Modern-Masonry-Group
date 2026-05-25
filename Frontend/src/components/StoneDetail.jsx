@@ -426,6 +426,15 @@ export default function StoneDetail({ stoneId, navigate }) {
                 <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Manufacturer</span>
                 <span className="text-[14px] text-[#e3decb] tracking-wider">{manufacturer}</span>
               </div>
+              {series && (
+                <>
+                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
+                  <div>
+                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Series</span>
+                    <span className="text-[14px] text-[#e3decb] tracking-wider">{series}</span>
+                  </div>
+                </>
+              )}
               {(stoneDetails.size || techSheetUrl) && (
                 <>
                   <div className="h-8 w-px bg-white/10 hidden sm:block" />
@@ -438,22 +447,13 @@ export default function StoneDetail({ stoneId, navigate }) {
                             href={techSheetUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[13px] text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
+                            className="inline-flex items-center gap-1.5 text-[15px] text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
                           >
-                            <FileText size={13} />
+                            <FileText size={15} />
                             Product Tech. Sheet
                           </a>
                         )
                     }
-                  </div>
-                </>
-              )}
-              {series && (
-                <>
-                  <div className="h-8 w-px bg-white/10 hidden sm:block" />
-                  <div>
-                    <span className="block text-[10px] text-[#c9a449] uppercase tracking-[0.2em] font-bold mb-2">Series</span>
-                    <span className="text-[14px] text-[#e3decb] tracking-wider">{series}</span>
                   </div>
                 </>
               )}
@@ -546,9 +546,9 @@ export default function StoneDetail({ stoneId, navigate }) {
                                 href={techSheetUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
+                                className="inline-flex items-center gap-1.5 text-[15px] text-[#c9a449] hover:text-[#e3b84e] transition-colors underline underline-offset-2 decoration-[#c9a449]/40"
                               >
-                                <FileText size={13} />
+                                <FileText size={15} />
                                 Product Tech. Sheet
                               </a>
                             }
