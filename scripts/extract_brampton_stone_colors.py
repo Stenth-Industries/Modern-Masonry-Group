@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Extract dominant colors for Canada Brick variants only and append to
+Extract dominant colors for Brampton Brick Stone variants and append to
 data/brick_colors.csv, then optionally sync to DB.
 
 Skips any SKU already present in the CSV so it's safe to re-run.
 
 Usage:
-    python scripts/extract_canadabrick_colors.py               # extract + write CSV
-    python scripts/extract_canadabrick_colors.py --sync        # extract + preview DB update
-    python scripts/extract_canadabrick_colors.py --sync --confirm   # extract + write to DB
-    python scripts/extract_canadabrick_colors.py --sync-only --confirm  # sync existing CSV only
+    python scripts/extract_brampton_stone_colors.py               # extract + write CSV
+    python scripts/extract_brampton_stone_colors.py --sync        # extract + preview DB update
+    python scripts/extract_brampton_stone_colors.py --sync --confirm   # extract + write to DB
+    python scripts/extract_brampton_stone_colors.py --sync-only --confirm  # sync existing CSV only
 """
 
 import argparse
@@ -45,6 +45,8 @@ STANDARD_COLORS_FILE = ROOT / "data" / "standard_colors.json"
 
 FIELDS = ["manufacturer", "sku", "colour_name", "hex", "lab_l", "lab_a", "lab_b", "matched_standard", "material"]
 
+MANUFACTURER_LABEL = "Brampton Stone"
+
 # ── DB ─────────────────────────────────────────────────────────────────────────
 
 def get_conn():
@@ -54,7 +56,7 @@ def get_conn():
     return psycopg2.connect(urlunparse(clean))
 
 
-def fetch_canada_brick_variants(conn):
+def fetch_brampton_stone_variants(conn):
     sql = """
         SELECT v.id, v.sku, v."colourName", v."imageUrl", p.material, m.name AS manufacturer
         FROM "Variant" v
@@ -63,7 +65,8 @@ def fetch_canada_brick_variants(conn):
         JOIN "Manufacturer"        m  ON m.id  = pm."manufacturerId"
         WHERE v."isActive" = true
           AND v."imageUrl" IS NOT NULL AND v."imageUrl" <> ''
-          AND m.name = 'Canada Brick'
+          AND m.name = 'Brampton Brick'
+          AND p.material = 'Stone'
         ORDER BY v."colourName"
     """
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
@@ -154,7 +157,6 @@ def write_csv(rows):
 # ── DB sync ─────────────────────────────────────────────────────────────────────
 
 def sync_to_db(conn, new_rows, dry_run=True):
-    """Update Category + Variant rows for Canada Brick colours only."""
     groups = defaultdict(list)
     for row in new_rows:
         key = (row["colour_name"] or "").strip()
@@ -173,7 +175,7 @@ def sync_to_db(conn, new_rows, dry_run=True):
     if dry_run:
         print(f"\n[DRY RUN] Would update {len(updates)} colour categories:")
         for name, hex_code, l, a, b, std in updates:
-            print(f"  {name:<20} → {hex_code}  Lab({l:5.1f},{a:5.1f},{b:5.1f})  std={std}")
+            print(f"  {name:<25} -> {hex_code}  Lab({l:5.1f},{a:5.1f},{b:5.1f})  std={std}")
         print("\nAdd --confirm to apply.")
         return
 
@@ -217,25 +219,24 @@ def main():
         print(f"Existing CSV: {len(existing_rows)} rows\n")
 
         if args.sync_only:
-            cb_rows = [r for r in existing_rows if r.get("manufacturer") == "Canada Brick"]
-            print(f"Syncing {len(cb_rows)} Canada Brick rows from CSV...")
-            sync_to_db(conn, cb_rows, dry_run=not args.confirm)
+            stone_rows = [r for r in existing_rows if r.get("manufacturer") == MANUFACTURER_LABEL]
+            print(f"Syncing {len(stone_rows)} Brampton Stone rows from CSV...")
+            sync_to_db(conn, stone_rows, dry_run=not args.confirm)
             return
 
-        # ── Extraction ──────────────────────────────────────────────────────────
-        variants  = fetch_canada_brick_variants(conn)
+        variants  = fetch_brampton_stone_variants(conn)
         standards = load_standards()
         to_process = [v for v in variants if v["sku"] not in existing_skus]
 
-        print(f"Canada Brick variants in DB : {len(variants)}")
-        print(f"Already in CSV (skipping)   : {len(variants) - len(to_process)}")
-        print(f"To extract                  : {len(to_process)}\n")
+        print(f"Brampton Stone variants in DB : {len(variants)}")
+        print(f"Already in CSV (skipping)     : {len(variants) - len(to_process)}")
+        print(f"To extract                    : {len(to_process)}\n")
 
         if not to_process:
-            print("All Canada Brick variants already have color data in CSV.")
+            print("All Brampton Stone variants already have color data in CSV.")
             if args.sync:
-                cb_rows = [r for r in existing_rows if r.get("manufacturer") == "Canada Brick"]
-                sync_to_db(conn, cb_rows, dry_run=not args.confirm)
+                stone_rows = [r for r in existing_rows if r.get("manufacturer") == MANUFACTURER_LABEL]
+                sync_to_db(conn, stone_rows, dry_run=not args.confirm)
             return
 
         new_rows = []
@@ -243,7 +244,7 @@ def main():
 
         for i, v in enumerate(to_process, 1):
             colour_name = (v["colourName"] or "Unknown").strip()
-            print(f"[{i}/{len(to_process)}] {colour_name:<20} {v['sku']}")
+            print(f"[{i}/{len(to_process)}] {colour_name:<25} {v['sku']}")
 
             img = fetch_image(v["imageUrl"])
             if img is None:
@@ -258,28 +259,27 @@ def main():
             print(f"    {hex_code}  Lab({lab_l:.1f},{lab_a:.1f},{lab_b:.1f})  -> {matched}")
 
             new_rows.append({
-                "manufacturer":    "Canada Brick",
-                "sku":             v["sku"],
-                "colour_name":     colour_name,
-                "hex":             hex_code,
-                "lab_l":           round(lab_l, 4),
-                "lab_a":           round(lab_a, 4),
-                "lab_b":           round(lab_b, 4),
+                "manufacturer":     MANUFACTURER_LABEL,
+                "sku":              v["sku"],
+                "colour_name":      colour_name,
+                "hex":              hex_code,
+                "lab_l":            round(lab_l, 4),
+                "lab_a":            round(lab_a, 4),
+                "lab_b":            round(lab_b, 4),
                 "matched_standard": matched,
-                "material":        "Brick",
+                "material":         "Stone",
             })
             time.sleep(0.3)
 
         print(f"\nExtracted: {len(new_rows)}  |  Skipped (no image): {skipped}")
 
-        # Merge with existing and save
         all_rows = existing_rows + new_rows
         write_csv(all_rows)
 
         if args.sync:
             sync_to_db(conn, new_rows, dry_run=not args.confirm)
         else:
-            print("\nNext: python scripts/extract_canadabrick_colors.py --sync --confirm")
+            print("\nNext: python scripts/extract_brampton_stone_colors.py --sync --confirm")
 
     finally:
         conn.close()

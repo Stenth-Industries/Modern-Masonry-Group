@@ -14,6 +14,7 @@ import {
 import {
   Search,
   ChevronDown,
+  ChevronRight,
   Check,
   Plus,
   SlidersHorizontal,
@@ -405,6 +406,9 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
   }, [initialQuery]);
 
   const [compact, setCompact] = useState(true);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const searchDebounceRef = useRef(null);
   const [collections, setCollections] = useState([]);
   const [colors, setColors] = useState([]);
   const [finishes, setFinishes] = useState([]);
@@ -544,6 +548,21 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
     setPage(1);
     setProducts([]);
   }, [debouncedQuery, collections, colors, finishes, manufacturers]);
+
+  // Quick-jump dropdown
+  useEffect(() => {
+    clearTimeout(searchDebounceRef.current);
+    if (query.trim().length < 2) { setSearchResults([]); setSearchDropdownOpen(false); return; }
+    searchDebounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/products?search=${encodeURIComponent(query.trim())}&material=Stone&limit=5`);
+        const data = await res.json();
+        setSearchResults(data.data || []);
+        setSearchDropdownOpen(true);
+      } catch { setSearchResults([]); }
+    }, 300);
+    return () => clearTimeout(searchDebounceRef.current);
+  }, [query]);
 
   const tog = useCallback((val, getter, setter) => {
     setter(getter.includes(val) ? getter.filter((x) => x !== val) : [...getter, val]);
@@ -760,9 +779,48 @@ export default function StoneCatalogue({ navigate, initialQuery = "" }) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
+                onFocus={() => { if (query.trim().length >= 2 && searchResults.length > 0) setSearchDropdownOpen(true); }}
+                onBlur={() => setTimeout(() => setSearchDropdownOpen(false), 150)}
+                onKeyDown={(e) => { if (e.key === 'Escape') setSearchDropdownOpen(false); }}
                 className="bg-transparent border-none w-[70px] sm:w-[120px] py-1 pl-7 text-[12px] tracking-wide text-[#e3decb] placeholder-[#9a9488] focus:outline-none focus:ring-0"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               />
+              {/* Quick-jump dropdown */}
+              <AnimatePresence>
+                {searchDropdownOpen && searchResults.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                    transition={{ duration: 0.15 }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="absolute top-full right-0 mt-2 w-[300px] bg-[#12100e]/98 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.7)] z-50"
+                  >
+                    {searchResults.map((product) => {
+                      const variant = product.variants?.[0];
+                      return (
+                        <button
+                          key={product.id}
+                          type="button"
+                          onClick={() => { navigate('#stone-detail/' + product.id); setSearchDropdownOpen(false); }}
+                          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors w-full text-left border-b border-white/5 last:border-0 group/r"
+                        >
+                          <div className="w-9 h-9 rounded-md overflow-hidden shrink-0 bg-white/5">
+                            {variant?.imageUrl
+                              ? <img src={variant.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                              : <div className="w-full h-full bg-white/10" />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-[12px] font-medium truncate group-hover/r:text-[#c9a449] transition-colors">{product.name}</p>
+                            <p className="text-white/40 text-[10px] truncate">{product.manufacturers?.[0]?.name}{variant?.colourName ? ` · ${variant.colourName}` : ''}</p>
+                          </div>
+                          <ChevronRight size={12} className="shrink-0 text-white/20 group-hover/r:text-white/60 transition-colors" />
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div className="flex items-center gap-1 border border-white/10 rounded-md p-1">
               <button

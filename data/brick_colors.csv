@@ -1,396 +1,438 @@
-manufacturer,sku,colour_name,hex,lab_l,lab_a,lab_b,matched_standard
-Arriscraft International,ARRIS-ABBEY-ROAD-MDT-218SAWN,Abbey Road,#BEB7AA,74.6457,0.2068,7.4906,Cream
-Arriscraft International,ARRIS-ABBEY-ROAD-MDT-218,Abbey Road,#B3ACA0,70.6129,0.3885,7.0633,Grey
-Arriscraft International,ARRIS-ABBEY-ROAD-MDT-358SAWN,Abbey Road,#A7A59B,67.6448,-1.1059,5.4357,Grey
-Arriscraft International,ARRIS-ABBEY-ROAD-MDT-358,Abbey Road,#B3AB9E,70.3006,0.591,7.7172,Grey
-Arriscraft International,ARRIS-ABBEY-ROAD-MDT-578,Abbey Road,#A7A59B,67.6448,-1.1059,5.4357,Grey
-Arriscraft International,ARRIS-ADAIR-LIME-ADL,Adair Limestone,#7B766D,49.8243,0.2201,5.6402,Grey
-Arriscraft International,ARRIS-ADAIR-PARL-ADP,Adair Parliament,#9C917F,60.6499,0.9804,11.0337,Grey
-Arriscraft International,ARRIS-ALPINE-W-CONT,Alpine White,#C3B9AF,75.6965,1.8006,6.3349,White
-Arriscraft International,ARRIS-ALPINE-W-TVB,Alpine White,#C5BFB8,77.6339,0.8635,4.2734,White
-Arriscraft International,ARRIS-AMALFI-CST-SAWN,Amalfi,#9C9584,61.8511,-0.4229,9.9073,Grey
-Arriscraft International,ARRIS-AMALFI-CST,Amalfi,#9C9584,61.8511,-0.4229,9.9073,Grey
-Arriscraft International,ARRIS-ANVIL-STK-SAWN,Anvil,#6C6E6C,46.2078,-1.1732,0.8463,Grey
-Arriscraft International,ARRIS-ANVIL-STK,Anvil,#676968,44.2131,-0.9765,0.2921,Grey
-Arriscraft International,ARRIS-ARRIS-CAST-ACT,Arris Cast,#A1826F,56.7721,9.0193,14.7879,Orange
-Arriscraft International,ARRIS-ASH-STK-SAWN,Ash,#A8A08F,66.0972,-0.0564,9.9075,Grey
-Arriscraft International,ARRIS-ASH-STK,Ash,#A09687,62.5376,1.0632,9.2385,Grey
-Arriscraft International,ARRIS-AUGUSTA-MTH,Augusta,#A28A6C,58.9197,4.5156,19.4533,Buff
-Arriscraft International,ARRIS-AVALANCHE-ULS,Avalanche,#C0B4AA,74.0304,2.5455,6.6297,Cream
-Arriscraft International,ARRIS-AVALANCHE-EDR,Avalanche,#C7C2BA,78.6194,0.3314,4.6386,White
-Arriscraft International,ARRIS-BAJA-CST-SAWN,Baja,#C9B69A,74.955,2.353,16.7399,Buff
-Arriscraft International,ARRIS-BAJA-CST,Baja,#C8B08E,73.0779,3.4999,20.619,Buff
-Arriscraft International,ARRIS-BARNWOOD-MTH,Barnwood,#9A836A,56.2309,4.885,16.789,Grey
-Arriscraft International,ARRIS-BASALT-ATL,Basalt,#777B74,51.0928,-2.8967,3.3044,Grey
-Arriscraft International,ARRIS-BASALT-ACP,Basalt,#777B74,51.0928,-2.8967,3.3044,Grey
-Arriscraft International,ARRIS-BASALT-GRN,Basalt,#808785,55.6958,-2.9715,0.184,Grey
-Arriscraft International,ARRIS-BEACH-STK,Beach,#C7B299,73.7287,3.582,15.5438,Buff
-Arriscraft International,ARRIS-BEACH-STK-SAWN,Beach,#CDBDA6,77.357,1.9197,13.6816,Cream
-Arriscraft International,ARRIS-BEDFORD-CRN,Bedford,#DED6BF,85.6977,-1.0774,12.3495,Cream
-Arriscraft International,ARRIS-BEECH-MOUN-HFL,Beech Mountain,#7E695A,46.0112,5.8897,11.5565,Brown
-Arriscraft International,ARRIS-BIG-HORN-OLC,Big Horn,#97887A,57.6485,3.2497,9.5749,Grey
-Arriscraft International,ARRIS-BIRCHBARK-CRN,Birchbark,#A39C96,64.776,1.459,4.0475,Grey
-Arriscraft International,ARRIS-BISCAYNE-MDT-358SAWN,Biscayne,#D2D0CD,83.5586,0.154,1.7305,White
-Arriscraft International,ARRIS-BISCAYNE-MDT-218SAWN,Biscayne,#D4D2CE,84.2495,-0.0235,2.2221,White
-Arriscraft International,ARRIS-BISCAYNE-MDT-218,Biscayne,#C8BFB3,77.7542,1.0896,7.1787,Cream
-Arriscraft International,ARRIS-BISCAYNE-MDT-358,Biscayne,#CAC4BA,79.3751,0.3425,5.7595,Cream
-Arriscraft International,ARRIS-BISCAYNE-MDT-578,Biscayne,#CFC9C0,81.206,0.5091,5.2319,White
-Arriscraft International,ARRIS-BLACK-CO-AVT,Black Coral,#8A8988,57.1457,0.18,0.6674,Grey
-Arriscraft International,ARRIS-BLACKROCK-HFL,Blackrock,#76777A,50.0378,0.2414,-1.7733,Grey
-Arriscraft International,ARRIS-BLACKSMITH-CRN,Blacksmith,#53514C,34.4894,-0.2124,3.2294,Black
-Arriscraft International,ARRIS-BLOOMINGTO-LAU,Bloomington,#B5AA99,70.0869,1.0555,10.1886,Buff
-Arriscraft International,ARRIS-BLUE-GREY-ADM,Blue Grey,#CDC7BD,80.4601,0.3402,5.7429,White
-Arriscraft International,ARRIS-BLUE-GREY--ADL,Blue Grey Georgian Blend,#CDC7BD,80.4601,0.3402,5.7429,White
-Arriscraft International,ARRIS-BLUERIDGE-MTH,Blueridge,#9B8B76,58.7346,2.5288,13.4362,Grey
-Arriscraft International,ARRIS-BROWN-SIL,Brown,#D6CEC4,83.1385,1.0421,5.9543,Brown
-Arriscraft International,ARRIS-BURNT-UM-ALSB-GS,Burnt Umber,#7E6E5B,47.4211,3.105,12.9208,Brown
-Arriscraft International,ARRIS-CAFE-ATL,Cafe,#B79C85,66.1651,6.4308,15.7579,Buff
-Arriscraft International,ARRIS-CAFE-GRN,Cafe,#B79D85,66.4241,5.882,16.1176,Buff
-Arriscraft International,ARRIS-CAFE-ACP,Cafe,#B79C85,66.1651,6.4308,15.7579,Buff
-Arriscraft International,ARRIS-CAPE-COD-CST,Cape Cod,#B0A792,68.7099,-0.3356,12.0371,Buff
-Arriscraft International,ARRIS-CAPE-COD-CST-SAWN,Cape Cod,#B0A690,68.3993,-0.1099,12.7029,Buff
-Arriscraft International,ARRIS-CARBON-EVO,Carbon,#9C988C,62.8588,-0.7191,6.8342,Grey
-Arriscraft International,ARRIS-CARBON-CRN,Carbon,#817A72,51.6116,1.1823,5.3344,Grey
-Arriscraft International,ARRIS-CASHMERE-FRE,Cashmere,#C3B8A5,75.2016,0.6961,11.0557,Cream
-Arriscraft International,ARRIS-CEDAR-WO-ALSB-GS,Cedar Woods,#A09585,62.2212,1.2888,9.9164,Brown
-Arriscraft International,ARRIS-CHALET-MTH,Chalet,#877A68,51.9156,1.9048,11.6836,Grey
-Arriscraft International,ARRIS-CHAMPAGNE-ATL,Champagne,#D2BB9E,77.1077,3.6982,17.7002,Cream
-Arriscraft International,ARRIS-CHAMPAGNE-ACP,Champagne,#D2BB9E,77.1077,3.6982,17.7002,Cream
-Arriscraft International,ARRIS-CHAMPAGNE-GRN,Champagne,#E7CDAD,83.793,4.2578,19.2847,Cream
-Arriscraft International,ARRIS-CHARCOAL-ULS,Charcoal,#99968C,62.0649,-0.7434,5.6626,Grey
-Arriscraft International,ARRIS-CHARCOAL-LAU,Charcoal,#898073,54.0212,1.0809,8.2872,Grey
-Arriscraft International,ARRIS-CHARCOAL-FRE,Charcoal,#9A9484,61.4082,-0.6405,9.2555,Grey
-Arriscraft International,ARRIS-CHARCOAL-EDR,Charcoal,#948F85,59.5569,0.0152,5.9775,Grey
-Arriscraft International,ARRIS-CHATEAU--ALSB-GS,Chateau Brown,#AC8C72,60.553,8.289,18.4654,Buff
-Arriscraft International,ARRIS-CLOUDLAND-HFL,Cloudland,#C3C3C3,78.7944,0.0063,0.0029,White
-Arriscraft International,ARRIS-COASTAL--AVT,Coastal Fog,#A39683,62.708,1.5812,11.7669,Grey
-Arriscraft International,ARRIS-COBBLE-HIL-GCT,Cobble Hill,#BBAA99,70.6041,3.3227,10.9941,Buff
-Arriscraft International,ARRIS-COTTON-CRE-MTH,Cotton Creek,#B0A697,68.5603,1.0165,9.0629,Grey
-Arriscraft International,ARRIS-DARK-SHORE-CST,Dark Shore,#7B7D79,52.1284,-1.5422,1.9164,Grey
-Arriscraft International,ARRIS-DARK-SHORE-CST-SAWN,Dark Shore,#7C7F7B,52.8332,-1.9148,1.7814,Grey
-Arriscraft International,ARRIS-DESERT-SAN-STK,Desert Sand,#BEA683,69.3685,3.4787,21.3712,Buff
-Arriscraft International,ARRIS-DESERT-SAN-STK-SAWN,Desert Sand,#CFB999,76.2305,2.913,19.1302,Buff
-Arriscraft International,ARRIS-DRIFTWOOD-CRN,Driftwood,#958C81,58.7242,1.3826,7.078,Grey
-Arriscraft International,ARRIS-DRIFTWOOD-EDR,Driftwood,#8C8375,55.1674,0.9016,8.7943,Grey
-Arriscraft International,ARRIS-DRIFTWOOD-FRE,Driftwood,#857C6E,52.4286,0.9262,8.8845,Grey
-Arriscraft International,ARRIS-DRIFTWOOD-ULS,Driftwood,#8B7C68,52.844,2.3987,13.035,Grey
-Arriscraft International,ARRIS-FRENCH-COU-FRE,French Country,#9E9486,61.8007,1.2356,8.7312,Grey
-Arriscraft International,ARRIS-GINGER-ACP,Ginger,#BCA38A,68.5485,5.275,16.377,Buff
-Arriscraft International,ARRIS-GINGER-ATL,Ginger,#BCA38A,68.5485,5.275,16.377,Buff
-Arriscraft International,ARRIS-GINGER-GRN,Ginger,#BFA68D,69.6627,5.2409,16.3184,Buff
-Arriscraft International,ARRIS-GLACIER-EDR,Glacier,#D0C8BE,80.9807,1.051,5.988,White
-Arriscraft International,ARRIS-GRAY-SIL,Gray,#D2D1CD,83.8147,-0.3689,2.103,White
-Arriscraft International,ARRIS-GREIGE-FRE,Greige,#9D917E,60.7156,1.2133,11.7045,Grey
-Arriscraft International,ARRIS-HARBOR-G-ALSB-GS,Harbor Grey,#736653,43.9043,1.9133,12.6455,Grey
-Arriscraft International,ARRIS-ICE-STK-SAWN,Ice,#D7D4D0,85.0413,0.3214,2.3395,White
-Arriscraft International,ARRIS-ICE-STK,Ice,#D0C9C0,81.2855,0.8636,5.3568,White
-Arriscraft International,ARRIS-INDIANA-BL-GCT,Indiana Blend,#C5BBAD,76.3313,1.13,8.3517,Cream
-Arriscraft International,ARRIS-INFINITY-FRE,Infinity,#A99C8C,65.0461,2.0307,10.102,Grey
-Arriscraft International,ARRIS-IRONSTONE-CRN,Ironstone,#B0AA9F,69.812,0.1926,6.4329,Grey
-Arriscraft International,ARRIS-IVORY-WHIT-LAU,Ivory White,#BBAA8D,70.3419,1.5184,17.2066,Cream
-Arriscraft International,ARRIS-IVORY-WH-CONT,Ivory White,#BEAC91,71.2119,2.1821,16.2703,Cream
-Arriscraft International,ARRIS-IVORY-WH-TVB,Ivory White,#C9BBA4,76.4595,1.1803,13.4467,Cream
-Arriscraft International,ARRIS-LIMESTONE-GRN,Limestone,#D9CFC0,83.5386,0.9262,8.6887,Cream
-Arriscraft International,ARRIS-LIMESTONE-ACP,Limestone,#D2CCC5,82.335,0.8495,4.2204,White
-Arriscraft International,ARRIS-LIMESTONE-ATL,Limestone,#D2CCC5,82.335,0.8495,4.2204,White
-Arriscraft International,ARRIS-LOMBARD-MDT-578,Lombard,#A49883,63.3327,0.8673,12.6579,Grey
-Arriscraft International,ARRIS-MAGNOLIA-GRN,Magnolia,#B6AA9B,70.2187,1.7558,9.2867,Buff
-Arriscraft International,ARRIS-MAGNOLIA-ACP,Magnolia,#A39685,62.7539,1.8989,10.7074,Grey
-Arriscraft International,ARRIS-MAGNOLIA-ATL,Magnolia,#A39685,62.7539,1.8989,10.7074,Grey
-Arriscraft International,ARRIS-MAHOGANY-LAU,Mahogany,#A09282,61.345,2.4702,10.3694,Brown
-Arriscraft International,ARRIS-MANHATTAN-MDT-218,Manhattan,#5C5F5F,40.058,-1.1725,-0.4089,Grey
-Arriscraft International,ARRIS-MATRIX-STK-SAWN,Matrix,#B5AB96,70.282,0.0356,12.1142,Buff
-Arriscraft International,ARRIS-MATRIX-STK,Matrix,#666B68,44.7161,-2.5422,1.0148,Grey
-Arriscraft International,ARRIS-MIDNIGHT-G-LAU,Midnight Grey,#7C6F5C,47.5294,1.8326,12.4503,Grey
-Arriscraft International,ARRIS-MOCHA-GCT,Mocha,#B9A68D,69.119,2.9053,15.4791,Buff
-Arriscraft International,ARRIS-MONTECITO-GRN,Montecito,#AAA192,66.6047,0.6514,8.9827,Grey
-Arriscraft International,ARRIS-MONTECITO-ATL,Montecito,#988F83,59.8517,1.2024,7.5835,Grey
-Arriscraft International,ARRIS-MONTECITO-ACP,Montecito,#988F83,59.8517,1.2024,7.5835,Grey
-Arriscraft International,ARRIS-MONTEREY-CST-SAWN,Monterey,#B0AEA4,70.9966,-1.0983,5.382,Grey
-Arriscraft International,ARRIS-MONTEREY-CST,Monterey,#AAA89D,68.7409,-1.2798,5.9351,Grey
-Arriscraft International,ARRIS-MOONSTONE-FRE,Moonstone,#C3BAAF,75.9556,1.2668,6.7073,Cream
-Arriscraft International,ARRIS-MOUNTAIN-R-ATL,Mountain Ridge,#BEB8AE,75.0038,0.3523,5.8288,Cream
-Arriscraft International,ARRIS-MOUNTAIN-R-GRN,Mountain Ridge,#C0BAAE,75.6873,0.0094,6.8325,Cream
-Arriscraft International,ARRIS-MOUNTAIN-R-ACP,Mountain Ridge,#BEB8AE,75.0038,0.3523,5.8288,Cream
-Arriscraft International,ARRIS-MYSTIC-G-CONT,Mystic Grey,#918678,56.5118,1.6804,9.0354,Grey
-Arriscraft International,ARRIS-MYSTIC-G-TVB,Mystic Grey,#8A7F72,53.8109,1.8806,8.5812,Grey
-Arriscraft International,ARRIS-NUTMEG-CRN,Nutmeg,#AFA59A,68.2831,1.6866,6.9942,Grey
-Arriscraft International,ARRIS-NUTMEG-EVO,Nutmeg,#C0B9B1,75.5003,1.0564,4.934,Cream
-Arriscraft International,ARRIS-OAK-RIDGE-ACP,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream
-Arriscraft International,ARRIS-OAK-RIDGE-ATL,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream
-Arriscraft International,ARRIS-OAK-RIDGE-GRN,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream
-Arriscraft International,ARRIS-OCEAN-MI-AVT,Ocean Mist,#C6BDAD,76.9316,0.4326,9.2203,Cream
-Arriscraft International,ARRIS-ONYX-LAU,Onyx,#A09F9D,65.5177,-0.013,1.1703,Grey
-Arriscraft International,ARRIS-OPAL-LAU,Opal,#AFA69C,68.5965,1.4813,6.3353,Grey
-Arriscraft International,ARRIS-PEACHTREE-MDT-358,Peachtree,#C1AB89,71.0563,2.7672,20.4561,Buff
-Arriscraft International,ARRIS-PEACHTREE-MDT-218SAWN,Peachtree,#CBB492,74.454,3.0699,20.3924,Buff
-Arriscraft International,ARRIS-REDROCK-ATL,Redrock,#C29078,63.9758,15.7361,20.1519,Red
-Arriscraft International,ARRIS-REDROCK-GRN,Redrock,#BB8F87,63.309,15.4709,10.6926,Red
-Arriscraft International,ARRIS-REDROCK-ACP,Redrock,#C29078,63.9758,15.7361,20.1519,Red
-Arriscraft International,ARRIS-ROCKPORT-G-GCT,Rockport Grey,#9E907C,60.49,1.8509,12.5315,Grey
-Arriscraft International,ARRIS-SADDLE-MTH,Saddle,#A18C6C,59.3574,2.9856,20.0311,Buff
-Arriscraft International,ARRIS-SANDRIFT-CRN,Sandrift,#ADA599,68.0901,0.7706,7.2498,Grey
-Arriscraft International,ARRIS-SANDY-SH-TGB,Sandy Shore,#BEBEBE,76.9759,0.0062,0.0028,White
-Arriscraft International,ARRIS-SAVANNAH-GCT,Savannah,#C9B597,74.6351,2.457,17.9163,Buff
-Arriscraft International,ARRIS-SEA-SHEL-AVT,Sea Shell,#CDC7BF,80.5089,0.6823,4.741,White
-Arriscraft International,ARRIS-SEDONA-RED-STK,Sedona Red,#A57E78,56.3642,14.1864,9.1004,Red
-Arriscraft International,ARRIS-SEPIA-ADM,Sepia,#D2C3B4,79.6293,2.7688,9.4341,Cream
-Arriscraft International,ARRIS-SEPIA-ADA,Sepia,#AC826B,57.8443,13.0068,18.7263,Orange
-Arriscraft International,ARRIS-SEPIA-GEOR-ADL,Sepia Georgian Blend,#B9A891,69.7279,2.4145,14.1316,Buff
-Arriscraft International,ARRIS-SILVER-SLA-GCT,Silver Slate,#B1AA9F,69.8946,0.5617,6.5623,Grey
-Arriscraft International,ARRIS-SILVERADO-FRE,Silverado,#8E897E,57.2198,-0.1568,6.5629,Grey
-Arriscraft International,ARRIS-SMOKY-MOUN-OLC,Smoky Mountain,#A69784,63.2652,2.357,12.0283,Grey
-Arriscraft International,ARRIS-SOUTHERN-TGB,Southern Dusk,#ADA89F,69.0348,0.1735,5.2831,Grey
-Arriscraft International,ARRIS-STEEL-GREY-EDR,Steel Grey,#A6A09A,66.1991,1.0813,3.897,Grey
-Arriscraft International,ARRIS-STEEL-GREY-SHS,Steel Grey,#82807D,53.6696,0.1715,1.8924,Grey
-Arriscraft International,ARRIS-STEEL-GREY-ULS,Steel Grey,#848280,54.4796,0.3633,1.3465,Grey
-Arriscraft International,ARRIS-STERLING-STK,Sterling,#989F9A,64.8073,-3.4679,1.7396,Grey
-Arriscraft International,ARRIS-SUNSET-ATL,Sunset,#B8A48C,68.4858,3.4568,15.1329,Buff
-Arriscraft International,ARRIS-SUNSET-ACP,Sunset,#B8A48C,68.4858,3.4568,15.1329,Buff
-Arriscraft International,ARRIS-SUNSET-GRN,Sunset,#C0A78C,69.9915,4.9483,17.3373,Buff
-Arriscraft International,ARRIS-TACOMA-SHS,Tacoma,#968A7A,58.0998,1.728,10.2002,Grey
-Arriscraft International,ARRIS-TACOMA-EDR,Tacoma,#C4BAA5,75.8047,0.0031,11.922,Cream
-Arriscraft International,ARRIS-TACOMA-ULS,Tacoma,#AEA18E,66.8558,1.5297,11.6095,Buff
-Arriscraft International,ARRIS-TAN-SIL,Tan,#DFD6CA,86.0291,1.0504,7.0242,White
-Arriscraft International,ARRIS-TAN-ACP,Tan,#DBCDB8,83.0109,1.4247,12.2108,Cream
-Arriscraft International,ARRIS-TAN-ATL,Tan,#DBCDB8,83.0109,1.4247,12.2108,Cream
-Arriscraft International,ARRIS-TRADITIONA-FRE,Traditional Grey,#938773,56.8495,1.1052,12.4032,Grey
-Arriscraft International,ARRIS-WALNUT-LAU,Walnut,#8C8374,55.1433,0.734,9.3371,Brown
-Arriscraft International,ARRIS-WEATHERE-TVB,Weathered Oak,#898272,54.552,-0.2251,9.6178,Brown
-Arriscraft International,ARRIS-WEATHERE-CONT,Weathered Oak,#928B7F,58.1399,0.4391,7.3512,Brown
-Arriscraft International,ARRIS-WEATHERWOO-GCT,Weatherwood,#B7A891,69.5527,1.6451,13.8603,Buff
-Arriscraft International,ARRIS-WHITE-CRN,White,#BFBBB5,76.0405,0.3294,3.5323,White
-Arriscraft International,ARRIS-WHITE-EVO,White,#BFBAB6,75.8055,1.0406,2.6486,White
-Arriscraft International,ARRIS-WHITE-SIL,White,#E6E6E5,91.2677,-0.1709,0.4889,White
-Arriscraft International,ARRIS-WHITE-CLIF-CST,White Cliff,#CBC4BB,79.4794,0.8697,5.3825,White
-Arriscraft International,ARRIS-WHITE-CLIF-CST-SAWN,White Cliff,#CECBC6,81.7897,0.1478,2.8568,White
-Arriscraft International,ARRIS-WHITE-PE-ALSB-GS,White Pearl,#D0C6B7,80.3015,0.9432,8.7631,Cream
-Brampton Brick,BB-KINGS-DORSET-ASHLAND-84,Ashland,#97928E,60.861,1.0949,2.7714,Grey
-Brampton Brick,BB-KINGS-CONTEM-AUBURN-M-85,Auburn Matt,#A17256,52.1563,15.0456,22.8725,Orange
-Brampton Brick,BB-KINGS-CONTEM-AUBURN-S-86,Auburn Smooth,#A57052,52.0591,17.4708,25.1208,Orange
-Brampton Brick,BB-KINGS-CONTEM-BISTRO-87,Bistro,#534A44,32.1548,2.6123,4.9554,Black
-Brampton Brick,BB-KINGS-LEGACY-CANYON-88,Canyon,#9F8C78,59.4189,3.873,13.3116,Grey
-Brampton Brick,BB-KINGS-DORSET-CAVIAR-89,Caviar,#4F4D4D,32.9318,0.8237,0.2926,Black
-Brampton Brick,BB-KINGS-VIVACE-CHARCOAL-90,Charcoal,#666364,42.2595,1.3874,-0.1451,Grey
-Brampton Brick,BB-KINGS-CONTEM-CHARCOAL-91,Charcoal Matt,#5F5956,38.2866,1.8246,2.6024,Brown
-Brampton Brick,BB-KINGS-CONTEM-CHELSEA-92,Chelsea,#9B8577,57.1489,6.0638,10.6417,Grey
-Brampton Brick,BB-KINGS-CONTEM-CHURCHIL-93,Churchill,#8B675A,46.8794,12.5654,12.9767,Red
-Brampton Brick,BB-KINGS-CONTEM-CINDER-94,Cinder,#726D67,46.3035,0.7875,4.0425,Grey
-Brampton Brick,BB-KINGS-CONTEM-CLARET-95,Claret,#6E5650,38.8116,8.9195,7.2744,Burgundy
-Brampton Brick,BB-KINGS-VIVACE-CORTONA-96,Cortona,#918884,57.3608,2.6316,3.3537,Grey
-Brampton Brick,BB-KINGS-LEGACY-CRIMSON-97,Crimson,#66514C,36.4261,7.8967,6.258,Burgundy
-Brampton Brick,BB-KINGS-LEGACY-CRYSTAL--98,Crystal Gray,#716D67,46.2139,0.3892,3.902,Grey
-Brampton Brick,BB-KINGS-CONTEM-DOVER-99,Dover,#BAB1A6,72.6519,1.2857,6.771,Cream
-Brampton Brick,BB-KINGS-CONTEM-DOVER-ME-100,Dover Metric Norman,#B6ABA2,70.6494,2.3775,6.0474,Grey
-Brampton Brick,BB-KINGS-CONTEM-DOVER-PR-101,Dover PRP,#BFB6B1,74.6395,2.303,3.6797,Cream
-Brampton Brick,BB-KINGS-CONTEM-ESPRESSO-102,Espresso,#413739,24.1664,4.8192,0.3847,Black
-Brampton Brick,BB-KINGS-CONTEM-KENTVILL-103,Kentville,#C8AF9B,73.0928,5.8688,13.5767,Buff
-Brampton Brick,BB-KINGS-LEGACY-MADISON--105,Madison County,#755D52,41.5634,7.9935,10.0277,Burgundy
-Brampton Brick,BB-KINGS-LEGACY-MANCHEST-106,Manchester,#927F6C,54.42,4.1594,13.0174,Grey
-Brampton Brick,BB-KINGS-CONTEM-MANILLA--107,Manilla Matt,#B7A389,68.0706,3.1744,16.1942,Buff
-Brampton Brick,BB-KINGS-CONTEM-MANILLA--108,Manilla Smooth,#C8AE86,72.4104,3.5273,24.0283,Buff
-Brampton Brick,BB-KINGS-DORSET-MARBLE-G-109,Marble Gray,#A6A29E,66.8368,0.706,2.5888,Grey
-Brampton Brick,BB-KINGS-VIVACE-MILANO-110,Milano,#A0938A,61.8058,3.2327,6.5008,Grey
-Brampton Brick,BB-KINGS-CONTEM-MOUNTAIN-111,Mountain Gray,#8B7460,50.481,5.8205,14.4149,Grey
-Brampton Brick,BB-KINGS-CONTEM-NICKEL-M-112,Nickel Metric Norman,#9E9A99,63.9011,1.2698,1.0413,Grey
-Brampton Brick,BB-KINGS-CONTEM-NICKEL-P-113,Nickel PRP,#938B88,58.4579,2.4228,2.6685,Grey
-Brampton Brick,BB-KINGS-CONTEM-NORDIC-M-114,Nordic Matt,#CCC2AF,78.7617,0.3055,10.8163,Cream
-Brampton Brick,BB-KINGS-LEGACY-OLD-CHIC-115,Old Chicago,#875948,42.4048,16.8498,17.5769,Red
-Brampton Brick,BB-KINGS-LEGACY-OLD-SCHO-116,Old School,#A37A66,54.7255,13.1951,17.1701,Orange
-Brampton Brick,BB-KINGS-CONTEM-ONYX-117,Onyx,#716E71,46.7834,1.7681,-1.2525,Grey
-Brampton Brick,BB-KINGS-DORSET-PALERMO--123,Palermo Beige,#938676,56.6454,2.1464,10.3981,Grey
-Brampton Brick,BB-KINGS-DORSET-PALERMO--121,Palermo Beige,#A79890,63.9055,4.1351,6.2088,Grey
-Brampton Brick,BB-KINGS-DORSET-PALERMO--122,Palermo Beige,#978B83,58.68,3.0618,5.8955,Grey
-Brampton Brick,BB-KINGS-CONTEM-POLAR-WH-124,Polar White,#D1CFC9,83.1246,-0.3764,3.221,White
-Brampton Brick,BB-KINGS-CONTEM-RAVEN-127,Raven,#453D3A,26.4716,2.8552,3.1098,Black
-Brampton Brick,BB-KINGS-CONTEM-REGENCY--128,Regency Brown,#8C7662,51.1683,5.3701,14.2127,Brown
-Brampton Brick,BB-KINGS-CONTEM-ROYAL-GR-129,Royal Gray,#858077,53.768,0.208,5.5568,Grey
-Brampton Brick,BB-KINGS-CONTEM-SAHARA-130,Sahara,#BF9076,63.6154,14.2872,20.7232,Buff
-Brampton Brick,BB-KINGS-CONTEM-SHADOW-131,Shadow,#8E8988,57.4821,1.672,1.1983,Grey
-Brampton Brick,BB-KINGS-CONTEM-SHADOW-P-132,Shadow PRP,#817C79,52.3566,1.3222,2.3108,Grey
-Brampton Brick,BB-KINGS-VIVACE-SIENA-133,Siena,#928879,57.1725,1.1118,9.4103,Grey
-Brampton Brick,BB-KINGS-CONTEM-SIENA-MA-134,Siena Matt,#918274,55.3248,3.294,9.658,Grey
-Brampton Brick,BB-KINGS-CONTEM-SOLSTICE-135,Solstice Matt,#AE8562,58.6542,11.0979,24.9204,Orange
-Brampton Brick,BB-KINGS-CONTEM-SOLSTICE-136,Solstice Smooth,#BB9267,63.427,9.8471,28.6738,Buff
-Brampton Brick,BB-KINGS-LEGACY-STERLING-138,Sterling Gray,#C3B5A1,74.3322,1.6675,11.9958,Cream
-Brampton Brick,BB-KINGS-CONTEM-TAHOE-139,Tahoe,#736455,43.3821,3.4116,10.7198,Brown
-Brampton Brick,BB-KINGS-VIVACE-TWEED-141,Tweed,#998D86,59.4739,3.2244,5.3454,Grey
-Brampton Brick,BB-KINGS-CONTEM-VENETIAN-143,Venetian,#664339,32.1112,13.7848,12.2324,Burgundy
-Brampton Brick,BB-KINGS-LEGACY-VERIDIAN-144,Veridian,#99806A,55.3302,6.1742,15.5348,Grey
-Brampton Brick,BB-KINGS-CONTEM-VICTORIA-145,Victoriaville,#7C5248,39.2203,16.2463,13.0315,Red
-Brampton Brick,BB-KINGS-LEGACY-WESTMONT-146,Westmont,#927F6F,54.4881,4.6162,11.3805,Grey
-Brampton Brick,BB-KINGS-CONTEM-WESTVILL-147,Westville,#8A5C53,43.7735,17.6826,12.8646,Red
-Brampton Brick,BB-KINGS-CONTEM-WINDSOR-148,Windsor,#9A5546,43.9581,26.9838,21.2958,Red
-Acme Brick,SKU-FROST-4438,Pink,#000000,0,0,0,Pink
-Acme Brick,SKU-OLD-D-8865,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-4-HB-3236,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-ASHCR-2171,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-CAMDE-1634,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-DANIS-8519,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-DANIS-5794,Pink,#000000,0,0,0,Pink
-Glen Gery,SKU-FRENC-7704,Pink,#000000,0,0,0,Pink
-Arriscraft International,ARRIS-BURNT-UM-ALSB-GRH,Burnt Umber,#8B4513,37.4669,26.4478,40.989,Brown
-Arriscraft International,ARRIS-CEDAR-WO-ALSB-GRH,Cedar Woods,#7B5234,38.7139,13.6356,24.4209,Brown
-Arriscraft International,ARRIS-CHARCOAL-ALSB-W,Charcoal,#4A4A4A,31.4579,0.0032,0.0014,Grey
-Arriscraft International,ARRIS-CHARCOAL-ALSB-CS,Charcoal,#4A4A4A,31.4579,0.0032,0.0014,Grey
-Arriscraft International,ARRIS-CHATEAU--ALSB-GRH,Chateau Brown,#6B4C3B,35.2232,10.7408,15.2861,Buff
-Arriscraft International,ARRIS-EVENING--ALSB-GRH,Evening Shade,#5A4A5A,33.5827,9.9718,-6.8905,Grey
-Arriscraft International,ARRIS-EVENING--ALSB-GS,Evening Shade,#5A4A5A,33.5827,9.9718,-6.8905,Grey
-Arriscraft International,ARRIS-FORGED-S-ALSB-GRH,Forged Steel,#506070,39.9836,-2.0376,-11.0578,Grey
-Arriscraft International,ARRIS-FORGED-S-ALSB-GS,Forged Steel,#506070,39.9836,-2.0376,-11.0578,Grey
-Arriscraft International,ARRIS-GEORGETO-ALSB-W,Georgetown Blend,#8C7B6A,52.71,3.6891,11.7019,Brown
-Arriscraft International,ARRIS-GEORGETO-ALSB-CS,Georgetown Blend,#8C7B6A,52.71,3.6891,11.7019,Brown
-Arriscraft International,ARRIS-HARBOR-G-ALSB-GRH,Harbor Grey,#708090,52.8363,-2.1371,-10.5684,Grey
-Arriscraft International,ARRIS-MAHOGANY-ALSB-W,Mahogany,#6B3A2A,30.2036,19.9189,19.3341,Cream
-Arriscraft International,ARRIS-MAHOGANY-ALSB-CS,Mahogany,#6B3A2A,30.2036,19.9189,19.3341,Cream
-Arriscraft International,ARRIS-MIDNIGHT-ALSB-W,Midnight Grey,#3A3A3A,24.4213,0.0027,0.0012,Grey
-Arriscraft International,ARRIS-MIDNIGHT-ALSB-CS,Midnight Grey,#3A3A3A,24.4213,0.0027,0.0012,Grey
-Arriscraft International,ARRIS-MILLSTON-ALSB-W,Millstone,#7A7268,48.4756,1.2494,6.6551,Grey
-Arriscraft International,ARRIS-MILLSTON-ALSB-CS,Millstone,#7A7268,48.4756,1.2494,6.6551,Grey
-Arriscraft International,ARRIS-OBSIDIAN-ALSB-W,Obsidian,#1A1A1A,9.2632,0.0017,0.0008,Grey
-Arriscraft International,ARRIS-OBSIDIAN-ALSB-CS,Obsidian,#1A1A1A,9.2632,0.0017,0.0008,Grey
-Arriscraft International,ARRIS-OPAL-ALSB-W,Opal,#C8C0B8,78.1337,1.4039,5.0261,Grey
-Arriscraft International,ARRIS-OPAL-ALSB-CS,Opal,#C8C0B8,78.1337,1.4039,5.0261,Grey
-Arriscraft International,ARRIS-RED-SUMA-ALSB-GRH,Red Sumac,#A03020,37.2835,45.3395,35.767,Red
-Arriscraft International,ARRIS-RED-SUMA-ALSB-GS,Red Sumac,#A03020,37.2835,45.3395,35.767,Red
-Arriscraft International,ARRIS-WALNUT-ALSB-W,Walnut,#5A4030,29.5479,9.0134,14.2381,Brown
-Arriscraft International,ARRIS-WALNUT-ALSB-CS,Walnut,#5A4030,29.5479,9.0134,14.2381,Brown
-Arriscraft International,ARRIS-WHITE-PE-ALSB-GRH,White Pearl,#F0EDE6,93.7998,-0.2014,3.7426,White
-Arriscraft International,SKU-ALPIN-9733,White,#000000,0,0,0,White
-Arriscraft International,SKU-BLIZZ-1557,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-CHARC-1192,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-IVORY-4804,Cream,#000000,0,0,0,Cream
-Arriscraft International,SKU-MIDNI-8632,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-MYSTI-2999,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-MYSTI-6394,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-OBSID-9901,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-OPAL-5472,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-PHOEN-3382,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-PLATI-5008,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-SILVE-8938,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-TOFIN-2970,Grey,#000000,0,0,0,Grey
-Arriscraft International,SKU-WEATH-7061,Brown,#000000,0,0,0,Grey
-Canada Brick,CB-VANIER,Black,#473F3A,27.2974,2.451,4.3201,Black
-Canada Brick,CB-SHADOW-RIDGE-VELOUR-2,Black,#666765,43.4555,-0.7972,0.9914,Grey
-Canada Brick,CB-LABRADOR,Black,#564F4C,34.1742,2.2904,2.8122,Black
-Canada Brick,CB-TUXEDO,Black,#4B4947,31.1511,0.4065,1.4903,Black
-Canada Brick,CB-SHADOW-RIDGE-MATT,Black,#636564,42.582,-0.9833,0.2941,Grey
-Canada Brick,CB-IRONSTONE,Black,#5A5751,37.0855,0.0046,3.9162,Black
-Canada Brick,CB-BLACK-CORAL-AVANTI,Black,#8A8988,57.1457,0.18,0.6674,Grey
-Canada Brick,CB-SHADOW-RIDGE-VELOUR,Black,#636563,42.5528,-1.1913,0.8593,Grey
-Canada Brick,CB-KINGSWAY-BLEND,Blend,#836F60,48.3088,5.3796,11.2762,Brown
-Canada Brick,CB-SUNNYBROOK-BLEND,Blend,#9B8566,56.7848,3.6294,19.8321,Buff
-Canada Brick,CB-PORT-ELGIN,Blend,#956A50,48.6069,13.8585,21.3946,Red
-Canada Brick,CB-CARLETON-BLEND,Blend,#7B624F,43.5231,7.1632,14.6486,Brown
-Canada Brick,CB-PORT-DOVER,Blend,#91745A,50.9769,7.5481,18.681,Red
-Canada Brick,CB-SONOMA-SMOOTH,Brown,#82695A,46.4281,7.5827,12.1995,Brown
-Canada Brick,CB-SONOMA-SMOOTH-IRONSPOT,Brown,#847060,48.6836,5.2134,11.8144,Brown
-Canada Brick,CB-WESTFORD-SQUARE,Brown,#786F63,47.3174,1.3192,7.9496,Brown
-Canada Brick,CB-RICHLAND-MATT,Brown,#928371,55.62,2.6508,11.8149,Brown
-Canada Brick,CB-DAKOTA,Brown,#8F7B6F,53.1168,5.6925,9.408,Grey
-Canada Brick,CB-DUNKERRON-MATT,Brown,#766759,44.6224,3.5376,10.0942,Brown
-Canada Brick,CB-DUNKERRON-SMOOTH,Brown,#726355,42.9988,3.5817,10.1695,Brown
-Canada Brick,CB-DUNKERRON-SMOOTH-IRONSPOT,Brown,#77685A,45.0266,3.5269,10.0758,Brown
-Canada Brick,CB-ALBION,Brown,#5D493E,32.7884,6.6736,9.8161,Brown
-Canada Brick,CB-RUTHERFORD,Brown,#6B5B4C,39.7982,3.9561,11.0684,Brown
-Canada Brick,CB-SONOMA-BARK,Brown,#77543F,38.9355,11.7599,18.0376,Brown
-Canada Brick,CB-WEATHERED-OAK-TUMBLED-VINTAGE-BRICK,Brown,#898171,54.2503,0.1755,9.7696,Cream
-Canada Brick,CB-SONOMA-BRUSHTEX,Brown,#77563F,39.4731,10.5548,18.7466,Brown
-Canada Brick,CB-HERITAGE-BROWN,Brown,#845D44,42.9908,12.7328,20.6713,Brown
-Canada Brick,CB-BRUNSWICK-MATT,Brown,#785F50,42.3943,7.7919,12.4451,Brown
-Canada Brick,CB-HICKORY-VELOUR,Brown,#766553,43.9208,3.7929,12.7149,Brown
-Canada Brick,CB-IRONSPOT-MK-II,Brown,#827163,48.8307,4.2637,10.2207,Brown
-Canada Brick,CB-VINTAGE-MATT,Brown,#765D4D,41.5575,7.6952,13.073,Brown
-Canada Brick,CB-MAHOGANY-VELOUR-IRONSPOT,Brown,#706052,41.8755,4.0451,10.3851,Brown
-Canada Brick,CB-SONOMA-MATT,Brown,#705D4E,40.9342,5.2298,11.5049,Brown
-Canada Brick,CB-CALEDONIA,Brown,#776756,44.6521,3.4912,11.9474,Brown
-Canada Brick,CB-MIDNIGHT-GREY-ARCHITECTURAL-LINEAR-SERIES-BRICK,Brown,#988D85,59.3598,2.6672,5.7404,Grey
-Canada Brick,CB-BALLYCROY-MATT,Buff,#968364,55.7222,2.4057,19.4467,Grey
-Canada Brick,CB-TAUPE-SMOOTH,Buff,#84735D,49.4443,3.0229,14.63,Buff
-Canada Brick,CB-SIERRA-SANDSTONE,Buff,#B3A78E,68.8772,0.1909,14.513,Buff
-Canada Brick,CB-SIERRA-SANDSTONE-SMOOTH,Buff,#B7AA8E,70.0143,0.1142,16.1512,Buff
-Canada Brick,CB-SPRING-HILL-MATT,Buff,#C0B2A4,73.3684,2.6332,8.9571,Cream
-Canada Brick,CB-SPRING-HILL-VELOUR,Buff,#C5B8A5,75.3691,1.4395,11.3166,Cream
-Canada Brick,CB-SPRING-HILL-VELOUR-2,Buff,#C5B7A5,75.1103,1.9732,10.9495,Cream
-Canada Brick,CB-SUNDANCE-BARK,Buff,#B6845B,59.1617,14.2952,29.6288,Orange
-Canada Brick,CB-SUNDANCE-MATT,Buff,#A98F68,60.8517,4.1219,24.3999,Buff
-Canada Brick,CB-SUNDANCE-RUGG,Buff,#987047,50.3564,10.7835,28.8478,Orange
-Canada Brick,CB-SUNDANCE-SMOOTH,Buff,#B2986E,64.1991,3.6046,25.6972,Buff
-Canada Brick,CB-SUNDANCE-SMOOTH-IRONSPOT,Buff,#C8AF82,72.5953,2.4935,26.4259,Buff
-Canada Brick,CB-SUNNYDALE-MATT,Buff,#9C8767,57.4391,3.0527,20.1678,Buff
-Canada Brick,CB-TAUPE-MATT,Buff,#8A7A62,52.0673,2.2349,15.4205,Buff
-Canada Brick,CB-ADELAIDE-SMOOTH-IRONSPOT,Buff,#A0947E,61.7918,0.7295,13.2532,Grey
-Canada Brick,CB-CORTES,Buff,#9D8A75,58.6297,3.7433,13.8862,Grey
-Canada Brick,CB-ADELAIDE-VELOUR,Buff,#B9A27E,67.7702,2.9959,21.851,Buff
-Canada Brick,CB-GEORGETOWN,Buff,#AB8969,59.4975,8.4189,22.0712,Buff
-Canada Brick,CB-GEORGETOWN-MK-II,Buff,#AC865E,58.6293,9.2591,27.0715,Buff
-Canada Brick,CB-HERITAGE-BEIGE,Buff,#926D58,49.195,11.7732,17.4548,Buff
-Canada Brick,CB-BURLINGTON-MATT,Buff,#977960,53.0572,7.9869,18.1392,Buff
-Canada Brick,CB-OCEAN-MIST-AVANTI,Buff,#C6BDAD,76.9316,0.4326,9.2203,Cream
-Canada Brick,CB-OLD-AZTEC,Buff,#A77A57,54.8892,13.1559,26.0093,Orange
-Canada Brick,CB-OSIANA-MATT,Buff,#A58967,58.8537,5.6781,22.2226,Buff
-Canada Brick,CB-OSIANA-SMOOTH,Buff,#B1926E,62.5335,6.4989,23.4611,Buff
-Canada Brick,CB-OSIANA-SMOOTH-IRONSPOT,Buff,#AD916B,61.8235,5.0367,24.1028,Buff
-Canada Brick,CB-PORT-CARTIER,Buff,#AA8B64,59.8267,6.2919,25.2773,Buff
-Canada Brick,CB-ADELAIDE,Buff,#AB9F89,65.9509,0.6827,13.0749,Buff
-Canada Brick,CB-COASTAL-FOG-AVANTI,Buff,#A39683,62.708,1.5812,11.7669,Grey
-Canada Brick,CB-CONESTOGA,Buff,#A89D8C,65.2254,1.0973,10.3439,Grey
-Canada Brick,CB-BALLYCROY-SMOOTH,Buff,#B09C77,65.2307,1.7261,22.109,Buff
-Canada Brick,CB-HUDSON,Gray,#7D6D5E,47.1125,3.7338,10.6995,Grey
-Canada Brick,CB-MYSTIC-GREY-CONTEMPORARY-BRICK,Gray,#918678,56.5118,1.6804,9.0354,Grey
-Canada Brick,CB-MYSTIC-GREY-TUMBLED-VINTAGE-BRICK,Gray,#8A7F72,53.8109,1.8806,8.5812,Grey
-Canada Brick,CB-OBSIDIAN-ARCHITECTURAL-LINEAR-SERIES-BRICK,Gray,#7D8588,54.9822,-2.3051,-2.6243,Grey
-Canada Brick,CB-HERITAGE-GREY,Gray,#C5AB8F,71.5409,5.1539,17.9146,Buff
-Canada Brick,CB-CREEKSIDE-VELOUR-2,Gray,#A39F95,65.5557,-0.3684,5.7307,Grey
-Canada Brick,CB-CHARCOAL-ARCHITECTURAL-LINEAR-SERIES-BRICK,Gray,#91908E,59.8157,-0.0132,1.1916,Grey
-Canada Brick,CB-PORTLAND,Gray,#716866,44.7599,3.1573,2.4031,Grey
-Canada Brick,CB-CREEKSIDE-VELOUR,Gray,#A39E94,65.2618,0.0046,5.8675,Grey
-Canada Brick,CB-CREEKSIDE-MATT,Gray,#A49C91,64.7347,0.9591,6.8019,Grey
-Canada Brick,CB-LAKESHORE,Pastel,#C8B9AB,76.0186,2.9723,9.0223,Cream
-Canada Brick,CB-TRINITY,Red,#6E432E,32.9768,16.2046,20.4534,Brown
-Canada Brick,CB-ANTIQUE-COPPER,Red,#8C6C59,48.2875,9.9305,15.5231,Brown
-Canada Brick,CB-BROOKVIEW-MATT,Red,#896B5A,47.7161,9.3755,14.0968,Brown
-Canada Brick,CB-BROOKVIEW-SMOOTH,Red,#8C6B59,48.0224,10.5142,15.1603,Brown
-Canada Brick,CB-BROOKVIEW-SMOOTH-IRONSPOT,Red,#866A5A,47.1245,8.6896,13.2299,Brown
-Canada Brick,CB-CAVENDISH-II,Red,#815B4D,42.2849,13.6707,14.2735,Red
-Canada Brick,CB-CHATEAU-LOCAS,Red,#7B594C,41.0208,12.136,13.0337,Red
-Canada Brick,CB-COPPER-BARK,Red,#925E40,44.9228,17.9077,25.8424,Orange
-Canada Brick,CB-COPPER-MATT,Red,#957358,51.1007,9.5834,20.0771,Orange
-Canada Brick,CB-COPPER-SMOOTH,Red,#9E7A5D,54.0042,9.9991,21.2611,Orange
-Canada Brick,CB-COPPER-SMOOTH-IRONSPOT,Red,#A98367,57.7003,10.7138,20.7447,Orange
-Canada Brick,CB-FULL-RANGE-BARK,Red,#7B553C,39.638,12.6246,20.8538,Red
-Canada Brick,CB-FULL-RANGE-RUGG,Red,#805841,41.137,13.6015,19.9365,Red
-Canada Brick,CB-HERITAGE-RUST,Red,#805743,40.9139,14.4169,18.4434,Orange
-Canada Brick,CB-MEDIUM-RANGE-RUGG,Red,#82583D,41.3148,14.0756,22.5916,Orange
-Canada Brick,CB-MEDIUM-RANGE-SHALETEX,Red,#8E6046,45.0238,15.5738,22.3775,Orange
-Canada Brick,CB-PORT-CARLING,Red,#886357,45.4226,13.2422,12.699,Red
-Canada Brick,CB-RIVERDALE-BARK,Red,#8A533D,41.0994,20.5364,22.5269,Red
-Canada Brick,CB-RIVERDALE-BRUSHTEX,Red,#965D45,45.2793,20.6728,23.4939,Red
-Canada Brick,CB-RIVERDALE-MATT,Red,#976F5B,50.3385,13.1073,17.3469,Orange
-Canada Brick,CB-RIVERDALE-RUGG,Red,#8C583E,42.6163,18.5898,23.9255,Brown
-Canada Brick,CB-RIVERDALE-SMOOTH,Red,#986C57,49.6034,14.7804,18.7077,Red
-Canada Brick,CB-RIVERDALE-SMOOTH-IRONSPOT,Red,#956C5A,49.3172,13.8734,16.5056,Red
-Canada Brick,CB-ROBINDALE,Red,#826356,44.7186,10.5551,12.2183,Brown
-Canada Brick,CB-SPADINA,Red,#6B5F5C,41.3476,4.2534,3.4733,Burgundy
-Canada Brick,CB-TALBOT-ANTIQUE,Red,#785140,38.2841,14.1291,16.5867,Red
-Canada Brick,CB-TALBOT-SQUARE,Red,#724D3C,36.3882,13.4073,16.3785,Red
-Canada Brick,CB-TAUPE-BARK,Red,#816040,43.3643,9.1906,23.4337,Brown
-Canada Brick,CB-TERRA-NOVA-2,Red,#7F5C44,42.1291,11.1108,19.428,Brown
-Canada Brick,CB-50-BARK,Red,#83573A,41.132,14.825,24.1501,Orange
-Canada Brick,CB-VARSITY-MATT,Red,#8E6654,46.8346,13.6483,16.5324,Brown
-Canada Brick,CB-VARSITY-SMOOTH,Red,#9D7361,52.1665,14.0709,16.4547,Orange
-Canada Brick,CB-VARSITY-SMOOTH-IRONSPOT,Red,#8B6959,47.383,11.2591,14.265,Brown
-Canada Brick,CB-VINTAGE-BARK,Red,#7E523A,39.2001,15.5583,21.5604,Brown
-Canada Brick,CB-WELLINGTON,Red,#543832,26.5731,11.5881,8.7767,Burgundy
-Canada Brick,CB-WILLIAMSBURG,Red,#935F49,45.4536,18.6255,21.2955,Red
-Canada Brick,CB-WILLIAMSBURG-MK-II,Red,#956049,45.9562,18.9054,22.0014,Red
-Canada Brick,CB-WHITE-ASH-2,White,#DAD4CB,85.1513,0.5003,5.1792,White
-Canada Brick,CB-SUSSEX,White,#B1A695,68.5985,1.0677,10.2349,Buff
-Canada Brick,CB-SEA-SHELL-AVANTI,White,#CDC7BF,80.5089,0.6823,4.741,White
-Canada Brick,CB-IVORY-WHITE-CONTEMPORARY-BRICK,White,#BEAC91,71.2119,2.1821,16.2703,Buff
-Canada Brick,CB-HAZELTON,White,#BBB4A3,73.4492,-0.4557,9.561,Cream
-Canada Brick,CB-OPAL-ARCHITECTURAL-LINEAR-SERIES-BRICK,White,#C8C1BC,78.491,1.5643,3.3845,White
-Canada Brick,CB-KELOWNA,White,#CFCCC6,82.1245,-0.0282,3.3521,White
-Canada Brick,CB-WINTERBOURNE,White,#C6C1B8,78.2317,0.1591,5.147,White
-Canada Brick,CB-ALPINE-WHITE-TUMBLED-VINTAGE-BRICK,White,#C5BFB7,77.609,0.6902,4.778,White
-Canada Brick,CB-WHITE-ASH,White,#DAD3CB,84.8972,1.0214,4.8121,White
+manufacturer,sku,colour_name,hex,lab_l,lab_a,lab_b,matched_standard,material
+Arriscraft International,ARRIS-ABBEY-ROAD-MDT-218SAWN,Abbey Road,#BEB7AA,74.6457,0.2068,7.4906,Cream,Stone
+Arriscraft International,ARRIS-ABBEY-ROAD-MDT-218,Abbey Road,#B3ACA0,70.6129,0.3885,7.0633,Grey,Stone
+Arriscraft International,ARRIS-ABBEY-ROAD-MDT-358SAWN,Abbey Road,#A7A59B,67.6448,-1.1059,5.4357,Grey,Stone
+Arriscraft International,ARRIS-ABBEY-ROAD-MDT-358,Abbey Road,#B3AB9E,70.3006,0.591,7.7172,Grey,Stone
+Arriscraft International,ARRIS-ABBEY-ROAD-MDT-578,Abbey Road,#A7A59B,67.6448,-1.1059,5.4357,Grey,Stone
+Arriscraft International,ARRIS-ADAIR-LIME-ADL,Adair Limestone,#7B766D,49.8243,0.2201,5.6402,Grey,Stone
+Arriscraft International,ARRIS-ADAIR-PARL-ADP,Adair Parliament,#9C917F,60.6499,0.9804,11.0337,Grey,Stone
+Arriscraft International,ARRIS-ALPINE-W-CONT,Alpine White,#C3B9AF,75.6965,1.8006,6.3349,White,Brick
+Arriscraft International,ARRIS-ALPINE-W-TVB,Alpine White,#C5BFB8,77.6339,0.8635,4.2734,White,Brick
+Arriscraft International,ARRIS-AMALFI-CST-SAWN,Amalfi,#9C9584,61.8511,-0.4229,9.9073,Grey,Stone
+Arriscraft International,ARRIS-AMALFI-CST,Amalfi,#9C9584,61.8511,-0.4229,9.9073,Grey,Stone
+Arriscraft International,ARRIS-ANVIL-STK-SAWN,Anvil,#6C6E6C,46.2078,-1.1732,0.8463,Grey,Stone
+Arriscraft International,ARRIS-ANVIL-STK,Anvil,#676968,44.2131,-0.9765,0.2921,Grey,Stone
+Arriscraft International,ARRIS-ARRIS-CAST-ACT,Arris Cast,#A1826F,56.7721,9.0193,14.7879,Orange,Stone
+Arriscraft International,ARRIS-ASH-STK-SAWN,Ash,#A8A08F,66.0972,-0.0564,9.9075,Grey,Stone
+Arriscraft International,ARRIS-ASH-STK,Ash,#A09687,62.5376,1.0632,9.2385,Grey,Stone
+Arriscraft International,ARRIS-AUGUSTA-MTH,Augusta,#A28A6C,58.9197,4.5156,19.4533,Buff,Stone
+Arriscraft International,ARRIS-AVALANCHE-ULS,Avalanche,#C0B4AA,74.0304,2.5455,6.6297,Cream,Stone
+Arriscraft International,ARRIS-AVALANCHE-EDR,Avalanche,#C7C2BA,78.6194,0.3314,4.6386,White,Stone
+Arriscraft International,ARRIS-BAJA-CST-SAWN,Baja,#C9B69A,74.955,2.353,16.7399,Buff,Stone
+Arriscraft International,ARRIS-BAJA-CST,Baja,#C8B08E,73.0779,3.4999,20.619,Buff,Stone
+Arriscraft International,ARRIS-BARNWOOD-MTH,Barnwood,#9A836A,56.2309,4.885,16.789,Grey,Stone
+Arriscraft International,ARRIS-BASALT-ATL,Basalt,#777B74,51.0928,-2.8967,3.3044,Grey,Stone
+Arriscraft International,ARRIS-BASALT-ACP,Basalt,#777B74,51.0928,-2.8967,3.3044,Grey,Stone
+Arriscraft International,ARRIS-BASALT-GRN,Basalt,#808785,55.6958,-2.9715,0.184,Grey,Stone
+Arriscraft International,ARRIS-BEACH-STK,Beach,#C7B299,73.7287,3.582,15.5438,Buff,Stone
+Arriscraft International,ARRIS-BEACH-STK-SAWN,Beach,#CDBDA6,77.357,1.9197,13.6816,Cream,Stone
+Arriscraft International,ARRIS-BEDFORD-CRN,Bedford,#DED6BF,85.6977,-1.0774,12.3495,Cream,Stone
+Arriscraft International,ARRIS-BEECH-MOUN-HFL,Beech Mountain,#7E695A,46.0112,5.8897,11.5565,Brown,Stone
+Arriscraft International,ARRIS-BIG-HORN-OLC,Big Horn,#97887A,57.6485,3.2497,9.5749,Grey,Stone
+Arriscraft International,ARRIS-BIRCHBARK-CRN,Birchbark,#A39C96,64.776,1.459,4.0475,Grey,Stone
+Arriscraft International,ARRIS-BISCAYNE-MDT-358SAWN,Biscayne,#D2D0CD,83.5586,0.154,1.7305,White,Stone
+Arriscraft International,ARRIS-BISCAYNE-MDT-218SAWN,Biscayne,#D4D2CE,84.2495,-0.0235,2.2221,White,Stone
+Arriscraft International,ARRIS-BISCAYNE-MDT-218,Biscayne,#C8BFB3,77.7542,1.0896,7.1787,Cream,Stone
+Arriscraft International,ARRIS-BISCAYNE-MDT-358,Biscayne,#CAC4BA,79.3751,0.3425,5.7595,Cream,Stone
+Arriscraft International,ARRIS-BISCAYNE-MDT-578,Biscayne,#CFC9C0,81.206,0.5091,5.2319,White,Stone
+Arriscraft International,ARRIS-BLACK-CO-AVT,Black Coral,#8A8988,57.1457,0.18,0.6674,Grey,Brick
+Arriscraft International,ARRIS-BLACKROCK-HFL,Blackrock,#76777A,50.0378,0.2414,-1.7733,Grey,Stone
+Arriscraft International,ARRIS-BLACKSMITH-CRN,Blacksmith,#53514C,34.4894,-0.2124,3.2294,Black,Stone
+Arriscraft International,ARRIS-BLOOMINGTO-LAU,Bloomington,#B5AA99,70.0869,1.0555,10.1886,Buff,Stone
+Arriscraft International,ARRIS-BLUE-GREY-ADM,Blue Grey,#CDC7BD,80.4601,0.3402,5.7429,White,Stone
+Arriscraft International,ARRIS-BLUE-GREY--ADL,Blue Grey Georgian Blend,#CDC7BD,80.4601,0.3402,5.7429,White,Stone
+Arriscraft International,ARRIS-BLUERIDGE-MTH,Blueridge,#9B8B76,58.7346,2.5288,13.4362,Grey,Stone
+Arriscraft International,ARRIS-BROWN-SIL,Brown,#D6CEC4,83.1385,1.0421,5.9543,Brown,Stone
+Arriscraft International,ARRIS-BURNT-UM-ALSB-GS,Burnt Umber,#7E6E5B,47.4211,3.105,12.9208,Brown,Brick
+Arriscraft International,ARRIS-CAFE-ATL,Cafe,#B79C85,66.1651,6.4308,15.7579,Buff,Stone
+Arriscraft International,ARRIS-CAFE-GRN,Cafe,#B79D85,66.4241,5.882,16.1176,Buff,Stone
+Arriscraft International,ARRIS-CAFE-ACP,Cafe,#B79C85,66.1651,6.4308,15.7579,Buff,Stone
+Arriscraft International,ARRIS-CAPE-COD-CST,Cape Cod,#B0A792,68.7099,-0.3356,12.0371,Buff,Stone
+Arriscraft International,ARRIS-CAPE-COD-CST-SAWN,Cape Cod,#B0A690,68.3993,-0.1099,12.7029,Buff,Stone
+Arriscraft International,ARRIS-CARBON-EVO,Carbon,#9C988C,62.8588,-0.7191,6.8342,Grey,Stone
+Arriscraft International,ARRIS-CARBON-CRN,Carbon,#817A72,51.6116,1.1823,5.3344,Grey,Stone
+Arriscraft International,ARRIS-CASHMERE-FRE,Cashmere,#C3B8A5,75.2016,0.6961,11.0557,Cream,Stone
+Arriscraft International,ARRIS-CEDAR-WO-ALSB-GS,Cedar Woods,#A09585,62.2212,1.2888,9.9164,Brown,Brick
+Arriscraft International,ARRIS-CHALET-MTH,Chalet,#877A68,51.9156,1.9048,11.6836,Grey,Stone
+Arriscraft International,ARRIS-CHAMPAGNE-ATL,Champagne,#D2BB9E,77.1077,3.6982,17.7002,Cream,Stone
+Arriscraft International,ARRIS-CHAMPAGNE-ACP,Champagne,#D2BB9E,77.1077,3.6982,17.7002,Cream,Stone
+Arriscraft International,ARRIS-CHAMPAGNE-GRN,Champagne,#E7CDAD,83.793,4.2578,19.2847,Cream,Stone
+Arriscraft International,ARRIS-CHARCOAL-ULS,Charcoal,#99968C,62.0649,-0.7434,5.6626,Grey,Stone
+Arriscraft International,ARRIS-CHARCOAL-LAU,Charcoal,#898073,54.0212,1.0809,8.2872,Grey,Stone
+Arriscraft International,ARRIS-CHARCOAL-FRE,Charcoal,#9A9484,61.4082,-0.6405,9.2555,Grey,Stone
+Arriscraft International,ARRIS-CHARCOAL-EDR,Charcoal,#948F85,59.5569,0.0152,5.9775,Grey,Stone
+Arriscraft International,ARRIS-CHATEAU--ALSB-GS,Chateau Brown,#AC8C72,60.553,8.289,18.4654,Buff,Brick
+Arriscraft International,ARRIS-CLOUDLAND-HFL,Cloudland,#C3C3C3,78.7944,0.0063,0.0029,White,Stone
+Arriscraft International,ARRIS-COASTAL--AVT,Coastal Fog,#A39683,62.708,1.5812,11.7669,Grey,Brick
+Arriscraft International,ARRIS-COBBLE-HIL-GCT,Cobble Hill,#BBAA99,70.6041,3.3227,10.9941,Buff,Stone
+Arriscraft International,ARRIS-COTTON-CRE-MTH,Cotton Creek,#B0A697,68.5603,1.0165,9.0629,Grey,Stone
+Arriscraft International,ARRIS-DARK-SHORE-CST,Dark Shore,#7B7D79,52.1284,-1.5422,1.9164,Grey,Stone
+Arriscraft International,ARRIS-DARK-SHORE-CST-SAWN,Dark Shore,#7C7F7B,52.8332,-1.9148,1.7814,Grey,Stone
+Arriscraft International,ARRIS-DESERT-SAN-STK,Desert Sand,#BEA683,69.3685,3.4787,21.3712,Buff,Stone
+Arriscraft International,ARRIS-DESERT-SAN-STK-SAWN,Desert Sand,#CFB999,76.2305,2.913,19.1302,Buff,Stone
+Arriscraft International,ARRIS-DRIFTWOOD-CRN,Driftwood,#958C81,58.7242,1.3826,7.078,Grey,Stone
+Arriscraft International,ARRIS-DRIFTWOOD-EDR,Driftwood,#8C8375,55.1674,0.9016,8.7943,Grey,Stone
+Arriscraft International,ARRIS-DRIFTWOOD-FRE,Driftwood,#857C6E,52.4286,0.9262,8.8845,Grey,Stone
+Arriscraft International,ARRIS-DRIFTWOOD-ULS,Driftwood,#8B7C68,52.844,2.3987,13.035,Grey,Stone
+Arriscraft International,ARRIS-FRENCH-COU-FRE,French Country,#9E9486,61.8007,1.2356,8.7312,Grey,Stone
+Arriscraft International,ARRIS-GINGER-ACP,Ginger,#BCA38A,68.5485,5.275,16.377,Buff,Stone
+Arriscraft International,ARRIS-GINGER-ATL,Ginger,#BCA38A,68.5485,5.275,16.377,Buff,Stone
+Arriscraft International,ARRIS-GINGER-GRN,Ginger,#BFA68D,69.6627,5.2409,16.3184,Buff,Stone
+Arriscraft International,ARRIS-GLACIER-EDR,Glacier,#D0C8BE,80.9807,1.051,5.988,White,Stone
+Arriscraft International,ARRIS-GRAY-SIL,Gray,#D2D1CD,83.8147,-0.3689,2.103,White,Stone
+Arriscraft International,ARRIS-GREIGE-FRE,Greige,#9D917E,60.7156,1.2133,11.7045,Grey,Stone
+Arriscraft International,ARRIS-HARBOR-G-ALSB-GS,Harbor Grey,#736653,43.9043,1.9133,12.6455,Grey,Brick
+Arriscraft International,ARRIS-ICE-STK-SAWN,Ice,#D7D4D0,85.0413,0.3214,2.3395,White,Stone
+Arriscraft International,ARRIS-ICE-STK,Ice,#D0C9C0,81.2855,0.8636,5.3568,White,Stone
+Arriscraft International,ARRIS-INDIANA-BL-GCT,Indiana Blend,#C5BBAD,76.3313,1.13,8.3517,Cream,Stone
+Arriscraft International,ARRIS-INFINITY-FRE,Infinity,#A99C8C,65.0461,2.0307,10.102,Grey,Stone
+Arriscraft International,ARRIS-IRONSTONE-CRN,Ironstone,#B0AA9F,69.812,0.1926,6.4329,Grey,Stone
+Arriscraft International,ARRIS-IVORY-WHIT-LAU,Ivory White,#BBAA8D,70.3419,1.5184,17.2066,Cream,Stone
+Arriscraft International,ARRIS-IVORY-WH-CONT,Ivory White,#BEAC91,71.2119,2.1821,16.2703,Cream,Brick
+Arriscraft International,ARRIS-IVORY-WH-TVB,Ivory White,#C9BBA4,76.4595,1.1803,13.4467,Cream,Brick
+Arriscraft International,ARRIS-LIMESTONE-GRN,Limestone,#D9CFC0,83.5386,0.9262,8.6887,Cream,Stone
+Arriscraft International,ARRIS-LIMESTONE-ACP,Limestone,#D2CCC5,82.335,0.8495,4.2204,White,Stone
+Arriscraft International,ARRIS-LIMESTONE-ATL,Limestone,#D2CCC5,82.335,0.8495,4.2204,White,Stone
+Arriscraft International,ARRIS-LOMBARD-MDT-578,Lombard,#A49883,63.3327,0.8673,12.6579,Grey,Stone
+Arriscraft International,ARRIS-MAGNOLIA-GRN,Magnolia,#B6AA9B,70.2187,1.7558,9.2867,Buff,Stone
+Arriscraft International,ARRIS-MAGNOLIA-ACP,Magnolia,#A39685,62.7539,1.8989,10.7074,Grey,Stone
+Arriscraft International,ARRIS-MAGNOLIA-ATL,Magnolia,#A39685,62.7539,1.8989,10.7074,Grey,Stone
+Arriscraft International,ARRIS-MAHOGANY-LAU,Mahogany,#A09282,61.345,2.4702,10.3694,Brown,Stone
+Arriscraft International,ARRIS-MANHATTAN-MDT-218,Manhattan,#5C5F5F,40.058,-1.1725,-0.4089,Grey,Stone
+Arriscraft International,ARRIS-MATRIX-STK-SAWN,Matrix,#B5AB96,70.282,0.0356,12.1142,Buff,Stone
+Arriscraft International,ARRIS-MATRIX-STK,Matrix,#666B68,44.7161,-2.5422,1.0148,Grey,Stone
+Arriscraft International,ARRIS-MIDNIGHT-G-LAU,Midnight Grey,#7C6F5C,47.5294,1.8326,12.4503,Grey,Stone
+Arriscraft International,ARRIS-MOCHA-GCT,Mocha,#B9A68D,69.119,2.9053,15.4791,Buff,Stone
+Arriscraft International,ARRIS-MONTECITO-GRN,Montecito,#AAA192,66.6047,0.6514,8.9827,Grey,Stone
+Arriscraft International,ARRIS-MONTECITO-ATL,Montecito,#988F83,59.8517,1.2024,7.5835,Grey,Stone
+Arriscraft International,ARRIS-MONTECITO-ACP,Montecito,#988F83,59.8517,1.2024,7.5835,Grey,Stone
+Arriscraft International,ARRIS-MONTEREY-CST-SAWN,Monterey,#B0AEA4,70.9966,-1.0983,5.382,Grey,Stone
+Arriscraft International,ARRIS-MONTEREY-CST,Monterey,#AAA89D,68.7409,-1.2798,5.9351,Grey,Stone
+Arriscraft International,ARRIS-MOONSTONE-FRE,Moonstone,#C3BAAF,75.9556,1.2668,6.7073,Cream,Stone
+Arriscraft International,ARRIS-MOUNTAIN-R-ATL,Mountain Ridge,#BEB8AE,75.0038,0.3523,5.8288,Cream,Stone
+Arriscraft International,ARRIS-MOUNTAIN-R-GRN,Mountain Ridge,#C0BAAE,75.6873,0.0094,6.8325,Cream,Stone
+Arriscraft International,ARRIS-MOUNTAIN-R-ACP,Mountain Ridge,#BEB8AE,75.0038,0.3523,5.8288,Cream,Stone
+Arriscraft International,ARRIS-MYSTIC-G-CONT,Mystic Grey,#918678,56.5118,1.6804,9.0354,Grey,Brick
+Arriscraft International,ARRIS-MYSTIC-G-TVB,Mystic Grey,#8A7F72,53.8109,1.8806,8.5812,Grey,Brick
+Arriscraft International,ARRIS-NUTMEG-CRN,Nutmeg,#AFA59A,68.2831,1.6866,6.9942,Grey,Stone
+Arriscraft International,ARRIS-NUTMEG-EVO,Nutmeg,#C0B9B1,75.5003,1.0564,4.934,Cream,Stone
+Arriscraft International,ARRIS-OAK-RIDGE-ACP,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream,Stone
+Arriscraft International,ARRIS-OAK-RIDGE-ATL,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream,Stone
+Arriscraft International,ARRIS-OAK-RIDGE-GRN,Oak Ridge,#CCB9A6,76.246,3.6727,12.1007,Cream,Stone
+Arriscraft International,ARRIS-OCEAN-MI-AVT,Ocean Mist,#C6BDAD,76.9316,0.4326,9.2203,Cream,Brick
+Arriscraft International,ARRIS-ONYX-LAU,Onyx,#A09F9D,65.5177,-0.013,1.1703,Grey,Stone
+Arriscraft International,ARRIS-OPAL-LAU,Opal,#AFA69C,68.5965,1.4813,6.3353,Grey,Stone
+Arriscraft International,ARRIS-PEACHTREE-MDT-358,Peachtree,#C1AB89,71.0563,2.7672,20.4561,Buff,Stone
+Arriscraft International,ARRIS-PEACHTREE-MDT-218SAWN,Peachtree,#CBB492,74.454,3.0699,20.3924,Buff,Stone
+Arriscraft International,ARRIS-REDROCK-ATL,Redrock,#C29078,63.9758,15.7361,20.1519,Red,Stone
+Arriscraft International,ARRIS-REDROCK-GRN,Redrock,#BB8F87,63.309,15.4709,10.6926,Red,Stone
+Arriscraft International,ARRIS-REDROCK-ACP,Redrock,#C29078,63.9758,15.7361,20.1519,Red,Stone
+Arriscraft International,ARRIS-ROCKPORT-G-GCT,Rockport Grey,#9E907C,60.49,1.8509,12.5315,Grey,Stone
+Arriscraft International,ARRIS-SADDLE-MTH,Saddle,#A18C6C,59.3574,2.9856,20.0311,Buff,Stone
+Arriscraft International,ARRIS-SANDRIFT-CRN,Sandrift,#ADA599,68.0901,0.7706,7.2498,Grey,Stone
+Arriscraft International,ARRIS-SANDY-SH-TGB,Sandy Shore,#BEBEBE,76.9759,0.0062,0.0028,White,Brick
+Arriscraft International,ARRIS-SAVANNAH-GCT,Savannah,#C9B597,74.6351,2.457,17.9163,Buff,Stone
+Arriscraft International,ARRIS-SEA-SHEL-AVT,Sea Shell,#CDC7BF,80.5089,0.6823,4.741,White,Brick
+Arriscraft International,ARRIS-SEDONA-RED-STK,Sedona Red,#A57E78,56.3642,14.1864,9.1004,Red,Stone
+Arriscraft International,ARRIS-SEPIA-ADM,Sepia,#D2C3B4,79.6293,2.7688,9.4341,Cream,Stone
+Arriscraft International,ARRIS-SEPIA-ADA,Sepia,#AC826B,57.8443,13.0068,18.7263,Orange,Stone
+Arriscraft International,ARRIS-SEPIA-GEOR-ADL,Sepia Georgian Blend,#B9A891,69.7279,2.4145,14.1316,Buff,Stone
+Arriscraft International,ARRIS-SILVER-SLA-GCT,Silver Slate,#B1AA9F,69.8946,0.5617,6.5623,Grey,Stone
+Arriscraft International,ARRIS-SILVERADO-FRE,Silverado,#8E897E,57.2198,-0.1568,6.5629,Grey,Stone
+Arriscraft International,ARRIS-SMOKY-MOUN-OLC,Smoky Mountain,#A69784,63.2652,2.357,12.0283,Grey,Stone
+Arriscraft International,ARRIS-SOUTHERN-TGB,Southern Dusk,#ADA89F,69.0348,0.1735,5.2831,Grey,Brick
+Arriscraft International,ARRIS-STEEL-GREY-EDR,Steel Grey,#A6A09A,66.1991,1.0813,3.897,Grey,Stone
+Arriscraft International,ARRIS-STEEL-GREY-SHS,Steel Grey,#82807D,53.6696,0.1715,1.8924,Grey,Stone
+Arriscraft International,ARRIS-STEEL-GREY-ULS,Steel Grey,#848280,54.4796,0.3633,1.3465,Grey,Stone
+Arriscraft International,ARRIS-STERLING-STK,Sterling,#989F9A,64.8073,-3.4679,1.7396,Grey,Stone
+Arriscraft International,ARRIS-SUNSET-ATL,Sunset,#B8A48C,68.4858,3.4568,15.1329,Buff,Stone
+Arriscraft International,ARRIS-SUNSET-ACP,Sunset,#B8A48C,68.4858,3.4568,15.1329,Buff,Stone
+Arriscraft International,ARRIS-SUNSET-GRN,Sunset,#C0A78C,69.9915,4.9483,17.3373,Buff,Stone
+Arriscraft International,ARRIS-TACOMA-SHS,Tacoma,#968A7A,58.0998,1.728,10.2002,Grey,Stone
+Arriscraft International,ARRIS-TACOMA-EDR,Tacoma,#C4BAA5,75.8047,0.0031,11.922,Cream,Stone
+Arriscraft International,ARRIS-TACOMA-ULS,Tacoma,#AEA18E,66.8558,1.5297,11.6095,Buff,Stone
+Arriscraft International,ARRIS-TAN-SIL,Tan,#DFD6CA,86.0291,1.0504,7.0242,White,Stone
+Arriscraft International,ARRIS-TAN-ACP,Tan,#DBCDB8,83.0109,1.4247,12.2108,Cream,Stone
+Arriscraft International,ARRIS-TAN-ATL,Tan,#DBCDB8,83.0109,1.4247,12.2108,Cream,Stone
+Arriscraft International,ARRIS-TRADITIONA-FRE,Traditional Grey,#938773,56.8495,1.1052,12.4032,Grey,Stone
+Arriscraft International,ARRIS-WALNUT-LAU,Walnut,#8C8374,55.1433,0.734,9.3371,Brown,Stone
+Arriscraft International,ARRIS-WEATHERE-TVB,Weathered Oak,#898272,54.552,-0.2251,9.6178,Brown,Brick
+Arriscraft International,ARRIS-WEATHERE-CONT,Weathered Oak,#928B7F,58.1399,0.4391,7.3512,Brown,Brick
+Arriscraft International,ARRIS-WEATHERWOO-GCT,Weatherwood,#B7A891,69.5527,1.6451,13.8603,Buff,Stone
+Arriscraft International,ARRIS-WHITE-CRN,White,#BFBBB5,76.0405,0.3294,3.5323,White,Stone
+Arriscraft International,ARRIS-WHITE-EVO,White,#BFBAB6,75.8055,1.0406,2.6486,White,Stone
+Arriscraft International,ARRIS-WHITE-SIL,White,#E6E6E5,91.2677,-0.1709,0.4889,White,Stone
+Arriscraft International,ARRIS-WHITE-CLIF-CST,White Cliff,#CBC4BB,79.4794,0.8697,5.3825,White,Stone
+Arriscraft International,ARRIS-WHITE-CLIF-CST-SAWN,White Cliff,#CECBC6,81.7897,0.1478,2.8568,White,Stone
+Arriscraft International,ARRIS-WHITE-PE-ALSB-GS,White Pearl,#D0C6B7,80.3015,0.9432,8.7631,Cream,Brick
+Brampton Brick,BB-KINGS-DORSET-ASHLAND-84,Ashland,#97928E,60.861,1.0949,2.7714,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-AUBURN-M-85,Auburn Matt,#A17256,52.1563,15.0456,22.8725,Orange,Brick
+Brampton Brick,BB-KINGS-CONTEM-AUBURN-S-86,Auburn Smooth,#A57052,52.0591,17.4708,25.1208,Orange,Brick
+Brampton Brick,BB-KINGS-CONTEM-BISTRO-87,Bistro,#534A44,32.1548,2.6123,4.9554,Black,Brick
+Brampton Brick,BB-KINGS-LEGACY-CANYON-88,Canyon,#9F8C78,59.4189,3.873,13.3116,Grey,Brick
+Brampton Brick,BB-KINGS-DORSET-CAVIAR-89,Caviar,#4F4D4D,32.9318,0.8237,0.2926,Black,Brick
+Brampton Brick,BB-KINGS-VIVACE-CHARCOAL-90,Charcoal,#666364,42.2595,1.3874,-0.1451,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-CHARCOAL-91,Charcoal Matt,#5F5956,38.2866,1.8246,2.6024,Brown,Brick
+Brampton Brick,BB-KINGS-CONTEM-CHELSEA-92,Chelsea,#9B8577,57.1489,6.0638,10.6417,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-CHURCHIL-93,Churchill,#8B675A,46.8794,12.5654,12.9767,Red,Brick
+Brampton Brick,BB-KINGS-CONTEM-CINDER-94,Cinder,#726D67,46.3035,0.7875,4.0425,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-CLARET-95,Claret,#6E5650,38.8116,8.9195,7.2744,Burgundy,Brick
+Brampton Brick,BB-KINGS-VIVACE-CORTONA-96,Cortona,#918884,57.3608,2.6316,3.3537,Grey,Brick
+Brampton Brick,BB-KINGS-LEGACY-CRIMSON-97,Crimson,#66514C,36.4261,7.8967,6.258,Burgundy,Brick
+Brampton Brick,BB-KINGS-LEGACY-CRYSTAL--98,Crystal Gray,#716D67,46.2139,0.3892,3.902,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-DOVER-99,Dover,#BAB1A6,72.6519,1.2857,6.771,Cream,Brick
+Brampton Brick,BB-KINGS-CONTEM-DOVER-ME-100,Dover Metric Norman,#B6ABA2,70.6494,2.3775,6.0474,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-DOVER-PR-101,Dover PRP,#BFB6B1,74.6395,2.303,3.6797,Cream,Brick
+Brampton Brick,BB-KINGS-CONTEM-ESPRESSO-102,Espresso,#413739,24.1664,4.8192,0.3847,Black,Brick
+Brampton Brick,BB-KINGS-CONTEM-KENTVILL-103,Kentville,#C8AF9B,73.0928,5.8688,13.5767,Buff,Brick
+Brampton Brick,BB-KINGS-LEGACY-MADISON--105,Madison County,#755D52,41.5634,7.9935,10.0277,Burgundy,Brick
+Brampton Brick,BB-KINGS-LEGACY-MANCHEST-106,Manchester,#927F6C,54.42,4.1594,13.0174,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-MANILLA--107,Manilla Matt,#B7A389,68.0706,3.1744,16.1942,Buff,Brick
+Brampton Brick,BB-KINGS-CONTEM-MANILLA--108,Manilla Smooth,#C8AE86,72.4104,3.5273,24.0283,Buff,Brick
+Brampton Brick,BB-KINGS-DORSET-MARBLE-G-109,Marble Gray,#A6A29E,66.8368,0.706,2.5888,Grey,Brick
+Brampton Brick,BB-KINGS-VIVACE-MILANO-110,Milano,#A0938A,61.8058,3.2327,6.5008,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-MOUNTAIN-111,Mountain Gray,#8B7460,50.481,5.8205,14.4149,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-NICKEL-M-112,Nickel Metric Norman,#9E9A99,63.9011,1.2698,1.0413,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-NICKEL-P-113,Nickel PRP,#938B88,58.4579,2.4228,2.6685,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-NORDIC-M-114,Nordic Matt,#CCC2AF,78.7617,0.3055,10.8163,Cream,Brick
+Brampton Brick,BB-KINGS-LEGACY-OLD-CHIC-115,Old Chicago,#875948,42.4048,16.8498,17.5769,Red,Brick
+Brampton Brick,BB-KINGS-LEGACY-OLD-SCHO-116,Old School,#A37A66,54.7255,13.1951,17.1701,Orange,Brick
+Brampton Brick,BB-KINGS-CONTEM-ONYX-117,Onyx,#716E71,46.7834,1.7681,-1.2525,Grey,Brick
+Brampton Brick,BB-KINGS-DORSET-PALERMO--123,Palermo Beige,#938676,56.6454,2.1464,10.3981,Grey,Brick
+Brampton Brick,BB-KINGS-DORSET-PALERMO--121,Palermo Beige,#A79890,63.9055,4.1351,6.2088,Grey,Brick
+Brampton Brick,BB-KINGS-DORSET-PALERMO--122,Palermo Beige,#978B83,58.68,3.0618,5.8955,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-POLAR-WH-124,Polar White,#D1CFC9,83.1246,-0.3764,3.221,White,Brick
+Brampton Brick,BB-KINGS-CONTEM-RAVEN-127,Raven,#453D3A,26.4716,2.8552,3.1098,Black,Brick
+Brampton Brick,BB-KINGS-CONTEM-REGENCY--128,Regency Brown,#8C7662,51.1683,5.3701,14.2127,Brown,Brick
+Brampton Brick,BB-KINGS-CONTEM-ROYAL-GR-129,Royal Gray,#858077,53.768,0.208,5.5568,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-SAHARA-130,Sahara,#BF9076,63.6154,14.2872,20.7232,Buff,Brick
+Brampton Brick,BB-KINGS-CONTEM-SHADOW-131,Shadow,#8E8988,57.4821,1.672,1.1983,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-SHADOW-P-132,Shadow PRP,#817C79,52.3566,1.3222,2.3108,Grey,Brick
+Brampton Brick,BB-KINGS-VIVACE-SIENA-133,Siena,#928879,57.1725,1.1118,9.4103,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-SIENA-MA-134,Siena Matt,#918274,55.3248,3.294,9.658,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-SOLSTICE-135,Solstice Matt,#AE8562,58.6542,11.0979,24.9204,Orange,Brick
+Brampton Brick,BB-KINGS-CONTEM-SOLSTICE-136,Solstice Smooth,#BB9267,63.427,9.8471,28.6738,Buff,Brick
+Brampton Brick,BB-KINGS-LEGACY-STERLING-138,Sterling Gray,#C3B5A1,74.3322,1.6675,11.9958,Cream,Brick
+Brampton Brick,BB-KINGS-CONTEM-TAHOE-139,Tahoe,#736455,43.3821,3.4116,10.7198,Brown,Brick
+Brampton Brick,BB-KINGS-VIVACE-TWEED-141,Tweed,#998D86,59.4739,3.2244,5.3454,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-VENETIAN-143,Venetian,#664339,32.1112,13.7848,12.2324,Burgundy,Brick
+Brampton Brick,BB-KINGS-LEGACY-VERIDIAN-144,Veridian,#99806A,55.3302,6.1742,15.5348,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-VICTORIA-145,Victoriaville,#7C5248,39.2203,16.2463,13.0315,Red,Brick
+Brampton Brick,BB-KINGS-LEGACY-WESTMONT-146,Westmont,#927F6F,54.4881,4.6162,11.3805,Grey,Brick
+Brampton Brick,BB-KINGS-CONTEM-WESTVILL-147,Westville,#8A5C53,43.7735,17.6826,12.8646,Red,Brick
+Brampton Brick,BB-KINGS-CONTEM-WINDSOR-148,Windsor,#9A5546,43.9581,26.9838,21.2958,Red,Brick
+Acme Brick,SKU-FROST-4438,Pink,#000000,0,0,0,Pink,Brick
+Acme Brick,SKU-OLD-D-8865,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-4-HB-3236,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-ASHCR-2171,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-CAMDE-1634,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-DANIS-8519,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-DANIS-5794,Pink,#000000,0,0,0,Pink,Brick
+Glen Gery,SKU-FRENC-7704,Pink,#000000,0,0,0,Pink,Brick
+Arriscraft International,ARRIS-BURNT-UM-ALSB-GRH,Burnt Umber,#8B4513,37.4669,26.4478,40.989,Brown,Brick
+Arriscraft International,ARRIS-CEDAR-WO-ALSB-GRH,Cedar Woods,#7B5234,38.7139,13.6356,24.4209,Brown,Brick
+Arriscraft International,ARRIS-CHARCOAL-ALSB-W,Charcoal,#4A4A4A,31.4579,0.0032,0.0014,Grey,Brick
+Arriscraft International,ARRIS-CHARCOAL-ALSB-CS,Charcoal,#4A4A4A,31.4579,0.0032,0.0014,Grey,Brick
+Arriscraft International,ARRIS-CHATEAU--ALSB-GRH,Chateau Brown,#6B4C3B,35.2232,10.7408,15.2861,Buff,Brick
+Arriscraft International,ARRIS-EVENING--ALSB-GRH,Evening Shade,#5A4A5A,33.5827,9.9718,-6.8905,Grey,Brick
+Arriscraft International,ARRIS-EVENING--ALSB-GS,Evening Shade,#5A4A5A,33.5827,9.9718,-6.8905,Grey,Brick
+Arriscraft International,ARRIS-FORGED-S-ALSB-GRH,Forged Steel,#506070,39.9836,-2.0376,-11.0578,Grey,Brick
+Arriscraft International,ARRIS-FORGED-S-ALSB-GS,Forged Steel,#506070,39.9836,-2.0376,-11.0578,Grey,Brick
+Arriscraft International,ARRIS-GEORGETO-ALSB-W,Georgetown Blend,#8C7B6A,52.71,3.6891,11.7019,Brown,Brick
+Arriscraft International,ARRIS-GEORGETO-ALSB-CS,Georgetown Blend,#8C7B6A,52.71,3.6891,11.7019,Brown,Brick
+Arriscraft International,ARRIS-HARBOR-G-ALSB-GRH,Harbor Grey,#708090,52.8363,-2.1371,-10.5684,Grey,Brick
+Arriscraft International,ARRIS-MAHOGANY-ALSB-W,Mahogany,#6B3A2A,30.2036,19.9189,19.3341,Cream,Brick
+Arriscraft International,ARRIS-MAHOGANY-ALSB-CS,Mahogany,#6B3A2A,30.2036,19.9189,19.3341,Cream,Brick
+Arriscraft International,ARRIS-MIDNIGHT-ALSB-W,Midnight Grey,#3A3A3A,24.4213,0.0027,0.0012,Grey,Brick
+Arriscraft International,ARRIS-MIDNIGHT-ALSB-CS,Midnight Grey,#3A3A3A,24.4213,0.0027,0.0012,Grey,Brick
+Arriscraft International,ARRIS-MILLSTON-ALSB-W,Millstone,#7A7268,48.4756,1.2494,6.6551,Grey,Brick
+Arriscraft International,ARRIS-MILLSTON-ALSB-CS,Millstone,#7A7268,48.4756,1.2494,6.6551,Grey,Brick
+Arriscraft International,ARRIS-OBSIDIAN-ALSB-W,Obsidian,#1A1A1A,9.2632,0.0017,0.0008,Grey,Brick
+Arriscraft International,ARRIS-OBSIDIAN-ALSB-CS,Obsidian,#1A1A1A,9.2632,0.0017,0.0008,Grey,Brick
+Arriscraft International,ARRIS-OPAL-ALSB-W,Opal,#C8C0B8,78.1337,1.4039,5.0261,Grey,Brick
+Arriscraft International,ARRIS-OPAL-ALSB-CS,Opal,#C8C0B8,78.1337,1.4039,5.0261,Grey,Brick
+Arriscraft International,ARRIS-RED-SUMA-ALSB-GRH,Red Sumac,#A03020,37.2835,45.3395,35.767,Red,Brick
+Arriscraft International,ARRIS-RED-SUMA-ALSB-GS,Red Sumac,#A03020,37.2835,45.3395,35.767,Red,Brick
+Arriscraft International,ARRIS-WALNUT-ALSB-W,Walnut,#5A4030,29.5479,9.0134,14.2381,Brown,Brick
+Arriscraft International,ARRIS-WALNUT-ALSB-CS,Walnut,#5A4030,29.5479,9.0134,14.2381,Brown,Brick
+Arriscraft International,ARRIS-WHITE-PE-ALSB-GRH,White Pearl,#F0EDE6,93.7998,-0.2014,3.7426,White,Brick
+Arriscraft International,SKU-ALPIN-9733,White,#000000,0,0,0,White,Brick
+Arriscraft International,SKU-BLIZZ-1557,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-CHARC-1192,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-IVORY-4804,Cream,#000000,0,0,0,Cream,Brick
+Arriscraft International,SKU-MIDNI-8632,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-MYSTI-2999,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-MYSTI-6394,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-OBSID-9901,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-OPAL-5472,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-PHOEN-3382,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-PLATI-5008,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-SILVE-8938,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-TOFIN-2970,Grey,#000000,0,0,0,Grey,Brick
+Arriscraft International,SKU-WEATH-7061,Brown,#000000,0,0,0,Grey,Brick
+Canada Brick,CB-VANIER,Black,#473F3A,27.2974,2.451,4.3201,Black,Brick
+Canada Brick,CB-SHADOW-RIDGE-VELOUR-2,Black,#666765,43.4555,-0.7972,0.9914,Grey,Brick
+Canada Brick,CB-LABRADOR,Black,#564F4C,34.1742,2.2904,2.8122,Black,Brick
+Canada Brick,CB-TUXEDO,Black,#4B4947,31.1511,0.4065,1.4903,Black,Brick
+Canada Brick,CB-SHADOW-RIDGE-MATT,Black,#636564,42.582,-0.9833,0.2941,Grey,Brick
+Canada Brick,CB-IRONSTONE,Black,#5A5751,37.0855,0.0046,3.9162,Black,Brick
+Canada Brick,CB-BLACK-CORAL-AVANTI,Black,#8A8988,57.1457,0.18,0.6674,Grey,Brick
+Canada Brick,CB-SHADOW-RIDGE-VELOUR,Black,#636563,42.5528,-1.1913,0.8593,Grey,Brick
+Canada Brick,CB-KINGSWAY-BLEND,Blend,#836F60,48.3088,5.3796,11.2762,Brown,Brick
+Canada Brick,CB-SUNNYBROOK-BLEND,Blend,#9B8566,56.7848,3.6294,19.8321,Buff,Brick
+Canada Brick,CB-PORT-ELGIN,Blend,#956A50,48.6069,13.8585,21.3946,Red,Brick
+Canada Brick,CB-CARLETON-BLEND,Blend,#7B624F,43.5231,7.1632,14.6486,Brown,Brick
+Canada Brick,CB-PORT-DOVER,Blend,#91745A,50.9769,7.5481,18.681,Red,Brick
+Canada Brick,CB-SONOMA-SMOOTH,Brown,#82695A,46.4281,7.5827,12.1995,Brown,Brick
+Canada Brick,CB-SONOMA-SMOOTH-IRONSPOT,Brown,#847060,48.6836,5.2134,11.8144,Brown,Brick
+Canada Brick,CB-WESTFORD-SQUARE,Brown,#786F63,47.3174,1.3192,7.9496,Brown,Brick
+Canada Brick,CB-RICHLAND-MATT,Brown,#928371,55.62,2.6508,11.8149,Brown,Brick
+Canada Brick,CB-DAKOTA,Brown,#8F7B6F,53.1168,5.6925,9.408,Grey,Brick
+Canada Brick,CB-DUNKERRON-MATT,Brown,#766759,44.6224,3.5376,10.0942,Brown,Brick
+Canada Brick,CB-DUNKERRON-SMOOTH,Brown,#726355,42.9988,3.5817,10.1695,Brown,Brick
+Canada Brick,CB-DUNKERRON-SMOOTH-IRONSPOT,Brown,#77685A,45.0266,3.5269,10.0758,Brown,Brick
+Canada Brick,CB-ALBION,Brown,#5D493E,32.7884,6.6736,9.8161,Brown,Brick
+Canada Brick,CB-RUTHERFORD,Brown,#6B5B4C,39.7982,3.9561,11.0684,Brown,Brick
+Canada Brick,CB-SONOMA-BARK,Brown,#77543F,38.9355,11.7599,18.0376,Brown,Brick
+Canada Brick,CB-WEATHERED-OAK-TUMBLED-VINTAGE-BRICK,Brown,#898171,54.2503,0.1755,9.7696,Cream,Brick
+Canada Brick,CB-SONOMA-BRUSHTEX,Brown,#77563F,39.4731,10.5548,18.7466,Brown,Brick
+Canada Brick,CB-HERITAGE-BROWN,Brown,#845D44,42.9908,12.7328,20.6713,Brown,Brick
+Canada Brick,CB-BRUNSWICK-MATT,Brown,#785F50,42.3943,7.7919,12.4451,Brown,Brick
+Canada Brick,CB-HICKORY-VELOUR,Brown,#766553,43.9208,3.7929,12.7149,Brown,Brick
+Canada Brick,CB-IRONSPOT-MK-II,Brown,#827163,48.8307,4.2637,10.2207,Brown,Brick
+Canada Brick,CB-VINTAGE-MATT,Brown,#765D4D,41.5575,7.6952,13.073,Brown,Brick
+Canada Brick,CB-MAHOGANY-VELOUR-IRONSPOT,Brown,#706052,41.8755,4.0451,10.3851,Brown,Brick
+Canada Brick,CB-SONOMA-MATT,Brown,#705D4E,40.9342,5.2298,11.5049,Brown,Brick
+Canada Brick,CB-CALEDONIA,Brown,#776756,44.6521,3.4912,11.9474,Brown,Brick
+Canada Brick,CB-MIDNIGHT-GREY-ARCHITECTURAL-LINEAR-SERIES-BRICK,Brown,#988D85,59.3598,2.6672,5.7404,Grey,Brick
+Canada Brick,CB-BALLYCROY-MATT,Buff,#968364,55.7222,2.4057,19.4467,Grey,Brick
+Canada Brick,CB-TAUPE-SMOOTH,Buff,#84735D,49.4443,3.0229,14.63,Buff,Brick
+Canada Brick,CB-SIERRA-SANDSTONE,Buff,#B3A78E,68.8772,0.1909,14.513,Buff,Brick
+Canada Brick,CB-SIERRA-SANDSTONE-SMOOTH,Buff,#B7AA8E,70.0143,0.1142,16.1512,Buff,Brick
+Canada Brick,CB-SPRING-HILL-MATT,Buff,#C0B2A4,73.3684,2.6332,8.9571,Cream,Brick
+Canada Brick,CB-SPRING-HILL-VELOUR,Buff,#C5B8A5,75.3691,1.4395,11.3166,Cream,Brick
+Canada Brick,CB-SPRING-HILL-VELOUR-2,Buff,#C5B7A5,75.1103,1.9732,10.9495,Cream,Brick
+Canada Brick,CB-SUNDANCE-BARK,Buff,#B6845B,59.1617,14.2952,29.6288,Orange,Brick
+Canada Brick,CB-SUNDANCE-MATT,Buff,#A98F68,60.8517,4.1219,24.3999,Buff,Brick
+Canada Brick,CB-SUNDANCE-RUGG,Buff,#987047,50.3564,10.7835,28.8478,Orange,Brick
+Canada Brick,CB-SUNDANCE-SMOOTH,Buff,#B2986E,64.1991,3.6046,25.6972,Buff,Brick
+Canada Brick,CB-SUNDANCE-SMOOTH-IRONSPOT,Buff,#C8AF82,72.5953,2.4935,26.4259,Buff,Brick
+Canada Brick,CB-SUNNYDALE-MATT,Buff,#9C8767,57.4391,3.0527,20.1678,Buff,Brick
+Canada Brick,CB-TAUPE-MATT,Buff,#8A7A62,52.0673,2.2349,15.4205,Buff,Brick
+Canada Brick,CB-ADELAIDE-SMOOTH-IRONSPOT,Buff,#A0947E,61.7918,0.7295,13.2532,Grey,Brick
+Canada Brick,CB-CORTES,Buff,#9D8A75,58.6297,3.7433,13.8862,Grey,Brick
+Canada Brick,CB-ADELAIDE-VELOUR,Buff,#B9A27E,67.7702,2.9959,21.851,Buff,Brick
+Canada Brick,CB-GEORGETOWN,Buff,#AB8969,59.4975,8.4189,22.0712,Buff,Brick
+Canada Brick,CB-GEORGETOWN-MK-II,Buff,#AC865E,58.6293,9.2591,27.0715,Buff,Brick
+Canada Brick,CB-HERITAGE-BEIGE,Buff,#926D58,49.195,11.7732,17.4548,Buff,Brick
+Canada Brick,CB-BURLINGTON-MATT,Buff,#977960,53.0572,7.9869,18.1392,Buff,Brick
+Canada Brick,CB-OCEAN-MIST-AVANTI,Buff,#C6BDAD,76.9316,0.4326,9.2203,Cream,Brick
+Canada Brick,CB-OLD-AZTEC,Buff,#A77A57,54.8892,13.1559,26.0093,Orange,Brick
+Canada Brick,CB-OSIANA-MATT,Buff,#A58967,58.8537,5.6781,22.2226,Buff,Brick
+Canada Brick,CB-OSIANA-SMOOTH,Buff,#B1926E,62.5335,6.4989,23.4611,Buff,Brick
+Canada Brick,CB-OSIANA-SMOOTH-IRONSPOT,Buff,#AD916B,61.8235,5.0367,24.1028,Buff,Brick
+Canada Brick,CB-PORT-CARTIER,Buff,#AA8B64,59.8267,6.2919,25.2773,Buff,Brick
+Canada Brick,CB-ADELAIDE,Buff,#AB9F89,65.9509,0.6827,13.0749,Buff,Brick
+Canada Brick,CB-COASTAL-FOG-AVANTI,Buff,#A39683,62.708,1.5812,11.7669,Grey,Brick
+Canada Brick,CB-CONESTOGA,Buff,#A89D8C,65.2254,1.0973,10.3439,Grey,Brick
+Canada Brick,CB-BALLYCROY-SMOOTH,Buff,#B09C77,65.2307,1.7261,22.109,Buff,Brick
+Canada Brick,CB-HUDSON,Gray,#7D6D5E,47.1125,3.7338,10.6995,Grey,Brick
+Canada Brick,CB-MYSTIC-GREY-CONTEMPORARY-BRICK,Gray,#918678,56.5118,1.6804,9.0354,Grey,Brick
+Canada Brick,CB-MYSTIC-GREY-TUMBLED-VINTAGE-BRICK,Gray,#8A7F72,53.8109,1.8806,8.5812,Grey,Brick
+Canada Brick,CB-OBSIDIAN-ARCHITECTURAL-LINEAR-SERIES-BRICK,Gray,#7D8588,54.9822,-2.3051,-2.6243,Grey,Brick
+Canada Brick,CB-HERITAGE-GREY,Gray,#C5AB8F,71.5409,5.1539,17.9146,Buff,Brick
+Canada Brick,CB-CREEKSIDE-VELOUR-2,Gray,#A39F95,65.5557,-0.3684,5.7307,Grey,Brick
+Canada Brick,CB-CHARCOAL-ARCHITECTURAL-LINEAR-SERIES-BRICK,Gray,#91908E,59.8157,-0.0132,1.1916,Grey,Brick
+Canada Brick,CB-PORTLAND,Gray,#716866,44.7599,3.1573,2.4031,Grey,Brick
+Canada Brick,CB-CREEKSIDE-VELOUR,Gray,#A39E94,65.2618,0.0046,5.8675,Grey,Brick
+Canada Brick,CB-CREEKSIDE-MATT,Gray,#A49C91,64.7347,0.9591,6.8019,Grey,Brick
+Canada Brick,CB-LAKESHORE,Pastel,#C8B9AB,76.0186,2.9723,9.0223,Cream,Brick
+Canada Brick,CB-TRINITY,Red,#6E432E,32.9768,16.2046,20.4534,Brown,Brick
+Canada Brick,CB-ANTIQUE-COPPER,Red,#8C6C59,48.2875,9.9305,15.5231,Brown,Brick
+Canada Brick,CB-BROOKVIEW-MATT,Red,#896B5A,47.7161,9.3755,14.0968,Brown,Brick
+Canada Brick,CB-BROOKVIEW-SMOOTH,Red,#8C6B59,48.0224,10.5142,15.1603,Brown,Brick
+Canada Brick,CB-BROOKVIEW-SMOOTH-IRONSPOT,Red,#866A5A,47.1245,8.6896,13.2299,Brown,Brick
+Canada Brick,CB-CAVENDISH-II,Red,#815B4D,42.2849,13.6707,14.2735,Red,Brick
+Canada Brick,CB-CHATEAU-LOCAS,Red,#7B594C,41.0208,12.136,13.0337,Red,Brick
+Canada Brick,CB-COPPER-BARK,Red,#925E40,44.9228,17.9077,25.8424,Orange,Brick
+Canada Brick,CB-COPPER-MATT,Red,#957358,51.1007,9.5834,20.0771,Orange,Brick
+Canada Brick,CB-COPPER-SMOOTH,Red,#9E7A5D,54.0042,9.9991,21.2611,Orange,Brick
+Canada Brick,CB-COPPER-SMOOTH-IRONSPOT,Red,#A98367,57.7003,10.7138,20.7447,Orange,Brick
+Canada Brick,CB-FULL-RANGE-BARK,Red,#7B553C,39.638,12.6246,20.8538,Red,Brick
+Canada Brick,CB-FULL-RANGE-RUGG,Red,#805841,41.137,13.6015,19.9365,Red,Brick
+Canada Brick,CB-HERITAGE-RUST,Red,#805743,40.9139,14.4169,18.4434,Orange,Brick
+Canada Brick,CB-MEDIUM-RANGE-RUGG,Red,#82583D,41.3148,14.0756,22.5916,Orange,Brick
+Canada Brick,CB-MEDIUM-RANGE-SHALETEX,Red,#8E6046,45.0238,15.5738,22.3775,Orange,Brick
+Canada Brick,CB-PORT-CARLING,Red,#886357,45.4226,13.2422,12.699,Red,Brick
+Canada Brick,CB-RIVERDALE-BARK,Red,#8A533D,41.0994,20.5364,22.5269,Red,Brick
+Canada Brick,CB-RIVERDALE-BRUSHTEX,Red,#965D45,45.2793,20.6728,23.4939,Red,Brick
+Canada Brick,CB-RIVERDALE-MATT,Red,#976F5B,50.3385,13.1073,17.3469,Orange,Brick
+Canada Brick,CB-RIVERDALE-RUGG,Red,#8C583E,42.6163,18.5898,23.9255,Brown,Brick
+Canada Brick,CB-RIVERDALE-SMOOTH,Red,#986C57,49.6034,14.7804,18.7077,Red,Brick
+Canada Brick,CB-RIVERDALE-SMOOTH-IRONSPOT,Red,#956C5A,49.3172,13.8734,16.5056,Red,Brick
+Canada Brick,CB-ROBINDALE,Red,#826356,44.7186,10.5551,12.2183,Brown,Brick
+Canada Brick,CB-SPADINA,Red,#6B5F5C,41.3476,4.2534,3.4733,Burgundy,Brick
+Canada Brick,CB-TALBOT-ANTIQUE,Red,#785140,38.2841,14.1291,16.5867,Red,Brick
+Canada Brick,CB-TALBOT-SQUARE,Red,#724D3C,36.3882,13.4073,16.3785,Red,Brick
+Canada Brick,CB-TAUPE-BARK,Red,#816040,43.3643,9.1906,23.4337,Brown,Brick
+Canada Brick,CB-TERRA-NOVA-2,Red,#7F5C44,42.1291,11.1108,19.428,Brown,Brick
+Canada Brick,CB-50-BARK,Red,#83573A,41.132,14.825,24.1501,Orange,Brick
+Canada Brick,CB-VARSITY-MATT,Red,#8E6654,46.8346,13.6483,16.5324,Brown,Brick
+Canada Brick,CB-VARSITY-SMOOTH,Red,#9D7361,52.1665,14.0709,16.4547,Orange,Brick
+Canada Brick,CB-VARSITY-SMOOTH-IRONSPOT,Red,#8B6959,47.383,11.2591,14.265,Brown,Brick
+Canada Brick,CB-VINTAGE-BARK,Red,#7E523A,39.2001,15.5583,21.5604,Brown,Brick
+Canada Brick,CB-WELLINGTON,Red,#543832,26.5731,11.5881,8.7767,Burgundy,Brick
+Canada Brick,CB-WILLIAMSBURG,Red,#935F49,45.4536,18.6255,21.2955,Red,Brick
+Canada Brick,CB-WILLIAMSBURG-MK-II,Red,#956049,45.9562,18.9054,22.0014,Red,Brick
+Canada Brick,CB-WHITE-ASH-2,White,#DAD4CB,85.1513,0.5003,5.1792,White,Brick
+Canada Brick,CB-SUSSEX,White,#B1A695,68.5985,1.0677,10.2349,Buff,Brick
+Canada Brick,CB-SEA-SHELL-AVANTI,White,#CDC7BF,80.5089,0.6823,4.741,White,Brick
+Canada Brick,CB-IVORY-WHITE-CONTEMPORARY-BRICK,White,#BEAC91,71.2119,2.1821,16.2703,Buff,Brick
+Canada Brick,CB-HAZELTON,White,#BBB4A3,73.4492,-0.4557,9.561,Cream,Brick
+Canada Brick,CB-OPAL-ARCHITECTURAL-LINEAR-SERIES-BRICK,White,#C8C1BC,78.491,1.5643,3.3845,White,Brick
+Canada Brick,CB-KELOWNA,White,#CFCCC6,82.1245,-0.0282,3.3521,White,Brick
+Canada Brick,CB-WINTERBOURNE,White,#C6C1B8,78.2317,0.1591,5.147,White,Brick
+Canada Brick,CB-ALPINE-WHITE-TUMBLED-VINTAGE-BRICK,White,#C5BFB7,77.609,0.6902,4.778,White,Brick
+Canada Brick,CB-WHITE-ASH,White,#DAD3CB,84.8972,1.0214,4.8121,White,Brick
+Brampton Stone,BB-STONE-TAL-OSL,Oslo,#B7B5A6,73.4599,-1.9572,7.8966,Cream,Stone
+Brampton Stone,BB-STONE-TAL-PAL,Palermo Beige,#8E8576,55.9211,0.7275,9.3108,Grey,Stone
+Brampton Stone,BB-STONE-FIN-PEE,Peel Silver,#ADA195,66.9334,2.2836,7.8171,Grey,Stone
+Brampton Stone,BB-STONE-BON-POL,Polar White,#CDC5B1,79.6627,-0.5896,11.0349,Cream,Stone
+Brampton Stone,BB-STONE-CON-POL,Polar White,#D8D4CA,84.971,-0.3699,5.4289,White,Stone
+Brampton Stone,BB-STONE-PRE-POL,Polar White,#9DA7A5,67.6669,-3.9128,-0.1844,Grey,Stone
+Brampton Stone,BB-STONE-BON-SAN,Sandbar,#C1B29C,73.2712,1.748,13.194,Buff,Stone
+Brampton Stone,BB-STONE-CON-SHA,Shadow,#7E7E79,52.6613,-0.9749,2.7201,Grey,Stone
+Brampton Stone,BB-STONE-ART2-SHO,Shoreline,#B0A293,67.4099,2.5454,9.6431,Buff,Stone
+Brampton Stone,BB-STONE-GRA-SUN,Sunrise,#AEA599,68.1743,1.1441,7.3814,Grey,Stone
+Brampton Stone,BB-STONE-TAL-TEM,Tempest,#C5C6B9,79.4778,-2.6615,6.3938,White,Stone
+Brampton Stone,BB-STONE-BON-TWI,Twilight,#655D5A,40.1367,2.6262,2.8787,Grey,Stone
+Brampton Stone,BB-STONE-TAL-TWI,Twilight,#5F5D5A,39.5801,0.1856,2.0032,Grey,Stone
+Brampton Stone,BB-STONE-FIN-WHE,Wheatfield,#C3B89E,75.0462,-0.3945,14.6284,Cream,Stone
+Brampton Stone,BB-STONE-ART2-CHA,Champagne,#847B70,52.1089,1.4418,7.2514,Grey,Stone
+Brampton Stone,BB-STONE-GRA-MAC,Mackinaw,#867669,50.74,3.9617,9.4339,Grey,Stone
+Brampton Stone,BB-STONE-GRA-MAR,Marble Gray,#919087,59.6309,-1.3208,4.9119,Grey,Stone
+Brampton Stone,BB-STONE-ART2-MAR,Marble Gray,#9F9995,63.6092,1.4542,2.8791,Grey,Stone
+Brampton Stone,BB-STONE-GRA-MID,Midnight,#52524D,34.7302,-1.044,2.9349,Black,Stone
+Brampton Stone,BB-STONE-BON-CLO,Cloudburst,,,,,White,Stone
+Brampton Stone,BB-STONE-ART2-DOV,Dover,,,,,White,Stone
+Brampton Stone,BB-STONE-CON-DOV,Dover,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-ALM,Almond,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-CAN,Canvas Beige,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-ICE,Iceland White,,,,,White,Stone
+Brampton Stone,BB-STONE-GRA-ASH,Ashland,,,,,White,Stone
+Brampton Stone,BB-STONE-GRA-CIN,Cinder,,,,,White,Stone
+Brampton Stone,BB-STONE-TAL-CIN,Cinder,,,,,White,Stone
+Brampton Stone,BB-STONE-TAL-MAC,Mackinaw,,,,,White,Stone
+Brampton Stone,BB-STONE-BON-DOV,Dover,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-EBO,Ebony,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-ECL,Eclipse,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-MIN,Mineral Gray,,,,,White,Stone
+Brampton Stone,BB-STONE-PRE-NIC,Nickel,,,,,White,Stone
+Brampton Stone,BB-STONE-CON-NIC,Nickel,,,,,White,Stone
+Brampton Stone,BB-STONE-CON-ONY,Onyx,,,,,White,Stone
+Brampton Stone,BB-STONE-BON-NIC,Nickel,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-ONY,Onyx,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-POL,Polar White,,,,,White,Stone
+Brampton Stone,BB-STONE-GRA-POL,Polar White,,,,,White,Stone
+Brampton Stone,BB-STONE-CON-SAN,Sandbar,,,,,White,Stone
+Brampton Stone,BB-STONE-FIN-ACA,Academy Black,,,,,White,Stone

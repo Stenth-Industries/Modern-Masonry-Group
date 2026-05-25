@@ -93,7 +93,10 @@ const MobileMenu = ({ open, onClose, navigate, onOpenSearch }) => (
 /* ── Search Modal Full Screen ── */
 const SearchModal = ({ open, onClose, navigate }) => {
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
     if (open) {
@@ -105,26 +108,67 @@ const SearchModal = ({ open, onClose, navigate }) => {
         window.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = '';
       };
+    } else {
+      setQuery('');
+      setResults([]);
     }
   }, [open, onClose]);
 
-  const handleSearch = (e) => {
+  // Debounced live search
+  useEffect(() => {
+    clearTimeout(debounceRef.current);
+    if (query.trim().length < 2) { setResults([]); setLoading(false); return; }
+    setLoading(true);
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/products?search=${encodeURIComponent(query.trim())}&limit=8`);
+        const data = await res.json();
+        setResults(data.data || []);
+      } catch {
+        setResults([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(debounceRef.current);
+  }, [query]);
+
+  const goToProduct = (product) => {
+    const isBrick = product.material?.toLowerCase() === 'brick';
+    navigate(isBrick ? `#brick-detail/${product.id}` : `#stone-detail/${product.id}`);
+    setQuery('');
+    setResults([]);
+    onClose();
+  };
+
+  const handleSearch = async (e) => {
     e.preventDefault();
     const q = query.trim().toLowerCase();
-    if(q) {
-       // OMNIBAR: Whole website search routing
-       if (q.includes("service") || q.includes("build")) navigate("#services-page");
-       else if (q.includes("home")) navigate("#home");
-       else if (q.includes("about") || q.includes("who")) navigate("#about");
-       else if (q.includes("contact") || q.includes("quote") || q.includes("email")) navigate("#contact");
-       else if (q.includes("gallery") || q.includes("photo") || q.includes("image")) navigate("#gallery");
-       else {
-         // Default to product database
-         navigate('#brick?search=' + encodeURIComponent(query.trim()));
-       }
-       setQuery(''); // clean for next open
-       onClose();
+    if (!q) return;
+    // Page routing keywords
+    if (q.includes("service") || q.includes("build")) navigate("#services-page");
+    else if (q.includes("home")) navigate("#home");
+    else if (q.includes("about") || q.includes("who")) navigate("#about");
+    else if (q.includes("contact") || q.includes("quote") || q.includes("email")) navigate("#contact");
+    else if (q.includes("gallery") || q.includes("photo") || q.includes("image")) navigate("#gallery");
+    else {
+      // Use live results if already loaded, otherwise fire an immediate fetch to avoid race condition
+      let resolved = results;
+      if (resolved.length === 0) {
+        try {
+          const res = await fetch(`/api/products?search=${encodeURIComponent(query.trim())}&limit=8`);
+          const data = await res.json();
+          resolved = data.data || [];
+        } catch { resolved = []; }
+      }
+      const hasStone = resolved.some(r => r.material?.toLowerCase() === 'stone');
+      const hasBrick = resolved.some(r => r.material?.toLowerCase() === 'brick');
+      if (hasStone && !hasBrick) navigate('#stone?search=' + encodeURIComponent(query.trim()));
+      else navigate('#brick?search=' + encodeURIComponent(query.trim()));
     }
+    setQuery('');
+    setResults([]);
+    onClose();
   };
 
   return (
@@ -132,59 +176,116 @@ const SearchModal = ({ open, onClose, navigate }) => {
       {open && (
         <>
           {/* Deep Glass Overlay */}
-          <motion.div 
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }} 
-            animate={{ opacity: 1, backdropFilter: "blur(24px)" }} 
+          <motion.div
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-[var(--obsidian)]/80 z-[100] flex flex-col justify-center items-center p-6"
+            className="fixed inset-0 bg-[var(--obsidian)]/80 z-[100]"
             onClick={onClose}
           />
-          
-          {/* Modal Content container */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }} 
-            animate={{ opacity: 1, scale: 1, y: 0 }} 
+
+          {/* Modal Content */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="fixed top-0 left-0 w-full h-full z-[101] flex flex-col pt-[20vh] items-center pointer-events-none px-6"
           >
             <div className="w-full max-w-4xl pointer-events-auto">
-               <div className="flex justify-between items-center mb-12 px-2">
-                 <span className="text-[var(--brass)] uppercase tracking-[0.4em] text-xs font-bold drop-shadow-[0_0_10px_#d4af37]">Catalogue Search</span>
-                 <button onClick={onClose} className="text-white/50 hover:text-white transition-colors flex items-center gap-2 text-[10px] uppercase tracking-widest"><X size={16}/> Esc to close</button>
-               </div>
-               
-               <form onSubmit={handleSearch} className="relative w-full group">
-                  <Search size={36} className="absolute left-0 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-[var(--brass)] transition-colors" />
-                  <input 
-                    ref={inputRef}
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search premium materials..."
-                    className="w-full bg-transparent border-b-2 border-white/10 text-4xl md:text-6xl font-light text-white pl-16 pb-6 focus:outline-none focus:border-[var(--brass)] transition-colors placeholder:text-white/10 placeholder:font-serif placeholder:italic tracking-tight"
-                  />
-               </form>
+              <div className="flex justify-between items-center mb-12 px-2">
+                <span className="text-[var(--brass)] uppercase tracking-[0.4em] text-xs font-bold drop-shadow-[0_0_10px_#d4af37]">Catalogue Search</span>
+                <button onClick={onClose} className="text-white/50 hover:text-white transition-colors flex items-center gap-2 text-[10px] uppercase tracking-widest"><X size={16}/> Esc to close</button>
+              </div>
 
-               {/* Quick Suggestions */}
-               <motion.div 
-                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                 className="mt-16"
-               >
-                  <p className="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium mb-6 px-2">Popular Categories</p>
-                  <div className="flex flex-wrap gap-4 px-2">
-                    {['Architectural Brick', 'Aged Natural Stone', 'Commercial Supply', 'Heritage Restoration'].map(tag => (
-                      <button 
-                        type="button"
-                        key={tag}
-                        onClick={() => { setQuery(tag); setTimeout(() => handleSearch({preventDefault: () => {}}), 100); }}
-                        className="px-6 py-3 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[var(--brass)] hover:bg-[var(--brass)]/10 text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300"
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-               </motion.div>
+              <form onSubmit={handleSearch} className="relative w-full group">
+                <Search size={36} className="absolute left-0 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-[var(--brass)] transition-colors" />
+                <input
+                  ref={inputRef}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search premium materials..."
+                  className="w-full bg-transparent border-b-2 border-white/10 text-4xl md:text-6xl font-light text-white pl-16 pb-6 focus:outline-none focus:border-[var(--brass)] transition-colors placeholder:text-white/10 placeholder:font-serif placeholder:italic tracking-tight"
+                />
+              </form>
+
+              {/* Live Results */}
+              <AnimatePresence mode="wait">
+                {query.trim().length >= 2 ? (
+                  <motion.div
+                    key="results"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2 }}
+                    className="mt-6"
+                  >
+                    {loading ? (
+                      <p className="text-white/30 text-xs uppercase tracking-[0.3em] px-2 py-4">Searching...</p>
+                    ) : results.length > 0 ? (
+                      <>
+                        <p className="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium mb-3 px-2">{results.length} result{results.length !== 1 ? 's' : ''}</p>
+                        <div className="flex flex-col divide-y divide-white/5 border border-white/10 rounded-2xl overflow-hidden bg-[var(--charcoal)]/80 backdrop-blur-md">
+                          {results.map((product) => {
+                            const isBrick = product.material?.toLowerCase() === 'brick';
+                            const variant = product.variants?.[0];
+                            return (
+                              <button
+                                key={product.id}
+                                type="button"
+                                onClick={() => goToProduct(product)}
+                                className="flex items-center gap-4 px-5 py-4 hover:bg-white/5 transition-colors text-left group/item"
+                              >
+                                {/* Thumbnail */}
+                                <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-white/5">
+                                  {variant?.imageUrl
+                                    ? <img src={variant.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                                    : <div className="w-full h-full bg-white/10" />}
+                                </div>
+                                {/* Info */}
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white text-sm font-medium truncate group-hover/item:text-[var(--brass)] transition-colors">{product.name}</p>
+                                  <p className="text-white/40 text-xs truncate">{product.manufacturer} {variant?.colourName ? `· ${variant.colourName}` : ''}</p>
+                                </div>
+                                {/* Material badge */}
+                                <span className={`shrink-0 text-[9px] uppercase tracking-widest font-bold px-2 py-1 rounded-full border ${isBrick ? 'border-[var(--brass)]/30 text-[var(--brass)]' : 'border-blue-400/30 text-blue-300'}`}>
+                                  {product.material}
+                                </span>
+                                <ChevronRight size={14} className="shrink-0 text-white/20 group-hover/item:text-white/60 transition-colors" />
+                              </button>
+                            );
+                          })}
+                        </div>
+                        <p className="text-white/20 text-[10px] uppercase tracking-[0.2em] mt-3 px-2">Press Enter to see all results in catalogue</p>
+                      </>
+                    ) : (
+                      <p className="text-white/30 text-xs uppercase tracking-[0.3em] px-2 py-4">No products found for "{query}"</p>
+                    )}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="suggestions"
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                    className="mt-16"
+                  >
+                    <p className="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium mb-6 px-2">Popular Categories</p>
+                    <div className="flex flex-wrap gap-4 px-2">
+                      {['Architectural Brick', 'Aged Natural Stone', 'Commercial Supply', 'Heritage Restoration'].map(tag => (
+                        <button
+                          type="button"
+                          key={tag}
+                          onClick={() => setQuery(tag)}
+                          className="px-6 py-3 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[var(--brass)] hover:bg-[var(--brass)]/10 text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300"
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
             </div>
           </motion.div>
         </>
