@@ -96,20 +96,17 @@ export default function QuotePage({ navigate }) {
       setIsSubmitting(true);
       setError(null);
       try {
-        const formDataPayload = new FormData();
-        formDataPayload.append('fullName', formData.name);
-        formDataPayload.append('email', formData.email);
-        formDataPayload.append('phone', formData.phone);
-        formDataPayload.append('company', formData.company);
-        formDataPayload.append('role', formData.role);
-        formDataPayload.append('details', formData.details);
-        if (formData.file) {
-          formDataPayload.append('attachment', formData.file);
-        }
-
         const response = await fetch(`/api/quotes`, {
           method: 'POST',
-          body: formDataPayload,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            company: formData.company,
+            role: formData.role,
+            details: formData.details,
+          }),
         });
 
         const data = await response.json();
