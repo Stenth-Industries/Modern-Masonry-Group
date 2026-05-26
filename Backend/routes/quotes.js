@@ -214,29 +214,6 @@ router.post('/', upload.single('attachment'), async (req, res) => {
                     </td>
                   </tr>
 
-                  <!-- CTA -->
-                  <tr>
-                    <td align="center" style="padding:10px 40px 40px;">
-
-                      <a 
-                        href="mailto:${data.email}" 
-                        style="
-                          display:inline-block;
-                          background:#d4af37;
-                          color:#000000;
-                          text-decoration:none;
-                          padding:14px 28px;
-                          border-radius:8px;
-                          font-weight:bold;
-                          font-size:15px;
-                        "
-                      >
-                        Reply to Client
-                      </a>
-
-                    </td>
-                  </tr>
-
                   <!-- FOOTER -->
                   <tr>
                     <td align="center" style="background:#0a0a0a;padding:30px 20px;border-top:1px solid #1f1f1f;">

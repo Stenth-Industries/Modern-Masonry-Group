@@ -77,11 +77,6 @@ function buildEmailHtml(data) {
             </td>
           </tr>
           <tr>
-            <td align="center" style="padding:10px 40px 40px;">
-              <a href="mailto:${data.email}" style="display:inline-block;background:#d4af37;color:#000000;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:bold;font-size:15px;">Reply to Client</a>
-            </td>
-          </tr>
-          <tr>
             <td align="center" style="background:#0a0a0a;padding:30px 20px;border-top:1px solid #1f1f1f;">
               <div style="color:#888888;font-size:13px;line-height:24px;">Modern Masonry Group<br/>Professional Masonry & Construction Services</div>
               <div style="margin-top:10px;color:#555555;font-size:12px;">This email was automatically generated from your website quote form.</div>
